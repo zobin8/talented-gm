@@ -1,9 +1,10 @@
 # Talented-GM
 
-## Description
-Talented GM is a simple tool for game masters (GMs) of the role-playing game "Wild Talents." "Wild Talents" was created by and belongs to Arc Dream Publishing. I am in no way affiliated with Arc Dream Publishing and do not make money off this program.
+## Disclaimer
+*Wild Talents* was created by and belongs to Arc Dream Publishing. I am in no way affiliated with Arc Dream Publishing and do not make money off this program.
 
-Using TalentedGM, one can create custom non-player characters (NPCs). This includes stats, skills, and hitboxes. These NPCs, along with minions, can be combined to make up custom locations. While a game is in process, one can load NPCs or locations into the current turn. Each turn also allows for intiative tracking and miscellaneous notes. After a game has finished, all turns can be exported into a log file.
+## Description
+Talented GM is a simple tool for game masters (GMs) of the role-playing game *Wild Talents*. Using TalentedGM, one can create custom non-player characters (NPCs). This includes stats, skills, and hitboxes. These NPCs, along with minions, can be combined to make up custom locations. While a game is in process, one can load NPCs or locations into the current turn. Each turn also allows for intiative tracking and miscellaneous notes. After a game has finished, all turns can be exported into a log file.
 
 At least, that is what will be possible once it is programmed. At the moment, virtually no features are available.
 
@@ -27,3 +28,8 @@ The templates tab is used for managing templates. Location and NPC templates can
 
 ### Editor tab
 The editor tab is used for editing locations and NPCs. The left side is for locations, the right for NPCs. On each side a template can be loaded and edited. When the "add to templates" button is clicked, all changes to the template are saved. Alternatively, the "add to turn" button will not modify the template but add the NPC or location to the current turn.
+
+## Copyright
+Copyright (C) 2017 Zoe Krueger
+
+Copying and distributing this project, with or without modification, is conditionally permitted according to the LGPLv3 license, a copy of which is provided in this repository. 
