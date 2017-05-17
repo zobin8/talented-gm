@@ -12,7 +12,9 @@ At least, that is what will be possible once it is programmed. At the moment, vi
  * Qt version 5 or above
  
 ## Installation
-Installation is not currently automated, but I will have a make file ready at some point. There are finished binaries located in the /bin directory, but they may not always be up to date.
+To compile, use `qmake` in the directory to create a Makefile. Then, use `make` to create a binary. This binary must be installed manually. `make install` does not currently work to the best of my knowledge.
+
+There are also finished binaries located in the /bin directory, but they may not always be up to date.
 
 ## Usage
 The program is divided into four tabs: general, turns, templates, and editor. The general tab is for use before or after a game. The turn tab is used during combat or non-combat turns. The templates tab can be used to manage location, NPC, player, or note templates. Finally, the editor is where locations and NPCs can be created. Detailed information of each tab is included below.
