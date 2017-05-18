@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLinkedList>
 
 namespace Ui
 {
@@ -10,6 +11,7 @@ namespace Ui
 
 class TalentData;
 class NPC;
+class MenuModule;
 
 class MainWindow : public QMainWindow
 {
@@ -26,9 +28,12 @@ private slots:
     void on_editNPCCombo_activated(const QString &arg1);
     void on_editNPCtoTempButton_clicked();
 
+    void on_editAddHitButton_clicked();
+
 private:
     Ui::MainWindow* ui;
     TalentData* data;
+    QLinkedList<MenuModule*> hitBoxModules;
 
     QString randName();
 };

@@ -4,6 +4,7 @@
 #include <QLinkedList>
 
 class NPC;
+class SVP;
 
 class TalentData
 {

@@ -27,11 +27,13 @@ SOURCES += src/main.cpp\
         src/mainwindow.cpp \
     src/npc.cpp \
     src/talentdata.cpp \
-    src/stringvaluepair.cpp
+    src/stringvaluepair.cpp \
+    src/menumodule.cpp
 
 HEADERS  += src/mainwindow.h \
     src/npc.h \
     src/talentdata.h \
-    src/stringvaluepair.h
+    src/stringvaluepair.h \
+    src/menumodule.h
 
 FORMS    += src/mainwindow.ui

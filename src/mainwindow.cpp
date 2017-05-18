@@ -3,6 +3,8 @@
 #include <QDateTime>
 #include "talentdata.h"
 #include "npc.h"
+#include "menumodule.h"
+#include "stringvaluepair.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,6 +22,10 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete data;
+    foreach(MenuModule* module, hitBoxModules)
+    {
+        delete module;
+    }
 }
 
 QString MainWindow::randName()
@@ -105,4 +111,12 @@ void MainWindow::on_editNPCtoTempButton_clicked()
     data->addNPCTemplate(npc);
 
     updateEditorNPC(npc->getName());
+}
+
+void MainWindow::on_editAddHitButton_clicked()
+{
+    QVBoxLayout* hitLayout = (QVBoxLayout*) ui->editHitBox->layout();
+    MenuModule* hitModule = new MenuModule();
+    hitLayout->insertWidget(2, hitModule);
+    hitModule->addLineEdit();
 }
