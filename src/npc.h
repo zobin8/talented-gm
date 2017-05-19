@@ -10,7 +10,7 @@ class NPC
 {
 public:
     explicit NPC();
-    explicit NPC(NPC*);
+    //explicit NPC(NPC*);
     ~NPC();
 
     int body;

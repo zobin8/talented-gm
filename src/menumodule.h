@@ -9,10 +9,12 @@ class QDoubleSpinBox;
 class QLineEdit;
 class QPushButton;
 
+//TODO: Change to QWidget
+
 class MenuModule : public QFrame
 {
 public:
-    explicit MenuModule(QWidget* parent = 0);
+    explicit MenuModule(QWidget* parent = 0, int decimals = 0);
     ~MenuModule();
 
     SVP getValue();

@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="generalTab">
        <attribute name="title">
@@ -1674,7 +1674,7 @@
                        </sizepolicy>
                       </property>
                       <property name="text">
-                       <string>Name</string>
+                       <string>Value</string>
                       </property>
                      </widget>
                     </item>
@@ -1687,7 +1687,7 @@
                        </sizepolicy>
                       </property>
                       <property name="text">
-                       <string>Value</string>
+                       <string>Name</string>
                       </property>
                      </widget>
                     </item>
@@ -1785,7 +1785,7 @@
                        </sizepolicy>
                       </property>
                       <property name="text">
-                       <string>Dice</string>
+                       <string>Boxes</string>
                       </property>
                      </widget>
                     </item>
@@ -1798,7 +1798,7 @@
                        </sizepolicy>
                       </property>
                       <property name="text">
-                       <string>Boxes</string>
+                       <string>Dice</string>
                       </property>
                      </widget>
                     </item>
@@ -1905,7 +1905,7 @@
      <x>0</x>
      <y>0</y>
      <width>1366</width>
-     <height>18</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>

@@ -4,6 +4,9 @@
 
 NPC::NPC()
 {
+    hitBoxes = new QLinkedList<SVP>();
+    skills = new QLinkedList<SVP>();
+
     body = 2;
     coord = 2;
     sense = 2;
@@ -12,7 +15,7 @@ NPC::NPC()
     comm = 2;
 }
 
-NPC::NPC(NPC* copy)
+/*NPC::NPC(NPC* copy)
 {
     name = copy->name;
     body = copy->body;
@@ -21,7 +24,7 @@ NPC::NPC(NPC* copy)
     mind = copy->mind;
     charm = copy->charm;
     comm = copy->comm;
-}
+}*/
 
 NPC::~NPC()
 {

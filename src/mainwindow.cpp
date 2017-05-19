@@ -1,10 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDateTime>
 #include "talentdata.h"
 #include "npc.h"
 #include "menumodule.h"
 #include "stringvaluepair.h"
+#include <QDateTime>
+#include <QLinkedList>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -35,8 +36,20 @@ QString MainWindow::randName()
 
 void MainWindow::updateEditorNPC(QString name)
 {
-    NPC* npc = currentEditorNPC(name);
+    QLayout* hitLayout = ui->editHitBox->layout();
+    for (int i = 0; i < hitLayout->count(); i++)
+    {
+        QWidget* widget = hitLayout->itemAt(i)->widget();
+        MenuModule* menuMod = dynamic_cast<MenuModule*>(widget);
+        if (menuMod)
+        {
+            //TODO: Fix this deletion code. It only deletes one item.
+            hitLayout->removeWidget(menuMod);
+            delete menuMod;
+        }
+    }
 
+    NPC* npc = currentEditorNPC(name);
     if (npc)
     {
         ui->editNPCName->setText(npc->getName());
@@ -46,6 +59,11 @@ void MainWindow::updateEditorNPC(QString name)
         ui->editMindSpin->setValue(npc->mind);
         ui->editCharmSpin->setValue(npc->charm);
         ui->editCommSpin->setValue(npc->comm);
+
+        foreach(SVP hit, *(npc->getHitBoxes()))
+        {
+            addHitBox(hit.string, hit.value);
+        }
     }
     else
     {
@@ -75,22 +93,19 @@ NPC* MainWindow::currentEditorNPC(QString name)
     return npc;
 }
 
-void MainWindow::on_editNPCCombo_activated(const QString &name)
+void MainWindow::addHitBox(QString s, double v)
 {
-    updateEditorNPC(name);
+    MenuModule* hitModule = new MenuModule();
+    hitModule->setValue(SVP(s, v));
+
+    QVBoxLayout* hitLayout = (QVBoxLayout*) ui->editHitBox->layout();
+    int index = hitLayout->count() - 2;
+    hitLayout->insertWidget(index, hitModule);
 }
 
-void MainWindow::on_editNPCtoTempButton_clicked()
+NPC* MainWindow::makeNPC()
 {
-    NPC* npc = currentEditorNPC();
-    if (npc)
-    {
-        npc = new NPC(npc);
-    }
-    else
-    {
-        npc = new NPC();
-    }
+    NPC* npc = new NPC();
 
     QString name = ui->editNPCName->text();
     if (name == "Custom")
@@ -108,6 +123,29 @@ void MainWindow::on_editNPCtoTempButton_clicked()
     npc->charm = ui->editCharmSpin->value();
     npc->comm = ui->editCommSpin->value();
 
+    QLayout* hitLayout = ui->editHitBox->layout();
+    for (int i = 0; i < hitLayout->count(); i++)
+    {
+        QWidget* widget = hitLayout->itemAt(i)->widget();
+        MenuModule* menuMod = dynamic_cast<MenuModule*>(widget);
+        if (menuMod)
+        {
+            npc->addHitBox(menuMod->getValue());
+        }
+    }
+
+    return npc;
+}
+
+void MainWindow::on_editNPCCombo_activated(const QString &name)
+{
+    updateEditorNPC(name);
+}
+
+void MainWindow::on_editNPCtoTempButton_clicked()
+{
+    NPC* npc = makeNPC();
+
     data->addNPCTemplate(npc);
 
     updateEditorNPC(npc->getName());
@@ -115,7 +153,5 @@ void MainWindow::on_editNPCtoTempButton_clicked()
 
 void MainWindow::on_editAddHitButton_clicked()
 {
-    QVBoxLayout* hitLayout = (QVBoxLayout*) ui->editHitBox->layout();
-    MenuModule* hitModule = new MenuModule();
-    hitLayout->insertWidget(2, hitModule);
+    addHitBox();
 }
