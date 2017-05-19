@@ -1,17 +1,17 @@
-#ifndef NPC_H
-#define NPC_H
+#ifndef NPCTEMPLATE_H
+#define NPCTEMPLATE_H
 
 #include <QString>
 #include <QLinkedList>
 
 class SVP;
 
-class NPC
+class NPCTemplate
 {
 public:
-    explicit NPC();
-    //explicit NPC(NPC*);
-    ~NPC();
+    explicit NPCTemplate();
+    NPCTemplate(NPCTemplate*);
+    ~NPCTemplate();
 
     int body;
     int coord;
@@ -32,6 +32,8 @@ private:
     QString name;
     QLinkedList<SVP>* skills;
     QLinkedList<SVP>* hitBoxes;
+
+    QString randName();
 };
 
-#endif // NPC_H
+#endif // NPCTEMPLATE_H

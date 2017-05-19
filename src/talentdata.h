@@ -3,22 +3,31 @@
 
 #include <QLinkedList>
 
-class NPC;
+class NPCTemplate;
 class SVP;
 
 class TalentData
 {
 public:
-    explicit TalentData();
+    static TalentData& getInstance()
+    {
+        static TalentData instance;
+        return instance;
+    }
+
     ~TalentData();
 
-    NPC* getNPCFromName(const QString);
+    NPCTemplate* getNPCFromName(const QString);
 
-    void addNPCTemplate(NPC*);
-    QLinkedList<NPC*> getNPCTemplates();
+    void addNPCTemplate(NPCTemplate*);
+    QLinkedList<NPCTemplate*> getNPCTemplates();
+
+    TalentData(TalentData const&) = delete;
+    void operator =(TalentData const&) = delete;
 
 private:
-    QLinkedList<NPC*> npcTemplates;
+    QLinkedList<NPCTemplate*> npcTemplates;
+    explicit TalentData();
 };
 
 #endif // TALENTDATA_H

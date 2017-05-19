@@ -1,23 +1,23 @@
 #include "talentdata.h"
-#include "npc.h"
+#include "npctemplate.h"
 #include <QLinkedList>
 
 TalentData::TalentData()
 {
-    npcTemplates = QLinkedList<NPC*>();
+    npcTemplates = QLinkedList<NPCTemplate*>();
 }
 
 TalentData::~TalentData()
 {
-    foreach (NPC* npc, npcTemplates)
+    foreach (NPCTemplate* npc, npcTemplates)
     {
         delete npc;
     }
 }
 
-NPC* TalentData::getNPCFromName(const QString name)
+NPCTemplate* TalentData::getNPCFromName(const QString name)
 {
-    foreach (NPC* npc, npcTemplates)
+    foreach (NPCTemplate* npc, npcTemplates)
     {
         if (npc->getName() == name)
         {
@@ -27,10 +27,10 @@ NPC* TalentData::getNPCFromName(const QString name)
     return NULL;
 }
 
-void TalentData::addNPCTemplate(NPC* npc)
+void TalentData::addNPCTemplate(NPCTemplate* npc)
 {
     QString name = npc->getName();
-    NPC* oldNPC = getNPCFromName(name);
+    NPCTemplate* oldNPC = getNPCFromName(name);
 
     if (oldNPC != npc)
     {
@@ -44,7 +44,7 @@ void TalentData::addNPCTemplate(NPC* npc)
     }
 }
 
-QLinkedList<NPC*> TalentData::getNPCTemplates()
+QLinkedList<NPCTemplate*> TalentData::getNPCTemplates()
 {
     return npcTemplates;
 }
