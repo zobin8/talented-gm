@@ -1,6 +1,6 @@
 #include "stringvaluepair.h"
 
-SVP::SVP(QString s, int v)
+SVP::SVP(QString s, double v)
 {
     string = s;
     value = v;

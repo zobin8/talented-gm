@@ -118,5 +118,4 @@ void MainWindow::on_editAddHitButton_clicked()
     QVBoxLayout* hitLayout = (QVBoxLayout*) ui->editHitBox->layout();
     MenuModule* hitModule = new MenuModule();
     hitLayout->insertWidget(2, hitModule);
-    hitModule->addLineEdit();
 }

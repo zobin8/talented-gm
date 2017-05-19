@@ -6,9 +6,9 @@
 class SVP
 {
 public:
-    SVP(QString, int);
+    SVP(QString, double);
     QString string;
-    int value;
+    double value;
 
 private:
 };

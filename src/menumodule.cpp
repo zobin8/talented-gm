@@ -1,61 +1,40 @@
 #include "menumodule.h"
+#include "stringvaluepair.h"
 #include <QHBoxLayout>
 #include <QLineEdit>
-#include <QPushButton>
-#include <QLabel>
-#include <QSpinBox>
 #include <QDoubleSpinBox>
-//#include <QObjectList>
+#include <QPushButton>
 
 MenuModule::MenuModule(QWidget* parent) : QFrame(parent)
 {
     layout = new QHBoxLayout(this);
+    spin = new QDoubleSpinBox();
+    edit = new QLineEdit();
+    del = new QPushButton();
+
+    layout->addWidget(spin);
+    layout->addWidget(edit);
+    layout->addWidget(del);
 }
 
 MenuModule::~MenuModule()
 {
-    while (layout->count() > 0)
-    {
-        QLayoutItem* child = layout->itemAt(0);
-        layout->removeItem(child);
-        delete child;
-    }
     delete layout;
+    delete spin;
+    delete edit;
+    delete del;
 }
 
-QLineEdit* MenuModule::addLineEdit(QString aString)
+SVP MenuModule::getValue()
 {
-    QLineEdit* out = new QLineEdit(aString);
-    layout->addWidget(out);
-    return out;
+    double v = spin->value();
+    QString s = edit->text();
+    SVP svp(s, v);
+    return svp;
 }
 
-QLabel* MenuModule::addLabel(QString aString)
+void MenuModule::setValue(SVP svp)
 {
-    QLabel* out = new QLabel(aString);
-    layout->addWidget(out);
-    return out;
-}
-
-QPushButton* MenuModule::addButton(QString aString)
-{
-    QPushButton* out = new QPushButton(aString);
-    layout->addWidget(out);
-    return out;
-}
-
-QSpinBox* MenuModule::addSpinBox(int anInt)
-{
-    QSpinBox* out = new QSpinBox();
-    out->setValue(anInt);
-    layout->addWidget(out);
-    return out;
-}
-
-QDoubleSpinBox* MenuModule::addDoubleSpinBox(double aDouble)
-{
-    QDoubleSpinBox* out = new QDoubleSpinBox();
-    out->setValue(aDouble);
-    layout->addWidget(out);
-    return out;
+    spin->setValue(svp.value);
+    edit->setText(svp.string);
 }
