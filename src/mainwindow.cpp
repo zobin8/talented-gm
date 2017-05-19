@@ -17,7 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->editHitScrollContents->layout()->setAlignment(Qt::AlignTop);
 
-    editorNPCController = new EditorNPCController(ui);
+    editorNPCController = new EditorNPCController();
+    editorNPCController->setUi(ui);
     editorNPCController->draw();
 }
 

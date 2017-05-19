@@ -2,6 +2,7 @@
 #define MENUMODULE_H
 
 #include <QFrame>
+#include <QObject>
 
 class SVP;
 class QHBoxLayout;
@@ -13,12 +14,24 @@ class QPushButton;
 
 class MenuModule : public QFrame
 {
+    Q_OBJECT
+
 public:
-    explicit MenuModule(QWidget* parent = 0, int decimals = 0);
+    MenuModule(QWidget* parent = 0);
     ~MenuModule();
 
     SVP getValue();
     void setValue(SVP);
+
+    void setDecimals(int);
+
+    QPushButton* getDeleteButton();
+
+signals:
+    void killMe(MenuModule* me);
+
+public slots:
+    void on_deletionEvent();
 
 private:
     QHBoxLayout* layout;

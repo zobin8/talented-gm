@@ -9,8 +9,10 @@ class MenuModule;
 
 class EditorNPCController : public Controller
 {
+    Q_OBJECT
+
 public:
-    explicit EditorNPCController(Ui::MainWindow*);
+    EditorNPCController(QObject* parent = 0);
     ~EditorNPCController();
 
     void draw();
@@ -19,9 +21,13 @@ public:
     void makeNPC();
     void toTemplate();
 
+signals:
+
+public slots:
+    void deleteHitBox(MenuModule*);
+
 private:
     NPCTemplate* npcTemp;
-    //QLinkedList<MenuModule*> hitBoxModules;
 };
 
 #endif // EDITORNPCCONTROLLER_H

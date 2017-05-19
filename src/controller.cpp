@@ -1,6 +1,11 @@
 #include "controller.h"
 
-Controller::Controller(Ui::MainWindow* anUi)
+Controller::Controller(QObject* parent) : QObject(parent)
 {
-    ui= anUi;
+
+}
+
+void Controller::setUi(Ui::MainWindow* anUi)
+{
+    ui = anUi;
 }

@@ -5,7 +5,7 @@
 #include "menumodule.h"
 #include "stringvaluepair.h"
 
-EditorNPCController::EditorNPCController(Ui::MainWindow* anUi) : Controller(anUi)
+EditorNPCController::EditorNPCController(QObject* parent) : Controller(parent)
 {
     npcTemp = new NPCTemplate();
 }
@@ -103,6 +103,15 @@ void EditorNPCController::addHitBox(QString s, double v)
     hitModule->setValue(SVP(s, v));
 
     QVBoxLayout* hitLayout = (QVBoxLayout*) ui->editHitScrollContents->layout();
-    int index = hitLayout->count() - 2;
+    int index = hitLayout->count() - 1;
     hitLayout->insertWidget(index, hitModule);
+
+    connect(hitModule, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteHitBox(MenuModule*)));
+}
+
+void EditorNPCController::deleteHitBox(MenuModule* menuMod)
+{
+    QVBoxLayout* hitLayout = (QVBoxLayout*) ui->editHitScrollContents->layout();
+    hitLayout->removeWidget(menuMod);
+    delete menuMod;
 }

@@ -5,7 +5,7 @@
 #include <QDoubleSpinBox>
 #include <QPushButton>
 
-MenuModule::MenuModule(QWidget* parent, int decimals) : QFrame(parent)
+MenuModule::MenuModule(QWidget* parent) : QFrame(parent)
 {
     layout = new QHBoxLayout(this);
     spin = new QDoubleSpinBox();
@@ -23,7 +23,7 @@ MenuModule::MenuModule(QWidget* parent, int decimals) : QFrame(parent)
 
     layout->setContentsMargins(9, 0, 9, 0);
 
-    spin->setDecimals(decimals);
+    connect(del, SIGNAL(clicked()), this, SLOT(on_deletionEvent()));
 }
 
 MenuModule::~MenuModule()
@@ -34,16 +34,31 @@ MenuModule::~MenuModule()
     delete del;
 }
 
+void MenuModule::setDecimals(int d)
+{
+    spin->setDecimals(d);
+}
+
+QPushButton* MenuModule::getDeleteButton()
+{
+    return del;
+}
+
 SVP MenuModule::getValue()
 {
     double v = spin->value();
     QString s = edit->text();
     SVP svp(s, v);
     return svp;
-};
+}
 
 void MenuModule::setValue(SVP svp)
 {
     spin->setValue(svp.value);
     edit->setText(svp.string);
+}
+
+void MenuModule::on_deletionEvent()
+{
+    emit killMe(this);
 }
