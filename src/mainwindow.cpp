@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     qsrand(QDateTime::currentMSecsSinceEpoch());
 
     ui->setupUi(this);
+    ui->editHitScrollContents->layout()->setAlignment(Qt::AlignTop);
+
     data = new TalentData();
 
     updateEditorNPC();
@@ -36,17 +38,12 @@ QString MainWindow::randName()
 
 void MainWindow::updateEditorNPC(QString name)
 {
-    QLayout* hitLayout = ui->editHitBox->layout();
-    for (int i = 0; i < hitLayout->count(); i++)
+    QLayout* hitLayout = ui->editHitScrollContents->layout();
+    while (hitLayout->count() > 0)
     {
-        QWidget* widget = hitLayout->itemAt(i)->widget();
-        MenuModule* menuMod = dynamic_cast<MenuModule*>(widget);
-        if (menuMod)
-        {
-            //TODO: Fix this deletion code. It only deletes one item.
-            hitLayout->removeWidget(menuMod);
-            delete menuMod;
-        }
+        QWidget* w =  hitLayout->itemAt(0)->widget();
+        hitLayout->removeWidget(w);
+        delete w;
     }
 
     NPC* npc = currentEditorNPC(name);
@@ -98,7 +95,7 @@ void MainWindow::addHitBox(QString s, double v)
     MenuModule* hitModule = new MenuModule();
     hitModule->setValue(SVP(s, v));
 
-    QVBoxLayout* hitLayout = (QVBoxLayout*) ui->editHitBox->layout();
+    QVBoxLayout* hitLayout = (QVBoxLayout*) ui->editHitScrollContents->layout();
     int index = hitLayout->count() - 2;
     hitLayout->insertWidget(index, hitModule);
 }
@@ -123,7 +120,7 @@ NPC* MainWindow::makeNPC()
     npc->charm = ui->editCharmSpin->value();
     npc->comm = ui->editCommSpin->value();
 
-    QLayout* hitLayout = ui->editHitBox->layout();
+    QLayout* hitLayout = ui->editHitScrollContents->layout();
     for (int i = 0; i < hitLayout->count(); i++)
     {
         QWidget* widget = hitLayout->itemAt(i)->widget();
