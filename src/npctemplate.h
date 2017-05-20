@@ -33,6 +33,7 @@ private:
     QLinkedList<SVP>* skills;
     QLinkedList<SVP>* hitBoxes;
 
+    //TODO: Make static
     QString randName();
 };
 

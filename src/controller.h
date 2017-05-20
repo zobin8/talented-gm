@@ -16,8 +16,9 @@ public:
     Controller(QObject* parent = 0);
 
     virtual void setUi(Ui::MainWindow*);
-    virtual void draw() = 0;
-    virtual void load() = 0;
+    virtual void toView() = 0;
+    virtual void fromModel() = 0;
+    virtual void fromView() = 0;
 
 public slots:
 

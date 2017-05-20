@@ -15,10 +15,10 @@ public:
     EditorNPCController(QObject* parent = 0);
     ~EditorNPCController();
 
-    void draw();
-    void load();
+    void toView();
+    void fromModel();
     void addHitBox(QString s = "", double v = 0);
-    void makeNPC();
+    void fromView();
     void toTemplate();
 
 signals:

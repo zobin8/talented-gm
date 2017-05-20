@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     editorNPCController = new EditorNPCController();
     editorNPCController->setUi(ui);
-    editorNPCController->draw();
+    editorNPCController->toView();
 }
 
 MainWindow::~MainWindow()
@@ -38,7 +38,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_editNPCCombo_activated(const QString &name)
 {
-    editorNPCController->load();
+    editorNPCController->fromModel();
 }
 
 void MainWindow::on_editNPCtoTempButton_clicked()

@@ -15,7 +15,7 @@ EditorNPCController::~EditorNPCController()
     delete npcTemp;
 }
 
-void EditorNPCController::makeNPC()
+void EditorNPCController::fromView()
 {
     npcTemp->getHitBoxes()->clear();
     QLayout* hitLayout = ui->editHitScrollContents->layout();
@@ -38,7 +38,7 @@ void EditorNPCController::makeNPC()
     npcTemp->comm = ui->editCommSpin->value();
 }
 
-void EditorNPCController::draw()
+void EditorNPCController::toView()
 {
     QLayout* hitLayout = ui->editHitScrollContents->layout();
     while (hitLayout->count() > 0)
@@ -70,7 +70,7 @@ void EditorNPCController::draw()
     ui->editNPCCombo->setCurrentText(npcTemp->getName());
 }
 
-void EditorNPCController::load()
+void EditorNPCController::fromModel()
 {
     QString name = ui->editNPCCombo->currentText();
     NPCTemplate* npc = TalentData::getInstance().getNPCFromName(name);
@@ -85,16 +85,17 @@ void EditorNPCController::load()
         npcTemp = new NPCTemplate();
     }
 
-    draw();
+    //TODO: There is a better way to do this. I can't think of it right now.
+    toView();
 }
 
 void EditorNPCController::toTemplate()
 {
-    makeNPC();
+    fromView();
 
     NPCTemplate* temp = new NPCTemplate(npcTemp);
     TalentData::getInstance().addNPCTemplate(temp);
-    draw();
+    toView();
 }
 
 void EditorNPCController::addHitBox(QString s, double v)
