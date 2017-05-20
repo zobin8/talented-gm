@@ -5,6 +5,8 @@
 
 class LocationTemplate;
 class NPCTemplate;
+class QComboBox;
+class QLineEdit;
 
 class EditorLocController : public Controller
 {
@@ -12,6 +14,8 @@ class EditorLocController : public Controller
 public:
     explicit EditorLocController(QObject *parent = 0);
     ~EditorLocController();
+
+    void setWidgets(QComboBox* editLocationCombo, QLineEdit* editLocationName);
 
     void toView();
     void fromModel();
@@ -26,6 +30,9 @@ public slots:
 
 private:
     LocationTemplate* locTemp;
+    QComboBox* uiCombo;
+    QLineEdit* uiName;
+
 };
 
 #endif // EDITORLOCCONTROLLER_H

@@ -2,7 +2,6 @@
 #define CONTROLLER_H
 
 #include <QObject>
-#include "mainwindow.h"
 
 class Controller : public QObject
 {
@@ -11,7 +10,6 @@ class Controller : public QObject
 public:
     Controller(QObject* parent = 0);
 
-    virtual void setUi(Ui::MainWindow*);
     virtual void toView() = 0;
     virtual void fromModel() = 0;
     virtual void fromView() = 0;
@@ -20,8 +18,6 @@ public slots:
 
 signals:
 
-protected:
-    Ui::MainWindow* ui;
 };
 
 #endif // CONTROLLER_H

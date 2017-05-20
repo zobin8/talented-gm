@@ -2,7 +2,8 @@
 #include "locationtemplate.h"
 #include "npctemplate.h"
 #include "talentdata.h"
-#include "ui_mainwindow.h"
+#include <QComboBox>
+#include <QLineEdit>
 
 EditorLocController::EditorLocController(QObject *parent) : Controller(parent)
 {
@@ -14,6 +15,12 @@ EditorLocController::~EditorLocController()
     delete locTemp;
 }
 
+void EditorLocController::setWidgets(QComboBox* editLocationCombo, QLineEdit* editLocationName)
+{
+    uiCombo = editLocationCombo;
+    uiName = editLocationName;
+}
+
 void EditorLocController::deleteNPC(NPCTemplate* npcTemp)
 {
 
@@ -21,18 +28,20 @@ void EditorLocController::deleteNPC(NPCTemplate* npcTemp)
 
 void EditorLocController::toView()
 {
-    ui->editLocationCombo->clear();
-    ui->editLocationCombo->addItem("Custom");
+    uiCombo->clear();
+    uiCombo->addItem("Custom");
     foreach (LocationTemplate* aLoc, TalentData::getInstance().getLocTemplates())
     {
-        ui->editLocationCombo->addItem(aLoc->getName());
+        uiCombo->addItem(aLoc->getName());
     }
-    ui->editLocationCombo->setCurrentText(locTemp->getName());
+    uiCombo->setCurrentText(locTemp->getName());
+
+    uiName->setText(locTemp->getName());
 }
 
 void EditorLocController::fromModel()
 {
-    QString name = ui->editLocationCombo->currentText();
+    QString name = uiCombo->currentText();
     LocationTemplate* loc = TalentData::getInstance().getLocFromName(name);
 
     delete locTemp;
@@ -51,5 +60,15 @@ void EditorLocController::fromModel()
 
 void EditorLocController::fromView()
 {
-    locTemp->setName(ui->editLocationName->text());
+    locTemp->setName(uiName->text());
+}
+
+void EditorLocController::toTemplate()
+{
+    fromView();
+
+    LocationTemplate* temp = new LocationTemplate(locTemp);
+    TalentData::getInstance().addLocTemplate(temp);
+
+    toView();
 }

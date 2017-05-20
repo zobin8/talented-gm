@@ -11,6 +11,7 @@ namespace Ui
 
 class NPCTemplate;
 class EditorNPCController;
+class EditorLocController;
 
 class MainWindow : public QMainWindow
 {
@@ -25,9 +26,18 @@ private slots:
     void on_editNPCtoTempButton_clicked();
     void on_editAddHitButton_clicked();
 
+    void on_editLocationCombo_activated(const QString &arg1);
+
+    void on_editAddLocTempButton_clicked();
+
+    void on_editAddNPCButton_clicked();
+
 private:
     Ui::MainWindow* ui;
     EditorNPCController* editorNPCController;
+    EditorLocController* editorLocController;
+
+    void setControllerWidgets();
 };
 
 #endif // MAINWINDOW_H

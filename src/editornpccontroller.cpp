@@ -1,9 +1,13 @@
 #include "editornpccontroller.h"
 #include "npctemplate.h"
-#include "ui_mainwindow.h"
 #include "talentdata.h"
 #include "menumodule.h"
 #include "stringvaluepair.h"
+#include <QVBoxLayout>
+#include <QLineEdit>
+#include <QSpinBox>
+#include <QDoubleSpinBox>
+#include <QComboBox>
 
 EditorNPCController::EditorNPCController(QObject* parent) : Controller(parent)
 {
@@ -15,10 +19,23 @@ EditorNPCController::~EditorNPCController()
     delete npcTemp;
 }
 
+void EditorNPCController::setWidgets(QWidget *editHitScrollContents, QLineEdit *editNPCName, QSpinBox *editBodySpin, QSpinBox *editCoordSpin, QDoubleSpinBox *editSenseSpin, QSpinBox *editMindSpin, QSpinBox *editCharmSpin, QSpinBox *editCommSpin, QComboBox *editNPCCombo)
+{
+    uiHitContents = editHitScrollContents;
+    uiName = editNPCName;
+    uiBody = editBodySpin;
+    uiCoord = editCoordSpin;
+    uiSense = editSenseSpin;
+    uiMind = editMindSpin;
+    uiCharm = editCharmSpin;
+    uiComm = editCommSpin;
+    uiCombo = editNPCCombo;
+}
+
 void EditorNPCController::fromView()
 {
     npcTemp->getHitBoxes()->clear();
-    QLayout* hitLayout = ui->editHitScrollContents->layout();
+    QLayout* hitLayout = uiHitContents->layout();
     for (int i = 0; i < hitLayout->count(); i++)
     {
         QWidget* widget = hitLayout->itemAt(i)->widget();
@@ -29,18 +46,18 @@ void EditorNPCController::fromView()
         }
     }
 
-    npcTemp->setName(ui->editNPCName->text());
-    npcTemp->body = ui->editBodySpin->value();
-    npcTemp->coord = ui->editCoordSpin->value();
-    npcTemp->sense = ui->editSenseSpin->value();
-    npcTemp->mind = ui->editMindSpin->value();
-    npcTemp->charm = ui->editCharmSpin->value();
-    npcTemp->comm = ui->editCommSpin->value();
+    npcTemp->setName(uiName->text());
+    npcTemp->body = uiBody->value();
+    npcTemp->coord = uiCoord->value();
+    npcTemp->sense = uiSense->value();
+    npcTemp->mind = uiMind->value();
+    npcTemp->charm = uiCharm->value();
+    npcTemp->comm = uiComm->value();
 }
 
 void EditorNPCController::toView()
 {
-    QLayout* hitLayout = ui->editHitScrollContents->layout();
+    QLayout* hitLayout = uiHitContents->layout();
     while (hitLayout->count() > 0)
     {
         QWidget* w =  hitLayout->itemAt(0)->widget();
@@ -53,26 +70,26 @@ void EditorNPCController::toView()
         addHitBox(hit.string, hit.value);
     }
 
-    ui->editNPCName->setText(npcTemp->getName());
-    ui->editBodySpin->setValue(npcTemp->body);
-    ui->editCoordSpin->setValue(npcTemp->coord);
-    ui->editSenseSpin->setValue(npcTemp->sense);
-    ui->editMindSpin->setValue(npcTemp->mind);
-    ui->editCharmSpin->setValue(npcTemp->charm);
-    ui->editCommSpin->setValue(npcTemp->comm);
+    uiName->setText(npcTemp->getName());
+    uiBody->setValue(npcTemp->body);
+    uiCoord->setValue(npcTemp->coord);
+    uiSense->setValue(npcTemp->sense);
+    uiMind->setValue(npcTemp->mind);
+    uiCharm->setValue(npcTemp->charm);
+    uiComm->setValue(npcTemp->comm);
 
-    ui->editNPCCombo->clear();
-    ui->editNPCCombo->addItem("Custom");
+    uiCombo->clear();
+    uiCombo->addItem("Custom");
     foreach (NPCTemplate* anNPC, TalentData::getInstance().getNPCTemplates())
     {
-        ui->editNPCCombo->addItem(anNPC->getName());
+        uiCombo->addItem(anNPC->getName());
     }
-    ui->editNPCCombo->setCurrentText(npcTemp->getName());
+    uiCombo->setCurrentText(npcTemp->getName());
 }
 
 void EditorNPCController::fromModel()
 {
-    QString name = ui->editNPCCombo->currentText();
+    QString name = uiCombo->currentText();
     NPCTemplate* npc = TalentData::getInstance().getNPCFromName(name);
 
     delete npcTemp;
@@ -103,7 +120,7 @@ void EditorNPCController::addHitBox(QString s, double v)
     MenuModule* hitModule = new MenuModule();
     hitModule->setValue(SVP(s, v));
 
-    QVBoxLayout* hitLayout = (QVBoxLayout*) ui->editHitScrollContents->layout();
+    QVBoxLayout* hitLayout = (QVBoxLayout*) uiHitContents->layout();
     int index = hitLayout->count() - 1;
     hitLayout->insertWidget(index, hitModule);
 
@@ -112,7 +129,7 @@ void EditorNPCController::addHitBox(QString s, double v)
 
 void EditorNPCController::deleteHitBox(MenuModule* menuMod)
 {
-    QVBoxLayout* hitLayout = (QVBoxLayout*) ui->editHitScrollContents->layout();
+    QVBoxLayout* hitLayout = (QVBoxLayout*) uiHitContents->layout();
     hitLayout->removeWidget(menuMod);
     delete menuMod;
 }
