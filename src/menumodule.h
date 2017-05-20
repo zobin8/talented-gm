@@ -1,30 +1,19 @@
 #ifndef MENUMODULE_H
 #define MENUMODULE_H
 
-#include <QFrame>
-#include <QObject>
+#include <QWidget>
 
-class SVP;
-class QHBoxLayout;
-class QDoubleSpinBox;
-class QLineEdit;
 class QPushButton;
+class QHBoxLayout;
 
-//TODO: Change to QWidget
-
-class MenuModule : public QFrame
+class MenuModule : public QWidget
 {
     Q_OBJECT
-
 public:
-    MenuModule(QWidget* parent = 0);
+    explicit MenuModule(QWidget *parent = 0);
     ~MenuModule();
 
-    SVP getValue();
-    void setValue(SVP);
-
-    void setDecimals(int);
-
+    void setDeleteText(QString);
     QPushButton* getDeleteButton();
 
 signals:
@@ -33,10 +22,10 @@ signals:
 public slots:
     void on_deletionEvent();
 
-private:
+protected:
     QHBoxLayout* layout;
-    QDoubleSpinBox* spin;
-    QLineEdit* edit;
+
+private:
     QPushButton* del;
 };
 

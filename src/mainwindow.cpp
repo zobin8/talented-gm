@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "talentdata.h"
 #include "npctemplate.h"
-#include "menumodule.h"
+#include "svpmenumodule.h"
 #include "stringvaluepair.h"
 #include "editornpccontroller.h"
 #include "editorloccontroller.h"
@@ -21,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     editorNPCController = new EditorNPCController();
     editorLocController = new EditorLocController();
+
+    connect(editorNPCController, SIGNAL(setNPCNames(QStringList)), editorLocController, SLOT(on_NPCNamesChanged(QStringList)));
 
     setControllerWidgets();
 
@@ -49,7 +51,9 @@ void MainWindow::setControllerWidgets()
     editorLocController->setWidgets(ui->editLocationCombo,
                                     ui->editLocationName,
                                     ui->editMinionSpin1,
-                                    ui->editMinionSpin2);
+                                    ui->editMinionSpin2,
+                                    ui->editLocContents,
+                                    ui->editLocNPCCombo);
 }
 
 void MainWindow::on_editNPCCombo_activated(const QString& name)
@@ -79,5 +83,5 @@ void MainWindow::on_editAddLocTempButton_clicked()
 
 void MainWindow::on_editAddNPCButton_clicked()
 {
-    //TODO
+    editorLocController->addNPCModule();
 }

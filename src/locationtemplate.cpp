@@ -18,7 +18,7 @@ LocationTemplate::LocationTemplate(LocationTemplate* old)
     npcs = QLinkedList<NPCTemplate*>(old->getNPCs());
 }
 
-QLinkedList<NPCTemplate*> LocationTemplate::getNPCs()
+QLinkedList<NPCTemplate*>& LocationTemplate::getNPCs()
 {
     return npcs;
 }
@@ -35,12 +35,12 @@ void LocationTemplate::setName(QString aName)
 
 void LocationTemplate::addNPC(NPCTemplate* npc)
 {
-    npcs.removeOne(npc);
+    npcs.append(npc);
 }
 
 void LocationTemplate::removeNPC(NPCTemplate* npc)
 {
-    npcs.append(npc);
+    npcs.removeOne(npc);
 }
 
 QString LocationTemplate::randName()

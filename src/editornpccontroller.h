@@ -5,6 +5,7 @@
 #include <QString>
 
 class NPCTemplate;
+class SVPMenuModule;
 class MenuModule;
 class QLineEdit;
 class QSpinBox;
@@ -29,6 +30,7 @@ public:
     void toTemplate();
 
 signals:
+    void setNPCNames(QStringList);
 
 public slots:
     void deleteHitBox(MenuModule*);

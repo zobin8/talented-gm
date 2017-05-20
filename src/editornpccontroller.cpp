@@ -1,7 +1,7 @@
 #include "editornpccontroller.h"
 #include "npctemplate.h"
 #include "talentdata.h"
-#include "menumodule.h"
+#include "svpmenumodule.h"
 #include "stringvaluepair.h"
 #include <QVBoxLayout>
 #include <QLineEdit>
@@ -39,7 +39,7 @@ void EditorNPCController::fromView()
     for (int i = 0; i < hitLayout->count(); i++)
     {
         QWidget* widget = hitLayout->itemAt(i)->widget();
-        MenuModule* menuMod = dynamic_cast<MenuModule*>(widget);
+        SVPMenuModule* menuMod = dynamic_cast<SVPMenuModule*>(widget);
         if (menuMod)
         {
             npcTemp->addHitBox(menuMod->getValue());
@@ -78,13 +78,16 @@ void EditorNPCController::toView()
     uiCharm->setValue(npcTemp->charm);
     uiComm->setValue(npcTemp->comm);
 
+    QStringList npcNames = QStringList();
     uiCombo->clear();
     uiCombo->addItem("Custom");
     foreach (NPCTemplate* anNPC, TalentData::getInstance().getNPCTemplates())
     {
         uiCombo->addItem(anNPC->getName());
+        npcNames.append(anNPC->getName());
     }
     uiCombo->setCurrentText(npcTemp->getName());
+    emit setNPCNames(npcNames);
 }
 
 void EditorNPCController::fromModel()
@@ -117,11 +120,11 @@ void EditorNPCController::toTemplate()
 
 void EditorNPCController::addHitBox(QString s, double v)
 {
-    MenuModule* hitModule = new MenuModule();
+    SVPMenuModule* hitModule = new SVPMenuModule();
     hitModule->setValue(SVP(s, v));
 
     QVBoxLayout* hitLayout = (QVBoxLayout*) uiHitContents->layout();
-    int index = hitLayout->count() - 1;
+    int index = hitLayout->count();
     hitLayout->insertWidget(index, hitModule);
 
     connect(hitModule, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteHitBox(MenuModule*)));

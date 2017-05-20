@@ -1209,7 +1209,7 @@
                    <x>0</x>
                    <y>0</y>
                    <width>639</width>
-                   <height>493</height>
+                   <height>491</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_18"/>
@@ -1217,10 +1217,31 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="editAddNPCButton">
-                <property name="text">
-                 <string>Add Current NPC</string>
-                </property>
+               <widget class="QWidget" name="widget_9" native="true">
+                <layout class="QHBoxLayout" name="horizontalLayout_30">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QComboBox" name="editLocNPCCombo"/>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="editAddNPCButton">
+                   <property name="text">
+                    <string>Add NPC</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>
@@ -1897,13 +1918,6 @@
                <widget class="QPushButton" name="editNPCtoTempButton">
                 <property name="text">
                  <string>Add to Templates</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="editNPCToLoc">
-                <property name="text">
-                 <string>Add to Location</string>
                 </property>
                </widget>
               </item>

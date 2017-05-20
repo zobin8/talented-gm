@@ -19,7 +19,7 @@ public:
     QString getName();
     void setName(QString);
 
-    QLinkedList<NPCTemplate*> getNPCs();
+    QLinkedList<NPCTemplate*>& getNPCs();
 
     void addNPC(NPCTemplate*);
     void removeNPC(NPCTemplate*);

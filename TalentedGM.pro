@@ -27,21 +27,23 @@ SOURCES += src/main.cpp\
         src/mainwindow.cpp \
     src/talentdata.cpp \
     src/stringvaluepair.cpp \
-    src/menumodule.cpp \
     src/npctemplate.cpp \
     src/controller.cpp \
     src/editornpccontroller.cpp \
     src/locationtemplate.cpp \
-    src/editorloccontroller.cpp
+    src/editorloccontroller.cpp \
+    src/svpmenumodule.cpp \
+    src/menumodule.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
     src/stringvaluepair.h \
-    src/menumodule.h \
     src/npctemplate.h \
     src/controller.h \
     src/editornpccontroller.h \
     src/locationtemplate.h \
-    src/editorloccontroller.h
+    src/editorloccontroller.h \
+    src/svpmenumodule.h \
+    src/menumodule.h
 
 FORMS    += src/mainwindow.ui
