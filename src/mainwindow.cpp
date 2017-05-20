@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
     ui->editHitScrollContents->layout()->setAlignment(Qt::AlignTop);
+    ui->editLocContents->layout()->setAlignment(Qt::AlignTop);
 
     editorNPCController = new EditorNPCController();
     editorNPCController->setUi(ui);
@@ -27,14 +28,6 @@ MainWindow::~MainWindow()
     delete ui;
     delete editorNPCController;
 }
-
-/*NPCTemplate* MainWindow::currentEditorNPC(QString name)
-{
-    if (name == "Custom") name = ui->editNPCCombo->currentText();
-    NPCTemplate* npc = TalentData::getInstance().getNPCFromName(name);
-    return npc;
-}*/
-
 
 void MainWindow::on_editNPCCombo_activated(const QString &name)
 {

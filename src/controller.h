@@ -2,11 +2,7 @@
 #define CONTROLLER_H
 
 #include <QObject>
-
-namespace Ui
-{
-    class MainWindow;
-}
+#include "mainwindow.h"
 
 class Controller : public QObject
 {

@@ -1,10 +1,12 @@
 #include "talentdata.h"
 #include "npctemplate.h"
+#include "locationtemplate.h"
 #include <QLinkedList>
 
 TalentData::TalentData()
 {
     npcTemplates = QLinkedList<NPCTemplate*>();
+    locTemplates = QLinkedList<LocationTemplate*>();
 }
 
 TalentData::~TalentData()
@@ -12,6 +14,10 @@ TalentData::~TalentData()
     foreach (NPCTemplate* npc, npcTemplates)
     {
         delete npc;
+    }
+    foreach (LocationTemplate* loc, locTemplates)
+    {
+        delete loc;
     }
 }
 
@@ -22,6 +28,18 @@ NPCTemplate* TalentData::getNPCFromName(const QString name)
         if (npc->getName() == name)
         {
             return npc;
+        }
+    }
+    return NULL;
+}
+
+LocationTemplate* TalentData::getLocFromName(const QString name)
+{
+    foreach (LocationTemplate* loc, locTemplates)
+    {
+        if (loc->getName() == name)
+        {
+            return loc;
         }
     }
     return NULL;
@@ -44,7 +62,29 @@ void TalentData::addNPCTemplate(NPCTemplate* npc)
     }
 }
 
+void TalentData::addLocTemplate(LocationTemplate* loc)
+{
+    QString name = loc->getName();
+    LocationTemplate* oldLoc = getLocFromName(name);
+
+    if (oldLoc != loc)
+    {
+        if (oldLoc)
+        {
+            locTemplates.removeOne(oldLoc);
+            delete oldLoc;
+        }
+
+        locTemplates.append(loc);
+    }
+}
+
 QLinkedList<NPCTemplate*> TalentData::getNPCTemplates()
 {
     return npcTemplates;
+}
+
+QLinkedList<LocationTemplate*> TalentData::getLocTemplates()
+{
+    return locTemplates;
 }

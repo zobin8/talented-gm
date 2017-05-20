@@ -31,7 +31,8 @@ SOURCES += src/main.cpp\
     src/npctemplate.cpp \
     src/controller.cpp \
     src/editornpccontroller.cpp \
-    src/locationtemplate.cpp
+    src/locationtemplate.cpp \
+    src/editorloccontroller.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
@@ -40,6 +41,7 @@ HEADERS  += src/mainwindow.h \
     src/npctemplate.h \
     src/controller.h \
     src/editornpccontroller.h \
-    src/locationtemplate.h
+    src/locationtemplate.h \
+    src/editorloccontroller.h
 
 FORMS    += src/mainwindow.ui

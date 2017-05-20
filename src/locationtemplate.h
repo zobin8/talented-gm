@@ -6,6 +6,7 @@
 
 class NPCTemplate;
 
+//TODO: brevity
 class LocationTemplate
 {
 public:
