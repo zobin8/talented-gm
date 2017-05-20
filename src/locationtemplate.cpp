@@ -5,6 +5,9 @@ LocationTemplate::LocationTemplate()
 {
     npcs = QLinkedList<NPCTemplate*>();
     name = LocationTemplate::randName();
+
+    minions1 = 0;
+    minions2 = 0;
 }
 
 LocationTemplate::LocationTemplate(LocationTemplate* old)

@@ -47,7 +47,9 @@ void MainWindow::setControllerWidgets()
                                     ui->editNPCCombo);
 
     editorLocController->setWidgets(ui->editLocationCombo,
-                                    ui->editLocationName);
+                                    ui->editLocationName,
+                                    ui->editMinionSpin1,
+                                    ui->editMinionSpin2);
 }
 
 void MainWindow::on_editNPCCombo_activated(const QString& name)

@@ -7,6 +7,7 @@ class LocationTemplate;
 class NPCTemplate;
 class QComboBox;
 class QLineEdit;
+class QSpinBox;
 
 class EditorLocController : public Controller
 {
@@ -15,7 +16,7 @@ public:
     explicit EditorLocController(QObject *parent = 0);
     ~EditorLocController();
 
-    void setWidgets(QComboBox* editLocationCombo, QLineEdit* editLocationName);
+    void setWidgets(QComboBox* editLocationCombo, QLineEdit* editLocationName, QSpinBox* editMinionSpin1, QSpinBox* editMinionSpin2);
 
     void toView();
     void fromModel();
@@ -32,7 +33,8 @@ private:
     LocationTemplate* locTemp;
     QComboBox* uiCombo;
     QLineEdit* uiName;
-
+    QSpinBox* uiMinions1;
+    QSpinBox* uiMinions2;
 };
 
 #endif // EDITORLOCCONTROLLER_H

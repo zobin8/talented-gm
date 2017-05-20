@@ -4,6 +4,7 @@
 #include "talentdata.h"
 #include <QComboBox>
 #include <QLineEdit>
+#include <QSpinBox>
 
 EditorLocController::EditorLocController(QObject *parent) : Controller(parent)
 {
@@ -15,10 +16,12 @@ EditorLocController::~EditorLocController()
     delete locTemp;
 }
 
-void EditorLocController::setWidgets(QComboBox* editLocationCombo, QLineEdit* editLocationName)
+void EditorLocController::setWidgets(QComboBox *editLocationCombo, QLineEdit *editLocationName, QSpinBox *editMinionSpin1, QSpinBox *editMinionSpin2)
 {
     uiCombo = editLocationCombo;
     uiName = editLocationName;
+    uiMinions1 = editMinionSpin1;
+    uiMinions2 = editMinionSpin2;
 }
 
 void EditorLocController::deleteNPC(NPCTemplate* npcTemp)
@@ -37,6 +40,8 @@ void EditorLocController::toView()
     uiCombo->setCurrentText(locTemp->getName());
 
     uiName->setText(locTemp->getName());
+    uiMinions1->setValue(locTemp->minions1);
+    uiMinions2->setValue(locTemp->minions2);
 }
 
 void EditorLocController::fromModel()
@@ -61,6 +66,8 @@ void EditorLocController::fromModel()
 void EditorLocController::fromView()
 {
     locTemp->setName(uiName->text());
+    locTemp->minions1 = uiMinions1->value();
+    locTemp->minions2 = uiMinions2->value();
 }
 
 void EditorLocController::toTemplate()
