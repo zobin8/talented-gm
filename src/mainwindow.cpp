@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->editHitScrollContents->layout()->setAlignment(Qt::AlignTop);
     ui->editLocContents->layout()->setAlignment(Qt::AlignTop);
+    ui->editSkillScrollContents->layout()->setAlignment(Qt::AlignTop);
 
     editorNPCController = new EditorNPCController();
     editorLocController = new EditorLocController();
@@ -46,7 +47,8 @@ void MainWindow::setControllerWidgets()
                                     ui->editMindSpin,
                                     ui->editCharmSpin,
                                     ui->editCommSpin,
-                                    ui->editNPCCombo);
+                                    ui->editNPCCombo,
+                                    ui->editSkillScrollContents);
 
     editorLocController->setWidgets(ui->editLocationCombo,
                                     ui->editLocationName,
@@ -69,6 +71,11 @@ void MainWindow::on_editNPCtoTempButton_clicked()
 void MainWindow::on_editAddHitButton_clicked()
 {
     editorNPCController->addHitBox();
+}
+
+void MainWindow::on_editAddSkillButton_clicked()
+{
+    editorNPCController->addSkill();
 }
 
 void MainWindow::on_editLocationCombo_activated(const QString& name)

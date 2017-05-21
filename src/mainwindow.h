@@ -32,6 +32,8 @@ private slots:
 
     void on_editAddNPCButton_clicked();
 
+    void on_editAddSkillButton_clicked();
+
 private:
     Ui::MainWindow* ui;
     EditorNPCController* editorNPCController;

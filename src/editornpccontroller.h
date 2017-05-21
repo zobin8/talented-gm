@@ -21,11 +21,12 @@ public:
     ~EditorNPCController();
 
     // RIP Code quality
-    void setWidgets(QWidget* editHitScrollContents, QLineEdit* editNPCName, QSpinBox* editBodySpin, QSpinBox* editCoordSpin, QDoubleSpinBox* editSenseSpin, QSpinBox* editMindSpin, QSpinBox* editCharmSpin, QSpinBox* editCommSpin, QComboBox* editNPCCombo);
+    void setWidgets(QWidget* editHitScrollContents, QLineEdit* editNPCName, QSpinBox* editBodySpin, QSpinBox* editCoordSpin, QDoubleSpinBox* editSenseSpin, QSpinBox* editMindSpin, QSpinBox* editCharmSpin, QSpinBox* editCommSpin, QComboBox* editNPCCombo, QWidget* editSkillScrollContents);
 
     void toView();
     void fromModel();
     void addHitBox(QString s = "", double v = 0);
+    void addSkill(QString s = "", double v = 0);
     void fromView();
     void toTemplate();
 
@@ -34,10 +35,12 @@ signals:
 
 public slots:
     void deleteHitBox(MenuModule*);
+    void deleteSkill(MenuModule*);
 
 private:
     NPCTemplate* npcTemp;
     QWidget* uiHitContents;
+    QWidget* uiSkillContents;
     QLineEdit* uiName;
     QSpinBox* uiBody;
     QSpinBox* uiCoord;

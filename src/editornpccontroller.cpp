@@ -19,9 +19,10 @@ EditorNPCController::~EditorNPCController()
     delete npcTemp;
 }
 
-void EditorNPCController::setWidgets(QWidget *editHitScrollContents, QLineEdit *editNPCName, QSpinBox *editBodySpin, QSpinBox *editCoordSpin, QDoubleSpinBox *editSenseSpin, QSpinBox *editMindSpin, QSpinBox *editCharmSpin, QSpinBox *editCommSpin, QComboBox *editNPCCombo)
+void EditorNPCController::setWidgets(QWidget *editHitScrollContents, QLineEdit *editNPCName, QSpinBox *editBodySpin, QSpinBox *editCoordSpin, QDoubleSpinBox *editSenseSpin, QSpinBox *editMindSpin, QSpinBox *editCharmSpin, QSpinBox *editCommSpin, QComboBox *editNPCCombo, QWidget *editSkillScrollContents)
 {
     uiHitContents = editHitScrollContents;
+    uiSkillContents = editSkillScrollContents;
     uiName = editNPCName;
     uiBody = editBodySpin;
     uiCoord = editCoordSpin;
@@ -46,6 +47,19 @@ void EditorNPCController::fromView()
         }
     }
 
+    //TODO: Make this cleaner. Maybe a function?
+    npcTemp->getSkills()->clear();
+    QLayout* skillLayout = uiSkillContents->layout();
+    for (int i = 0; i < skillLayout->count(); i++)
+    {
+        QWidget* widget = skillLayout->itemAt(i)->widget();
+        SVPMenuModule* menuMod = dynamic_cast<SVPMenuModule*>(widget);
+        if (menuMod)
+        {
+            npcTemp->addSkill(menuMod->getValue());
+        }
+    }
+
     npcTemp->setName(uiName->text());
     npcTemp->body = uiBody->value();
     npcTemp->coord = uiCoord->value();
@@ -65,9 +79,22 @@ void EditorNPCController::toView()
         delete w;
     }
 
+    //TODO: Make this cleaner too. (Function)
+    QLayout* skillLayout = uiSkillContents->layout();
+    while (skillLayout->count() > 0)
+    {
+        QWidget* w =  skillLayout->itemAt(0)->widget();
+        skillLayout->removeWidget(w);
+        delete w;
+    }
+
     foreach(SVP hit, *(npcTemp->getHitBoxes()))
     {
         addHitBox(hit.string, hit.value);
+    }
+    foreach (SVP skill, *npcTemp->getSkills())
+    {
+        addSkill(skill.string, skill.value);
     }
 
     uiName->setText(npcTemp->getName());
@@ -134,5 +161,26 @@ void EditorNPCController::deleteHitBox(MenuModule* menuMod)
 {
     QVBoxLayout* hitLayout = (QVBoxLayout*) uiHitContents->layout();
     hitLayout->removeWidget(menuMod);
+    delete menuMod;
+}
+
+//TODO: Does this function really need to be different from addHitBox()?
+void EditorNPCController::addSkill(QString s, double v)
+{
+    SVPMenuModule* skillModule = new SVPMenuModule();
+    skillModule->setValue(SVP(s, v));
+
+    QVBoxLayout* skillLayout = (QVBoxLayout*) uiSkillContents->layout();
+    int index = skillLayout->count();
+    skillLayout->insertWidget(index, skillModule);
+
+    connect(skillModule, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteSkill(MenuModule*)));
+}
+
+//TODO: Does this function really need to be different from deleteHitBox()?
+void EditorNPCController::deleteSkill(MenuModule* menuMod)
+{
+    QVBoxLayout* skillLayout = (QVBoxLayout*) uiSkillContents->layout();
+    skillLayout->removeWidget(menuMod);
     delete menuMod;
 }
