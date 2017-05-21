@@ -6,6 +6,7 @@
 #include "stringvaluepair.h"
 #include "editornpccontroller.h"
 #include "editorloccontroller.h"
+#include "tempnpccontroller.h"
 #include "temploccontroller.h"
 #include <QDateTime>
 #include <QLinkedList>
@@ -26,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     editorNPCController = new EditorNPCController();
     editorLocController = new EditorLocController();
     tempLocController = new TempLocController();
+    tempNPCController = new TempNPCController();
 
     connectControllers();
     setControllerWidgets();
@@ -43,8 +45,12 @@ MainWindow::~MainWindow()
 void MainWindow::connectControllers()
 {
     connect(editorNPCController, SIGNAL(setNPCNames(QStringList)), editorLocController, SLOT(on_NPCNamesChanged(QStringList)));
+
     connect(editorLocController, SIGNAL(update()), tempLocController, SLOT(on_update()));
     connect(tempLocController, SIGNAL(update()), editorLocController, SLOT(on_update()));
+
+    connect(editorNPCController, SIGNAL(update()), tempNPCController, SLOT(on_update()));
+    connect(tempNPCController, SIGNAL(update()), editorNPCController, SLOT(on_update()));
 }
 
 void MainWindow::setControllerWidgets()
@@ -68,6 +74,8 @@ void MainWindow::setControllerWidgets()
                                     ui->editLocNPCCombo);
 
     tempLocController->setWidgets(ui->tempLocContents);
+
+    tempNPCController->setWidgets(ui->tempNPCContents);
 }
 
 void MainWindow::on_editNPCCombo_activated(const QString& name)

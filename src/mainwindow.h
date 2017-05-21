@@ -13,6 +13,7 @@ class NPCTemplate;
 class EditorNPCController;
 class EditorLocController;
 class TempLocController;
+class TempNPCController;
 
 class MainWindow : public QMainWindow
 {
@@ -38,6 +39,7 @@ private:
     EditorNPCController* editorNPCController;
     EditorLocController* editorLocController;
     TempLocController* tempLocController;
+    TempNPCController* tempNPCController;
 
     void setControllerWidgets();
     void connectControllers();
