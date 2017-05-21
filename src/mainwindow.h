@@ -14,6 +14,8 @@ class EditorNPCController;
 class EditorLocController;
 class TempLocController;
 class TempNPCController;
+class TempPlayerController;
+class Controller;
 
 class MainWindow : public QMainWindow
 {
@@ -34,12 +36,17 @@ private slots:
     void on_tempAddLocationButton_clicked();
     void on_tempAddNPCButton_clicked();
 
+    void on_tempNewPlayerButton_clicked();
+
 private:
     Ui::MainWindow* ui;
+    QLinkedList<Controller*> controllers;
+
     EditorNPCController* editorNPCController;
     EditorLocController* editorLocController;
     TempLocController* tempLocController;
     TempNPCController* tempNPCController;
+    TempPlayerController* tempPlayerController;
 
     void setControllerWidgets();
     void connectControllers();

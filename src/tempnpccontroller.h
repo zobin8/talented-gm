@@ -20,7 +20,6 @@ public:
     void setWidgets(QWidget* tempNPCContents);
 
 signals:
-    void update();
 
 public slots:
     void on_deletionEvent(MenuModule*);

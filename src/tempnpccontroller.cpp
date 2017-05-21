@@ -18,12 +18,7 @@ void TempNPCController::setWidgets(QWidget* tempNPCContents)
 void TempNPCController::toView()
 {
     QLayout* lay = uiNPCContents->layout();
-    while (lay->count() > 0)
-    {
-        QWidget* w =  lay->itemAt(0)->widget();
-        lay->removeWidget(w);
-        delete w;
-    }
+    Controller::clearLayout(lay);
 
     foreach (NPCTemplate* npc, npcTemplates)
     {

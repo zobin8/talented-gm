@@ -17,6 +17,9 @@ public:
     SVP getValue();
     void setValue(SVP);
 
+    QDoubleSpinBox* getSpin();
+    QLineEdit* getEdit();
+
     void setDecimals(int);
 
 private:

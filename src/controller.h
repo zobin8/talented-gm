@@ -3,12 +3,16 @@
 
 #include <QObject>
 
+class QLayout;
+
 class Controller : public QObject
 {
     Q_OBJECT
 
 public:
     Controller(QObject* parent = 0);
+
+    static void clearLayout(QLayout*);
 
     virtual void toView() = 0;
     virtual void fromModel() = 0;

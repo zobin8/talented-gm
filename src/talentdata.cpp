@@ -1,12 +1,14 @@
 #include "talentdata.h"
 #include "npctemplate.h"
 #include "locationtemplate.h"
+#include "stringvaluepair.h"
 #include <QLinkedList>
 
 TalentData::TalentData()
 {
     npcTemplates = QLinkedList<NPCTemplate*>();
     locTemplates = QLinkedList<LocationTemplate*>();
+    players = new QLinkedList<SVP>();
 }
 
 TalentData::~TalentData()
@@ -19,6 +21,19 @@ TalentData::~TalentData()
     {
         delete loc;
     }
+
+    delete players;
+}
+
+QLinkedList<SVP>* TalentData::getPlayers()
+{
+    return players;
+}
+
+void TalentData::setPlayers(QLinkedList<SVP>* newPlayers)
+{
+    delete players;
+    players = new QLinkedList<SVP>(*newPlayers);
 }
 
 NPCTemplate* TalentData::getNPCFromName(const QString name)

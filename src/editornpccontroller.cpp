@@ -72,21 +72,10 @@ void EditorNPCController::fromView()
 void EditorNPCController::toView()
 {
     QLayout* hitLayout = uiHitContents->layout();
-    while (hitLayout->count() > 0)
-    {
-        QWidget* w =  hitLayout->itemAt(0)->widget();
-        hitLayout->removeWidget(w);
-        delete w;
-    }
+    Controller::clearLayout(hitLayout);
 
-    //TODO: Make this cleaner too. (Function)
     QLayout* skillLayout = uiSkillContents->layout();
-    while (skillLayout->count() > 0)
-    {
-        QWidget* w =  skillLayout->itemAt(0)->widget();
-        skillLayout->removeWidget(w);
-        delete w;
-    }
+    Controller::clearLayout(skillLayout);
 
     foreach(SVP hit, *(npcTemp->getHitBoxes()))
     {

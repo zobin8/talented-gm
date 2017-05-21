@@ -41,3 +41,13 @@ void SVPMenuModule::setValue(SVP svp)
     spin->setValue(svp.value);
     edit->setText(svp.string);
 }
+
+QDoubleSpinBox* SVPMenuModule::getSpin()
+{
+    return spin;
+}
+
+QLineEdit* SVPMenuModule::getEdit()
+{
+    return edit;
+}

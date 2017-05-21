@@ -69,12 +69,7 @@ void EditorLocController::toView()
     uiCombo->setCurrentText(locTemp->getName());
 
     QLayout* npcLayout = uiNPCWidget->layout();
-    while (npcLayout->count() > 0)
-    {
-        QWidget* w =  npcLayout->itemAt(0)->widget();
-        npcLayout->removeWidget(w);
-        delete w;
-    }
+    Controller::clearLayout(npcLayout);
 
     foreach (NPCTemplate* npc, locTemp->getNPCs())
     {

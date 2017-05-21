@@ -8,6 +8,7 @@
 #include "editorloccontroller.h"
 #include "tempnpccontroller.h"
 #include "temploccontroller.h"
+#include "tempplayercontroller.h"
 #include <QDateTime>
 #include <QLinkedList>
 
@@ -23,17 +24,29 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->editSkillScrollContents->layout()->setAlignment(Qt::AlignTop);
     ui->tempLocContents->layout()->setAlignment(Qt::AlignTop);
     ui->tempNPCContents->layout()->setAlignment(Qt::AlignTop);
+    ui->tempPlayerContents->layout()->setAlignment(Qt::AlignTop);
 
     editorNPCController = new EditorNPCController();
     editorLocController = new EditorLocController();
     tempLocController = new TempLocController();
     tempNPCController = new TempNPCController();
+    tempPlayerController = new TempPlayerController();
+
+    controllers = QLinkedList<Controller*>();
+    controllers.append(editorNPCController);
+    controllers.append(editorLocController);
+    controllers.append(tempLocController);
+    controllers.append(tempNPCController);
+    controllers.append(tempPlayerController);
 
     connectControllers();
     setControllerWidgets();
 
-    editorNPCController->toView();
-    editorLocController->toView();
+    foreach (Controller* con, controllers)
+    {
+        con->fromModel();
+        con->toView();
+    }
 }
 
 MainWindow::~MainWindow()
@@ -65,7 +78,6 @@ void MainWindow::setControllerWidgets()
                                     ui->editCommSpin,
                                     ui->editNPCCombo,
                                     ui->editSkillScrollContents);
-
     editorLocController->setWidgets(ui->editLocationCombo,
                                     ui->editLocationName,
                                     ui->editMinionSpin1,
@@ -74,8 +86,8 @@ void MainWindow::setControllerWidgets()
                                     ui->editLocNPCCombo);
 
     tempLocController->setWidgets(ui->tempLocContents);
-
     tempNPCController->setWidgets(ui->tempNPCContents);
+    tempPlayerController->setWidgets(ui->tempPlayerContents);
 }
 
 void MainWindow::on_editNPCCombo_activated(const QString& name)
@@ -125,4 +137,9 @@ void MainWindow::on_tempAddLocationButton_clicked()
 void MainWindow::on_tempAddNPCButton_clicked()
 {
     ui->tabWidget->setCurrentWidget(ui->editorTab);
+}
+
+void MainWindow::on_tempNewPlayerButton_clicked()
+{
+    tempPlayerController->addPlayer();
 }

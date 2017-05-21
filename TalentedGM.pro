@@ -35,7 +35,8 @@ SOURCES += src/main.cpp\
     src/svpmenumodule.cpp \
     src/menumodule.cpp \
     src/temploccontroller.cpp \
-    src/tempnpccontroller.cpp
+    src/tempnpccontroller.cpp \
+    src/tempplayercontroller.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
@@ -48,6 +49,7 @@ HEADERS  += src/mainwindow.h \
     src/svpmenumodule.h \
     src/menumodule.h \
     src/temploccontroller.h \
-    src/tempnpccontroller.h
+    src/tempnpccontroller.h \
+    src/tempplayercontroller.h
 
 FORMS    += src/mainwindow.ui

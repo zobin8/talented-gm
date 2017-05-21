@@ -18,12 +18,7 @@ void TempLocController::setWidgets(QWidget* tempLocContents)
 void TempLocController::toView()
 {
     QLayout* lay = uiLocContents->layout();
-    while (lay->count() > 0)
-    {
-        QWidget* w =  lay->itemAt(0)->widget();
-        lay->removeWidget(w);
-        delete w;
-    }
+    Controller::clearLayout(lay);
 
     foreach (LocationTemplate* loc, locTemplates)
     {

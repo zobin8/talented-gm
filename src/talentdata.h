@@ -6,6 +6,7 @@
 class NPCTemplate;
 class LocationTemplate;
 class SVP;
+class QLayout;
 
 class TalentData
 {
@@ -15,7 +16,6 @@ public:
         static TalentData instance;
         return instance;
     }
-
     ~TalentData();
 
     NPCTemplate* getNPCFromName(const QString);
@@ -29,12 +29,18 @@ public:
     QLinkedList<LocationTemplate*> getLocTemplates();
     void setLocTemplates(QLinkedList<LocationTemplate*>);
 
+    QLinkedList<SVP>* getPlayers();
+    void setPlayers(QLinkedList<SVP>*);
+
     TalentData(TalentData const&) = delete;
     void operator =(TalentData const&) = delete;
 
 private:
     QLinkedList<NPCTemplate*> npcTemplates;
     QLinkedList<LocationTemplate*> locTemplates;
+
+    QLinkedList<SVP>* players;
+
     explicit TalentData();
 };
 
