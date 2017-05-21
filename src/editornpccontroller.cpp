@@ -142,7 +142,9 @@ void EditorNPCController::toTemplate()
 
     NPCTemplate* temp = new NPCTemplate(npcTemp);
     TalentData::getInstance().addNPCTemplate(temp);
+
     toView();
+    emit update();
 }
 
 void EditorNPCController::addHitBox(QString s, double v)

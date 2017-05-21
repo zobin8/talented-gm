@@ -32,6 +32,7 @@ public:
 
 signals:
     void setNPCNames(QStringList);
+    void update();
 
 public slots:
     void deleteHitBox(MenuModule*);

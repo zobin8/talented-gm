@@ -16,6 +16,9 @@ public:
     void setDeleteText(QString);
     QPushButton* getDeleteButton();
 
+    void setIdentifier(QString);
+    QString getIdentifier();
+
 signals:
     void killMe(MenuModule* me);
 
@@ -27,6 +30,7 @@ protected:
 
 private:
     QPushButton* del;
+    QString identifier;
 };
 
 #endif // MENUMODULE_H

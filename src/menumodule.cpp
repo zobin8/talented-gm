@@ -36,3 +36,13 @@ void MenuModule::on_deletionEvent()
 {
     emit killMe(this);
 }
+
+void MenuModule::setIdentifier(QString i)
+{
+    identifier = i;
+}
+
+QString MenuModule::getIdentifier()
+{
+    return identifier;
+}

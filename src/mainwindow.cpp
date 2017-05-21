@@ -6,6 +6,7 @@
 #include "stringvaluepair.h"
 #include "editornpccontroller.h"
 #include "editorloccontroller.h"
+#include "temploccontroller.h"
 #include <QDateTime>
 #include <QLinkedList>
 
@@ -19,12 +20,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->editHitScrollContents->layout()->setAlignment(Qt::AlignTop);
     ui->editLocContents->layout()->setAlignment(Qt::AlignTop);
     ui->editSkillScrollContents->layout()->setAlignment(Qt::AlignTop);
+    ui->tempLocContents->layout()->setAlignment(Qt::AlignTop);
+    ui->tempNPCContents->layout()->setAlignment(Qt::AlignTop);
 
     editorNPCController = new EditorNPCController();
     editorLocController = new EditorLocController();
+    tempLocController = new TempLocController();
 
-    connect(editorNPCController, SIGNAL(setNPCNames(QStringList)), editorLocController, SLOT(on_NPCNamesChanged(QStringList)));
-
+    connectControllers();
     setControllerWidgets();
 
     editorNPCController->toView();
@@ -35,6 +38,13 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete editorNPCController;
+}
+
+void MainWindow::connectControllers()
+{
+    connect(editorNPCController, SIGNAL(setNPCNames(QStringList)), editorLocController, SLOT(on_NPCNamesChanged(QStringList)));
+    connect(editorLocController, SIGNAL(update()), tempLocController, SLOT(on_update()));
+    connect(tempLocController, SIGNAL(update()), editorLocController, SLOT(on_update()));
 }
 
 void MainWindow::setControllerWidgets()
@@ -56,6 +66,8 @@ void MainWindow::setControllerWidgets()
                                     ui->editMinionSpin2,
                                     ui->editLocContents,
                                     ui->editLocNPCCombo);
+
+    tempLocController->setWidgets(ui->tempLocContents);
 }
 
 void MainWindow::on_editNPCCombo_activated(const QString& name)
@@ -66,6 +78,8 @@ void MainWindow::on_editNPCCombo_activated(const QString& name)
 void MainWindow::on_editNPCtoTempButton_clicked()
 {
     editorNPCController->toTemplate();
+
+    ui->tabWidget->setCurrentWidget(ui->templatesTab);
 }
 
 void MainWindow::on_editAddHitButton_clicked()
@@ -86,9 +100,21 @@ void MainWindow::on_editLocationCombo_activated(const QString& name)
 void MainWindow::on_editAddLocTempButton_clicked()
 {
     editorLocController->toTemplate();
+
+    ui->tabWidget->setCurrentWidget(ui->templatesTab);
 }
 
 void MainWindow::on_editAddNPCButton_clicked()
 {
     editorLocController->addNPCModule();
+}
+
+void MainWindow::on_tempAddLocationButton_clicked()
+{
+    ui->tabWidget->setCurrentWidget(ui->editorTab);
+}
+
+void MainWindow::on_tempAddNPCButton_clicked()
+{
+    ui->tabWidget->setCurrentWidget(ui->editorTab);
 }

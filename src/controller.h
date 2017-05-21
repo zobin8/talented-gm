@@ -15,8 +15,10 @@ public:
     virtual void fromView() = 0;
 
 public slots:
+    void on_update();
 
 signals:
+    void update();
 
 };
 

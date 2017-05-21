@@ -26,7 +26,7 @@ public:
     void toTemplate();
 
 signals:
-
+    void update();
 
 public slots:
     void deleteNPC(MenuModule*);

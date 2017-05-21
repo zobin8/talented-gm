@@ -88,3 +88,13 @@ QLinkedList<LocationTemplate*> TalentData::getLocTemplates()
 {
     return locTemplates;
 }
+
+void TalentData::setLocTemplates(QLinkedList<LocationTemplate*> locs)
+{
+    locTemplates = QLinkedList<LocationTemplate*>(locs);
+}
+
+void TalentData::setNPCTemplates(QLinkedList<NPCTemplate*> npcs)
+{
+    npcTemplates = QLinkedList<NPCTemplate*>(npcs);
+}

@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="generalTab">
        <attribute name="title">
@@ -764,24 +764,28 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_9">
            <item>
-            <widget class="QPushButton" name="pushButton_12">
-             <property name="text">
-              <string>Delete NPC &quot;[NPC NAME]&quot;</string>
+            <widget class="QScrollArea" name="scrollArea_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="tempNPCContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>639</width>
+                <height>281</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_20"/>
+             </widget>
             </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_6">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>243</height>
-              </size>
-             </property>
-            </spacer>
            </item>
           </layout>
          </widget>
@@ -793,24 +797,28 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_8">
            <item>
-            <widget class="QPushButton" name="pushButton_11">
-             <property name="text">
-              <string>Delete location &quot;[LOCATION NAME]&quot;</string>
+            <widget class="QScrollArea" name="scrollArea_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="tempLocContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>639</width>
+                <height>282</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_21"/>
+             </widget>
             </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_5">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>244</height>
-              </size>
-             </property>
-            </spacer>
            </item>
           </layout>
          </widget>

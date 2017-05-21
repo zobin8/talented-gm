@@ -23,9 +23,11 @@ public:
 
     void addNPCTemplate(NPCTemplate*);
     QLinkedList<NPCTemplate*> getNPCTemplates();
+    void setNPCTemplates(QLinkedList<NPCTemplate*>);
 
     void addLocTemplate(LocationTemplate*);
     QLinkedList<LocationTemplate*> getLocTemplates();
+    void setLocTemplates(QLinkedList<LocationTemplate*>);
 
     TalentData(TalentData const&) = delete;
     void operator =(TalentData const&) = delete;

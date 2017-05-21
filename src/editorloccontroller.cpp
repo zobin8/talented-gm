@@ -41,6 +41,7 @@ void EditorLocController::addNPCModule(QString name)
     {
         MenuModule* menMod = new MenuModule();
         menMod->setDeleteText("Delete NPC: " + name);
+        menMod->setIdentifier(name);
 
         QVBoxLayout* npcLayout = (QVBoxLayout*) uiNPCWidget->layout();
         int index = npcLayout->count();
@@ -118,8 +119,7 @@ void EditorLocController::fromView()
         MenuModule* menuMod = dynamic_cast<MenuModule*>(widget);
         if (menuMod)
         {
-            QString name = menuMod->getDeleteButton()->text();
-            name.remove("Delete NPC: ");
+            QString name = menuMod->getIdentifier();
 
             NPCTemplate* npc = TalentData::getInstance().getNPCFromName(name);
 
@@ -139,6 +139,7 @@ void EditorLocController::toTemplate()
     TalentData::getInstance().addLocTemplate(temp);
 
     toView();
+    emit update();
 }
 
 void EditorLocController::on_NPCNamesChanged(QStringList names)
@@ -150,3 +151,4 @@ void EditorLocController::on_NPCNamesChanged(QStringList names)
 
     uiNPCCombo->setCurrentText(current);
 }
+
