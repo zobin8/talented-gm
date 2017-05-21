@@ -143,3 +143,8 @@ void MainWindow::on_tempNewPlayerButton_clicked()
 {
     tempPlayerController->addPlayer();
 }
+
+void MainWindow::on_tempEdit_textChanged()
+{
+    TalentData::getInstance().setNoteTemplate(ui->tempEdit->toPlainText());
+}

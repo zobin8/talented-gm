@@ -73,6 +73,7 @@ void TempPlayerController::addPlayerView(QString s, double v)
 {
     SVPMenuModule* menMod = new SVPMenuModule();
     menMod->setValue(SVP(s, v));
+    menMod->setDecimals(1);
 
     //TODO: Make this a static function in Controller
     QVBoxLayout* playerLayout = (QVBoxLayout*) uiPlayerContents->layout();

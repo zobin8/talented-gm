@@ -140,6 +140,7 @@ void EditorNPCController::addHitBox(QString s, double v)
 {
     SVPMenuModule* hitModule = new SVPMenuModule();
     hitModule->setValue(SVP(s, v));
+    hitModule->setDecimals(0);
 
     QVBoxLayout* hitLayout = (QVBoxLayout*) uiHitContents->layout();
     int index = hitLayout->count();
@@ -160,6 +161,7 @@ void EditorNPCController::addSkill(QString s, double v)
 {
     SVPMenuModule* skillModule = new SVPMenuModule();
     skillModule->setValue(SVP(s, v));
+    skillModule->setDecimals(0);
 
     QVBoxLayout* skillLayout = (QVBoxLayout*) uiSkillContents->layout();
     int index = skillLayout->count();

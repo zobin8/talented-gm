@@ -15,6 +15,8 @@ SVPMenuModule::SVPMenuModule(QWidget* parent) : MenuModule(parent)
 
     layout->insertWidget(0, edit);
     layout->insertWidget(0, spin);
+
+    setDecimals(0);
 }
 
 SVPMenuModule::~SVPMenuModule()

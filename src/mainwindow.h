@@ -38,6 +38,8 @@ private slots:
 
     void on_tempNewPlayerButton_clicked();
 
+    void on_tempEdit_textChanged();
+
 private:
     Ui::MainWindow* ui;
     QLinkedList<Controller*> controllers;

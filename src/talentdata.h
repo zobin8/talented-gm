@@ -2,6 +2,7 @@
 #define TALENTDATA_H
 
 #include <QLinkedList>
+#include <QString>
 
 class NPCTemplate;
 class LocationTemplate;
@@ -32,6 +33,9 @@ public:
     QLinkedList<SVP>* getPlayers();
     void setPlayers(QLinkedList<SVP>*);
 
+    QString getNoteTemplate();
+    void setNoteTemplate(QString);
+
     TalentData(TalentData const&) = delete;
     void operator =(TalentData const&) = delete;
 
@@ -40,6 +44,7 @@ private:
     QLinkedList<LocationTemplate*> locTemplates;
 
     QLinkedList<SVP>* players;
+    QString noteTemplate;
 
     explicit TalentData();
 };

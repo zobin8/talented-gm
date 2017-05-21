@@ -113,3 +113,13 @@ void TalentData::setNPCTemplates(QLinkedList<NPCTemplate*> npcs)
 {
     npcTemplates = QLinkedList<NPCTemplate*>(npcs);
 }
+
+QString TalentData::getNoteTemplate()
+{
+    return noteTemplate;
+}
+
+void TalentData::setNoteTemplate(QString aString)
+{
+    noteTemplate = aString;
+}
