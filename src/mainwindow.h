@@ -35,10 +35,15 @@ private slots:
     void on_editAddSkillButton_clicked();
     void on_tempAddLocationButton_clicked();
     void on_tempAddNPCButton_clicked();
-
     void on_tempNewPlayerButton_clicked();
-
     void on_tempEdit_textChanged();
+    void on_actionQuit_triggered();
+    void on_actionGeneral_triggered();
+    void on_actionTurns_triggered();
+    void on_actionTemplates_triggered();
+    void on_actionEditor_triggered();
+
+    void closeEvent(QCloseEvent*);
 
 private:
     Ui::MainWindow* ui;

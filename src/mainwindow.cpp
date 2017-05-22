@@ -11,6 +11,7 @@
 #include "tempplayercontroller.h"
 #include <QDateTime>
 #include <QLinkedList>
+#include <QCloseEvent>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -149,4 +150,34 @@ void MainWindow::on_tempNewPlayerButton_clicked()
 void MainWindow::on_tempEdit_textChanged()
 {
     TalentData::getInstance().setNoteTemplate(ui->tempEdit->toPlainText());
+}
+
+void MainWindow::on_actionQuit_triggered()
+{
+    QApplication::quit();
+}
+
+void MainWindow::on_actionGeneral_triggered()
+{
+    ui->tabWidget->setCurrentWidget(ui->generalTab);
+}
+
+void MainWindow::on_actionTurns_triggered()
+{
+    ui->tabWidget->setCurrentWidget(ui->turnTab);
+}
+
+void MainWindow::on_actionTemplates_triggered()
+{
+    ui->tabWidget->setCurrentWidget(ui->templatesTab);
+}
+
+void MainWindow::on_actionEditor_triggered()
+{
+    ui->tabWidget->setCurrentWidget(ui->editorTab);
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+    event->accept();
 }
