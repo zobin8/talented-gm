@@ -32,7 +32,7 @@ Once a binary is obtained, simply execute it to use TalentedGM. There is no inst
 The program is divided into four tabs: general, turns, templates, and editor. The general tab is for use before or after a game. The turn tab is used during combat or non-combat turns. The templates tab can be used to manage location, NPC, player, or note templates. Finally, the editor is where locations and NPCs can be created. Detailed information of each tab is included below.
 
 ### General tab
-This tab contains a segment for general notes about the game. These notes are not tied to a turn and will not be included in the log file. The tab also contains buttons for creating new game files, saving game files, exporting files, etc.
+This tab contains a segment for general notes about the game. These notes are not tied to a turn and will not be included in the log file. By default, these notes contain a basic usage guide for new users.
 
 ### Turn tab
 This tab contains all information for the current turn. In the bottom right, the "next turn" and "previous turn" buttons can be used to navigate through turns. From this menu, any location or NPC template can be loaded into the current turn. There is also a display for all NPC hitboxes on the top left and NPC info on the bottom left. The top right includes an initiative pane. Here, the actions of all players and NPCs are recorded. Finally, the bottom right includes an editor for turn notes. These notes are associated with the current turn and will be included in the log file.
@@ -42,6 +42,8 @@ The templates tab is used for managing templates. Location and NPC templates can
 
 ### Editor tab
 The editor tab is used for editing locations and NPCs. The left side is for locations, the right for NPCs. On each side a template can be loaded and edited. When the "add to templates" button is clicked, all changes to the template are saved. Alternatively, the "add to turn" button will not modify the template but add the NPC or location to the current turn.
+
+Note: When an NPC template is modified and saved, all location templates that contain the NPC will be updated.
 
 ## Copyright
 Copyright (C) 2017 Zoe Krueger
