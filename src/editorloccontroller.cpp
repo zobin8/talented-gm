@@ -43,9 +43,7 @@ void EditorLocController::addNPCModule(QString name)
         menMod->setDeleteText("Delete NPC: " + name);
         menMod->setIdentifier(name);
 
-        QVBoxLayout* npcLayout = (QVBoxLayout*) uiNPCWidget->layout();
-        int index = npcLayout->count();
-        npcLayout->insertWidget(index, menMod);
+        Controller::appendToLayout(menMod, uiNPCWidget->layout());
 
         connect(menMod, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteNPC(MenuModule*)));
     }
@@ -95,9 +93,6 @@ void EditorLocController::fromModel()
     {
         locTemp = new LocTemplate();
     }
-
-    //TODO: See EditorNPCController::fromModel()
-    toView();
 }
 
 void EditorLocController::fromView()

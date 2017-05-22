@@ -75,10 +75,7 @@ void TempPlayerController::addPlayerView(QString s, double v)
     menMod->setValue(SVP(s, v));
     menMod->setDecimals(1);
 
-    //TODO: Make this a static function in Controller
-    QVBoxLayout* playerLayout = (QVBoxLayout*) uiPlayerContents->layout();
-    int index = playerLayout->count();
-    playerLayout->insertWidget(index, menMod);
+    Controller::appendToLayout(menMod, uiPlayerContents->layout());
 
     connect(menMod, SIGNAL(killMe(MenuModule*)), this, SLOT(on_deletionEvent(MenuModule*)));
     connect(menMod->getSpin(), SIGNAL(valueChanged(double)), this, SLOT(on_uiUpdate()));

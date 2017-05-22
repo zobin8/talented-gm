@@ -79,11 +79,11 @@ void EditorNPCController::toView()
 
     foreach(SVP hit, *(npcTemp->getHitBoxes()))
     {
-        addHitBox(hit.string, hit.value);
+        addModule(uiHitContents, hit.string, hit.value);
     }
     foreach (SVP skill, *npcTemp->getSkills())
     {
-        addSkill(skill.string, skill.value);
+        addModule(uiSkillContents, skill.string, skill.value);
     }
 
     uiName->setText(npcTemp->getName());
@@ -120,9 +120,6 @@ void EditorNPCController::fromModel()
     {
         npcTemp = new NPCTemplate();
     }
-
-    //TODO: There is a better way to do this. I can't think of it right now.
-    toView();
 }
 
 void EditorNPCController::toTemplate()
@@ -136,44 +133,24 @@ void EditorNPCController::toTemplate()
     emit update();
 }
 
-void EditorNPCController::addHitBox(QString s, double v)
+void EditorNPCController::addModule(QWidget* contents, QString s, double v)
 {
-    SVPMenuModule* hitModule = new SVPMenuModule();
-    hitModule->setValue(SVP(s, v));
-    hitModule->setDecimals(0);
+    SVPMenuModule* module = new SVPMenuModule();
+    module->setValue(SVP(s, v));
+    module->setDecimals(0);
 
-    QVBoxLayout* hitLayout = (QVBoxLayout*) uiHitContents->layout();
-    int index = hitLayout->count();
-    hitLayout->insertWidget(index, hitModule);
+    Controller::appendToLayout(module, contents->layout());
 
-    connect(hitModule, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteHitBox(MenuModule*)));
+    connect(module, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteModule(MenuModule*)));
 }
 
-void EditorNPCController::deleteHitBox(MenuModule* menuMod)
+void EditorNPCController::deleteModule(MenuModule* menuMod)
 {
-    QVBoxLayout* hitLayout = (QVBoxLayout*) uiHitContents->layout();
+    QVBoxLayout* hitLayout = static_cast<QVBoxLayout*>(uiHitContents->layout());
     hitLayout->removeWidget(menuMod);
-    delete menuMod;
-}
 
-//TODO: Does this function really need to be different from addHitBox()?
-void EditorNPCController::addSkill(QString s, double v)
-{
-    SVPMenuModule* skillModule = new SVPMenuModule();
-    skillModule->setValue(SVP(s, v));
-    skillModule->setDecimals(0);
-
-    QVBoxLayout* skillLayout = (QVBoxLayout*) uiSkillContents->layout();
-    int index = skillLayout->count();
-    skillLayout->insertWidget(index, skillModule);
-
-    connect(skillModule, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteSkill(MenuModule*)));
-}
-
-//TODO: Does this function really need to be different from deleteHitBox()?
-void EditorNPCController::deleteSkill(MenuModule* menuMod)
-{
-    QVBoxLayout* skillLayout = (QVBoxLayout*) uiSkillContents->layout();
+    QVBoxLayout* skillLayout = static_cast<QVBoxLayout*>(uiSkillContents->layout());
     skillLayout->removeWidget(menuMod);
+
     delete menuMod;
 }

@@ -13,6 +13,7 @@ public:
     Controller(QObject* parent = 0);
 
     static void clearLayout(QLayout*);
+    static void appendToLayout(QWidget*, QLayout*);
 
     virtual void toView() = 0;
     virtual void fromModel() = 0;

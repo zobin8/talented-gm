@@ -3,7 +3,6 @@
 #include "menumodule.h"
 #include "talentdata.h"
 #include <QLayout>
-#include <QVBoxLayout>
 
 TempNPCController::TempNPCController(QObject *parent) : Controller(parent)
 {
@@ -26,9 +25,7 @@ void TempNPCController::toView()
         npcMod->setDeleteText("Delete NPC: " + npc->getName());
         npcMod->setIdentifier(npc->getName());
 
-        QVBoxLayout* npcLayout = static_cast<QVBoxLayout*>(uiNPCContents->layout());
-        int i = npcLayout->count();
-        npcLayout->insertWidget(i, npcMod);
+        Controller::appendToLayout(npcMod, uiNPCContents->layout());
 
         connect(npcMod, SIGNAL(killMe(MenuModule*)), this, SLOT(on_deletionEvent(MenuModule*)));
     }

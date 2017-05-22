@@ -26,9 +26,7 @@ void TempLocController::toView()
         locMod->setDeleteText("Delete location: " + loc->getName());
         locMod->setIdentifier(loc->getName());
 
-        QVBoxLayout* locLayout = static_cast<QVBoxLayout*>(uiLocContents->layout());
-        int i = locLayout->count();
-        locLayout->insertWidget(i, locMod);
+        Controller::appendToLayout(locMod, uiLocContents->layout());
 
         connect(locMod, SIGNAL(killMe(MenuModule*)), this, SLOT(on_deletionEvent(MenuModule*)));
     }

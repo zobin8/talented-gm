@@ -93,6 +93,7 @@ void MainWindow::setControllerWidgets()
 void MainWindow::on_editNPCCombo_activated(const QString& name)
 {
     editorNPCController->fromModel();
+    editorNPCController->toView();
 }
 
 void MainWindow::on_editNPCtoTempButton_clicked()
@@ -104,17 +105,18 @@ void MainWindow::on_editNPCtoTempButton_clicked()
 
 void MainWindow::on_editAddHitButton_clicked()
 {
-    editorNPCController->addHitBox();
+    editorNPCController->addModule(ui->editHitScrollContents);
 }
 
 void MainWindow::on_editAddSkillButton_clicked()
 {
-    editorNPCController->addSkill();
+    editorNPCController->addModule(ui->editSkillScrollContents);
 }
 
 void MainWindow::on_editLocationCombo_activated(const QString& name)
 {
     editorLocController->fromModel();
+    editorLocController->toView();
 }
 
 void MainWindow::on_editAddLocTempButton_clicked()

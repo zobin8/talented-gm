@@ -25,8 +25,7 @@ public:
 
     void toView();
     void fromModel();
-    void addHitBox(QString s = "", double v = 0);
-    void addSkill(QString s = "", double v = 0);
+    void addModule(QWidget* contents, QString s = "", double v = 0);
     void fromView();
     void toTemplate();
 
@@ -35,8 +34,7 @@ signals:
     void update();
 
 public slots:
-    void deleteHitBox(MenuModule*);
-    void deleteSkill(MenuModule*);
+    void deleteModule(MenuModule*);
 
 private:
     NPCTemplate* npcTemp;
