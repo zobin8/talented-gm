@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     qsrand(QDateTime::currentMSecsSinceEpoch());
 
+    running = false;
+
     ui->setupUi(this);
     ui->editHitScrollContents->layout()->setAlignment(Qt::AlignTop);
     ui->editLocContents->layout()->setAlignment(Qt::AlignTop);
@@ -93,43 +95,76 @@ void MainWindow::setControllerWidgets()
 
 void MainWindow::on_editNPCCombo_activated(const QString& name)
 {
+    if (running) return;
+    running = true;
+
     editorNPCController->fromModel();
     editorNPCController->toView();
+
+    running = false;
 }
 
 void MainWindow::on_editNPCtoTempButton_clicked()
 {
+    if (running) return;
+    running = true;
     editorNPCController->toTemplate();
+    running = false;
 
     ui->tabWidget->setCurrentWidget(ui->templatesTab);
 }
 
 void MainWindow::on_editAddHitButton_clicked()
 {
+    if (running) return;
+    running = true;
+
     editorNPCController->addModule(ui->editHitScrollContents);
+
+    running = false;
 }
 
 void MainWindow::on_editAddSkillButton_clicked()
 {
+    if (running) return;
+    running = true;
+
     editorNPCController->addModule(ui->editSkillScrollContents);
+
+    running = false;
 }
 
 void MainWindow::on_editLocationCombo_activated(const QString& name)
 {
+    if (running) return;
+    running = true;
+
     editorLocController->fromModel();
     editorLocController->toView();
+
+    running = false;
 }
 
 void MainWindow::on_editAddLocTempButton_clicked()
 {
+    if (running) return;
+    running = true;
+
     editorLocController->toTemplate();
+
+    running = false;
 
     ui->tabWidget->setCurrentWidget(ui->templatesTab);
 }
 
 void MainWindow::on_editAddNPCButton_clicked()
 {
+    if (running) return;
+    running = true;
+
     editorLocController->addNPCModule();
+
+    running = false;
 }
 
 void MainWindow::on_tempAddLocationButton_clicked()
@@ -144,12 +179,22 @@ void MainWindow::on_tempAddNPCButton_clicked()
 
 void MainWindow::on_tempNewPlayerButton_clicked()
 {
+    if (running) return;
+    running = true;
+
     tempPlayerController->addPlayer();
+
+    running = false;
 }
 
 void MainWindow::on_tempEdit_textChanged()
 {
+    if (running) return;
+    running = true;
+
     TalentData::getInstance().setNoteTemplate(ui->tempEdit->toPlainText());
+
+    running = false;
 }
 
 void MainWindow::on_actionQuit_triggered()
@@ -160,6 +205,7 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::on_actionGeneral_triggered()
 {
     ui->tabWidget->setCurrentWidget(ui->generalTab);
+
 }
 
 void MainWindow::on_actionTurns_triggered()
@@ -179,5 +225,10 @@ void MainWindow::on_actionEditor_triggered()
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
+    if (running) return;
+    running = true;
+
     event->accept();
+
+    running = false;
 }

@@ -57,6 +57,8 @@ private:
 
     void setControllerWidgets();
     void connectControllers();
+
+    bool running;
 };
 
 #endif // MAINWINDOW_H
