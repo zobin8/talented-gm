@@ -15,6 +15,7 @@ class EditorLocController;
 class TempLocController;
 class TempNPCController;
 class TempPlayerController;
+class FileController;
 class Controller;
 
 class MainWindow : public QMainWindow
@@ -42,8 +43,12 @@ private slots:
     void on_actionTurns_triggered();
     void on_actionTemplates_triggered();
     void on_actionEditor_triggered();
-
     void closeEvent(QCloseEvent*);
+    void on_actionNew_triggered();
+    void on_actionOpen_triggered();
+    void on_actionSave_triggered();
+    void on_actionSave_as_triggered();
+    void on_actionExport_to_log_triggered();
 
 private:
     Ui::MainWindow* ui;
@@ -54,6 +59,7 @@ private:
     TempLocController* tempLocController;
     TempNPCController* tempNPCController;
     TempPlayerController* tempPlayerController;
+    FileController* fileController;
 
     void setControllerWidgets();
     void connectControllers();

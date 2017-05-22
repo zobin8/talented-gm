@@ -1873,7 +1873,7 @@ p, li { white-space: pre-wrap; }
   </widget>
   <action name="actionNew">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>New</string>
@@ -1884,7 +1884,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionOpen">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Open</string>
@@ -1895,7 +1895,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionSave">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Save</string>
@@ -1906,7 +1906,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionSave_as">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Save as</string>
@@ -1917,7 +1917,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionExport_to_log">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Export to log</string>

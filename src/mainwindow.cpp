@@ -9,6 +9,7 @@
 #include "tempnpccontroller.h"
 #include "temploccontroller.h"
 #include "tempplayercontroller.h"
+#include "filecontroller.h"
 #include <QDateTime>
 #include <QLinkedList>
 #include <QCloseEvent>
@@ -34,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     tempLocController = new TempLocController();
     tempNPCController = new TempNPCController();
     tempPlayerController = new TempPlayerController();
+    fileController = new FileController();
 
     controllers = QLinkedList<Controller*>();
     controllers.append(editorNPCController);
@@ -231,4 +233,29 @@ void MainWindow::closeEvent(QCloseEvent* event)
     event->accept();
 
     running = false;
+}
+
+void MainWindow::on_actionNew_triggered()
+{
+
+}
+
+void MainWindow::on_actionOpen_triggered()
+{
+
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+
+}
+
+void MainWindow::on_actionSave_as_triggered()
+{
+
+}
+
+void MainWindow::on_actionExport_to_log_triggered()
+{
+
 }
