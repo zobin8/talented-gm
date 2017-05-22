@@ -6,13 +6,27 @@
 ## Description
 Talented GM is a simple tool for game masters (GMs) of the role-playing game *Wild Talents*. Using TalentedGM, one can create custom non-player characters (NPCs). This includes stats, skills, and hitboxes. These NPCs, along with minions, can be combined to make up custom locations. While a game is in process, one can load NPCs or locations into the current turn. Each turn also allows for intiative tracking and miscellaneous notes. After a game has finished, all turns can be exported into a log file.
 
-**At least, that is what will be possible once it is programmed. At the moment, virtually no features are available.**
+**At least, that is what will be possible once it is programmed. At the moment, limited features are available.** The following features are currently missing:
+ * Saving to and loading from file
+ * Exporting as a log file
+ * Moving between, adding, and deleting turns
+ * Displaying notes in the turn tab
+ * Displaying initiative in the turn tab
+ * Displaying NPCs and their hitboxes in the turn tab
+ * Displaying further NPC information (stats & skills) in the turn tab
+ * Writing notes in the general tab
 
 ## Dependecies
  * Qt version 5 or above
+ * qmake
+ * make
  
 ## Installation
-To compile, use `qmake` in the directory to create a Makefile. Then, use `make` to create a binary. This binary must be installed manually. `make install` does not currently work to the best of my knowledge. There are also finished binaries located in the release and debug directories.
+The easiest way to install TalentedGM is to simply download a pre-compiled binary file from the bin folder. These exist for the 64bit version of Linux and Windows. However, if one uses a different platform, one will have to compile the project from the source code.
+
+To compile, download this repository and all dependencies. Inside the downloaded folder, run `qmake`. This should generate a file called Makefile. Then, run `make`. This will produce a working binary.
+
+Once a binary is obtained, simply execute it to use TalentedGM. There is no installation wizard or package one needs to run. To update TalentedGM, obtain the newest binary file.
 
 ## Usage
 The program is divided into four tabs: general, turns, templates, and editor. The general tab is for use before or after a game. The turn tab is used during combat or non-combat turns. The templates tab can be used to manage location, NPC, player, or note templates. Finally, the editor is where locations and NPCs can be created. Detailed information of each tab is included below.
