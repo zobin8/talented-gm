@@ -5,7 +5,7 @@
 #include <QLinkedList>
 
 class MenuModule;
-class LocationTemplate;
+class LocTemplate;
 
 class TempLocController : public Controller
 {
@@ -26,7 +26,7 @@ public slots:
     void on_deletionEvent(MenuModule*);
 
 private:
-    QLinkedList<LocationTemplate*> locTemplates;
+    QLinkedList<LocTemplate*> locTemplates;
     QWidget* uiLocContents;
 };
 

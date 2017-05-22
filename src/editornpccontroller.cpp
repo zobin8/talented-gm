@@ -2,7 +2,7 @@
 #include "npctemplate.h"
 #include "talentdata.h"
 #include "svpmenumodule.h"
-#include "stringvaluepair.h"
+#include "svp.h"
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include <QSpinBox>

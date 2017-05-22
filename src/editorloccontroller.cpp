@@ -1,5 +1,5 @@
 #include "editorloccontroller.h"
-#include "locationtemplate.h"
+#include "loctemplate.h"
 #include "npctemplate.h"
 #include "talentdata.h"
 #include "menumodule.h"
@@ -11,7 +11,7 @@
 
 EditorLocController::EditorLocController(QObject *parent) : Controller(parent)
 {
-    locTemp = new LocationTemplate();
+    locTemp = new LocTemplate();
 }
 
 EditorLocController::~EditorLocController()
@@ -62,7 +62,7 @@ void EditorLocController::toView()
 {
     uiCombo->clear();
     uiCombo->addItem("Custom");
-    foreach (LocationTemplate* aLoc, TalentData::getInstance().getLocTemplates())
+    foreach (LocTemplate* aLoc, TalentData::getInstance().getLocTemplates())
     {
         uiCombo->addItem(aLoc->getName());
     }
@@ -84,16 +84,16 @@ void EditorLocController::toView()
 void EditorLocController::fromModel()
 {
     QString name = uiCombo->currentText();
-    LocationTemplate* loc = TalentData::getInstance().getLocFromName(name);
+    LocTemplate* loc = TalentData::getInstance().getLocFromName(name);
 
     delete locTemp;
     if (loc)
     {
-        locTemp = new LocationTemplate(loc);
+        locTemp = new LocTemplate(loc);
     }
     else
     {
-        locTemp = new LocationTemplate();
+        locTemp = new LocTemplate();
     }
 
     //TODO: See EditorNPCController::fromModel()
@@ -130,7 +130,7 @@ void EditorLocController::toTemplate()
 {
     fromView();
 
-    LocationTemplate* temp = new LocationTemplate(locTemp);
+    LocTemplate* temp = new LocTemplate(locTemp);
     TalentData::getInstance().addLocTemplate(temp);
 
     toView();

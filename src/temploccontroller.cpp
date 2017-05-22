@@ -1,5 +1,5 @@
 #include "temploccontroller.h"
-#include "locationtemplate.h"
+#include "loctemplate.h"
 #include "menumodule.h"
 #include "talentdata.h"
 #include <QLayout>
@@ -7,7 +7,7 @@
 
 TempLocController::TempLocController(QObject *parent) : Controller(parent)
 {
-    locTemplates = QLinkedList<LocationTemplate*>();
+    locTemplates = QLinkedList<LocTemplate*>();
 }
 
 void TempLocController::setWidgets(QWidget* tempLocContents)
@@ -20,7 +20,7 @@ void TempLocController::toView()
     QLayout* lay = uiLocContents->layout();
     Controller::clearLayout(lay);
 
-    foreach (LocationTemplate* loc, locTemplates)
+    foreach (LocTemplate* loc, locTemplates)
     {
         MenuModule* locMod = new MenuModule();
         locMod->setDeleteText("Delete location: " + loc->getName());
@@ -36,8 +36,8 @@ void TempLocController::toView()
 
 void TempLocController::fromModel()
 {
-    QLinkedList<LocationTemplate*> model = TalentData::getInstance().getLocTemplates();
-    locTemplates = QLinkedList<LocationTemplate*>(model);
+    QLinkedList<LocTemplate*> model = TalentData::getInstance().getLocTemplates();
+    locTemplates = QLinkedList<LocTemplate*>(model);
 }
 
 void TempLocController::fromView()
@@ -51,7 +51,7 @@ void TempLocController::fromView()
         if (menuMod)
         {
             QString name = menuMod->getIdentifier();
-            LocationTemplate* loc = TalentData::getInstance().getLocFromName(name);
+            LocTemplate* loc = TalentData::getInstance().getLocFromName(name);
 
             if (loc)
             {

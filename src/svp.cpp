@@ -1,4 +1,4 @@
-#include "stringvaluepair.h"
+#include "svp.h"
 
 SVP::SVP(QString s, double v)
 {

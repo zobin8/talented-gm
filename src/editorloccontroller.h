@@ -3,7 +3,7 @@
 
 #include "controller.h"
 
-class LocationTemplate;
+class LocTemplate;
 class NPCTemplate;
 class QComboBox;
 class QLineEdit;
@@ -33,7 +33,7 @@ public slots:
     void on_NPCNamesChanged(QStringList);
 
 private:
-    LocationTemplate* locTemp;
+    LocTemplate* locTemp;
     QComboBox* uiCombo;
     QLineEdit* uiName;
     QSpinBox* uiMinions1;

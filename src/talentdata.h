@@ -5,7 +5,7 @@
 #include <QString>
 
 class NPCTemplate;
-class LocationTemplate;
+class LocTemplate;
 class SVP;
 class QLayout;
 
@@ -20,15 +20,15 @@ public:
     ~TalentData();
 
     NPCTemplate* getNPCFromName(const QString);
-    LocationTemplate* getLocFromName(const QString);
+    LocTemplate* getLocFromName(const QString);
 
     void addNPCTemplate(NPCTemplate*);
     QLinkedList<NPCTemplate*> getNPCTemplates();
     void setNPCTemplates(QLinkedList<NPCTemplate*>);
 
-    void addLocTemplate(LocationTemplate*);
-    QLinkedList<LocationTemplate*> getLocTemplates();
-    void setLocTemplates(QLinkedList<LocationTemplate*>);
+    void addLocTemplate(LocTemplate*);
+    QLinkedList<LocTemplate*> getLocTemplates();
+    void setLocTemplates(QLinkedList<LocTemplate*>);
 
     QLinkedList<SVP>* getPlayers();
     void setPlayers(QLinkedList<SVP>*);
@@ -41,7 +41,7 @@ public:
 
 private:
     QLinkedList<NPCTemplate*> npcTemplates;
-    QLinkedList<LocationTemplate*> locTemplates;
+    QLinkedList<LocTemplate*> locTemplates;
 
     QLinkedList<SVP>* players;
     QString noteTemplate;

@@ -33,8 +33,7 @@ private:
     QLinkedList<SVP>* skills;
     QLinkedList<SVP>* hitBoxes;
 
-    //TODO: Make static
-    QString randName();
+    static QString randName();
 };
 
 #endif // NPCTEMPLATE_H

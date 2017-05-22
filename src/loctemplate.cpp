@@ -1,16 +1,16 @@
-#include "locationtemplate.h"
+#include "loctemplate.h"
 #include "npctemplate.h"
 
-LocationTemplate::LocationTemplate()
+LocTemplate::LocTemplate()
 {
     npcs = QLinkedList<NPCTemplate*>();
-    name = LocationTemplate::randName();
+    name = LocTemplate::randName();
 
     minions1 = 0;
     minions2 = 0;
 }
 
-LocationTemplate::LocationTemplate(LocationTemplate* old)
+LocTemplate::LocTemplate(LocTemplate* old)
 {
     name = old->getName();
     minions1 = old->minions1;
@@ -18,32 +18,32 @@ LocationTemplate::LocationTemplate(LocationTemplate* old)
     npcs = QLinkedList<NPCTemplate*>(old->getNPCs());
 }
 
-QLinkedList<NPCTemplate*>& LocationTemplate::getNPCs()
+QLinkedList<NPCTemplate*>& LocTemplate::getNPCs()
 {
     return npcs;
 }
 
-QString LocationTemplate::getName()
+QString LocTemplate::getName()
 {
     return name;
 }
 
-void LocationTemplate::setName(QString aName)
+void LocTemplate::setName(QString aName)
 {
     name = aName;
 }
 
-void LocationTemplate::addNPC(NPCTemplate* npc)
+void LocTemplate::addNPC(NPCTemplate* npc)
 {
     npcs.append(npc);
 }
 
-void LocationTemplate::removeNPC(NPCTemplate* npc)
+void LocTemplate::removeNPC(NPCTemplate* npc)
 {
     npcs.removeOne(npc);
 }
 
-QString LocationTemplate::randName()
+QString LocTemplate::randName()
 {
     return "Custom Location #" + QString::number(qrand() % 1000000);
 }

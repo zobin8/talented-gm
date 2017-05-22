@@ -1,10 +1,10 @@
 #include "npctemplate.h"
-#include "stringvaluepair.h"
+#include "svp.h"
 #include <QLinkedList>
 
 NPCTemplate::NPCTemplate()
 {
-    name = randName();
+    name = NPCTemplate::randName();
 
     hitBoxes = new QLinkedList<SVP>();
     skills = new QLinkedList<SVP>();

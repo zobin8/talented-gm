@@ -1,5 +1,5 @@
 #include "tempplayercontroller.h"
-#include "stringvaluepair.h"
+#include "svp.h"
 #include "svpmenumodule.h"
 #include "talentdata.h"
 #include <QLinkedList>

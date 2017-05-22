@@ -3,7 +3,7 @@
 #include "talentdata.h"
 #include "npctemplate.h"
 #include "svpmenumodule.h"
-#include "stringvaluepair.h"
+#include "svp.h"
 #include "editornpccontroller.h"
 #include "editorloccontroller.h"
 #include "tempnpccontroller.h"

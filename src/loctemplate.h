@@ -6,12 +6,11 @@
 
 class NPCTemplate;
 
-//TODO: brevity
-class LocationTemplate
+class LocTemplate
 {
 public:
-    LocationTemplate();
-    LocationTemplate(LocationTemplate*);
+    LocTemplate();
+    LocTemplate(LocTemplate*);
 
     int minions1;
     int minions2;
