@@ -1,5 +1,6 @@
 #include "npctemplate.h"
 #include "svp.h"
+#include "talentdata.h"
 #include <QLinkedList>
 
 NPCTemplate::NPCTemplate()
@@ -43,17 +44,17 @@ void NPCTemplate::setName(QString aName)
     name = aName;
 }
 
-QString NPCTemplate::getName()
+QString NPCTemplate::getName() const
 {
     return name;
 }
 
-QLinkedList<SVP>* NPCTemplate::getSkills()
+QLinkedList<SVP>* NPCTemplate::getSkills() const
 {
     return skills;
 }
 
-QLinkedList<SVP>* NPCTemplate::getHitBoxes()
+QLinkedList<SVP>* NPCTemplate::getHitBoxes() const
 {
     return hitBoxes;
 }
@@ -68,7 +69,84 @@ void NPCTemplate::addHitBox(SVP svp)
     hitBoxes->append(svp);
 }
 
+void NPCTemplate::setSkills(QLinkedList<SVP>* s)
+{
+    delete skills;
+    skills = s;
+}
+
+void NPCTemplate::setHitBoxes(QLinkedList<SVP>* h)
+{
+    delete hitBoxes;
+    hitBoxes = h;
+}
+
 QString NPCTemplate::randName()
 {
     return "Custom NPC #" + QString::number(qrand() % 1000000);
+}
+
+QDataStream& operator <<(QDataStream& out, const NPCTemplate& npc)
+{
+    out << QString("NPCTemplate1");
+
+    out << npc.getName();
+    out << npc.body;
+    out << npc.coord;
+    out << npc.sense;
+    out << npc.mind;
+    out << npc.charm;
+    out << npc.comm;
+    out << *npc.getSkills();
+    out << *npc.getHitBoxes();
+
+    return out;
+}
+
+QDataStream& operator >>(QDataStream& in, NPCTemplate& npc)
+{
+    QString version;
+    in >> version;
+    int v = TalentData::versionNumber(version, "NPCTemplate");
+
+    if (v == 1)
+    {
+        QString name;
+        in >> name;
+        npc.setName(name);
+
+        int body;
+        in >> body;
+        npc.body = body;
+
+        int coord;
+        in >> coord;
+        npc.coord = coord;
+
+        double sense;
+        in >> sense;
+        npc.sense = sense;
+
+        int mind;
+        in >> mind;
+        npc.mind = mind;
+
+        int charm;
+        in >> charm;
+        npc.charm = charm;
+
+        int comm;
+        in >> comm;
+        npc.comm = comm;
+
+        QLinkedList<SVP>* skills = new QLinkedList<SVP>();
+        in >> *skills;
+        npc.setSkills(skills);
+
+        QLinkedList<SVP>* hitBoxes = new QLinkedList<SVP>();
+        in >> *hitBoxes;
+        npc.setHitBoxes(hitBoxes);
+    }
+
+    return in;
 }

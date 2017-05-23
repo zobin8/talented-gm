@@ -140,10 +140,17 @@ void TalentFile::setNotes(QString aString)
 
 QDataStream& operator <<(QDataStream& out, const TalentFile& file)
 {
-    out << QString("TalentFile2");
+    out << QString("TalentFile4");
 
     out << file.getNotes();
     out << file.getNoteTemplate();
+    out << *file.getPlayers();
+
+    out << file.getNPCTemplates().count();
+    foreach (NPCTemplate* npc, file.getNPCTemplates())
+    {
+        out << *npc;
+    }
 
     return out;
 }
@@ -160,12 +167,37 @@ QDataStream& operator >>(QDataStream& in, TalentFile& file)
         in >> n;
         file.setNotes(n);
     }
-    if (v == 2)
+    if (v >= 2)
     {
         QString nTemp;
         in >> nTemp;
         file.setNoteTemplate(nTemp);
     }
+    if (v >= 3)
+    {
+        QLinkedList<SVP>* p = new QLinkedList<SVP>();
+        in >> *p;
+        file.setPlayers(p);
+    }
+    if (v >= 4)
+    {
+        QLinkedList<NPCTemplate*> npcs = QLinkedList<NPCTemplate*>();
+        int count;
+        in >> count;
+        for (int i = 0; i < count; i++)
+        {
+            NPCTemplate* npc = new NPCTemplate();
+            in >> *npc;
+            npcs.append(npc);
+        }
+        file.setNPCTemplates(npcs);
+    }
+    /*if (v >= 5)
+    {
+        QLinkedList<LocTemplate*> locs = QLinkedList<LocTemplate*>();
+        in >> locs;
+        file.setLocTemplates(locs);
+    }*/
 
     return in;
 }

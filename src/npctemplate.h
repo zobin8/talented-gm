@@ -21,12 +21,14 @@ public:
     int comm;
 
     void setName(QString);
-    QString getName();
+    QString getName() const;
 
-    QLinkedList<SVP>* getSkills();
-    QLinkedList<SVP>* getHitBoxes();
+    QLinkedList<SVP>* getSkills() const;
+    QLinkedList<SVP>* getHitBoxes() const;
     void addSkill(SVP);
     void addHitBox(SVP);
+    void setSkills(QLinkedList<SVP>*);
+    void setHitBoxes(QLinkedList<SVP>*);
 
 private:
     QString name;
@@ -35,5 +37,8 @@ private:
 
     static QString randName();
 };
+
+QDataStream& operator <<(QDataStream&, const NPCTemplate&);
+QDataStream& operator >>(QDataStream&, NPCTemplate&);
 
 #endif // NPCTEMPLATE_H

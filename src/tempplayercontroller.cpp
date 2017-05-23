@@ -41,7 +41,17 @@ void TempPlayerController::toModel()
 
 void TempPlayerController::fromView()
 {
-
+    players->clear();
+    QLayout* pLayout = uiPlayerContents->layout();
+    for (int i = 0; i < pLayout->count(); i++)
+    {
+        QWidget* widget = pLayout->itemAt(i)->widget();
+        SVPMenuModule* menMod = dynamic_cast<SVPMenuModule*>(widget);
+        if (menMod)
+        {
+            players->append(menMod->getValue());
+        }
+    }
 }
 
 void TempPlayerController::setWidgets(QWidget* tempPlayerContents)
