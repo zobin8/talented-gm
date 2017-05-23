@@ -50,8 +50,8 @@ QDataStream& operator >>(QDataStream& in, TalentData& data)
     if (v == 1)
     {
         TalentFile* f = new TalentFile();
-        in >> *f;
         data.setTalentFile(f);
+        in >> *f;
     }
 
     return in;

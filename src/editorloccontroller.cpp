@@ -70,7 +70,7 @@ void EditorLocController::toView()
     QLayout* npcLayout = uiNPCWidget->layout();
     Controller::clearLayout(npcLayout);
 
-    foreach (NPCTemplate* npc, locTemp->getNPCs())
+    foreach (NPCTemplate* npc, locTemp->NPCs())
     {
         addNPCModule(npc->getName());
     }
@@ -102,7 +102,7 @@ void EditorLocController::fromView()
     locTemp->minions1 = uiMinions1->value();
     locTemp->minions2 = uiMinions2->value();
 
-    locTemp->getNPCs().clear();
+    locTemp->NPCs().clear();
     QLayout* npcLayout = uiNPCWidget->layout();
     for (int i = 0; i < npcLayout->count(); i++)
     {
