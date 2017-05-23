@@ -17,6 +17,7 @@ class TempNPCController;
 class TempPlayerController;
 class FileController;
 class GeneralController;
+class TempNotesController;
 class Controller;
 
 class MainWindow : public QMainWindow
@@ -38,7 +39,6 @@ private slots:
     void on_tempAddLocationButton_clicked();
     void on_tempAddNPCButton_clicked();
     void on_tempNewPlayerButton_clicked();
-    void on_tempEdit_textChanged();
     void on_actionQuit_triggered();
     void on_actionGeneral_triggered();
     void on_actionTurns_triggered();
@@ -62,6 +62,7 @@ private:
     TempPlayerController* tempPlayerController;
     FileController* fileController;
     GeneralController* generalController;
+    TempNotesController* tempNotesController;
 
     void setControllerWidgets();
     void connectControllers();

@@ -310,8 +310,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>304</width>
-                      <height>68</height>
+                      <width>308</width>
+                      <height>63</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_24"/>
@@ -360,8 +360,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>304</width>
-                      <height>68</height>
+                      <width>308</width>
+                      <height>63</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_23"/>
@@ -514,8 +514,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>634</width>
-                   <height>306</height>
+                   <width>638</width>
+                   <height>329</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_25"/>
@@ -689,8 +689,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>634</width>
-                <height>272</height>
+                <width>639</width>
+                <height>281</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -722,8 +722,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>634</width>
-                <height>273</height>
+                <width>639</width>
+                <height>282</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_21"/>
@@ -819,8 +819,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>634</width>
-                <height>224</height>
+                <width>638</width>
+                <height>238</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_22"/>
@@ -1077,8 +1077,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>634</width>
-                   <height>469</height>
+                   <width>639</width>
+                   <height>491</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_18"/>
@@ -1642,8 +1642,8 @@ p, li { white-space: pre-wrap; }
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>301</width>
-                         <height>282</height>
+                         <width>305</width>
+                         <height>321</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_19"/>
@@ -1761,8 +1761,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>301</width>
-                      <height>282</height>
+                      <width>304</width>
+                      <height>321</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_17"/>
@@ -1832,12 +1832,12 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1366</width>
-     <height>19</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>Fi&amp;le</string>
     </property>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
@@ -1850,7 +1850,7 @@ p, li { white-space: pre-wrap; }
    </widget>
    <widget class="QMenu" name="menuTurns">
     <property name="title">
-     <string>Turns</string>
+     <string>T&amp;urns</string>
     </property>
     <addaction name="actionPrevious_turn"/>
     <addaction name="actionNext"/>
@@ -1860,7 +1860,7 @@ p, li { white-space: pre-wrap; }
    </widget>
    <widget class="QMenu" name="menuNavigation">
     <property name="title">
-     <string>Navigation</string>
+     <string>&amp;Navigation</string>
     </property>
     <addaction name="actionGeneral"/>
     <addaction name="actionTurns"/>
@@ -1876,7 +1876,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>New</string>
+    <string>&amp;New</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -1887,7 +1887,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Open</string>
+    <string>&amp;Open</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -1898,7 +1898,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Save</string>
+    <string>&amp;Save</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -1909,7 +1909,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Save as</string>
+    <string>Sa&amp;ve as</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
@@ -1920,7 +1920,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Export to log</string>
+    <string>&amp;Export to log</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+E</string>
@@ -1928,7 +1928,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionQuit">
    <property name="text">
-    <string>Quit</string>
+    <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -1939,7 +1939,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Previous</string>
+    <string>&amp;Previous</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+[</string>
@@ -1950,7 +1950,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Next</string>
+    <string>&amp;Next</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+]</string>
@@ -1961,7 +1961,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Add</string>
+    <string>&amp;Add</string>
    </property>
    <property name="shortcut">
     <string>Ctrl++</string>
@@ -1972,7 +1972,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Delete</string>
+    <string>&amp;Delete</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+-</string>
@@ -1980,7 +1980,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionGeneral">
    <property name="text">
-    <string>General</string>
+    <string>&amp;General</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+1</string>
@@ -1988,7 +1988,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionTurns">
    <property name="text">
-    <string>Turns</string>
+    <string>&amp;Turns</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+2</string>
@@ -1996,7 +1996,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionTemplates">
    <property name="text">
-    <string>Templates</string>
+    <string>Te&amp;mplates</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+3</string>
@@ -2004,7 +2004,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionEditor">
    <property name="text">
-    <string>Editor</string>
+    <string>&amp;Editor</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+4</string>

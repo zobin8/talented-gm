@@ -12,6 +12,7 @@
 #include "tempplayercontroller.h"
 #include "filecontroller.h"
 #include "generalcontroller.h"
+#include "tempnotescontroller.h"
 
 #include <QDateTime>
 #include <QLinkedList>
@@ -41,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     tempPlayerController = new TempPlayerController();
     fileController = new FileController();
     generalController = new GeneralController();
+    tempNotesController = new TempNotesController();
 
     controllers = QLinkedList<Controller*>();
     controllers.append(editorNPCController);
@@ -50,15 +52,10 @@ MainWindow::MainWindow(QWidget *parent) :
     controllers.append(tempPlayerController);
     controllers.append(fileController);
     controllers.append(generalController);
+    controllers.append(tempNotesController);
 
-    connectControllers();
     setControllerWidgets();
-
-    foreach (Controller* con, controllers)
-    {
-        con->fromModel();
-        con->toView();
-    }
+    connectControllers();
 
     fileController->openFile(":/default/default.tgm");
     fileController->loadFile();
@@ -81,7 +78,13 @@ void MainWindow::connectControllers()
     connect(editorNPCController, SIGNAL(update()), tempNPCController, SLOT(on_update()));
     connect(tempNPCController, SIGNAL(update()), editorNPCController, SLOT(on_update()));
 
-    connect(fileController, SIGNAL(update()), generalController, SLOT(on_update()));
+    foreach (Controller* con, controllers)
+    {
+        if (con != fileController)
+        {
+            connect(fileController, SIGNAL(update()), con, SLOT(on_update()));
+        }
+    }
 }
 
 void MainWindow::setControllerWidgets()
@@ -106,8 +109,10 @@ void MainWindow::setControllerWidgets()
     tempLocController->setWidgets(ui->tempLocContents);
     tempNPCController->setWidgets(ui->tempNPCContents);
     tempPlayerController->setWidgets(ui->tempPlayerContents);
+    tempNotesController->setWidgets(ui->tempEdit);
 
     generalController->setWidgets(ui->generalEdit);
+
 }
 
 QString MainWindow::pickFile(bool allowNew)
@@ -234,16 +239,6 @@ void MainWindow::on_tempNewPlayerButton_clicked()
     running = true;
 
     tempPlayerController->addPlayer();
-
-    running = false;
-}
-
-void MainWindow::on_tempEdit_textChanged()
-{
-    if (running) return;
-    running = true;
-
-    TalentData::getTalentFile()->setNoteTemplate(ui->tempEdit->toPlainText());
 
     running = false;
 }

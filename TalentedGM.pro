@@ -39,7 +39,8 @@ SOURCES += src/main.cpp\
     src/svp.cpp \
     src/filecontroller.cpp \
     src/talentfile.cpp \
-    src/generalcontroller.cpp
+    src/generalcontroller.cpp \
+    src/tempnotescontroller.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
@@ -56,7 +57,8 @@ HEADERS  += src/mainwindow.h \
     src/svp.h \
     src/filecontroller.h \
     src/talentfile.h \
-    src/generalcontroller.h
+    src/generalcontroller.h \
+    src/tempnotescontroller.h
 
 FORMS    += src/mainwindow.ui
 

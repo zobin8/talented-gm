@@ -10,14 +10,7 @@ TalentFile::TalentFile()
     locTemplates = QLinkedList<LocTemplate*>();
     players = new QLinkedList<SVP>();
     generalNotes = "";
-}
-
-TalentFile::TalentFile(QString notes)
-{
-    npcTemplates = QLinkedList<NPCTemplate*>();
-    locTemplates = QLinkedList<LocTemplate*>();
-    players = new QLinkedList<SVP>();
-    generalNotes = notes;
+    noteTemplate = "";
 }
 
 TalentFile::~TalentFile()
@@ -34,7 +27,7 @@ TalentFile::~TalentFile()
     delete players;
 }
 
-QLinkedList<SVP>* TalentFile::getPlayers()
+QLinkedList<SVP>* TalentFile::getPlayers() const
 {
     return players;
 }
@@ -103,12 +96,12 @@ void TalentFile::addLocTemplate(LocTemplate* loc)
     }
 }
 
-QLinkedList<NPCTemplate*> TalentFile::getNPCTemplates()
+QLinkedList<NPCTemplate*> TalentFile::getNPCTemplates() const
 {
     return npcTemplates;
 }
 
-QLinkedList<LocTemplate*> TalentFile::getLocTemplates()
+QLinkedList<LocTemplate*> TalentFile::getLocTemplates() const
 {
     return locTemplates;
 }
@@ -123,7 +116,7 @@ void TalentFile::setNPCTemplates(QLinkedList<NPCTemplate*> npcs)
     npcTemplates = QLinkedList<NPCTemplate*>(npcs);
 }
 
-QString TalentFile::getNoteTemplate()
+QString TalentFile::getNoteTemplate() const
 {
     return noteTemplate;
 }
@@ -146,9 +139,10 @@ void TalentFile::setNotes(QString aString)
 
 QDataStream& operator <<(QDataStream& out, const TalentFile& file)
 {
-    out << QString("TalentFile1");
+    out << QString("TalentFile2");
 
     out << file.getNotes();
+    out << file.getNoteTemplate();
 
     return out;
 }
@@ -163,6 +157,16 @@ QDataStream& operator >>(QDataStream& in, TalentFile& file)
         QString n;
         in >> n;
         file.setNotes(n);
+    }
+    else if (version == "TalentFile2")
+    {
+        QString n;
+        in >> n;
+        file.setNotes(n);
+
+        QString nTemp;
+        in >> nTemp;
+        file.setNoteTemplate(nTemp);
     }
 
     return in;

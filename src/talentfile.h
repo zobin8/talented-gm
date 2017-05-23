@@ -13,24 +13,23 @@ class TalentFile
 {
 public:
     TalentFile();
-    TalentFile(QString notes);
     ~TalentFile();
 
     NPCTemplate* getNPCFromName(const QString);
     LocTemplate* getLocFromName(const QString);
 
     void addNPCTemplate(NPCTemplate*);
-    QLinkedList<NPCTemplate*> getNPCTemplates();
+    QLinkedList<NPCTemplate*> getNPCTemplates() const;
     void setNPCTemplates(QLinkedList<NPCTemplate*>);
 
     void addLocTemplate(LocTemplate*);
-    QLinkedList<LocTemplate*> getLocTemplates();
+    QLinkedList<LocTemplate*> getLocTemplates() const;
     void setLocTemplates(QLinkedList<LocTemplate*>);
 
-    QLinkedList<SVP>* getPlayers();
+    QLinkedList<SVP>* getPlayers() const;
     void setPlayers(QLinkedList<SVP>*);
 
-    QString getNoteTemplate();
+    QString getNoteTemplate() const;
     void setNoteTemplate(QString);
 
     QString getNotes() const;
