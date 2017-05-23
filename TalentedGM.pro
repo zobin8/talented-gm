@@ -59,3 +59,6 @@ HEADERS  += src/mainwindow.h \
     src/generalcontroller.h
 
 FORMS    += src/mainwindow.ui
+
+RESOURCES += \
+    res/default.qrc

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>default/default.tgm</file>
+    </qresource>
+</RCC>

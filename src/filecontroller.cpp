@@ -40,6 +40,7 @@ void FileController::newFile()
 {
     closeFile();
     TalentData::setTalentFile(new TalentFile());
+    toView();
 }
 
 void FileController::openFile(QString path)

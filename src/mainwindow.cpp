@@ -60,7 +60,9 @@ MainWindow::MainWindow(QWidget *parent) :
         con->toView();
     }
 
-    fileController->newFile();
+    fileController->openFile(":/default/default.tgm");
+    fileController->loadFile();
+    fileController->closeFile();
 }
 
 MainWindow::~MainWindow()
