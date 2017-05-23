@@ -113,7 +113,7 @@ void MainWindow::setControllerWidgets()
     tempNotesController->setWidgets(ui->tempEdit);
 
     generalController->setWidgets(ui->generalEdit);
-
+    fileController->setWidgets(ui->statusBar);
 }
 
 QString MainWindow::pickFile(bool allowNew)
@@ -332,6 +332,7 @@ void MainWindow::on_actionSave_triggered()
     }
     else
     {
+        running = false;
         on_actionSave_as_triggered();
     }
 

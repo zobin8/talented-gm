@@ -5,6 +5,7 @@
 #include <QObject>
 
 class QFile;
+class QStatusBar;
 
 class FileController : public Controller
 {
@@ -12,6 +13,9 @@ class FileController : public Controller
 public:
     explicit FileController(QObject *parent = 0);
     ~FileController();
+
+    void setWidgets(QStatusBar* statusBar);
+    void setStatus();
 
     void toView();
     void fromModel();
@@ -35,6 +39,7 @@ public slots:
 
 private:
     QFile* file;
+    QStatusBar* uiStatusBar;
     bool unsaved;
 };
 

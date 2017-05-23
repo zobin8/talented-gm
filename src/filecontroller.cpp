@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QDataStream>
 #include <QMessageBox>
+#include <QStatusBar>
 
 FileController::FileController(QObject *parent) : Controller(parent)
 {
@@ -15,14 +16,21 @@ FileController::~FileController()
     closeFile();
 }
 
+void FileController::setWidgets(QStatusBar* statusBar)
+{
+    uiStatusBar = statusBar;
+}
+
 void FileController::setUnsaved(bool aBool)
 {
     unsaved = aBool;
+    setStatus();
 }
 
 void FileController::toView()
 {
     emit update();
+    setStatus();
 }
 
 void FileController::fromModel()
@@ -36,6 +44,27 @@ void FileController::fromModel()
 void FileController::fromView()
 {
     // Do nothing
+}
+
+void FileController::setStatus()
+{
+    QString status;
+
+    if (file)
+    {
+        status = file->fileName();
+    }
+    else
+    {
+        status = "Unnamed file";
+    }
+
+    if (unsaved)
+    {
+        status += "*";
+    }
+
+    uiStatusBar->showMessage(status);
 }
 
 bool FileController::hasFile()
@@ -76,6 +105,7 @@ void FileController::closeFile()
     {
         delete file;
         file = NULL;
+        setStatus();
     }
 }
 
@@ -103,7 +133,7 @@ void FileController::on_unsavedChange()
 
 bool FileController::abortClose()
 {
-    if (unsaved && file)
+    if (unsaved)
     {
         QMessageBox msgBox;
         msgBox.setModal(true);
