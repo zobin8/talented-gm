@@ -310,8 +310,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>308</width>
-                      <height>63</height>
+                      <width>304</width>
+                      <height>68</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_24"/>
@@ -360,8 +360,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>308</width>
-                      <height>63</height>
+                      <width>304</width>
+                      <height>68</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_23"/>
@@ -514,8 +514,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>638</width>
-                   <height>329</height>
+                   <width>634</width>
+                   <height>306</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_25"/>
@@ -689,8 +689,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>639</width>
-                <height>281</height>
+                <width>634</width>
+                <height>272</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -722,8 +722,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>639</width>
-                <height>282</height>
+                <width>634</width>
+                <height>273</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_21"/>
@@ -819,8 +819,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>638</width>
-                <height>238</height>
+                <width>634</width>
+                <height>224</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_22"/>
@@ -1077,8 +1077,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>639</width>
-                   <height>491</height>
+                   <width>634</width>
+                   <height>469</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_18"/>
@@ -1642,8 +1642,8 @@ p, li { white-space: pre-wrap; }
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>305</width>
-                         <height>321</height>
+                         <width>301</width>
+                         <height>282</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_19"/>
@@ -1761,8 +1761,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>304</width>
-                      <height>321</height>
+                      <width>301</width>
+                      <height>282</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_17"/>
@@ -1832,7 +1832,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1366</width>
-     <height>18</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1917,7 +1917,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionExport_to_log">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>&amp;Export to log</string>

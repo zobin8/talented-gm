@@ -25,6 +25,7 @@ signals:
 private:
     QString notes;
     QTextEdit* uiNotes;
+    bool naturalChange;
 };
 
 #endif // GENERALCONTROLLER_H

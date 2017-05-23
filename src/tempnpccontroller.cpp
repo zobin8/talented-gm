@@ -73,4 +73,5 @@ void TempNPCController::on_deletionEvent(MenuModule* menMod)
 
     fromView();
     toModel();
+    emit unsavedChange();
 }

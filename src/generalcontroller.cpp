@@ -5,7 +5,7 @@
 
 GeneralController::GeneralController(QObject *parent) : Controller(parent)
 {
-
+    naturalChange = false;
 }
 
 void GeneralController::setWidgets(QTextEdit* generalNotes)
@@ -27,11 +27,15 @@ void GeneralController::fromModel()
 
 void GeneralController::fromView()
 {
+    naturalChange = true;
     notes = uiNotes->toPlainText();
 }
 
 void GeneralController::on_textChanged()
 {
+    if (!naturalChange) emit unsavedChange();
+
     fromView();
+    naturalChange = false;
     TalentData::getTalentFile()->setNotes(notes);
 }

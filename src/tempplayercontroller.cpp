@@ -66,6 +66,7 @@ void TempPlayerController::on_deletionEvent(MenuModule* del)
 
     fromView();
     toModel();
+    emit unsavedChange();
 }
 
 void TempPlayerController::addPlayer()
@@ -78,6 +79,7 @@ void TempPlayerController::on_uiUpdate()
 {
     fromView();
     toModel();
+    emit unsavedChange();
 }
 
 void TempPlayerController::addPlayerView(QString s, double v)

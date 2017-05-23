@@ -132,6 +132,7 @@ void EditorNPCController::toTemplate()
 
     toView();
     emit update();
+    emit unsavedChange();
 }
 
 void EditorNPCController::addModule(QWidget* contents, QString s, double v)

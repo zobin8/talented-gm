@@ -24,6 +24,7 @@ public slots:
 
 signals:
     void update();
+    void unsavedChange();
 
 };
 

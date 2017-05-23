@@ -5,7 +5,7 @@
 
 TempNotesController::TempNotesController(QObject *parent) : Controller(parent)
 {
-
+    naturalChange = false;
 }
 
 void TempNotesController::setWidgets(QTextEdit* tempEdit)
@@ -17,6 +17,7 @@ void TempNotesController::setWidgets(QTextEdit* tempEdit)
 
 void TempNotesController::toView()
 {
+    naturalChange = true;
     uiNotes->setPlainText(notes);
 }
 
@@ -32,6 +33,9 @@ void TempNotesController::fromView()
 
 void TempNotesController::on_textChanged()
 {
+    if (!naturalChange) emit unsavedChange();
+
     fromView();
+    naturalChange = false;
     TalentData::getTalentFile()->setNoteTemplate(notes);
 }

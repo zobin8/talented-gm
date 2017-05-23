@@ -131,6 +131,7 @@ void EditorLocController::toTemplate()
 
     toView();
     emit update();
+    emit unsavedChange();
 }
 
 void EditorLocController::on_NPCNamesChanged(QStringList names)

@@ -25,12 +25,17 @@ public:
     void saveFile();
     void exportToLog(QString);
 
+    bool abortClose();
+    void setUnsaved(bool);
+
 signals:
 
 public slots:
+    void on_unsavedChange();
 
 private:
     QFile* file;
+    bool unsaved;
 };
 
 #endif // FILECONTROLLER_H

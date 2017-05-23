@@ -1,5 +1,6 @@
 #include "talentdata.h"
 #include "talentfile.h"
+#include <QMessageBox>
 
 TalentData::TalentData()
 {

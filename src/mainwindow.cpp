@@ -83,6 +83,7 @@ void MainWindow::connectControllers()
         if (con != fileController)
         {
             connect(fileController, SIGNAL(update()), con, SLOT(on_update()));
+            connect(con, SIGNAL(unsavedChange()), fileController, SLOT(on_unsavedChange()));
         }
     }
 }
@@ -245,7 +246,10 @@ void MainWindow::on_tempNewPlayerButton_clicked()
 
 void MainWindow::on_actionQuit_triggered()
 {
-    QApplication::quit();
+    if (!fileController->abortClose())
+    {
+        QApplication::quit();
+    }
 }
 
 void MainWindow::on_actionGeneral_triggered()
@@ -274,28 +278,54 @@ void MainWindow::closeEvent(QCloseEvent* event)
     if (running) return;
     running = true;
 
-    event->accept();
+    if (!fileController->abortClose())
+    {
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
+    }
 
     running = false;
 }
 
 void MainWindow::on_actionNew_triggered()
 {
-    fileController->newFile();
+    if (running) return;
+    running = true;
+
+    if (!fileController->abortClose())
+    {
+        fileController->newFile();
+    }
+
+    running = false;
 }
 
 void MainWindow::on_actionOpen_triggered()
 {
-    QString path = pickFile(false);
-    if (path != "")
+    if (running) return;
+    running = true;
+
+    if (!fileController->abortClose())
     {
-        fileController->openFile(path);
-        fileController->loadFile();
+        QString path = pickFile(false);
+        if (path != "")
+        {
+            fileController->openFile(path);
+            fileController->loadFile();
+        }
     }
+
+    running = false;
 }
 
 void MainWindow::on_actionSave_triggered()
 {
+    if (running) return;
+    running = true;
+
     if (fileController->hasFile())
     {
         fileController->saveFile();
@@ -304,16 +334,23 @@ void MainWindow::on_actionSave_triggered()
     {
         on_actionSave_as_triggered();
     }
+
+    running = false;
 }
 
 void MainWindow::on_actionSave_as_triggered()
 {
+    if (running) return;
+    running = true;
+
     QString path = pickFile(true);
     if (path != "")
     {
         fileController->openFile(path);
         fileController->saveFile();
     }
+
+    running = false;
 }
 
 void MainWindow::on_actionExport_to_log_triggered()
