@@ -1,5 +1,6 @@
 #include "tempnotescontroller.h"
 #include "talentdata.h"
+#include "talentfile.h"
 #include <QTextEdit>
 
 TempNotesController::TempNotesController(QObject *parent) : Controller(parent)

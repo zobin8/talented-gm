@@ -2,6 +2,7 @@
 #include "loctemplate.h"
 #include "menumodule.h"
 #include "talentdata.h"
+#include "talentfile.h"
 #include <QLayout>
 #include <QVBoxLayout>
 

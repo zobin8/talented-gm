@@ -1,7 +1,8 @@
 #ifndef TALENTDATA_H
 #define TALENTDATA_H
 
-#include "talentfile.h"
+#include <QString>
+#include <QDataStream>
 
 class TalentFile;
 
@@ -17,6 +18,8 @@ public:
 
     static TalentFile* getTalentFile();
     static void setTalentFile(TalentFile*);
+
+    static int versionNumber(QString version, QString prefix);
 
     TalentData(TalentData const&) = delete;
     void operator =(TalentData const&) = delete;

@@ -2,6 +2,7 @@
 #include "npctemplate.h"
 #include "menumodule.h"
 #include "talentdata.h"
+#include "talentfile.h"
 #include <QLayout>
 
 TempNPCController::TempNPCController(QObject *parent) : Controller(parent)

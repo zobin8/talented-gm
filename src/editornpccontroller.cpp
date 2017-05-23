@@ -1,6 +1,7 @@
 #include "editornpccontroller.h"
 #include "npctemplate.h"
 #include "talentdata.h"
+#include "talentfile.h"
 #include "svpmenumodule.h"
 #include "svp.h"
 #include <QVBoxLayout>

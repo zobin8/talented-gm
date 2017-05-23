@@ -1,6 +1,7 @@
 #include "talentfile.h"
 #include "npctemplate.h"
 #include "loctemplate.h"
+#include "talentdata.h"
 #include "svp.h"
 #include <QLinkedList>
 
@@ -151,19 +152,16 @@ QDataStream& operator >>(QDataStream& in, TalentFile& file)
 {
     QString version;
     in >> version;
+    int v = TalentData::versionNumber(version, "TalentFile");
 
-    if (version == "TalentFile1")
+    if (v >= 1)
     {
         QString n;
         in >> n;
         file.setNotes(n);
     }
-    else if (version == "TalentFile2")
+    if (v == 2)
     {
-        QString n;
-        in >> n;
-        file.setNotes(n);
-
         QString nTemp;
         in >> nTemp;
         file.setNoteTemplate(nTemp);

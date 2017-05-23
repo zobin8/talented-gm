@@ -2,6 +2,7 @@
 #include "svp.h"
 #include "svpmenumodule.h"
 #include "talentdata.h"
+#include "talentfile.h"
 #include <QLinkedList>
 #include <QVBoxLayout>
 #include <QDoubleSpinBox>

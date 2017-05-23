@@ -1,5 +1,6 @@
 #include "filecontroller.h"
 #include "talentdata.h"
+#include "talentfile.h"
 #include <QFile>
 #include <QDataStream>
 

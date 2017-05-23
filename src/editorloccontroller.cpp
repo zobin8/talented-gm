@@ -2,6 +2,7 @@
 #include "loctemplate.h"
 #include "npctemplate.h"
 #include "talentdata.h"
+#include "talentfile.h"
 #include "menumodule.h"
 #include <QComboBox>
 #include <QLineEdit>

@@ -1,5 +1,6 @@
 #include "generalcontroller.h"
 #include "talentdata.h"
+#include "talentfile.h"
 #include <QTextEdit>
 
 GeneralController::GeneralController(QObject *parent) : Controller(parent)
