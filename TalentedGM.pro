@@ -37,7 +37,9 @@ SOURCES += src/main.cpp\
     src/tempplayercontroller.cpp \
     src/loctemplate.cpp \
     src/svp.cpp \
-    src/filecontroller.cpp
+    src/filecontroller.cpp \
+    src/talentfile.cpp \
+    src/generalcontroller.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
@@ -52,6 +54,8 @@ HEADERS  += src/mainwindow.h \
     src/tempplayercontroller.h \
     src/loctemplate.h \
     src/svp.h \
-    src/filecontroller.h
+    src/filecontroller.h \
+    src/talentfile.h \
+    src/generalcontroller.h
 
 FORMS    += src/mainwindow.ui

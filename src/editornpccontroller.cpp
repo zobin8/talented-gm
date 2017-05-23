@@ -97,7 +97,7 @@ void EditorNPCController::toView()
     QStringList npcNames = QStringList();
     uiCombo->clear();
     uiCombo->addItem("Custom");
-    foreach (NPCTemplate* anNPC, TalentData::getInstance().getNPCTemplates())
+    foreach (NPCTemplate* anNPC, TalentData::getTalentFile()->getNPCTemplates())
     {
         uiCombo->addItem(anNPC->getName());
         npcNames.append(anNPC->getName());
@@ -109,7 +109,7 @@ void EditorNPCController::toView()
 void EditorNPCController::fromModel()
 {
     QString name = uiCombo->currentText();
-    NPCTemplate* npc = TalentData::getInstance().getNPCFromName(name);
+    NPCTemplate* npc = TalentData::getTalentFile()->getNPCFromName(name);
 
     delete npcTemp;
     if (npc)
@@ -127,7 +127,7 @@ void EditorNPCController::toTemplate()
     fromView();
 
     NPCTemplate* temp = new NPCTemplate(npcTemp);
-    TalentData::getInstance().addNPCTemplate(temp);
+    TalentData::getTalentFile()->addNPCTemplate(temp);
 
     toView();
     emit update();

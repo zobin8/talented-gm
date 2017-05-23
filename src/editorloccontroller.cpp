@@ -36,7 +36,7 @@ void EditorLocController::addNPCModule(QString name)
         name = uiNPCCombo->currentText();
     }
 
-    NPCTemplate* npc = TalentData::getInstance().getNPCFromName(name);
+    NPCTemplate* npc = TalentData::getTalentFile()->getNPCFromName(name);
     if (npc)
     {
         MenuModule* menMod = new MenuModule();
@@ -60,7 +60,7 @@ void EditorLocController::toView()
 {
     uiCombo->clear();
     uiCombo->addItem("Custom");
-    foreach (LocTemplate* aLoc, TalentData::getInstance().getLocTemplates())
+    foreach (LocTemplate* aLoc, TalentData::getTalentFile()->getLocTemplates())
     {
         uiCombo->addItem(aLoc->getName());
     }
@@ -82,7 +82,7 @@ void EditorLocController::toView()
 void EditorLocController::fromModel()
 {
     QString name = uiCombo->currentText();
-    LocTemplate* loc = TalentData::getInstance().getLocFromName(name);
+    LocTemplate* loc = TalentData::getTalentFile()->getLocFromName(name);
 
     delete locTemp;
     if (loc)
@@ -111,7 +111,7 @@ void EditorLocController::fromView()
         {
             QString name = menuMod->getIdentifier();
 
-            NPCTemplate* npc = TalentData::getInstance().getNPCFromName(name);
+            NPCTemplate* npc = TalentData::getTalentFile()->getNPCFromName(name);
 
             if (npc)
             {
@@ -126,7 +126,7 @@ void EditorLocController::toTemplate()
     fromView();
 
     LocTemplate* temp = new LocTemplate(locTemp);
-    TalentData::getInstance().addLocTemplate(temp);
+    TalentData::getTalentFile()->addLocTemplate(temp);
 
     toView();
     emit update();

@@ -16,6 +16,7 @@ class TempLocController;
 class TempNPCController;
 class TempPlayerController;
 class FileController;
+class GeneralController;
 class Controller;
 
 class MainWindow : public QMainWindow
@@ -60,9 +61,12 @@ private:
     TempNPCController* tempNPCController;
     TempPlayerController* tempPlayerController;
     FileController* fileController;
+    GeneralController* generalController;
 
     void setControllerWidgets();
     void connectControllers();
+
+    QString pickFile(bool allowNew);
 
     bool running;
 };

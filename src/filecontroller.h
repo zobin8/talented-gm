@@ -20,7 +20,7 @@ public:
     bool hasFile();
     void newFile();
     void openFile(QString);
-    void reloadFile();
+    void loadFile();
     void closeFile();
     void saveFile();
     void exportToLog(QString);

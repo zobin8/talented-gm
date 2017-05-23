@@ -30,12 +30,12 @@ void TempPlayerController::toView()
 void TempPlayerController::fromModel()
 {
     delete players;
-    players = new QLinkedList<SVP>(*TalentData::getInstance().getPlayers());
+    players = new QLinkedList<SVP>(*TalentData::getTalentFile()->getPlayers());
 }
 
 void TempPlayerController::toModel()
 {
-    TalentData::getInstance().setPlayers(players);
+    TalentData::getTalentFile()->setPlayers(players);
 }
 
 void TempPlayerController::fromView()

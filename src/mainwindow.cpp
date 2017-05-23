@@ -4,15 +4,19 @@
 #include "npctemplate.h"
 #include "svpmenumodule.h"
 #include "svp.h"
+
 #include "editornpccontroller.h"
 #include "editorloccontroller.h"
 #include "tempnpccontroller.h"
 #include "temploccontroller.h"
 #include "tempplayercontroller.h"
 #include "filecontroller.h"
+#include "generalcontroller.h"
+
 #include <QDateTime>
 #include <QLinkedList>
 #include <QCloseEvent>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -36,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     tempNPCController = new TempNPCController();
     tempPlayerController = new TempPlayerController();
     fileController = new FileController();
+    generalController = new GeneralController();
 
     controllers = QLinkedList<Controller*>();
     controllers.append(editorNPCController);
@@ -43,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
     controllers.append(tempLocController);
     controllers.append(tempNPCController);
     controllers.append(tempPlayerController);
+    controllers.append(fileController);
+    controllers.append(generalController);
 
     connectControllers();
     setControllerWidgets();
@@ -52,6 +59,8 @@ MainWindow::MainWindow(QWidget *parent) :
         con->fromModel();
         con->toView();
     }
+
+    fileController->newFile();
 }
 
 MainWindow::~MainWindow()
@@ -69,6 +78,8 @@ void MainWindow::connectControllers()
 
     connect(editorNPCController, SIGNAL(update()), tempNPCController, SLOT(on_update()));
     connect(tempNPCController, SIGNAL(update()), editorNPCController, SLOT(on_update()));
+
+    connect(fileController, SIGNAL(update()), generalController, SLOT(on_update()));
 }
 
 void MainWindow::setControllerWidgets()
@@ -93,6 +104,42 @@ void MainWindow::setControllerWidgets()
     tempLocController->setWidgets(ui->tempLocContents);
     tempNPCController->setWidgets(ui->tempNPCContents);
     tempPlayerController->setWidgets(ui->tempPlayerContents);
+
+    generalController->setWidgets(ui->generalEdit);
+}
+
+QString MainWindow::pickFile(bool allowNew)
+{
+    QFileDialog fileDialog(this, "Choose a file");
+    fileDialog.setNameFilter("TalentedGM Files (*.tgm)");
+    fileDialog.setDefaultSuffix(".tgm");
+    if (allowNew)
+    {
+        fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+    }
+    else
+    {
+        fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+    }
+    fileDialog.exec();
+
+    QString path = fileDialog.selectedFiles().first();
+    QFileInfo check(path);
+    if (check.exists() && check.isFile())
+    {
+        return path;
+    }
+    else
+    {
+        if (!check.exists() && allowNew)
+        {
+            return path;
+        }
+        else
+        {
+            return QString("");
+        }
+    }
 }
 
 void MainWindow::on_editNPCCombo_activated(const QString& name)
@@ -194,7 +241,7 @@ void MainWindow::on_tempEdit_textChanged()
     if (running) return;
     running = true;
 
-    TalentData::getInstance().setNoteTemplate(ui->tempEdit->toPlainText());
+    TalentData::getTalentFile()->setNoteTemplate(ui->tempEdit->toPlainText());
 
     running = false;
 }
@@ -237,25 +284,42 @@ void MainWindow::closeEvent(QCloseEvent* event)
 
 void MainWindow::on_actionNew_triggered()
 {
-
+    fileController->newFile();
 }
 
 void MainWindow::on_actionOpen_triggered()
 {
-
+    QString path = pickFile(false);
+    if (path != "")
+    {
+        fileController->openFile(path);
+        fileController->loadFile();
+    }
 }
 
 void MainWindow::on_actionSave_triggered()
 {
-
+    if (fileController->hasFile())
+    {
+        fileController->saveFile();
+    }
+    else
+    {
+        on_actionSave_as_triggered();
+    }
 }
 
 void MainWindow::on_actionSave_as_triggered()
 {
-
+    QString path = pickFile(true);
+    if (path != "")
+    {
+        fileController->openFile(path);
+        fileController->saveFile();
+    }
 }
 
 void MainWindow::on_actionExport_to_log_triggered()
 {
-
+    //TODO: this function
 }

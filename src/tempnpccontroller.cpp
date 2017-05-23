@@ -33,7 +33,7 @@ void TempNPCController::toView()
 
 void TempNPCController::fromModel()
 {
-    QLinkedList<NPCTemplate*> model = TalentData::getInstance().getNPCTemplates();
+    QLinkedList<NPCTemplate*> model = TalentData::getTalentFile()->getNPCTemplates();
     npcTemplates = QLinkedList<NPCTemplate*>(model);
 }
 
@@ -48,7 +48,7 @@ void TempNPCController::fromView()
         if (menuMod)
         {
             QString name = menuMod->getIdentifier();
-            NPCTemplate* npc = TalentData::getInstance().getNPCFromName(name);
+            NPCTemplate* npc = TalentData::getTalentFile()->getNPCFromName(name);
 
             if (npc)
             {
@@ -60,7 +60,7 @@ void TempNPCController::fromView()
 
 void TempNPCController::toModel()
 {
-    TalentData::getInstance().setNPCTemplates(npcTemplates);
+    TalentData::getTalentFile()->setNPCTemplates(npcTemplates);
 
     emit update();
 }

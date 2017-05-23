@@ -34,7 +34,7 @@ void TempLocController::toView()
 
 void TempLocController::fromModel()
 {
-    QLinkedList<LocTemplate*> model = TalentData::getInstance().getLocTemplates();
+    QLinkedList<LocTemplate*> model = TalentData::getTalentFile()->getLocTemplates();
     locTemplates = QLinkedList<LocTemplate*>(model);
 }
 
@@ -49,7 +49,7 @@ void TempLocController::fromView()
         if (menuMod)
         {
             QString name = menuMod->getIdentifier();
-            LocTemplate* loc = TalentData::getInstance().getLocFromName(name);
+            LocTemplate* loc = TalentData::getTalentFile()->getLocFromName(name);
 
             if (loc)
             {
@@ -61,7 +61,7 @@ void TempLocController::fromView()
 
 void TempLocController::toModel()
 {
-    TalentData::getInstance().setLocTemplates(locTemplates);
+    TalentData::getTalentFile()->setLocTemplates(locTemplates);
 
     emit update();
 }

@@ -1,13 +1,9 @@
 #ifndef TALENTDATA_H
 #define TALENTDATA_H
 
-#include <QLinkedList>
-#include <QString>
+#include "talentfile.h"
 
-class NPCTemplate;
-class LocTemplate;
-class SVP;
-class QLayout;
+class TalentFile;
 
 class TalentData
 {
@@ -19,34 +15,19 @@ public:
     }
     ~TalentData();
 
-    NPCTemplate* getNPCFromName(const QString);
-    LocTemplate* getLocFromName(const QString);
-
-    void addNPCTemplate(NPCTemplate*);
-    QLinkedList<NPCTemplate*> getNPCTemplates();
-    void setNPCTemplates(QLinkedList<NPCTemplate*>);
-
-    void addLocTemplate(LocTemplate*);
-    QLinkedList<LocTemplate*> getLocTemplates();
-    void setLocTemplates(QLinkedList<LocTemplate*>);
-
-    QLinkedList<SVP>* getPlayers();
-    void setPlayers(QLinkedList<SVP>*);
-
-    QString getNoteTemplate();
-    void setNoteTemplate(QString);
+    static TalentFile* getTalentFile();
+    static void setTalentFile(TalentFile*);
 
     TalentData(TalentData const&) = delete;
     void operator =(TalentData const&) = delete;
 
 private:
-    QLinkedList<NPCTemplate*> npcTemplates;
-    QLinkedList<LocTemplate*> locTemplates;
-
-    QLinkedList<SVP>* players;
-    QString noteTemplate;
-
     explicit TalentData();
+
+    TalentFile* talentFile;
 };
+
+QDataStream& operator <<(QDataStream&, const TalentData&);
+QDataStream& operator >>(QDataStream&, TalentData&);
 
 #endif // TALENTDATA_H
