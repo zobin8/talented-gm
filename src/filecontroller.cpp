@@ -125,7 +125,6 @@ void FileController::saveFile()
     out << TalentData::getInstance();
 
     file->close();
-
     setUnsaved(false);
 }
 

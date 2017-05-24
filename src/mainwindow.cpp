@@ -13,6 +13,8 @@
 #include "filecontroller.h"
 #include "generalcontroller.h"
 #include "tempnotescontroller.h"
+#include "turncontroller.h"
+#include "turnnotescontroller.h"
 
 #include <QDateTime>
 #include <QLinkedList>
@@ -43,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     fileController = new FileController();
     generalController = new GeneralController();
     tempNotesController = new TempNotesController();
+    turnController = new TurnController();
 
     controllers = QLinkedList<Controller*>();
     controllers.append(editorNPCController);
@@ -53,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
     controllers.append(fileController);
     controllers.append(generalController);
     controllers.append(tempNotesController);
+    controllers.append(turnController);
 
     setControllerWidgets();
     connectControllers();
@@ -114,6 +118,9 @@ void MainWindow::setControllerWidgets()
 
     generalController->setWidgets(ui->generalEdit);
     fileController->setWidgets(ui->statusBar);
+
+    turnController->setWidgets(ui->turnCounterLabel);
+    turnController->turnNotesController->setWidgets(ui->turnEdit);
 }
 
 QString MainWindow::pickFile(bool allowNew)
@@ -357,4 +364,61 @@ void MainWindow::on_actionSave_as_triggered()
 void MainWindow::on_actionExport_to_log_triggered()
 {
     //TODO: this function
+}
+
+void MainWindow::on_actionAdd_triggered()
+{
+    if (running) return;
+    running = true;
+
+    turnController->addTurn();
+
+    running = false;
+}
+
+void MainWindow::on_actionDelete_triggered()
+{
+    if (running) return;
+    running = true;
+
+    turnController->deleteTurn();
+
+    running = false;
+}
+
+void MainWindow::on_actionPrevious_turn_triggered()
+{
+    if (running) return;
+    running = true;
+
+    turnController->prevTurn();
+
+    running = false;
+}
+
+void MainWindow::on_actionNext_triggered()
+{
+    if (running) return;
+    running = true;
+
+    turnController->nextTurn();
+
+    running = false;
+}
+
+void MainWindow::on_turnDeleteButton_clicked()
+{
+    on_actionDelete_triggered();
+}
+void MainWindow::on_turnPrevButton_clicked()
+{
+    on_actionPrevious_turn_triggered();
+}
+void MainWindow::on_turnNextButton_clicked()
+{
+    on_actionNext_triggered();
+}
+void MainWindow::on_turnAddButton_clicked()
+{
+    on_actionAdd_triggered();
 }

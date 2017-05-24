@@ -14,6 +14,7 @@ TalentFile::TalentFile()
     generalNotes = "";
     noteTemplate = "";
 
+    turnIndex = 0;
     turns = QList<Turn*>();
     addTurn();
 }
@@ -195,6 +196,7 @@ void TalentFile::addTurn()
 {
     Turn* turn = new Turn();
     turns.append(turn);
+    nextTurn();
 }
 
 void TalentFile::deleteTurn()

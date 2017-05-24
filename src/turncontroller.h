@@ -20,6 +20,11 @@ public:
     void fromModel();
     void fromView();
 
+    void addTurn();
+    void deleteTurn();
+    void nextTurn();
+    void prevTurn();
+
     TurnNotesController* turnNotesController;
 
 signals:

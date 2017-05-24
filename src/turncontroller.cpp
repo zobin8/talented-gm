@@ -1,11 +1,17 @@
 #include "turncontroller.h"
 #include "turnnotescontroller.h"
+#include "talentdata.h"
+#include "talentfile.h"
 #include <QLabel>
 #include <QList>
 
 TurnController::TurnController(QObject *parent) : Controller(parent)
 {
+    turnNotesController = new TurnNotesController();
+
     turnControllers = QList<Controller*>();
+    turnControllers.append(turnNotesController);
+
 }
 
 TurnController::~TurnController()
@@ -27,6 +33,10 @@ void TurnController::toView()
     {
         con->toView();
     }
+
+    int count = TalentData::getTalentFile()->currentTurnIndex();
+    QString counter = "Turn: " + QString::number(count + 1);
+    uiTurnCount->setText(counter);
 }
 
 void TurnController::toModel()
@@ -51,4 +61,46 @@ void TurnController::fromView()
     {
         con->fromView();
     }
+}
+
+void TurnController::addTurn()
+{
+    fromView();
+    toModel();
+    TalentData::getTalentFile()->addTurn();
+    fromModel();
+    toView();
+}
+
+void TurnController::deleteTurn()
+{
+    fromView();
+    toModel();
+
+    TalentData::getTalentFile()->deleteTurn();
+
+    fromModel();
+    toView();
+}
+
+void TurnController::nextTurn()
+{
+    fromView();
+    toModel();
+
+    TalentData::getTalentFile()->nextTurn();
+
+    fromModel();
+    toView();
+}
+
+void TurnController::prevTurn()
+{
+    fromView();
+    toModel();
+
+    TalentData::getTalentFile()->previousTurn();
+
+    fromModel();
+    toView();
 }

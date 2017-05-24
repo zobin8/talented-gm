@@ -18,6 +18,7 @@ class TempPlayerController;
 class FileController;
 class GeneralController;
 class TempNotesController;
+class TurnController;
 class Controller;
 
 class MainWindow : public QMainWindow
@@ -51,6 +52,22 @@ private slots:
     void on_actionSave_as_triggered();
     void on_actionExport_to_log_triggered();
 
+    void on_actionAdd_triggered();
+
+    void on_actionDelete_triggered();
+
+    void on_actionPrevious_turn_triggered();
+
+    void on_actionNext_triggered();
+
+    void on_turnDeleteButton_clicked();
+
+    void on_turnPrevButton_clicked();
+
+    void on_turnNextButton_clicked();
+
+    void on_turnAddButton_clicked();
+
 private:
     Ui::MainWindow* ui;
     QLinkedList<Controller*> controllers;
@@ -63,6 +80,7 @@ private:
     FileController* fileController;
     GeneralController* generalController;
     TempNotesController* tempNotesController;
+    TurnController* turnController;
 
     void setControllerWidgets();
     void connectControllers();
