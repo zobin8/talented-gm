@@ -71,15 +71,22 @@ void Location::addNPC(NPC* npc)
 void Location::removeNPC(NPC* npc)
 {
     npcs.removeOne(npc);
+    delete npc;
 }
 
 QDataStream& operator <<(QDataStream& out, const Location& loc)
 {
-    out << QString("Location1");
+    out << QString("Location2");
 
     out << loc.getName();
     out << loc.minions1;
     out << loc.minions2;
+
+    out << loc.getNPCs().count();
+    foreach (const NPC* npc, loc.getNPCs())
+    {
+        out << *npc;
+    }
 
     return out;
 }
@@ -98,6 +105,16 @@ QDataStream& operator >>(QDataStream& in, Location& loc)
 
         in >> loc.minions1;
         in >> loc.minions2;
+
+        int count;
+        in >> count;
+        loc.NPCs().clear();
+        for (int i = 0; i < count; i++)
+        {
+            NPC* npc = new NPC();
+            in >> *npc;
+            loc.addNPC(npc);
+        }
     }
 
     return in;

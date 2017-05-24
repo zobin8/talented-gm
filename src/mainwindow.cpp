@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tempLocContents->layout()->setAlignment(Qt::AlignTop);
     ui->tempNPCContents->layout()->setAlignment(Qt::AlignTop);
     ui->tempPlayerContents->layout()->setAlignment(Qt::AlignTop);
+    ui->turnNPCContents->layout()->setAlignment(Qt::AlignTop);
 
     editorNPCController = new EditorNPCController();
     editorLocController = new EditorLocController();
@@ -128,7 +129,8 @@ void MainWindow::setControllerWidgets()
     turnController->turnNotesController->setWidgets(ui->turnEdit);
     turnController->turnLocController->setWidgets(ui->turnMinionSpin1,
                                                   ui->turnMinionSpin2,
-                                                  ui->turnLocationLabel);
+                                                  ui->turnLocationLabel,
+                                                  ui->turnNPCContents);
 }
 
 QString MainWindow::pickTGMFile(bool allowNew)

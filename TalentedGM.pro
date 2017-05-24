@@ -46,7 +46,8 @@ SOURCES += src/main.cpp\
     src/turnnotescontroller.cpp \
     src/turnloccontroller.cpp \
     src/location.cpp \
-    src/npc.cpp
+    src/npc.cpp \
+    src/npcmenumodule.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
@@ -70,7 +71,8 @@ HEADERS  += src/mainwindow.h \
     src/turnnotescontroller.h \
     src/turnloccontroller.h \
     src/location.h \
-    src/npc.h
+    src/npc.h \
+    src/npcmenumodule.h
 
 FORMS    += src/mainwindow.ui
 

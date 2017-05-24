@@ -6,6 +6,7 @@
 class QSpinBox;
 class QLabel;
 class Location;
+class QWidget;
 
 class TurnLocController : public Controller
 {
@@ -14,7 +15,7 @@ public:
     explicit TurnLocController(QObject *parent = 0);
     ~TurnLocController();
 
-    void setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMinionSpin2, QLabel* turnLocName);
+    void setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMinionSpin2, QLabel* turnLocName, QWidget* turnNPCContents);
 
     void toView();
     void toModel();
@@ -24,11 +25,13 @@ public:
 signals:
 
 public slots:
+    void on_deletionEvent();
 
 private:
     QSpinBox* uiMinions1;
     QSpinBox* uiMinions2;
     QLabel* uiLocName;
+    QWidget* uiContents;
 
     Location* loc;
 };
