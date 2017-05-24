@@ -7,6 +7,7 @@ class Turn
 {
 public:
     Turn();
+    Turn(Turn*);
 
     QString getNotes() const;
     void setNotes(QString);

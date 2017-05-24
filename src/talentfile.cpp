@@ -148,7 +148,9 @@ void TalentFile::setNotes(QString aString)
 
 Turn* TalentFile::currentTurn()
 {
-    return turns.takeAt(turnIndex);
+    //RIP 3 hours of my time. They have served me well trying to figure out why this line would not work:
+    //return turns.takeAt(turnIndex);
+    return turns.at(turnIndex);
 }
 
 const QList<Turn*> TalentFile::getTurns() const
@@ -195,8 +197,13 @@ void TalentFile::nextTurn()
 void TalentFile::addTurn()
 {
     Turn* turn = new Turn();
+
+    turn->setNotes(noteTemplate);
+
     turns.append(turn);
-    nextTurn();
+
+    turnIndex = turns.count() - 1;
+    updateTurnIndex();
 }
 
 void TalentFile::deleteTurn()
@@ -212,7 +219,7 @@ void TalentFile::deleteTurn()
 
 QDataStream& operator <<(QDataStream& out, const TalentFile& file)
 {
-    out << QString("TalentFile5");
+    out << QString("TalentFile6");
 
     out << file.getNotes();
     out << file.getNoteTemplate();
@@ -228,6 +235,12 @@ QDataStream& operator <<(QDataStream& out, const TalentFile& file)
     foreach (LocTemplate* loc, file.getLocTemplates())
     {
         out << *loc;
+    }
+
+    out << file.getTurns().count();
+    foreach (Turn* t, file.getTurns())
+    {
+        out << *t;
     }
 
     return out;
@@ -282,6 +295,19 @@ QDataStream& operator >>(QDataStream& in, TalentFile& file)
             locs.append(loc);
         }
         file.setLocTemplates(locs);
+    }
+    if (v >= 6)
+    {
+        QList<Turn*> turns = QList<Turn*>();
+        int count;
+        in >> count;
+        for (int i = 0; i < count; i++)
+        {
+            Turn* t = new Turn();
+            in >> *t;
+            turns.append(t);
+        }
+        file.setTurns(turns);
     }
 
     return in;

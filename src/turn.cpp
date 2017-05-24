@@ -6,6 +6,11 @@ Turn::Turn()
     notes = "";
 }
 
+Turn::Turn(Turn* old)
+{
+    notes = old->getNotes();
+}
+
 QString Turn::getNotes() const
 {
     return notes;
