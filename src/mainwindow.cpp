@@ -15,6 +15,7 @@
 #include "tempnotescontroller.h"
 #include "turncontroller.h"
 #include "turnnotescontroller.h"
+#include "turnloccontroller.h"
 
 #include <QDateTime>
 #include <QLinkedList>
@@ -64,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent) :
     fileController->openFile(":/default/default.tgm");
     fileController->loadFile();
     fileController->closeFile();
+
+    ui->tabWidget->setCurrentWidget(ui->generalTab);
 }
 
 MainWindow::~MainWindow()
@@ -81,6 +84,8 @@ void MainWindow::connectControllers()
 
     connect(editorNPCController, SIGNAL(update()), tempNPCController, SLOT(on_update()));
     connect(tempNPCController, SIGNAL(update()), editorNPCController, SLOT(on_update()));
+
+    connect(editorLocController, SIGNAL(update()), turnController->turnLocController, SLOT(on_update()));
 
     foreach (Controller* con, controllers)
     {
@@ -121,6 +126,9 @@ void MainWindow::setControllerWidgets()
 
     turnController->setWidgets(ui->turnCounterLabel);
     turnController->turnNotesController->setWidgets(ui->turnEdit);
+    turnController->turnLocController->setWidgets(ui->turnMinionSpin1,
+                                                  ui->turnMinionSpin2,
+                                                  ui->turnLocationLabel);
 }
 
 QString MainWindow::pickFile(bool allowNew)
@@ -231,12 +239,7 @@ void MainWindow::on_editAddNPCButton_clicked()
     running = false;
 }
 
-void MainWindow::on_tempAddLocationButton_clicked()
-{
-    ui->tabWidget->setCurrentWidget(ui->editorTab);
-}
-
-void MainWindow::on_tempAddNPCButton_clicked()
+void MainWindow::on_tempAddTempButton_clicked()
 {
     ui->tabWidget->setCurrentWidget(ui->editorTab);
 }
@@ -421,4 +424,19 @@ void MainWindow::on_turnNextButton_clicked()
 void MainWindow::on_turnAddButton_clicked()
 {
     on_actionAdd_triggered();
+}
+
+void MainWindow::on_turnLoadButton_clicked()
+{
+    ui->tabWidget->setCurrentWidget(ui->editorTab);
+}
+
+void MainWindow::on_editAddLocTurnButton_clicked()
+{
+    if (running) return;
+    running = true;
+    editorLocController->toTurn();
+    running = false;
+
+    ui->tabWidget->setCurrentWidget(ui->turnTab);
 }

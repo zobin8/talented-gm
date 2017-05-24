@@ -2,6 +2,7 @@
 #include "npctemplate.h"
 #include "loctemplate.h"
 #include "talentdata.h"
+#include "location.h"
 #include "svp.h"
 #include "turn.h"
 #include <QLinkedList>
@@ -148,6 +149,8 @@ void TalentFile::setNotes(QString aString)
 
 Turn* TalentFile::currentTurn()
 {
+    if (turns.count() == 0) return NULL;
+
     //RIP 3 hours of my time. They have served me well trying to figure out why this line would not work:
     //return turns.takeAt(turnIndex);
     return turns.at(turnIndex);
@@ -199,6 +202,12 @@ void TalentFile::addTurn()
     Turn* turn = new Turn();
 
     turn->setNotes(noteTemplate);
+
+    if (currentTurn())
+    {
+        Location* loc = new Location(currentTurn()->getLoc());
+        turn->setLoc(loc);
+    }
 
     turns.append(turn);
 

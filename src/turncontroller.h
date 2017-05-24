@@ -4,6 +4,7 @@
 #include "controller.h"
 
 class TurnNotesController;
+class TurnLocController;
 class QLabel;
 
 class TurnController : public Controller
@@ -26,6 +27,7 @@ public:
     void prevTurn();
 
     TurnNotesController* turnNotesController;
+    TurnLocController* turnLocController;
 
 signals:
 

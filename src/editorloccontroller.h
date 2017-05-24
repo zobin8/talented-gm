@@ -24,6 +24,7 @@ public:
     void addNPCModule(QString name = "");
     void fromView();
     void toModel();
+    void toTurn();
 
 signals:
     void update();

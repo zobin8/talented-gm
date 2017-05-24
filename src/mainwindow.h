@@ -37,8 +37,7 @@ private slots:
     void on_editAddLocTempButton_clicked();
     void on_editAddNPCButton_clicked();
     void on_editAddSkillButton_clicked();
-    void on_tempAddLocationButton_clicked();
-    void on_tempAddNPCButton_clicked();
+    void on_tempAddTempButton_clicked();
     void on_tempNewPlayerButton_clicked();
     void on_actionQuit_triggered();
     void on_actionGeneral_triggered();
@@ -67,6 +66,10 @@ private slots:
     void on_turnNextButton_clicked();
 
     void on_turnAddButton_clicked();
+
+    void on_turnLoadButton_clicked();
+
+    void on_editAddLocTurnButton_clicked();
 
 private:
     Ui::MainWindow* ui;

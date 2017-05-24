@@ -3,6 +3,9 @@
 
 #include <QString>
 
+class LocTemplate;
+class Location;
+
 class Turn
 {
 public:
@@ -11,9 +14,15 @@ public:
 
     QString getNotes() const;
     void setNotes(QString);
+    void setLocTemplate(const LocTemplate*);
+
+    const Location* getLoc() const;
+    void setLoc(Location*);
+
 
 private:
     QString notes;
+    Location* loc;
 };
 
 QDataStream& operator <<(QDataStream&, const Turn&);

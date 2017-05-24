@@ -112,13 +112,13 @@ p, li { white-space: pre-wrap; }
               <item>
                <widget class="QLabel" name="turnLocationLabel">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>No Location Loaded</string>
+                 <string>No location loaded</string>
                 </property>
                </widget>
               </item>
@@ -128,7 +128,7 @@ p, li { white-space: pre-wrap; }
                  <enum>Qt::Horizontal</enum>
                 </property>
                 <property name="sizeType">
-                 <enum>QSizePolicy::Preferred</enum>
+                 <enum>QSizePolicy::Maximum</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -154,7 +154,7 @@ p, li { white-space: pre-wrap; }
               <item>
                <widget class="QSpinBox" name="turnMinionSpin1">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -180,7 +180,7 @@ p, li { white-space: pre-wrap; }
               <item>
                <widget class="QSpinBox" name="turnMinionSpin2">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -198,6 +198,31 @@ p, li { white-space: pre-wrap; }
              <property name="title">
               <string>NPCs</string>
              </property>
+             <layout class="QVBoxLayout" name="verticalLayout_26">
+              <item>
+               <widget class="QScrollArea" name="scrollArea_10">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="widgetResizable">
+                 <bool>true</bool>
+                </property>
+                <widget class="QWidget" name="turnNPCContents">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>0</y>
+                   <width>634</width>
+                   <height>377</height>
+                  </rect>
+                 </property>
+                </widget>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>
@@ -216,12 +241,12 @@ p, li { white-space: pre-wrap; }
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_8">
               <item>
-               <widget class="QPushButton" name="turnLoadNPCButton">
+               <widget class="QPushButton" name="turnLoadButton">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="text">
-                 <string>Load NPC</string>
+                 <string>Load Template</string>
                 </property>
                 <property name="autoDefault">
                  <bool>false</bool>
@@ -231,16 +256,6 @@ p, li { white-space: pre-wrap; }
                 </property>
                 <property name="flat">
                  <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="turnLoadLocationButton">
-                <property name="enabled">
-                 <bool>false</bool>
-                </property>
-                <property name="text">
-                 <string>Load Location</string>
                 </property>
                </widget>
               </item>
@@ -310,8 +325,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>308</width>
-                      <height>63</height>
+                      <width>304</width>
+                      <height>68</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_24"/>
@@ -360,8 +375,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>308</width>
-                      <height>63</height>
+                      <width>304</width>
+                      <height>68</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_23"/>
@@ -514,8 +529,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>638</width>
-                   <height>307</height>
+                   <width>634</width>
+                   <height>284</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_25"/>
@@ -692,8 +707,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>639</width>
-                <height>270</height>
+                <width>634</width>
+                <height>261</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -725,8 +740,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>639</width>
-                <height>271</height>
+                <width>634</width>
+                <height>262</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_21"/>
@@ -822,8 +837,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>638</width>
-                <height>227</height>
+                <width>634</width>
+                <height>213</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_22"/>
@@ -893,16 +908,9 @@ p, li { white-space: pre-wrap; }
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_14">
            <item>
-            <widget class="QPushButton" name="tempAddLocationButton">
+            <widget class="QPushButton" name="tempAddTempButton">
              <property name="text">
-              <string>Add Location</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="tempAddNPCButton">
-             <property name="text">
-              <string>Add NPC</string>
+              <string>Add Template</string>
              </property>
             </widget>
            </item>
@@ -1080,8 +1088,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>639</width>
-                   <height>469</height>
+                   <width>634</width>
+                   <height>447</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_18"/>
@@ -1144,7 +1152,7 @@ p, li { white-space: pre-wrap; }
               <item>
                <widget class="QPushButton" name="editAddLocTurnButton">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="text">
                  <string>Add to Turn</string>
@@ -1645,8 +1653,8 @@ p, li { white-space: pre-wrap; }
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>305</width>
-                         <height>299</height>
+                         <width>301</width>
+                         <height>260</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_19"/>
@@ -1764,8 +1772,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>304</width>
-                      <height>299</height>
+                      <width>301</width>
+                      <height>260</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_17"/>
@@ -1835,7 +1843,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1366</width>
-     <height>18</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

@@ -3,6 +3,7 @@
 #include "npctemplate.h"
 #include "talentdata.h"
 #include "talentfile.h"
+#include "turn.h"
 #include "menumodule.h"
 #include <QComboBox>
 #include <QLineEdit>
@@ -130,6 +131,16 @@ void EditorLocController::toModel()
     TalentData::getTalentFile()->addLocTemplate(temp);
 
     toView();
+    emit update();
+    emit unsavedChange();
+}
+
+void EditorLocController::toTurn()
+{
+    fromView();
+
+    TalentData::getTalentFile()->currentTurn()->setLocTemplate(locTemp);
+
     emit update();
     emit unsavedChange();
 }

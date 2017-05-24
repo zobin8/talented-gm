@@ -1,5 +1,6 @@
 #include "turncontroller.h"
 #include "turnnotescontroller.h"
+#include "turnloccontroller.h"
 #include "talentdata.h"
 #include "talentfile.h"
 #include <QLabel>
@@ -8,9 +9,11 @@
 TurnController::TurnController(QObject *parent) : Controller(parent)
 {
     turnNotesController = new TurnNotesController();
+    turnLocController = new TurnLocController();
 
     turnControllers = QList<Controller*>();
     turnControllers.append(turnNotesController);
+    turnControllers.append(turnLocController);
 
 }
 
