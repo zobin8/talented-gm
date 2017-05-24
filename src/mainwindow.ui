@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="generalTab">
        <attribute name="title">
@@ -1848,7 +1848,7 @@ p, li { white-space: pre-wrap; }
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>Fi&amp;le</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
@@ -1861,7 +1861,7 @@ p, li { white-space: pre-wrap; }
    </widget>
    <widget class="QMenu" name="menuTurns">
     <property name="title">
-     <string>T&amp;urns</string>
+     <string>&amp;Turns</string>
     </property>
     <addaction name="actionPrevious_turn"/>
     <addaction name="actionNext"/>
@@ -2000,7 +2000,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionTurns">
    <property name="text">
-    <string>&amp;Turns</string>
+    <string>T&amp;urns</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+2</string>

@@ -23,6 +23,7 @@ void TempNPCController::toView()
     foreach (NPCTemplate* npc, npcTemplates)
     {
         MenuModule* npcMod = new MenuModule();
+        npcMod->addWidgets();
         npcMod->setDeleteText("Delete NPC: " + npc->getName());
         npcMod->setIdentifier(npc->getName());
 

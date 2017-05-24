@@ -14,6 +14,8 @@ public:
     SVPMenuModule(QWidget* parent = 0);
     ~SVPMenuModule();
 
+    void addWidgets();
+
     SVP getValue();
     void setValue(SVP);
 

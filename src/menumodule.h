@@ -13,6 +13,8 @@ public:
     explicit MenuModule(QWidget *parent = 0);
     ~MenuModule();
 
+    void addWidgets();
+
     void setDeleteText(QString);
     QPushButton* getDeleteButton();
 

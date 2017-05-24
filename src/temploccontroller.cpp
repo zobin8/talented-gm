@@ -24,6 +24,7 @@ void TempLocController::toView()
     foreach (LocTemplate* loc, locTemplates)
     {
         MenuModule* locMod = new MenuModule();
+        locMod->addWidgets();
         locMod->setDeleteText("Delete location: " + loc->getName());
         locMod->setIdentifier(loc->getName());
 

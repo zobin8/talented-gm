@@ -131,11 +131,26 @@ void MainWindow::setControllerWidgets()
                                                   ui->turnLocationLabel);
 }
 
-QString MainWindow::pickFile(bool allowNew)
+QString MainWindow::pickTGMFile(bool allowNew)
+{
+    QString filter = "TalentedGM Files (*.tgm)";
+    QString suffix = ".tgm";
+    return pickFile(allowNew, filter, suffix);
+}
+
+QString MainWindow::pickLogFile()
+{
+    QString filter = "TalentedGM Files (*.tgm)";
+    QString suffix = ".tgm";
+    bool allowNew = true;
+    return pickFile(allowNew, filter, suffix);
+}
+
+QString MainWindow::pickFile(bool allowNew, QString filter, QString suffix)
 {
     QFileDialog fileDialog(this, "Choose a file");
-    fileDialog.setNameFilter("TalentedGM Files (*.tgm)");
-    fileDialog.setDefaultSuffix(".tgm");
+    fileDialog.setNameFilter(filter);
+    fileDialog.setDefaultSuffix(suffix);
     if (allowNew)
     {
         fileDialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -320,7 +335,7 @@ void MainWindow::on_actionOpen_triggered()
 
     if (!fileController->abortClose())
     {
-        QString path = pickFile(false);
+        QString path = pickTGMFile(false);
         if (path != "")
         {
             fileController->openFile(path);
@@ -354,7 +369,7 @@ void MainWindow::on_actionSave_as_triggered()
     if (running) return;
     running = true;
 
-    QString path = pickFile(true);
+    QString path = pickTGMFile(true);
     if (path != "")
     {
         fileController->openFile(path);
@@ -366,7 +381,16 @@ void MainWindow::on_actionSave_as_triggered()
 
 void MainWindow::on_actionExport_to_log_triggered()
 {
-    //TODO: this function
+    if (running) return;
+    running = true;
+
+    QString path = pickLogFile();
+    if (path != "")
+    {
+        fileController->exportToLog(path);
+    }
+
+    running = false;
 }
 
 void MainWindow::on_actionAdd_triggered()

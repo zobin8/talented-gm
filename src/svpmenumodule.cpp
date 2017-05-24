@@ -13,10 +13,15 @@ SVPMenuModule::SVPMenuModule(QWidget* parent) : MenuModule(parent)
     spin->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     edit->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
-    layout->insertWidget(0, edit);
-    layout->insertWidget(0, spin);
-
     setDecimals(0);
+    spin->setValue(1);
+}
+
+void SVPMenuModule::addWidgets()
+{
+    layout->addWidget(spin);
+    layout->addWidget(edit);
+    layout->addWidget(getDeleteButton());
 }
 
 SVPMenuModule::~SVPMenuModule()

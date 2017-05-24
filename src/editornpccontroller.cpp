@@ -138,6 +138,7 @@ void EditorNPCController::toModel()
 void EditorNPCController::addModule(QWidget* contents, QString s, double v)
 {
     SVPMenuModule* module = new SVPMenuModule();
+    module->addWidgets();
     module->setValue(SVP(s, v));
     module->setDecimals(0);
 

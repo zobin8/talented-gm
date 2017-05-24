@@ -85,6 +85,7 @@ void TempPlayerController::on_uiUpdate()
 void TempPlayerController::addPlayerView(QString s, double v)
 {
     SVPMenuModule* menMod = new SVPMenuModule();
+    menMod->addWidgets();
     menMod->setValue(SVP(s, v));
     menMod->setDecimals(1);
 

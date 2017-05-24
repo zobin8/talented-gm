@@ -50,25 +50,15 @@ private slots:
     void on_actionSave_triggered();
     void on_actionSave_as_triggered();
     void on_actionExport_to_log_triggered();
-
     void on_actionAdd_triggered();
-
     void on_actionDelete_triggered();
-
     void on_actionPrevious_turn_triggered();
-
     void on_actionNext_triggered();
-
     void on_turnDeleteButton_clicked();
-
     void on_turnPrevButton_clicked();
-
     void on_turnNextButton_clicked();
-
     void on_turnAddButton_clicked();
-
     void on_turnLoadButton_clicked();
-
     void on_editAddLocTurnButton_clicked();
 
 private:
@@ -88,7 +78,9 @@ private:
     void setControllerWidgets();
     void connectControllers();
 
-    QString pickFile(bool allowNew);
+    QString pickFile(bool allowNew, QString filter, QString suffix);
+    QString pickTGMFile(bool allowNew);
+    QString pickLogFile();
 
     bool running;
 };

@@ -42,6 +42,7 @@ void EditorLocController::addNPCModule(QString name)
     if (npc)
     {
         MenuModule* menMod = new MenuModule();
+        menMod->addWidgets();
         menMod->setDeleteText("Delete NPC: " + name);
         menMod->setIdentifier(name);
 
