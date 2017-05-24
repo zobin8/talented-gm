@@ -16,6 +16,7 @@ public:
     void toView();
     void fromModel();
     void fromView();
+    void toModel();
 
 public slots:
     void on_textChanged();

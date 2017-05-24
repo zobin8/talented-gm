@@ -3,6 +3,7 @@
 #include "loctemplate.h"
 #include "talentdata.h"
 #include "svp.h"
+#include "turn.h"
 #include <QLinkedList>
 
 TalentFile::TalentFile()
@@ -12,6 +13,9 @@ TalentFile::TalentFile()
     players = new QLinkedList<SVP>();
     generalNotes = "";
     noteTemplate = "";
+
+    turns = QList<Turn*>();
+    addTurn();
 }
 
 TalentFile::~TalentFile()
@@ -23,6 +27,10 @@ TalentFile::~TalentFile()
     foreach (LocTemplate* loc, locTemplates)
     {
         delete loc;
+    }
+    foreach (Turn* turn, turns)
+    {
+        delete turn;
     }
 
     delete players;
@@ -137,6 +145,68 @@ void TalentFile::setNotes(QString aString)
     generalNotes = aString;
 }
 
+Turn* TalentFile::currentTurn()
+{
+    return turns.takeAt(turnIndex);
+}
+
+const QList<Turn*> TalentFile::getTurns() const
+{
+    return turns;
+}
+
+void TalentFile::setTurns(QList<Turn*> newTurns)
+{
+    //Memory leak?
+    turns = QList<Turn*>(newTurns);
+    updateTurnIndex();
+}
+
+int TalentFile::currentTurnIndex() const
+{
+    return turnIndex;
+}
+
+void TalentFile::updateTurnIndex()
+{
+    if (turnIndex < 0)
+    {
+        turnIndex = 0;
+    }
+    else if (turnIndex >= turns.count())
+    {
+        turnIndex = turns.count() - 1;
+    }
+}
+
+void TalentFile::previousTurn()
+{
+    turnIndex--;
+    updateTurnIndex();
+}
+
+void TalentFile::nextTurn()
+{
+    turnIndex++;
+    updateTurnIndex();
+}
+
+void TalentFile::addTurn()
+{
+    Turn* turn = new Turn();
+    turns.append(turn);
+}
+
+void TalentFile::deleteTurn()
+{
+    if (turns.count() > 1)
+    {
+        Turn* turn = currentTurn();
+        turns.removeOne(turn);
+        delete turn;
+        updateTurnIndex();
+    }
+}
 
 QDataStream& operator <<(QDataStream& out, const TalentFile& file)
 {

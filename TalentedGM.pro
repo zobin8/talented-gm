@@ -40,7 +40,10 @@ SOURCES += src/main.cpp\
     src/filecontroller.cpp \
     src/talentfile.cpp \
     src/generalcontroller.cpp \
-    src/tempnotescontroller.cpp
+    src/tempnotescontroller.cpp \
+    src/turn.cpp \
+    src/turncontroller.cpp \
+    src/turnnotescontroller.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
@@ -58,7 +61,10 @@ HEADERS  += src/mainwindow.h \
     src/filecontroller.h \
     src/talentfile.h \
     src/generalcontroller.h \
-    src/tempnotescontroller.h
+    src/tempnotescontroller.h \
+    src/turn.h \
+    src/turncontroller.h \
+    src/turnnotescontroller.h
 
 FORMS    += src/mainwindow.ui
 

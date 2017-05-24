@@ -122,7 +122,7 @@ void EditorLocController::fromView()
     }
 }
 
-void EditorLocController::toTemplate()
+void EditorLocController::toModel()
 {
     fromView();
 

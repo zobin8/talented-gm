@@ -165,7 +165,7 @@ void MainWindow::on_editNPCtoTempButton_clicked()
 {
     if (running) return;
     running = true;
-    editorNPCController->toTemplate();
+    editorNPCController->toModel();
     running = false;
 
     ui->tabWidget->setCurrentWidget(ui->templatesTab);
@@ -207,7 +207,7 @@ void MainWindow::on_editAddLocTempButton_clicked()
     if (running) return;
     running = true;
 
-    editorLocController->toTemplate();
+    editorLocController->toModel();
 
     running = false;
 

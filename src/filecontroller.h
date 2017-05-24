@@ -20,6 +20,7 @@ public:
     void toView();
     void fromModel();
     void fromView();
+    void toModel();
 
     bool hasFile();
     void newFile();

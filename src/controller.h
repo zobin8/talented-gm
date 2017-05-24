@@ -16,6 +16,7 @@ public:
     static void appendToLayout(QWidget*, QLayout*);
 
     virtual void toView() = 0;
+    virtual void toModel() = 0;
     virtual void fromModel() = 0;
     virtual void fromView() = 0;
 

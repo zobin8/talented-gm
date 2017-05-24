@@ -123,7 +123,7 @@ void EditorNPCController::fromModel()
     }
 }
 
-void EditorNPCController::toTemplate()
+void EditorNPCController::toModel()
 {
     fromView();
 

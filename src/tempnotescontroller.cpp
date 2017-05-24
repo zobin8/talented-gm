@@ -19,6 +19,12 @@ void TempNotesController::toView()
 {
     naturalChange = true;
     uiNotes->setPlainText(notes);
+    naturalChange = false;
+}
+
+void TempNotesController::toModel()
+{
+    TalentData::getTalentFile()->setNoteTemplate(notes);
 }
 
 void TempNotesController::fromModel()
@@ -36,6 +42,5 @@ void TempNotesController::on_textChanged()
     if (!naturalChange) emit unsavedChange();
 
     fromView();
-    naturalChange = false;
-    TalentData::getTalentFile()->setNoteTemplate(notes);
+    toModel();
 }

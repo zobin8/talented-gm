@@ -2,12 +2,14 @@
 #define TALENTFILE_H
 
 #include <QLinkedList>
+#include <QList>
 #include <QString>
 
 class NPCTemplate;
 class LocTemplate;
 class SVP;
 class QLayout;
+class Turn;
 
 class TalentFile
 {
@@ -35,6 +37,17 @@ public:
     QString getNotes() const;
     void setNotes(QString);
 
+    Turn* currentTurn();
+    const QList<Turn*> getTurns() const;
+    void setTurns(QList<Turn*>);
+
+    int currentTurnIndex() const;
+    void updateTurnIndex();
+    void previousTurn();
+    void nextTurn();
+    void addTurn();
+    void deleteTurn();
+
 private:
     QLinkedList<NPCTemplate*> npcTemplates;
     QLinkedList<LocTemplate*> locTemplates;
@@ -43,6 +56,9 @@ private:
     QString noteTemplate;
 
     QString generalNotes;
+
+    QList<Turn*> turns;
+    int turnIndex;
 };
 
 

@@ -23,7 +23,7 @@ public:
     void fromModel();
     void addNPCModule(QString name = "");
     void fromView();
-    void toTemplate();
+    void toModel();
 
 signals:
     void update();

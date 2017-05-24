@@ -41,6 +41,14 @@ void FileController::fromModel()
     }
 }
 
+void FileController::toModel()
+{
+    if (file)
+    {
+        saveFile();
+    }
+}
+
 void FileController::fromView()
 {
     // Do nothing

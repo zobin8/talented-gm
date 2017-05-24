@@ -27,7 +27,7 @@ public:
     void fromModel();
     void addModule(QWidget* contents, QString s = "", double v = 0);
     void fromView();
-    void toTemplate();
+    void toModel();
 
 signals:
     void setNPCNames(QStringList);
