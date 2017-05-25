@@ -39,6 +39,12 @@ void TempPlayerController::toModel()
     TalentData::getTalentFile()->setPlayers(players);
 }
 
+void TempPlayerController::toTurn()
+{
+    TalentData::getTalentFile()->resetInitiative();
+    emit update();
+}
+
 void TempPlayerController::fromView()
 {
     players->clear();

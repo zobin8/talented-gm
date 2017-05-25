@@ -40,6 +40,7 @@ void Turn::addNPCTemplate(const NPCTemplate* npcTemp)
 {
     NPC* npc = new NPC(npcTemp);
     loc->addNPC(npc);
+    loc->incrementName(npc);
     addNPCInitiative(npc);
 }
 

@@ -2,6 +2,7 @@
 #define LOCATION_H
 
 #include <QString>
+#include <QMap>
 #include <QLinkedList>
 
 class NPC;
@@ -24,12 +25,16 @@ public:
     QLinkedList<NPC*>& NPCs();
     const QLinkedList<NPC*>& getNPCs() const;
 
+    QMap<QString, int> getTempNames() const;
+
     void addNPC(NPC*);
+    void incrementName(NPC*);
     void removeNPC(NPC*);
 
 private:
     QString name;
     QLinkedList<NPC*> npcs;
+    QMap<QString, int> tempNames;
 
     static QString randName();
 };

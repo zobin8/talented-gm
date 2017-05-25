@@ -98,6 +98,7 @@ void MainWindow::connectControllers()
 
     connect(turnController->turnLocController, SIGNAL(deletedNPC(QString)), turnController->turnInitController, SLOT(deleteInit(QString)));
     connect(tempPlayerController, SIGNAL(deletedPlayer(QString)), turnController->turnInitController, SLOT(deleteInit(QString)));
+    connect(tempPlayerController, SIGNAL(update()), turnController->turnInitController, SLOT(on_update()));
 
     foreach (Controller* con, controllers)
     {
@@ -365,6 +366,9 @@ void MainWindow::on_actionSave_triggered()
     if (running) return;
     running = true;
 
+    turnController->fromView();
+    turnController->toModel();
+
     if (fileController->hasFile())
     {
         fileController->saveFile();
@@ -383,6 +387,9 @@ void MainWindow::on_actionSave_as_triggered()
     if (running) return;
     running = true;
 
+    turnController->fromView();
+    turnController->toModel();
+
     QString path = pickTGMFile(true);
     if (path != "")
     {
@@ -397,6 +404,9 @@ void MainWindow::on_actionExport_to_log_triggered()
 {
     if (running) return;
     running = true;
+
+    turnController->fromView();
+    turnController->toModel();
 
     QString path = pickLogFile();
     if (path != "")
@@ -484,6 +494,16 @@ void MainWindow::on_editNPCToTurn_clicked()
     if (running) return;
     running = true;
     editorNPCController->toTurn();
+    running = false;
+
+    ui->tabWidget->setCurrentWidget(ui->turnTab);
+}
+
+void MainWindow::on_tempToTurnButton_clicked()
+{
+    if (running) return;
+    running = true;
+    tempPlayerController->toTurn();
     running = false;
 
     ui->tabWidget->setCurrentWidget(ui->turnTab);

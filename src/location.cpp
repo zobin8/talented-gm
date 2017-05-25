@@ -6,6 +6,7 @@
 
 Location::Location()
 {
+    tempNames = QMap<QString, int>();
     npcs = QLinkedList<NPC*>();
     name = "No location loaded";
 
@@ -15,6 +16,7 @@ Location::Location()
 
 Location::Location(const Location* old)
 {
+    tempNames = QMap<QString, int>(old->getTempNames());
     name = old->getName();
     minions1 = old->minions1;
     minions2 = old->minions2;
@@ -29,6 +31,7 @@ Location::Location(const Location* old)
 
 Location::Location(const LocTemplate* locTemp)
 {
+    tempNames = QMap<QString, int>();
     name = locTemp->getName();
     minions1 = locTemp->minions1;
     minions2 = locTemp->minions2;
@@ -37,6 +40,9 @@ Location::Location(const LocTemplate* locTemp)
     foreach (NPCTemplate* npcTemp, locTemp->getNPCs())
     {
         NPC* npc = new NPC(npcTemp);
+
+        incrementName(npc);
+
         npcs.append(npc);
     }
 }
@@ -47,6 +53,18 @@ Location::~Location()
     {
         delete npc;
     }
+}
+
+QMap<QString, int> Location::getTempNames() const
+{
+    return tempNames;
+}
+
+void Location::incrementName(NPC* npc)
+{
+    int i = ++tempNames[npc->getName()];
+    QString name = npc->getName() + " (" + QString::number(i) + ")";
+    npc->setName(name);
 }
 
 const QLinkedList<NPC*>& Location::getNPCs() const

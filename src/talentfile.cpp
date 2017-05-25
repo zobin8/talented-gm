@@ -226,14 +226,21 @@ void TalentFile::addTurn()
     {
         Location* loc = new Location(currentTurn()->getLoc());
         turn->setLoc(loc);
+
+        QVector<InitiativeAct>* initiative = new QVector<InitiativeAct>();
+        foreach (InitiativeAct act, *currentTurn()->getInitiative())
+        {
+            InitiativeAct newAct = InitiativeAct();
+            newAct.setPlayer(act.getPlayer());
+            initiative->append(newAct);
+        }
+        turn->setInitiative(initiative);
     }
 
     turns.append(turn);
 
     turnIndex = turns.count() - 1;
     updateTurnIndex();
-
-    resetInitiative();
 }
 
 void TalentFile::deleteTurn()

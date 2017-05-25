@@ -16,6 +16,7 @@ public:
     void toView();
     void fromModel();
     void toModel();
+    void toTurn();
     void fromView();
     void setWidgets(QWidget* tempPlayerContents);
     void addPlayer();
