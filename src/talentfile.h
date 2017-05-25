@@ -41,6 +41,8 @@ public:
     const QList<Turn*> getTurns() const;
     void setTurns(QList<Turn*>);
 
+    void resetInitiative();
+
     int currentTurnIndex() const;
     void updateTurnIndex();
     void previousTurn();

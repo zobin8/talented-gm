@@ -18,6 +18,7 @@ InitModule::InitModule(QWidget *parent) : MenuModule(parent)
 
     result = new QCheckBox();
     result->setTristate(true);
+    result->setText("Success?");
 
     sense->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     name->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
@@ -42,7 +43,6 @@ void InitModule::addWidgets()
     layout->addWidget(action);
     layout->addWidget(result);
     layout->addWidget(notes);
-    layout->addWidget(getDeleteButton());
 }
 
 InitiativeAct InitModule::getInitiativeAct()

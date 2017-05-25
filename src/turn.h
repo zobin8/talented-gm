@@ -8,6 +8,7 @@ class LocTemplate;
 class NPCTemplate;
 class Location;
 class InitiativeAct;
+class NPC;
 
 class Turn
 {
@@ -26,6 +27,7 @@ public:
 
     const QVector<InitiativeAct>* getInitiative() const;
     void setInitiative(QVector<InitiativeAct>*);
+    void addNPCInitiative(NPC*);
 
 private:
     QString notes;

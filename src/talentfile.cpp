@@ -3,8 +3,10 @@
 #include "loctemplate.h"
 #include "talentdata.h"
 #include "location.h"
+#include "initiativeact.h"
 #include "svp.h"
 #include "turn.h"
+#include "npc.h"
 #include <QLinkedList>
 
 TalentFile::TalentFile()
@@ -197,6 +199,23 @@ void TalentFile::nextTurn()
     updateTurnIndex();
 }
 
+void TalentFile::resetInitiative()
+{
+    QVector<InitiativeAct>* initiative = new QVector<InitiativeAct>();
+    foreach (SVP player, *players)
+    {
+        InitiativeAct act = InitiativeAct();
+        act.setPlayer(player);
+        initiative->append(act);
+    }
+    currentTurn()->setInitiative(initiative);
+
+    foreach (NPC* npc, currentTurn()->getLoc()->getNPCs())
+    {
+        currentTurn()->addNPCInitiative(npc);
+    }
+}
+
 void TalentFile::addTurn()
 {
     Turn* turn = new Turn();
@@ -213,6 +232,8 @@ void TalentFile::addTurn()
 
     turnIndex = turns.count() - 1;
     updateTurnIndex();
+
+    resetInitiative();
 }
 
 void TalentFile::deleteTurn()

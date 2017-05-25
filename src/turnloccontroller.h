@@ -24,6 +24,7 @@ public:
     void fromView();
 
 signals:
+    void deletedNPC(QString);
 
 public slots:
     void on_deletionEvent(MenuModule*);

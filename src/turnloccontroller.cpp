@@ -90,6 +90,8 @@ void TurnLocController::fromView()
 
 void TurnLocController::on_deletionEvent(MenuModule* toDelete)
 {
+    emit deletedNPC(toDelete->getIdentifier());
+
     uiContents->layout()->removeWidget(toDelete);
     delete toDelete;
 

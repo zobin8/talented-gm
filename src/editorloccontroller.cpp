@@ -141,6 +141,7 @@ void EditorLocController::toTurn()
     fromView();
 
     TalentData::getTalentFile()->currentTurn()->setLocTemplate(locTemp);
+    TalentData::getInstance().getTalentFile()->resetInitiative();
 
     emit update();
     emit unsavedChange();

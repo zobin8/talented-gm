@@ -16,6 +16,7 @@
 #include "turncontroller.h"
 #include "turnnotescontroller.h"
 #include "turnloccontroller.h"
+#include "turninitcontroller.h"
 
 #include <QDateTime>
 #include <QLinkedList>
@@ -38,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tempNPCContents->layout()->setAlignment(Qt::AlignTop);
     ui->tempPlayerContents->layout()->setAlignment(Qt::AlignTop);
     ui->turnNPCContents->layout()->setAlignment(Qt::AlignTop);
+    ui->turnInitContents->layout()->setAlignment(Qt::AlignTop);
 
     editorNPCController = new EditorNPCController();
     editorLocController = new EditorLocController();
@@ -61,6 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
     controllers.append(turnController);
     controllers.append(turnController->turnLocController);
     controllers.append(turnController->turnNotesController);
+    controllers.append(turnController->turnInitController);
 
     setControllerWidgets();
     connectControllers();
@@ -90,6 +93,10 @@ void MainWindow::connectControllers()
 
     connect(editorLocController, SIGNAL(update()), turnController->turnLocController, SLOT(on_update()));
     connect(editorNPCController, SIGNAL(update()), turnController->turnLocController, SLOT(on_update()));
+    connect(editorNPCController, SIGNAL(update()), turnController->turnInitController, SLOT(on_update()));
+    connect(editorLocController, SIGNAL(update()), turnController->turnInitController, SLOT(on_update()));
+
+    connect(turnController->turnLocController, SIGNAL(deletedNPC(QString)), turnController->turnInitController, SLOT(deleteInit(QString)));
 
     foreach (Controller* con, controllers)
     {
@@ -134,6 +141,7 @@ void MainWindow::setControllerWidgets()
                                                   ui->turnMinionSpin2,
                                                   ui->turnLocationLabel,
                                                   ui->turnNPCContents);
+    turnController->turnInitController->setWidgets(ui->turnInitContents);
 }
 
 QString MainWindow::pickTGMFile(bool allowNew)

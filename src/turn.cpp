@@ -1,5 +1,6 @@
 #include "turn.h"
 #include "talentdata.h"
+#include "talentfile.h"
 #include "loctemplate.h"
 #include "npctemplate.h"
 #include "npc.h"
@@ -39,6 +40,7 @@ void Turn::addNPCTemplate(const NPCTemplate* npcTemp)
 {
     NPC* npc = new NPC(npcTemp);
     loc->addNPC(npc);
+    addNPCInitiative(npc);
 }
 
 const Location* Turn::getLoc() const
@@ -61,6 +63,14 @@ void Turn::setInitiative(QVector<InitiativeAct>* init)
 {
     delete initiative;
     initiative = new QVector<InitiativeAct>(*init);
+}
+
+void Turn::addNPCInitiative(NPC* npc)
+{
+    InitiativeAct act = InitiativeAct();
+    SVP player = SVP(npc->getName(), npc->sense);
+    act.setPlayer(player);
+    initiative->append(act);
 }
 
 QDataStream& operator <<(QDataStream& out, const Turn& turn)
