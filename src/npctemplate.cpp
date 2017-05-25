@@ -18,7 +18,7 @@ NPCTemplate::NPCTemplate()
     comm = 2;
 }
 
-NPCTemplate::NPCTemplate(NPCTemplate* old)
+NPCTemplate::NPCTemplate(const NPCTemplate* old)
 {
     setName(old->getName());
 

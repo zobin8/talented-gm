@@ -10,7 +10,7 @@ class NPCTemplate
 {
 public:
     explicit NPCTemplate();
-    NPCTemplate(NPCTemplate*);
+    NPCTemplate(const NPCTemplate*);
     ~NPCTemplate();
 
     int body;

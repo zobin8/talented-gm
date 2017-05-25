@@ -28,6 +28,7 @@ public:
     void addModule(QWidget* contents, QString s = "", double v = 0);
     void fromView();
     void toModel();
+    void toTurn();
 
 signals:
     void setNPCNames(QStringList);

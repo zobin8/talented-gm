@@ -89,6 +89,7 @@ void MainWindow::connectControllers()
     connect(tempNPCController, SIGNAL(update()), editorNPCController, SLOT(on_update()));
 
     connect(editorLocController, SIGNAL(update()), turnController->turnLocController, SLOT(on_update()));
+    connect(editorNPCController, SIGNAL(update()), turnController->turnLocController, SLOT(on_update()));
 
     foreach (Controller* con, controllers)
     {
@@ -464,6 +465,16 @@ void MainWindow::on_editAddLocTurnButton_clicked()
     if (running) return;
     running = true;
     editorLocController->toTurn();
+    running = false;
+
+    ui->tabWidget->setCurrentWidget(ui->turnTab);
+}
+
+void MainWindow::on_editNPCToTurn_clicked()
+{
+    if (running) return;
+    running = true;
+    editorNPCController->toTurn();
     running = false;
 
     ui->tabWidget->setCurrentWidget(ui->turnTab);

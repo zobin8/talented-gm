@@ -1,6 +1,8 @@
 #include "turn.h"
 #include "talentdata.h"
 #include "loctemplate.h"
+#include "npctemplate.h"
+#include "npc.h"
 #include "location.h"
 
 Turn::Turn()
@@ -28,6 +30,12 @@ void Turn::setLocTemplate(const LocTemplate* locTemp)
 {
     delete loc;
     loc = new Location(locTemp);
+}
+
+void Turn::addNPCTemplate(const NPCTemplate* npcTemp)
+{
+    NPC* npc = new NPC(npcTemp);
+    loc->addNPC(npc);
 }
 
 const Location* Turn::getLoc() const

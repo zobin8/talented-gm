@@ -60,6 +60,7 @@ private slots:
     void on_turnAddButton_clicked();
     void on_turnLoadButton_clicked();
     void on_editAddLocTurnButton_clicked();
+    void on_editNPCToTurn_clicked();
 
 private:
     Ui::MainWindow* ui;

@@ -2,6 +2,7 @@
 #include "npctemplate.h"
 #include "talentdata.h"
 #include "talentfile.h"
+#include "turn.h"
 #include "svpmenumodule.h"
 #include "svp.h"
 #include <QVBoxLayout>
@@ -131,6 +132,16 @@ void EditorNPCController::toModel()
     TalentData::getTalentFile()->addNPCTemplate(temp);
 
     toView();
+    emit update();
+    emit unsavedChange();
+}
+
+void EditorNPCController::toTurn()
+{
+    fromView();
+
+    TalentData::getTalentFile()->currentTurn()->addNPCTemplate(npcTemp);
+
     emit update();
     emit unsavedChange();
 }
