@@ -4,11 +4,14 @@
 #include "npctemplate.h"
 #include "npc.h"
 #include "location.h"
+#include "initiativeact.h"
+#include <QVector>
 
 Turn::Turn()
 {
     notes = "";
     loc = new Location();
+    initiative = new QVector<InitiativeAct>();
 }
 
 Turn::Turn(Turn* old)
@@ -49,12 +52,24 @@ void Turn::setLoc(Location* aLoc)
     loc = new Location(aLoc);
 }
 
+const QVector<InitiativeAct>* Turn::getInitiative() const
+{
+    return initiative;
+}
+
+void Turn::setInitiative(QVector<InitiativeAct>* init)
+{
+    delete initiative;
+    initiative = new QVector<InitiativeAct>(*init);
+}
+
 QDataStream& operator <<(QDataStream& out, const Turn& turn)
 {
-    out << QString("Turn2");
+    out << QString("Turn3");
 
     out << turn.getNotes();
     out << *turn.getLoc();
+    out << *turn.getInitiative();
 
     return out;
 }
@@ -76,6 +91,12 @@ QDataStream& operator >>(QDataStream& in, Turn& turn)
         Location* loc = new Location();
         in >> *loc;
         turn.setLoc(loc);
+    }
+    if (v >= 3)
+    {
+        QVector<InitiativeAct>* init = new QVector<InitiativeAct>();
+        in >> *init;
+        turn.setInitiative(init);
     }
 
     return in;

@@ -2,10 +2,12 @@
 #define TURN_H
 
 #include <QString>
+#include <QVector>
 
 class LocTemplate;
 class NPCTemplate;
 class Location;
+class InitiativeAct;
 
 class Turn
 {
@@ -22,10 +24,13 @@ public:
     const Location* getLoc() const;
     void setLoc(Location*);
 
+    const QVector<InitiativeAct>* getInitiative() const;
+    void setInitiative(QVector<InitiativeAct>*);
 
 private:
     QString notes;
     Location* loc;
+    QVector<InitiativeAct>* initiative;
 };
 
 QDataStream& operator <<(QDataStream&, const Turn&);

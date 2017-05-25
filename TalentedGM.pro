@@ -49,7 +49,9 @@ SOURCES += src/main.cpp\
     src/npc.cpp \
     src/npcmenumodule.cpp \
     src/hitarea.cpp \
-    src/hitmodule.cpp
+    src/hitmodule.cpp \
+    src/initiativeact.cpp \
+    src/initmodule.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
@@ -76,7 +78,9 @@ HEADERS  += src/mainwindow.h \
     src/npc.h \
     src/npcmenumodule.h \
     src/hitarea.h \
-    src/hitmodule.h
+    src/hitmodule.h \
+    src/initiativeact.h \
+    src/initmodule.h
 
 FORMS    += src/mainwindow.ui
 
