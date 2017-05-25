@@ -8,7 +8,6 @@ Talented GM is a simple tool for game masters (GMs) of the role-playing game *Wi
 
 **At least, that is what will be possible once it is programmed. At the moment, not all features are available.** The following features are currently missing:
  * Exporting as a log file
- * Displaying initiative in the turn tab
  * Displaying further NPC information (stats & skills) in the turn tab
 
 ## Dependecies
