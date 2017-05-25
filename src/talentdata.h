@@ -19,6 +19,9 @@ public:
     static TalentFile* getTalentFile();
     static void setTalentFile(TalentFile*);
 
+    static Qt::CheckState intToState(int);
+    static int stateToInt(Qt::CheckState);
+
     static int versionNumber(QString version, QString prefix);
 
     TalentData(TalentData const&) = delete;

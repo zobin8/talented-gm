@@ -33,6 +33,28 @@ int TalentData::versionNumber(QString version, QString prefix)
     return str.toInt();
 }
 
+Qt::CheckState TalentData::intToState(int i)
+{
+    switch(i)
+    {
+    case 0: return Qt::Unchecked;
+    case 1: return Qt::PartiallyChecked;
+    case 2: return Qt::Checked;
+    default: return Qt::Unchecked;
+    }
+}
+
+int TalentData::stateToInt(Qt::CheckState state)
+{
+    switch(state)
+    {
+    case Qt::Unchecked: return 0;
+    case Qt::PartiallyChecked: return 1;
+    case Qt::Checked: return 2;
+    default: return 0;
+    }
+}
+
 QDataStream& operator <<(QDataStream& out, const TalentData& data)
 {
     out << QString("TalentData1");

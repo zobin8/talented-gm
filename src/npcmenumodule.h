@@ -5,6 +5,7 @@
 
 class NPC;
 class QLabel;
+class QWidget;
 
 class NPCMenuModule : public MenuModule
 {
@@ -20,6 +21,7 @@ public:
 private:
     NPC* npc;
     QLabel* nameLabel;
+    QWidget* hitContents;
 };
 
 #endif // NPCMENUMODULE_H

@@ -48,7 +48,8 @@ SOURCES += src/main.cpp\
     src/location.cpp \
     src/npc.cpp \
     src/npcmenumodule.cpp \
-    src/hitarea.cpp
+    src/hitarea.cpp \
+    src/hitmodule.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
@@ -74,7 +75,8 @@ HEADERS  += src/mainwindow.h \
     src/location.h \
     src/npc.h \
     src/npcmenumodule.h \
-    src/hitarea.h
+    src/hitarea.h \
+    src/hitmodule.h
 
 FORMS    += src/mainwindow.ui
 
