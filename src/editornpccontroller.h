@@ -9,7 +9,6 @@ class SVPMenuModule;
 class MenuModule;
 class QLineEdit;
 class QSpinBox;
-class QDoubleSpinBox;
 class QComboBox;
 
 class EditorNPCController : public Controller
@@ -21,7 +20,7 @@ public:
     ~EditorNPCController();
 
     // RIP Code quality
-    void setWidgets(QWidget* editHitScrollContents, QLineEdit* editNPCName, QSpinBox* editBodySpin, QSpinBox* editCoordSpin, QDoubleSpinBox* editSenseSpin, QSpinBox* editMindSpin, QSpinBox* editCharmSpin, QSpinBox* editCommSpin, QComboBox* editNPCCombo, QWidget* editSkillScrollContents);
+    void setWidgets(QWidget* editHitScrollContents, QLineEdit* editNPCName, QSpinBox* editBodySpin, QSpinBox* editCoordSpin, QSpinBox* editSenseSpin, QSpinBox* editMindSpin, QSpinBox* editCharmSpin, QSpinBox* editCommSpin, QComboBox* editNPCCombo, QWidget* editSkillScrollContents);
 
     void toView();
     void fromModel();
@@ -44,7 +43,7 @@ private:
     QLineEdit* uiName;
     QSpinBox* uiBody;
     QSpinBox* uiCoord;
-    QDoubleSpinBox* uiSense;
+    QSpinBox* uiSense;
     QSpinBox* uiMind;
     QSpinBox* uiCharm;
     QSpinBox* uiComm;

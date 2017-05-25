@@ -10,7 +10,7 @@ MenuModule::MenuModule(QWidget *parent) : QWidget(parent)
     del->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
-    layout->setContentsMargins(9, 0, 9, 0);
+    layout->setContentsMargins(0, 0, 0, 0);
 
     connect(del, SIGNAL(clicked()), this, SLOT(on_deletionEvent()));
 }

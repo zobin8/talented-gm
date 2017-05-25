@@ -8,7 +8,6 @@
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include <QSpinBox>
-#include <QDoubleSpinBox>
 #include <QComboBox>
 
 EditorNPCController::EditorNPCController(QObject* parent) : Controller(parent)
@@ -21,7 +20,7 @@ EditorNPCController::~EditorNPCController()
     delete npcTemp;
 }
 
-void EditorNPCController::setWidgets(QWidget *editHitScrollContents, QLineEdit *editNPCName, QSpinBox *editBodySpin, QSpinBox *editCoordSpin, QDoubleSpinBox *editSenseSpin, QSpinBox *editMindSpin, QSpinBox *editCharmSpin, QSpinBox *editCommSpin, QComboBox *editNPCCombo, QWidget *editSkillScrollContents)
+void EditorNPCController::setWidgets(QWidget *editHitScrollContents, QLineEdit *editNPCName, QSpinBox *editBodySpin, QSpinBox *editCoordSpin, QSpinBox *editSenseSpin, QSpinBox *editMindSpin, QSpinBox *editCharmSpin, QSpinBox *editCommSpin, QComboBox *editNPCCombo, QWidget *editSkillScrollContents)
 {
     uiHitContents = editHitScrollContents;
     uiSkillContents = editSkillScrollContents;
