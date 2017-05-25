@@ -2,8 +2,10 @@
 #define NPC_H
 
 #include <QString>
+#include <QVector>
 
 class NPCTemplate;
+class HitArea;
 
 class NPC
 {
@@ -23,8 +25,12 @@ public:
     void setName(QString);
     QString getName() const;
 
+    void setHitAreas(QVector<HitArea>*);
+    QVector<HitArea>* getHitAreas() const;
+
 private:
     QString name;
+    QVector<HitArea>* hitAreas;
 };
 
 QDataStream& operator <<(QDataStream&, const NPC&);
