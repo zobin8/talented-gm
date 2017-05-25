@@ -18,7 +18,13 @@ Location::Location(const Location* old)
     name = old->getName();
     minions1 = old->minions1;
     minions2 = old->minions2;
-    npcs = QLinkedList<NPC*>(old->getNPCs());
+
+    npcs = QLinkedList<NPC*>();
+    foreach (const NPC* oldNPC, old->getNPCs())
+    {
+        NPC* newNPC = new NPC(oldNPC);
+        addNPC(newNPC);
+    }
 }
 
 Location::Location(const LocTemplate* locTemp)

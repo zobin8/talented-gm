@@ -14,7 +14,7 @@ NPC::NPC()
     comm = 2;
 }
 
-NPC::NPC(NPC* old)
+NPC::NPC(const NPC* old)
 {
     setName(old->getName());
 
@@ -26,7 +26,7 @@ NPC::NPC(NPC* old)
     comm = old->comm;
 }
 
-NPC::NPC(NPCTemplate* npcTemp)
+NPC::NPC(const NPCTemplate* npcTemp)
 {
     setName(npcTemp->getName());
 

@@ -59,6 +59,8 @@ MainWindow::MainWindow(QWidget *parent) :
     controllers.append(generalController);
     controllers.append(tempNotesController);
     controllers.append(turnController);
+    controllers.append(turnController->turnLocController);
+    controllers.append(turnController->turnNotesController);
 
     setControllerWidgets();
     connectControllers();

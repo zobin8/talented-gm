@@ -39,11 +39,12 @@ void TurnLocController::toView()
     foreach (NPC* npc, loc->getNPCs())
     {
         NPCMenuModule* npcMod = new NPCMenuModule();
+        npcMod->addWidgets();
         npcMod->setNPC(npc);
 
         Controller::appendToLayout(npcMod, uiContents->layout());
 
-        connect(npcMod, SIGNAL(killMe(MenuModule*)), this, SLOT(on_deletionEvent()));
+        connect(npcMod, SIGNAL(killMe(MenuModule*)), this, SLOT(on_deletionEvent(MenuModule*)));
     }
 }
 
@@ -51,6 +52,8 @@ void TurnLocController::toModel()
 {
     Location* modelLoc = new Location(loc);
     TalentData::getTalentFile()->currentTurn()->setLoc(modelLoc);
+
+    emit unsavedChange();
 }
 
 void TurnLocController::fromModel()
@@ -85,7 +88,11 @@ void TurnLocController::fromView()
     }
 }
 
-void TurnLocController::on_deletionEvent()
+void TurnLocController::on_deletionEvent(MenuModule* toDelete)
 {
+    uiContents->layout()->removeWidget(toDelete);
+    delete toDelete;
 
+    fromView();
+    toModel();
 }

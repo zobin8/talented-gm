@@ -27,6 +27,5 @@ void Controller::clearLayout(QLayout* lay)
 void Controller::appendToLayout(QWidget* w, QLayout* l)
 {
     QVBoxLayout* vLayout = static_cast<QVBoxLayout*>(l);
-    int index = vLayout->count();
-    vLayout->insertWidget(index, w);
+    vLayout->addWidget(w);
 }

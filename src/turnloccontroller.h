@@ -6,6 +6,7 @@
 class QSpinBox;
 class QLabel;
 class Location;
+class MenuModule;
 class QWidget;
 
 class TurnLocController : public Controller
@@ -25,7 +26,7 @@ public:
 signals:
 
 public slots:
-    void on_deletionEvent();
+    void on_deletionEvent(MenuModule*);
 
 private:
     QSpinBox* uiMinions1;

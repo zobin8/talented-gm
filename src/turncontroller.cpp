@@ -48,6 +48,8 @@ void TurnController::toModel()
     {
         con->toModel();
     }
+
+    emit unsavedChange();
 }
 
 void TurnController::fromModel()

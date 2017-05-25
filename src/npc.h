@@ -9,8 +9,8 @@ class NPC
 {
 public:
     NPC();
-    NPC(NPC*);
-    NPC(NPCTemplate*);
+    NPC(const NPC*);
+    NPC(const NPCTemplate*);
     ~NPC();
 
     int body;

@@ -34,6 +34,6 @@ void NPCMenuModule::setNPC(NPC* newNPC)
     npc = new NPC(newNPC);
 
     nameLabel->setText(npc->getName());
-    setDeleteText("Remove NPC: " + npc->getName());
+    setDeleteText("Remove");
     setIdentifier(npc->getName());
 }
