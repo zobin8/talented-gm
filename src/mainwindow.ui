@@ -215,8 +215,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>634</width>
-                   <height>377</height>
+                   <width>639</width>
+                   <height>408</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_27"/>
@@ -326,8 +326,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>304</width>
-                      <height>68</height>
+                      <width>308</width>
+                      <height>63</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_24"/>
@@ -376,8 +376,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>304</width>
-                      <height>68</height>
+                      <width>308</width>
+                      <height>63</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_23"/>
@@ -530,8 +530,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>634</width>
-                   <height>284</height>
+                   <width>638</width>
+                   <height>307</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_25"/>
@@ -708,8 +708,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>634</width>
-                <height>261</height>
+                <width>639</width>
+                <height>270</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -741,8 +741,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>634</width>
-                <height>262</height>
+                <width>639</width>
+                <height>271</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_21"/>
@@ -838,8 +838,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>634</width>
-                <height>213</height>
+                <width>638</width>
+                <height>227</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_22"/>
@@ -1089,8 +1089,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>634</width>
-                   <height>447</height>
+                   <width>639</width>
+                   <height>469</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_18"/>
@@ -1654,8 +1654,8 @@ p, li { white-space: pre-wrap; }
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>301</width>
-                         <height>260</height>
+                         <width>305</width>
+                         <height>299</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_19"/>
@@ -1773,8 +1773,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>301</width>
-                      <height>260</height>
+                      <width>304</width>
+                      <height>299</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_17"/>
@@ -1844,7 +1844,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1366</width>
-     <height>19</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1977,7 +1977,7 @@ p, li { white-space: pre-wrap; }
     <string>&amp;Add</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl++</string>
+    <string>Ctrl+=</string>
    </property>
   </action>
   <action name="actionDelete">
