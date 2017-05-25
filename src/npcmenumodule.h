@@ -22,6 +22,7 @@ private:
     NPC* npc;
     QLabel* nameLabel;
     QWidget* hitContents;
+    QWidget* mainContents;
 };
 
 #endif // NPCMENUMODULE_H

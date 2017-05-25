@@ -13,25 +13,35 @@ NPCMenuModule::NPCMenuModule()
     nameLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
     hitContents = new QWidget();
-    QVBoxLayout* hitLayout = new QVBoxLayout(hitContents);
-    hitLayout->setAlignment(Qt::AlignTop);
+    QVBoxLayout* hitLayout1 = new QVBoxLayout(hitContents);
+    hitLayout1->setAlignment(Qt::AlignTop);
+
+    mainContents = new QWidget();
+    QVBoxLayout* hitLayout2 = new QVBoxLayout(mainContents);
+    hitLayout2->setAlignment(Qt::AlignTop);
 
     npc = new NPC();
 }
 
 NPCMenuModule::~NPCMenuModule()
 {
+    mainContents->layout()->removeWidget(del);
+
     delete hitContents->layout();
     delete hitContents;
+    delete mainContents->layout();
     delete nameLabel;
+    //TODO: memory leak
+    //delete mainContents;
     delete npc;
 }
 
 void NPCMenuModule::addWidgets()
 {
-    layout->addWidget(nameLabel);
+    mainContents->layout()->addWidget(nameLabel);
+    mainContents->layout()->addWidget(del);
+    layout->addWidget(mainContents);
     layout->addWidget(hitContents);
-    layout->addWidget(getDeleteButton());
 }
 
 NPC* NPCMenuModule::getNPC()

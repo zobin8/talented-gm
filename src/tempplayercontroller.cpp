@@ -61,6 +61,8 @@ void TempPlayerController::setWidgets(QWidget* tempPlayerContents)
 
 void TempPlayerController::on_deletionEvent(MenuModule* del)
 {
+    emit deletedPlayer(del->getIdentifier());
+
     uiPlayerContents->layout()->removeWidget(del);
     delete del;
 

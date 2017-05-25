@@ -21,6 +21,7 @@ public:
     void addPlayer();
 
 signals:
+    void deletedPlayer(QString);
 
 public slots:
     void on_deletionEvent(MenuModule*);

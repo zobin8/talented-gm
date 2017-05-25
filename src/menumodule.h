@@ -29,9 +29,9 @@ public slots:
 
 protected:
     QHBoxLayout* layout;
+    QPushButton* del;
 
 private:
-    QPushButton* del;
     QString identifier;
 };
 
