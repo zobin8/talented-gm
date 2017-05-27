@@ -1,6 +1,8 @@
 #include "talentdata.h"
 #include "talentfile.h"
 #include <QMessageBox>
+#include <QTime>
+#include <QCoreApplication>
 
 TalentData::TalentData()
 {
@@ -52,6 +54,16 @@ int TalentData::stateToInt(Qt::CheckState state)
     case Qt::PartiallyChecked: return 1;
     case Qt::Checked: return 2;
     default: return 0;
+    }
+}
+
+//Because qSleep() requires huge dependencies (QTest).
+void TalentData::sleep(int ms)
+{
+    QTime stop = QTime::currentTime().addMSecs(ms);
+    while (QTime::currentTime() < stop)
+    {
+        QCoreApplication::processEvents(QEventLoop::AllEvents, ms / 10);
     }
 }
 

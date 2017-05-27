@@ -24,6 +24,7 @@ void TempNPCController::toView()
     {
         MenuModule* npcMod = new MenuModule();
         npcMod->addWidgets();
+        npcMod->requireConfirmation();
         npcMod->setDeleteText("Delete NPC: " + npc->getName());
         npcMod->setIdentifier(npc->getName());
 

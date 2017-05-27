@@ -25,6 +25,7 @@ void TempLocController::toView()
     {
         MenuModule* locMod = new MenuModule();
         locMod->addWidgets();
+        locMod->requireConfirmation();
         locMod->setDeleteText("Delete Location: " + loc->getName());
         locMod->setIdentifier(loc->getName());
 
@@ -71,7 +72,7 @@ void TempLocController::toModel()
 void TempLocController::on_deletionEvent(MenuModule* menMod)
 {
     uiLocContents->layout()->removeWidget(menMod);
-    delete menMod;
+    menMod->deleteLater();
 
     fromView();
     toModel();

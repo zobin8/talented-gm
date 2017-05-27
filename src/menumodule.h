@@ -14,8 +14,11 @@ public:
     ~MenuModule();
 
     void addWidgets();
+    void requireConfirmation(bool con = true);
 
     void setDeleteText(QString);
+    QString getDeleteText();
+
     QPushButton* getDeleteButton();
 
     void setIdentifier(QString);
@@ -26,10 +29,15 @@ signals:
 
 public slots:
     void on_deletionEvent();
+    void on_confirmationTimeout();
 
 protected:
     QHBoxLayout* layout;
     QPushButton* del;
+    QString deleteText;
+
+    bool confirmationNeeded;
+    QTimer* confirmationTimer;
 
 private:
     QString identifier;

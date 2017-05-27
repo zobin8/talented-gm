@@ -40,6 +40,7 @@ void TurnLocController::toView()
     {
         NPCMenuModule* npcMod = new NPCMenuModule();
         npcMod->addWidgets();
+        npcMod->requireConfirmation();
         npcMod->setNPC(npc);
 
         Controller::appendToLayout(npcMod, uiContents->layout());

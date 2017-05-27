@@ -26,7 +26,6 @@ public slots:
 signals:
     void update();
     void unsavedChange();
-
 };
 
 #endif // CONTROLLER_H

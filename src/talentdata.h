@@ -24,6 +24,8 @@ public:
 
     static int versionNumber(QString version, QString prefix);
 
+    static void sleep(int ms);
+
     TalentData(TalentData const&) = delete;
     void operator =(TalentData const&) = delete;
 

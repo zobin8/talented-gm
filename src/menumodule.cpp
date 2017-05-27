@@ -1,11 +1,17 @@
 #include "menumodule.h"
+#include "talentdata.h"
 #include <QPushButton>
 #include <QHBoxLayout>
+#include <QTimer>
 
 MenuModule::MenuModule(QWidget *parent) : QWidget(parent)
 {
     layout = new QHBoxLayout(this);
     del = new QPushButton("Delete");
+
+    confirmationNeeded = false;
+    confirmationTimer = new QTimer();
+    connect(confirmationTimer, SIGNAL(timeout()), this, SLOT(on_confirmationTimeout()));
 
     del->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
@@ -24,11 +30,22 @@ MenuModule::~MenuModule()
 {
     delete layout;
     delete del;
+    delete confirmationTimer;
+}
+
+void MenuModule::requireConfirmation(bool con)
+{
+    confirmationNeeded = con;
 }
 
 void MenuModule::setDeleteText(QString text)
 {
     del->setText(text);
+}
+
+QString MenuModule::getDeleteText()
+{
+    return del->text();
 }
 
 QPushButton* MenuModule::getDeleteButton()
@@ -38,7 +55,24 @@ QPushButton* MenuModule::getDeleteButton()
 
 void MenuModule::on_deletionEvent()
 {
-    emit killMe(this);
+    if (confirmationTimer->isActive())
+    {
+        confirmationTimer->stop();
+        emit killMe(this);
+    }
+    else
+    {
+        deleteText = del->text();
+        del->setText("Are you sure?");
+
+        confirmationTimer->start(3000);
+    }
+}
+
+void MenuModule::on_confirmationTimeout()
+{
+    del->setText(deleteText);
+    confirmationTimer->stop();
 }
 
 void MenuModule::setIdentifier(QString i)
