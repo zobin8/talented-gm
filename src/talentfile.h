@@ -38,6 +38,7 @@ public:
     void setNotes(QString);
 
     Turn* currentTurn();
+    Turn* lastTurn();
     const QList<Turn*> getTurns() const;
     void setTurns(QList<Turn*>);
 

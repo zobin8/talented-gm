@@ -85,4 +85,5 @@ void TurnInitController::deleteInit(QString identity)
     }
 
     toView();
+    toModel();
 }

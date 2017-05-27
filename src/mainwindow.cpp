@@ -590,3 +590,25 @@ void MainWindow::on_tempToTurnButton_clicked()
 
     ui->tabWidget->setCurrentWidget(ui->turnTab);
 }
+
+void MainWindow::on_actionNext_Tab_triggered()
+{
+    int i = ui->tabWidget->currentIndex();
+    i++;
+    if (i >= ui->tabWidget->count())
+    {
+        i = 0;
+    }
+    ui->tabWidget->setCurrentIndex(i);
+}
+
+void MainWindow::on_actionPrevious_Tab_triggered()
+{
+    int i = ui->tabWidget->currentIndex();
+    i--;
+    if (i <= -1)
+    {
+        i = ui->tabWidget->count() - 1;
+    }
+    ui->tabWidget->setCurrentIndex(i);
+}

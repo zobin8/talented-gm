@@ -62,6 +62,8 @@ private slots:
     void on_editAddLocTurnButton_clicked();
     void on_editNPCToTurn_clicked();
     void on_tempToTurnButton_clicked();
+    void on_actionNext_Tab_triggered();
+    void on_actionPrevious_Tab_triggered();
 
 private:
     Ui::MainWindow* ui;

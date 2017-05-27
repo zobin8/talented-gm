@@ -158,6 +158,13 @@ Turn* TalentFile::currentTurn()
     return turns.at(turnIndex);
 }
 
+Turn* TalentFile::lastTurn()
+{
+    if (turns.count() == 0) return NULL;
+
+    return turns.last();
+}
+
 const QList<Turn*> TalentFile::getTurns() const
 {
     return turns;
@@ -222,13 +229,13 @@ void TalentFile::addTurn()
 
     turn->setNotes(noteTemplate);
 
-    if (currentTurn())
+    if (lastTurn())
     {
-        Location* loc = new Location(currentTurn()->getLoc());
+        Location* loc = new Location(lastTurn()->getLoc());
         turn->setLoc(loc);
 
         QVector<InitiativeAct>* initiative = new QVector<InitiativeAct>();
-        foreach (InitiativeAct act, *currentTurn()->getInitiative())
+        foreach (InitiativeAct act, *lastTurn()->getInitiative())
         {
             InitiativeAct newAct = InitiativeAct();
             newAct.setPlayer(act.getPlayer());

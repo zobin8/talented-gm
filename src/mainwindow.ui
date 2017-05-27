@@ -17,8 +17,11 @@
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="toolTip">
+       <string/>
+      </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="generalTab">
        <attribute name="title">
@@ -53,19 +56,7 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Welcome to TalentedGM, a simple tool for GMs of Wild Talents. This program is divided into four tabs: General, Turns, Templates, and Editor.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This tab, the General tab, contains a segment for general notes about the game. These notes are not tied to a turn and will not be included when exporting into a log file.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The Turn tab contains all information for the current turn. In the bottom right, the &amp;quot;next turn&amp;quot; and &amp;quot;previous turn&amp;quot; buttons can be used to navigate through turns. From this menu, any location or NPC template can be loaded into the current turn. There is also a display for all NPC hitboxes on the top left and NPC info on the bottom left. The top right includes an initiative pane. Here, the actions of all players and NPCs are recorded. Finally, the bottom right includes an editor for turn notes. These notes are associated with the current turn and will be included in the log file.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The Templates tab is used for managing templates. Location and NPC templates can be deleted on the left side. The bottom right includes a note template. This is the default value for the turn notes and will be added to the turn notes whenever a new turn is created. Finally, the top right contains a template for the players in the game. This is used to determine the number of players in any new turn.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Finally, the Editor tab is used for editing locations and NPCs. The left side is for locations, the right for NPCs. On each side a template can be loaded and edited. When the &amp;quot;add to templates&amp;quot; button is clicked, all changes to the template are saved. Alternatively, the &amp;quot;add to turn&amp;quot; button will not modify the template but add the NPC or location to the current turn.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Note: When an NPC template is modified and saved, all location templates that contain the NPC will be updated.&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;To get started, either open an existing TalentedGM file using the file menu in the top left, or delete this text and begin creating a new game.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
@@ -236,8 +227,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>634</width>
-                   <height>356</height>
+                   <width>639</width>
+                   <height>388</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_27"/>
@@ -266,6 +257,9 @@ p, li { white-space: pre-wrap; }
                <widget class="QPushButton" name="turnLoadButton">
                 <property name="enabled">
                  <bool>true</bool>
+                </property>
+                <property name="toolTip">
+                 <string/>
                 </property>
                 <property name="text">
                  <string>Load Template</string>
@@ -347,8 +341,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>304</width>
-                      <height>68</height>
+                      <width>308</width>
+                      <height>63</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_24"/>
@@ -397,8 +391,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>304</width>
-                      <height>68</height>
+                      <width>308</width>
+                      <height>63</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_23"/>
@@ -550,8 +544,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>634</width>
-                   <height>304</height>
+                   <width>638</width>
+                   <height>325</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_25"/>
@@ -618,6 +612,9 @@ p, li { white-space: pre-wrap; }
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="toolTip">
+                 <string/>
+                </property>
                 <property name="text">
                  <string>Delete Turn</string>
                 </property>
@@ -636,6 +633,9 @@ p, li { white-space: pre-wrap; }
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+                <property name="toolTip">
+                 <string/>
                 </property>
                 <property name="text">
                  <string>Previous Turn</string>
@@ -672,6 +672,9 @@ p, li { white-space: pre-wrap; }
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="toolTip">
+                 <string/>
+                </property>
                 <property name="text">
                  <string>Next Turn</string>
                 </property>
@@ -687,6 +690,9 @@ p, li { white-space: pre-wrap; }
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+                <property name="toolTip">
+                 <string/>
                 </property>
                 <property name="text">
                  <string>Add Turn</string>
@@ -728,8 +734,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>634</width>
-                <height>261</height>
+                <width>639</width>
+                <height>270</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -761,8 +767,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>634</width>
-                <height>262</height>
+                <width>639</width>
+                <height>271</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_21"/>
@@ -864,8 +870,8 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>634</width>
-                <height>233</height>
+                <width>638</width>
+                <height>245</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_22"/>
@@ -911,15 +917,27 @@ p, li { white-space: pre-wrap; }
           <layout class="QHBoxLayout" name="horizontalLayout_13">
            <item>
             <widget class="QPushButton" name="tempNewPlayerButton">
+             <property name="toolTip">
+              <string/>
+             </property>
              <property name="text">
-              <string>New Player</string>
+              <string>New Player (Alt+P)</string>
+             </property>
+             <property name="shortcut">
+              <string>Alt+P</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="tempToTurnButton">
+             <property name="toolTip">
+              <string/>
+             </property>
              <property name="text">
-              <string>Add to Turn</string>
+              <string>Add to Turn (Alt+Shift+P)</string>
+             </property>
+             <property name="shortcut">
+              <string>Alt+Shift+P</string>
              </property>
             </widget>
            </item>
@@ -943,6 +961,9 @@ p, li { white-space: pre-wrap; }
           <layout class="QHBoxLayout" name="horizontalLayout_14">
            <item>
             <widget class="QPushButton" name="tempAddTempButton">
+             <property name="toolTip">
+              <string/>
+             </property>
              <property name="text">
               <string>Add Template</string>
              </property>
@@ -1140,8 +1161,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>634</width>
-                   <height>447</height>
+                   <width>639</width>
+                   <height>469</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_18"/>
@@ -1168,8 +1189,14 @@ p, li { white-space: pre-wrap; }
                  </item>
                  <item>
                   <widget class="QPushButton" name="editAddNPCButton">
+                   <property name="toolTip">
+                    <string/>
+                   </property>
                    <property name="text">
-                    <string>Add NPC</string>
+                    <string>Add NPC (Alt+P)</string>
+                   </property>
+                   <property name="shortcut">
+                    <string>Alt+P</string>
                    </property>
                   </widget>
                  </item>
@@ -1196,8 +1223,14 @@ p, li { white-space: pre-wrap; }
              <layout class="QHBoxLayout" name="horizontalLayout_18">
               <item>
                <widget class="QPushButton" name="editAddLocTempButton">
+                <property name="toolTip">
+                 <string/>
+                </property>
                 <property name="text">
-                 <string>Add to Templates</string>
+                 <string>Add to Templates (Alt+Shift+L)</string>
+                </property>
+                <property name="shortcut">
+                 <string>Alt+Shift+L</string>
                 </property>
                </widget>
               </item>
@@ -1206,8 +1239,14 @@ p, li { white-space: pre-wrap; }
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
+                <property name="toolTip">
+                 <string/>
+                </property>
                 <property name="text">
-                 <string>Add to Turn</string>
+                 <string>Add to Turn (Alt+L)</string>
+                </property>
+                <property name="shortcut">
+                 <string>Alt+L</string>
                 </property>
                </widget>
               </item>
@@ -1729,8 +1768,8 @@ p, li { white-space: pre-wrap; }
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>301</width>
-                         <height>299</height>
+                         <width>305</width>
+                         <height>335</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_19"/>
@@ -1743,7 +1782,10 @@ p, li { white-space: pre-wrap; }
                  <item>
                   <widget class="QPushButton" name="editAddSkillButton">
                    <property name="text">
-                    <string>Add Skill</string>
+                    <string>Add Skill (Alt+S)</string>
+                   </property>
+                   <property name="shortcut">
+                    <string>Alt+S</string>
                    </property>
                   </widget>
                  </item>
@@ -1860,8 +1902,8 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>301</width>
-                      <height>299</height>
+                      <width>304</width>
+                      <height>335</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_17"/>
@@ -1870,8 +1912,17 @@ p, li { white-space: pre-wrap; }
                  </item>
                  <item>
                   <widget class="QPushButton" name="editAddHitButton">
+                   <property name="toolTip">
+                    <string/>
+                   </property>
                    <property name="text">
-                    <string>Add Hitbox</string>
+                    <string>Add Hitbox (Alt+H)</string>
+                   </property>
+                   <property name="shortcut">
+                    <string>Alt+H</string>
+                   </property>
+                   <property name="checkable">
+                    <bool>false</bool>
                    </property>
                   </widget>
                  </item>
@@ -1899,7 +1950,10 @@ p, li { white-space: pre-wrap; }
               <item>
                <widget class="QPushButton" name="editNPCtoTempButton">
                 <property name="text">
-                 <string>Add to Templates</string>
+                 <string>Add to Templates (Alt+Shift+N)</string>
+                </property>
+                <property name="shortcut">
+                 <string>Alt+Shift+N</string>
                 </property>
                </widget>
               </item>
@@ -1908,8 +1962,14 @@ p, li { white-space: pre-wrap; }
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
+                <property name="toolTip">
+                 <string/>
+                </property>
                 <property name="text">
-                 <string>Add to Turn</string>
+                 <string>Add to Turn (Alt+N)</string>
+                </property>
+                <property name="shortcut">
+                 <string>Alt+N</string>
                 </property>
                </widget>
               </item>
@@ -1931,7 +1991,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1366</width>
-     <height>19</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1949,7 +2009,7 @@ p, li { white-space: pre-wrap; }
    </widget>
    <widget class="QMenu" name="menuTurns">
     <property name="title">
-     <string>&amp;Turns</string>
+     <string>T&amp;urns</string>
     </property>
     <addaction name="actionPrevious_turn"/>
     <addaction name="actionNext"/>
@@ -1959,12 +2019,15 @@ p, li { white-space: pre-wrap; }
    </widget>
    <widget class="QMenu" name="menuNavigation">
     <property name="title">
-     <string>&amp;Navigation</string>
+     <string>Na&amp;vigation</string>
     </property>
     <addaction name="actionGeneral"/>
     <addaction name="actionTurns"/>
     <addaction name="actionTemplates"/>
     <addaction name="actionEditor"/>
+    <addaction name="separator"/>
+    <addaction name="actionNext_Tab"/>
+    <addaction name="actionPrevious_Tab"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTurns"/>
@@ -1976,7 +2039,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;New</string>
+    <string>New</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -1987,7 +2050,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Open</string>
+    <string>Open</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -1998,7 +2061,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Save</string>
+    <string>Save</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -2009,7 +2072,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Sa&amp;ve as</string>
+    <string>Save as</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
@@ -2020,7 +2083,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Export to log</string>
+    <string>Export to log</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+E</string>
@@ -2028,7 +2091,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionQuit">
    <property name="text">
-    <string>&amp;Quit</string>
+    <string>Quit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -2039,7 +2102,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Previous</string>
+    <string>Previous</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+[</string>
@@ -2050,7 +2113,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Next</string>
+    <string>Next</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+]</string>
@@ -2061,7 +2124,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Add</string>
+    <string>Add</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+=</string>
@@ -2072,7 +2135,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;Delete</string>
+    <string>Delete</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+-</string>
@@ -2080,7 +2143,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionGeneral">
    <property name="text">
-    <string>&amp;General</string>
+    <string>General Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+1</string>
@@ -2088,7 +2151,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionTurns">
    <property name="text">
-    <string>T&amp;urns</string>
+    <string>Turns Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+2</string>
@@ -2096,7 +2159,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionTemplates">
    <property name="text">
-    <string>Te&amp;mplates</string>
+    <string>Templates Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+3</string>
@@ -2104,10 +2167,26 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionEditor">
    <property name="text">
-    <string>&amp;Editor</string>
+    <string>Editor Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+4</string>
+   </property>
+  </action>
+  <action name="actionNext_Tab">
+   <property name="text">
+    <string>Next Tab</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Tab</string>
+   </property>
+  </action>
+  <action name="actionPrevious_Tab">
+   <property name="text">
+    <string>Previous Tab</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Backtab</string>
    </property>
   </action>
  </widget>
