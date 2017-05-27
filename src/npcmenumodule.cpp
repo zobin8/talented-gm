@@ -2,6 +2,7 @@
 #include "npc.h"
 #include "hitmodule.h"
 #include "hitarea.h"
+#include "controller.h"
 #include <QLabel>
 #include <QLayout>
 #include <QVBoxLayout>
@@ -78,6 +79,8 @@ void NPCMenuModule::setNPC(NPC* newNPC)
     {
         HitModule* hitMod = new HitModule();
         hitMod->setHitArea(area);
-        hitContents->layout()->addWidget(hitMod);
+        hitMod->setSortID(area.getName());
+
+        Controller::appendToLayout(hitMod, hitContents->layout());
     }
 }
