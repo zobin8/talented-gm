@@ -96,6 +96,7 @@ void TempPlayerController::addPlayerView(QString s, double v)
     menMod->addWidgets();
     menMod->setValue(SVP(s, v));
     menMod->setDecimals(1);
+    menMod->setSortID(QString::number(v));
 
     Controller::appendToLayout(menMod, uiPlayerContents->layout());
 

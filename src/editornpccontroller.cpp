@@ -151,6 +151,7 @@ void EditorNPCController::addModule(QWidget* contents, QString s, double v)
     module->addWidgets();
     module->setValue(SVP(s, v));
     module->setDecimals(0);
+    module->setSortID(s);
 
     Controller::appendToLayout(module, contents->layout());
 

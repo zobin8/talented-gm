@@ -45,6 +45,7 @@ void EditorLocController::addNPCModule(QString name)
         menMod->addWidgets();
         menMod->setDeleteText("Delete NPC: " + name);
         menMod->setIdentifier(name);
+        menMod->setSortID(name);
 
         Controller::appendToLayout(menMod, uiNPCWidget->layout());
 

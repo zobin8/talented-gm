@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QTime>
 #include <QCoreApplication>
+#include <QRegularExpressionMatchIterator>
 
 TalentData::TalentData()
 {
@@ -57,14 +58,39 @@ int TalentData::stateToInt(Qt::CheckState state)
     }
 }
 
-//Because qSleep() requires huge dependencies (QTest).
-void TalentData::sleep(int ms)
+void TalentData::smartifyString(QString& string)
 {
-    QTime stop = QTime::currentTime().addMSecs(ms);
-    while (QTime::currentTime() < stop)
+    int offset = 0;
+
+    QRegularExpression re("[\\d]+");
+    QRegularExpressionMatchIterator i = re.globalMatch(string);
+    while (i.hasNext())
     {
-        QCoreApplication::processEvents(QEventLoop::AllEvents, ms / 10);
+        QRegularExpressionMatch match = i.next();
+        if (match.hasMatch())
+        {
+            int index = match.capturedStart();
+            int length = match.capturedLength();
+            int count = 10 - length;
+            for (int i = count; i > 0; i--)
+            {
+                string.insert(index + offset, "0");
+                offset++;
+            }
+        }
     }
+}
+
+int TalentData::smartStringCompare(const QString s1, const QString s2)
+{
+    QString comp1 = s1;
+    QString comp2 = s2;
+
+    TalentData::smartifyString(comp1);
+    TalentData::smartifyString(comp2);
+
+    int c = QString::localeAwareCompare(comp1, comp2);
+    return c;
 }
 
 QDataStream& operator <<(QDataStream& out, const TalentData& data)

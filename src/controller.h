@@ -4,6 +4,7 @@
 #include <QObject>
 
 class QLayout;
+class Module;
 
 class Controller : public QObject
 {
@@ -13,7 +14,7 @@ public:
     Controller(QObject* parent = 0);
 
     static void clearLayout(QLayout*);
-    static void appendToLayout(QWidget*, QLayout*);
+    static void appendToLayout(Module*, QLayout*);
 
     virtual void toView() = 0;
     virtual void toModel() = 0;

@@ -28,7 +28,9 @@ void TurnInitController::toView()
         InitModule* iMod = new InitModule();
         iMod->addWidgets();
         iMod->setInitiativeAct(act);
-        initLayout->addWidget(iMod);
+        iMod->setSortID(QString::number(act.getPlayer().value));
+
+        Controller::appendToLayout(iMod, initLayout);
     }
 }
 

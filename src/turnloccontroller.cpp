@@ -42,6 +42,7 @@ void TurnLocController::toView()
         npcMod->addWidgets();
         npcMod->requireConfirmation();
         npcMod->setNPC(npc);
+        npcMod->setSortID(npc->getName());
 
         Controller::appendToLayout(npcMod, uiContents->layout());
 

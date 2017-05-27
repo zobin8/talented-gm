@@ -22,9 +22,10 @@ public:
     static Qt::CheckState intToState(int);
     static int stateToInt(Qt::CheckState);
 
-    static int versionNumber(QString version, QString prefix);
+    static int smartStringCompare(const QString, const QString);
+    static void smartifyString(QString&);
 
-    static void sleep(int ms);
+    static int versionNumber(QString version, QString prefix);
 
     TalentData(TalentData const&) = delete;
     void operator =(TalentData const&) = delete;

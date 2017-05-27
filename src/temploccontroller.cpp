@@ -28,6 +28,7 @@ void TempLocController::toView()
         locMod->requireConfirmation();
         locMod->setDeleteText("Delete Location: " + loc->getName());
         locMod->setIdentifier(loc->getName());
+        locMod->setSortID(loc->getName());
 
         Controller::appendToLayout(locMod, uiLocContents->layout());
 

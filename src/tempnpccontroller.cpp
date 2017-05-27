@@ -27,6 +27,7 @@ void TempNPCController::toView()
         npcMod->requireConfirmation();
         npcMod->setDeleteText("Delete NPC: " + npc->getName());
         npcMod->setIdentifier(npc->getName());
+        npcMod->setSortID(npc->getName());
 
         Controller::appendToLayout(npcMod, uiNPCContents->layout());
 

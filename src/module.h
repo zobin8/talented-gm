@@ -13,6 +13,8 @@ public:
     ~Module();
 
     void setSortID(QString);
+    QString getSortID();
+    bool needsSort();
 
 signals:
 
@@ -23,6 +25,7 @@ protected:
 
 private:
     QString sortID;
+    bool sort;
 };
 
 #endif // MODULE_H
