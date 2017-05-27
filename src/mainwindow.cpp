@@ -22,6 +22,7 @@
 #include <QLinkedList>
 #include <QCloseEvent>
 #include <QFileDialog>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -68,9 +69,25 @@ MainWindow::MainWindow(QWidget *parent) :
     setControllerWidgets();
     connectControllers();
 
-    fileController->openFile(":/default/default.tgm");
-    fileController->loadFile();
-    fileController->closeFile();
+    QString path = ":/default/default.tgm";
+    QString argPath = "";
+
+    if (QCoreApplication::arguments().count() > 1)
+    {
+        argPath = QCoreApplication::arguments().at(1);
+    }
+
+    if (fileOkay(argPath, false))
+    {
+        fileController->openFile(argPath);
+        fileController->loadFile();
+    }
+    else
+    {
+        fileController->openFile(path);
+        fileController->loadFile();
+        fileController->closeFile();
+    }
 
     ui->tabWidget->setCurrentWidget(ui->generalTab);
 }
@@ -146,6 +163,38 @@ void MainWindow::setControllerWidgets()
     turnController->turnInitController->setWidgets(ui->turnInitContents);
 }
 
+void MainWindow::fromView()
+{
+    foreach (Controller* con, controllers)
+    {
+        con->fromView();
+    }
+}
+
+void MainWindow::toView()
+{
+    foreach (Controller* con, controllers)
+    {
+        con->toView();
+    }
+}
+
+void MainWindow::fromModel()
+{
+    foreach (Controller* con, controllers)
+    {
+        con->fromModel();
+    }
+}
+
+void MainWindow::toModel()
+{
+    foreach (Controller* con, controllers)
+    {
+        con->toModel();
+    }
+}
+
 QString MainWindow::pickTGMFile(bool allowNew)
 {
     QString filter = "TalentedGM Files (*.tgm)";
@@ -159,6 +208,35 @@ QString MainWindow::pickLogFile()
     QString suffix = ".tgm";
     bool allowNew = true;
     return pickFile(allowNew, filter, suffix);
+}
+
+bool MainWindow::fileOkay(QString path, bool allowNew)
+{
+    QFileInfo check(path);
+
+    if (path == "")
+    {
+        return false;
+    }
+    else if (check.exists() && check.isFile())
+    {
+        return true;
+    }
+    else if (allowNew && !check.exists())
+    {
+        if (check.fileName().endsWith(".tgm"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
 }
 
 QString MainWindow::pickFile(bool allowNew, QString filter, QString suffix)
@@ -176,22 +254,23 @@ QString MainWindow::pickFile(bool allowNew, QString filter, QString suffix)
     }
     fileDialog.exec();
 
-    QString path = fileDialog.selectedFiles().first();
-    QFileInfo check(path);
-    if (check.exists() && check.isFile())
+    QString path;
+    if (fileDialog.selectedFiles().count() > 0)
+    {
+        path = fileDialog.selectedFiles().first();
+    }
+    else
+    {
+        return QString("");
+    }
+
+    if (fileOkay(path, allowNew))
     {
         return path;
     }
     else
     {
-        if (!check.exists() && allowNew)
-        {
-            return path;
-        }
-        else
-        {
-            return QString("");
-        }
+        return QString("");
     }
 }
 
@@ -366,11 +445,11 @@ void MainWindow::on_actionSave_triggered()
     if (running) return;
     running = true;
 
-    turnController->fromView();
-    turnController->toModel();
-
     if (fileController->hasFile())
     {
+        fromView();
+        toModel();
+
         fileController->saveFile();
     }
     else
@@ -387,12 +466,12 @@ void MainWindow::on_actionSave_as_triggered()
     if (running) return;
     running = true;
 
-    turnController->fromView();
-    turnController->toModel();
-
     QString path = pickTGMFile(true);
     if (path != "")
     {
+        fromView();
+        toModel();
+
         fileController->openFile(path);
         fileController->saveFile();
     }
@@ -411,6 +490,9 @@ void MainWindow::on_actionExport_to_log_triggered()
     QString path = pickLogFile();
     if (path != "")
     {
+        fromView();
+        toModel();
+
         fileController->exportToLog(path);
     }
 

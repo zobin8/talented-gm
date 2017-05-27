@@ -80,6 +80,12 @@ private:
     void setControllerWidgets();
     void connectControllers();
 
+    void fromView();
+    void toView();
+    void fromModel();
+    void toModel();
+
+    bool fileOkay(QString path, bool allowNew);
     QString pickFile(bool allowNew, QString filter, QString suffix);
     QString pickTGMFile(bool allowNew);
     QString pickLogFile();
