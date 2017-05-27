@@ -52,7 +52,8 @@ SOURCES += src/main.cpp\
     src/hitmodule.cpp \
     src/initiativeact.cpp \
     src/initmodule.cpp \
-    src/turninitcontroller.cpp
+    src/turninitcontroller.cpp \
+    src/module.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
@@ -82,7 +83,8 @@ HEADERS  += src/mainwindow.h \
     src/hitmodule.h \
     src/initiativeact.h \
     src/initmodule.h \
-    src/turninitcontroller.h
+    src/turninitcontroller.h \
+    src/module.h
 
 FORMS    += src/mainwindow.ui
 

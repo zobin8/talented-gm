@@ -5,13 +5,11 @@
 #include <QCheckBox>
 #include <QHBoxLayout>
 
-HitModule::HitModule(QWidget *parent) : QWidget(parent)
+HitModule::HitModule(QWidget *parent) : Module(parent)
 {
-    layout = new QHBoxLayout(this);
     label = new QLabel();
     boxes = QVector<QCheckBox*>();
 
-    this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     label->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
     layout->setContentsMargins(9, 0, 9, 0);
@@ -27,7 +25,6 @@ HitModule::~HitModule()
     }
 
     delete label;
-    delete layout;
 }
 
 HitArea HitModule::getHitArea()

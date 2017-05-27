@@ -1,15 +1,14 @@
 #ifndef HITMODULE_H
 #define HITMODULE_H
 
-#include <QWidget>
+#include "module.h"
 #include <QVector>
 
-class QHBoxLayout;
 class HitArea;
 class QLabel;
 class QCheckBox;
 
-class HitModule : public QWidget
+class HitModule : public Module
 {
     Q_OBJECT
 public:
@@ -24,7 +23,6 @@ signals:
 public slots:
 
 private:
-    QHBoxLayout* layout;
     QLabel* label;
     QVector<QCheckBox*> boxes;
 };

@@ -4,9 +4,8 @@
 #include <QHBoxLayout>
 #include <QTimer>
 
-MenuModule::MenuModule(QWidget *parent) : QWidget(parent)
+MenuModule::MenuModule(QWidget *parent) : Module(parent)
 {
-    layout = new QHBoxLayout(this);
     del = new QPushButton("Delete");
 
     confirmationNeeded = false;
@@ -14,7 +13,6 @@ MenuModule::MenuModule(QWidget *parent) : QWidget(parent)
     connect(confirmationTimer, SIGNAL(timeout()), this, SLOT(on_confirmationTimeout()));
 
     del->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-    this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
     layout->setContentsMargins(0, 0, 0, 0);
 
@@ -28,7 +26,6 @@ void MenuModule::addWidgets()
 
 MenuModule::~MenuModule()
 {
-    delete layout;
     delete del;
     delete confirmationTimer;
 }
@@ -55,17 +52,24 @@ QPushButton* MenuModule::getDeleteButton()
 
 void MenuModule::on_deletionEvent()
 {
-    if (confirmationTimer->isActive())
+    if (confirmationNeeded)
     {
-        confirmationTimer->stop();
-        emit killMe(this);
+        if (confirmationTimer->isActive())
+        {
+            confirmationTimer->stop();
+            emit killMe(this);
+        }
+        else
+        {
+            deleteText = del->text();
+            del->setText("Are you sure?");
+
+            confirmationTimer->start(3000);
+        }
     }
     else
     {
-        deleteText = del->text();
-        del->setText("Are you sure?");
-
-        confirmationTimer->start(3000);
+        emit killMe(this);
     }
 }
 

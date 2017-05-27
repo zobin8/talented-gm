@@ -1,12 +1,11 @@
 #ifndef MENUMODULE_H
 #define MENUMODULE_H
 
-#include <QWidget>
+#include "module.h"
 
 class QPushButton;
-class QHBoxLayout;
 
-class MenuModule : public QWidget
+class MenuModule : public Module
 {
     Q_OBJECT
 public:
@@ -32,7 +31,6 @@ public slots:
     void on_confirmationTimeout();
 
 protected:
-    QHBoxLayout* layout;
     QPushButton* del;
     QString deleteText;
 
