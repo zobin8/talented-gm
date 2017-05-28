@@ -138,7 +138,7 @@ void FileController::on_unsavedChange()
     setUnsaved(true);
 }
 
-bool FileController::abortClose()
+FileAbortResponse FileController::abortClose()
 {
     if (unsaved)
     {
@@ -153,18 +153,17 @@ bool FileController::abortClose()
         switch (ret)
         {
         case QMessageBox::Save:
-            saveFile();
-            return false;
+            return FileAbortResponse::Save;
         case QMessageBox::Discard:
-            return false;
+            return FileAbortResponse::Okay;
         case QMessageBox::Cancel:
-            return true;
+            return FileAbortResponse::Cancel;
         default:
-            return true;
+            return FileAbortResponse::Cancel;
         }
     }
     else
     {
-        return false;
+        return FileAbortResponse::Okay;
     }
 }

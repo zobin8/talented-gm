@@ -284,7 +284,7 @@ QString MainWindow::pickFile(bool allowNew, QString filter, QString suffix)
     }
 }
 
-void MainWindow::on_editNPCCombo_activated(const QString& name)
+void MainWindow::on_editNPCCombo_activated(const QString&)
 {
     if (running) return;
     running = true;
@@ -325,7 +325,7 @@ void MainWindow::on_editAddSkillButton_clicked()
     running = false;
 }
 
-void MainWindow::on_editLocationCombo_activated(const QString& name)
+void MainWindow::on_editLocationCombo_activated(const QString&)
 {
     if (running) return;
     running = true;
@@ -375,9 +375,15 @@ void MainWindow::on_tempNewPlayerButton_clicked()
 
 void MainWindow::on_actionQuit_triggered()
 {
-    if (!fileController->abortClose())
+    FileAbortResponse res = fileController->abortClose();
+    if (res == FileAbortResponse::Okay)
     {
         QApplication::quit();
+    }
+    else if (res ==FileAbortResponse::Save)
+    {
+        on_actionSave_triggered();
+        on_actionQuit_triggered();
     }
 }
 
@@ -407,9 +413,17 @@ void MainWindow::closeEvent(QCloseEvent* event)
     if (running) return;
     running = true;
 
-    if (!fileController->abortClose())
+    FileAbortResponse res = fileController->abortClose();
+    if (res == FileAbortResponse::Okay)
     {
         event->accept();
+    }
+    else if (res == FileAbortResponse::Save)
+    {
+        running = false;
+        on_actionSave_triggered();
+        running = false;
+        closeEvent(event);
     }
     else
     {
@@ -424,9 +438,17 @@ void MainWindow::on_actionNew_triggered()
     if (running) return;
     running = true;
 
-    if (!fileController->abortClose())
+    FileAbortResponse res = fileController->abortClose();
+    if (res == FileAbortResponse::Okay)
     {
         fileController->newFile();
+    }
+    else if (res == FileAbortResponse::Save)
+    {
+        running = false;
+        on_actionSave_triggered();
+        running = false;
+        on_actionNew_triggered();
     }
 
     running = false;
@@ -437,14 +459,23 @@ void MainWindow::on_actionOpen_triggered()
     if (running) return;
     running = true;
 
-    if (!fileController->abortClose())
+    FileAbortResponse res = fileController->abortClose();
+    if (res == FileAbortResponse::Okay)
     {
+        //TODO: Clean up, put in functions. Need to hotfix right now.
         QString path = pickTGMFile(false);
         if (path != "")
         {
             fileController->openFile(path);
             fileController->loadFile();
         }
+    }
+    else if (res == FileAbortResponse::Save)
+    {
+        running = false;
+        on_actionSave_triggered();
+        running = false;
+        on_actionOpen_triggered();
     }
 
     running = false;

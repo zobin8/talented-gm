@@ -7,6 +7,13 @@
 class QFile;
 class QStatusBar;
 
+enum class FileAbortResponse
+{
+    Cancel,
+    Save,
+    Okay
+};
+
 class FileController : public Controller
 {
     Q_OBJECT
@@ -30,7 +37,7 @@ public:
     void saveFile();
     void exportToLog(QString);
 
-    bool abortClose();
+    FileAbortResponse abortClose();
     void setUnsaved(bool);
 
 signals:
