@@ -9,6 +9,7 @@ class QComboBox;
 class QLineEdit;
 class QSpinBox;
 class MenuModule;
+class NPC;
 
 class EditorLocController : public Controller
 {
@@ -28,6 +29,7 @@ public:
 
 signals:
     void update();
+    void viewNPC(NPC*);
 
 public slots:
     void deleteNPC(MenuModule*);

@@ -228,7 +228,7 @@ p, li { white-space: pre-wrap; }
                    <x>0</x>
                    <y>0</y>
                    <width>639</width>
-                   <height>388</height>
+                   <height>287</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_27"/>
@@ -286,6 +286,12 @@ p, li { white-space: pre-wrap; }
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>230</height>
+              </size>
+             </property>
              <property name="title">
               <string>NPC Info</string>
              </property>
@@ -342,7 +348,7 @@ p, li { white-space: pre-wrap; }
                       <x>0</x>
                       <y>0</y>
                       <width>308</width>
-                      <height>63</height>
+                      <height>164</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_24"/>
@@ -392,7 +398,7 @@ p, li { white-space: pre-wrap; }
                       <x>0</x>
                       <y>0</y>
                       <width>308</width>
-                      <height>63</height>
+                      <height>164</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_23"/>

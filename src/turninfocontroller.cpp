@@ -1,5 +1,6 @@
 #include "turninfocontroller.h"
 #include "npc.h"
+#include "svp.h"
 #include <QLayout>
 #include <QLabel>
 
@@ -29,7 +30,34 @@ void TurnInfoController::toView()
 
     if (npc)
     {
-        //stats->addWidget(new QLabel("Body: " + QString::number(npc->body)));
+        int baseWill = npc->comm + npc->charm;
+
+        QString bodyString = "Body: " + QString::number(npc->body);
+        stats->addWidget(new QLabel(bodyString));
+
+        QString coordString = "Coordination: " + QString::number(npc->coord);
+        stats->addWidget(new QLabel(coordString));
+
+        QString senseString = "Sense: " + QString::number(npc->sense);
+        stats->addWidget(new QLabel(senseString));
+
+        QString mindString = "Mind: " + QString::number(npc->mind);
+        stats->addWidget(new QLabel(mindString));
+
+        QString charmString = "Charm: " + QString::number(npc->charm);
+        stats->addWidget(new QLabel(charmString));
+
+        QString commString = "Command: " + QString::number(npc->comm);
+        stats->addWidget(new QLabel(commString));
+
+        QString willString = "Base will: " + QString::number(baseWill);
+        stats->addWidget(new QLabel(willString));
+
+        foreach (SVP skill, *npc->getSkills())
+        {
+            QString string = skill.string + ": " + QString::number(skill.value);
+            skills->addWidget(new QLabel(string));
+        }
     }
 }
 
@@ -48,10 +76,54 @@ void TurnInfoController::fromView()
     //No action. View only.
 }
 
-void TurnInfoController::on_viewNPC(NPC* anNPC)
+void TurnInfoController::setNPC(NPC* anNPC)
 {
     delete npc;
-    npc = new NPC(anNPC);
+    if (anNPC)
+    {
+        npc = new NPC(anNPC);
+    }
+    else
+    {
+        npc = NULL;
+    }
 
     toView();
+}
+
+void TurnInfoController::on_viewNPC(NPC* anNPC)
+{
+    if (anNPC)
+    {
+        if (npc)
+        {
+            if (npc->getName() == anNPC->getName())
+            {
+                setNPC(NULL);
+            }
+            else
+            {
+                setNPC(anNPC);
+            }
+        }
+        else
+        {
+            setNPC(anNPC);
+        }
+    }
+    else
+    {
+        setNPC(NULL);
+    }
+}
+
+void TurnInfoController::on_deleteNPC(QString name)
+{
+    if (npc)
+    {
+        if (name == npc->getName())
+        {
+            setNPC(NULL);
+        }
+    }
 }

@@ -14,6 +14,8 @@ public:
 
     void setWidgets(QWidget* turnStatContents, QWidget* turnSkillContents);
 
+    void setNPC(NPC*);
+
     void toView();
     void toModel();
     void fromModel();
@@ -23,6 +25,7 @@ signals:
 
 public slots:
     void on_viewNPC(NPC*);
+    void on_deleteNPC(QString);
 
 private:
     NPC* npc;

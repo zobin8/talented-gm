@@ -122,6 +122,8 @@ void MainWindow::connectControllers()
     connect(tempPlayerController, SIGNAL(update()), turnController->turnInitController, SLOT(on_update()));
 
     connect(turnController->turnLocController, SIGNAL(viewNPC(NPC*)), turnController->turnInfoController, SLOT(on_viewNPC(NPC*)));
+    connect(turnController->turnLocController, SIGNAL(deletedNPC(QString)), turnController->turnInfoController, SLOT(on_deleteNPC(QString)));
+    connect(editorLocController, SIGNAL(viewNPC(NPC*)), turnController->turnInfoController, SLOT(on_viewNPC(NPC*)));
 
     foreach (Controller* con, controllers)
     {
