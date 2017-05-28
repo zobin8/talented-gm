@@ -9,6 +9,7 @@ class QWidget;
 
 class NPCMenuModule : public MenuModule
 {
+    Q_OBJECT
 public:
     NPCMenuModule();
     ~NPCMenuModule();
@@ -18,11 +19,18 @@ public:
     NPC* getNPC();
     void setNPC(NPC*);
 
+public slots:
+    void on_viewEvent();
+
+signals:
+    void viewNPC(NPC*);
+
 private:
     NPC* npc;
     QLabel* nameLabel;
     QWidget* hitContents;
     QWidget* mainContents;
+    QPushButton* viewButton;
 };
 
 #endif // NPCMENUMODULE_H

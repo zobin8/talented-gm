@@ -13,6 +13,9 @@ NPCMenuModule::NPCMenuModule()
     nameLabel = new QLabel();
     nameLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
+    viewButton = new QPushButton("More Info");
+    connect(viewButton, SIGNAL(clicked(bool)), this, SLOT(on_viewEvent()));
+
     hitContents = new QWidget();
     QVBoxLayout* hitLayout1 = new QVBoxLayout(hitContents);
     hitLayout1->setAlignment(Qt::AlignTop);
@@ -32,6 +35,7 @@ NPCMenuModule::~NPCMenuModule()
     delete hitContents;
     delete mainContents->layout();
     delete nameLabel;
+    delete viewButton;
     //TODO: memory leak
     //delete mainContents;
     delete npc;
@@ -40,6 +44,7 @@ NPCMenuModule::~NPCMenuModule()
 void NPCMenuModule::addWidgets()
 {
     mainContents->layout()->addWidget(nameLabel);
+    mainContents->layout()->addWidget(viewButton);
     mainContents->layout()->addWidget(del);
     layout->addWidget(mainContents);
     layout->addWidget(hitContents);
@@ -83,4 +88,9 @@ void NPCMenuModule::setNPC(NPC* newNPC)
 
         Controller::appendToLayout(hitMod, hitContents->layout());
     }
+}
+
+void NPCMenuModule::on_viewEvent()
+{
+    emit viewNPC(npc);
 }

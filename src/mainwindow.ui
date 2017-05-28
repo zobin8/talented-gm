@@ -21,7 +21,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="generalTab">
        <attribute name="title">
@@ -2039,7 +2039,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>New</string>
+    <string>&amp;New</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -2050,7 +2050,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Open</string>
+    <string>&amp;Open</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -2061,7 +2061,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Save</string>
+    <string>&amp;Save</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -2072,7 +2072,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Save as</string>
+    <string>Sa&amp;ve as</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
@@ -2083,7 +2083,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Export to log</string>
+    <string>&amp;Export to log</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+E</string>
@@ -2091,7 +2091,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionQuit">
    <property name="text">
-    <string>Quit</string>
+    <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -2102,7 +2102,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Previous</string>
+    <string>&amp;Previous</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+[</string>
@@ -2113,7 +2113,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Next</string>
+    <string>&amp;Next</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+]</string>
@@ -2124,7 +2124,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Add</string>
+    <string>&amp;Add</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+=</string>
@@ -2135,7 +2135,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Delete</string>
+    <string>&amp;Delete</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+-</string>
@@ -2143,7 +2143,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionGeneral">
    <property name="text">
-    <string>General Tab</string>
+    <string>&amp;General Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+1</string>
@@ -2151,7 +2151,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionTurns">
    <property name="text">
-    <string>Turns Tab</string>
+    <string>&amp;Turns Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+2</string>
@@ -2159,7 +2159,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionTemplates">
    <property name="text">
-    <string>Templates Tab</string>
+    <string>Te&amp;mplates Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+3</string>
@@ -2167,7 +2167,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionEditor">
    <property name="text">
-    <string>Editor Tab</string>
+    <string>&amp;Editor Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+4</string>
@@ -2175,7 +2175,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionNext_Tab">
    <property name="text">
-    <string>Next Tab</string>
+    <string>&amp;Next Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Tab</string>
@@ -2183,7 +2183,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="actionPrevious_Tab">
    <property name="text">
-    <string>Previous Tab</string>
+    <string>&amp;Previous Tab</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+Backtab</string>

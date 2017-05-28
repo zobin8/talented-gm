@@ -6,6 +6,7 @@
 
 class NPCTemplate;
 class HitArea;
+class SVP;
 
 class NPC
 {
@@ -28,9 +29,13 @@ public:
     void setHitAreas(QVector<HitArea>*);
     QVector<HitArea>* getHitAreas() const;
 
+    void setSkills(QVector<SVP>*);
+    QVector<SVP>* getSkills() const;
+
 private:
     QString name;
     QVector<HitArea>* hitAreas;
+    QVector<SVP>* skills;
 };
 
 QDataStream& operator <<(QDataStream&, const NPC&);

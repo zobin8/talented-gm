@@ -8,6 +8,7 @@ class QLabel;
 class Location;
 class MenuModule;
 class QWidget;
+class NPC;
 
 class TurnLocController : public Controller
 {
@@ -25,8 +26,10 @@ public:
 
 signals:
     void deletedNPC(QString);
+    void viewNPC(NPC*);
 
 public slots:
+    void on_viewNPC(NPC*);
     void on_deletionEvent(MenuModule*);
 
 private:

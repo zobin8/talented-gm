@@ -17,6 +17,7 @@
 #include "turnnotescontroller.h"
 #include "turnloccontroller.h"
 #include "turninitcontroller.h"
+#include "turninfocontroller.h"
 
 #include <QDateTime>
 #include <QLinkedList>
@@ -41,6 +42,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tempPlayerContents->layout()->setAlignment(Qt::AlignTop);
     ui->turnNPCContents->layout()->setAlignment(Qt::AlignTop);
     ui->turnInitContents->layout()->setAlignment(Qt::AlignTop);
+    ui->turnSkillContents->layout()->setAlignment(Qt::AlignTop);
+    ui->turnStatContents->layout()->setAlignment(Qt::AlignTop);
 
     editorNPCController = new EditorNPCController();
     editorLocController = new EditorLocController();
@@ -65,6 +68,7 @@ MainWindow::MainWindow(QWidget *parent) :
     controllers.append(turnController->turnLocController);
     controllers.append(turnController->turnNotesController);
     controllers.append(turnController->turnInitController);
+    controllers.append(turnController->turnInfoController);
 
     setControllerWidgets();
     connectControllers();
@@ -117,6 +121,8 @@ void MainWindow::connectControllers()
     connect(tempPlayerController, SIGNAL(deletedPlayer(QString)), turnController->turnInitController, SLOT(deleteInit(QString)));
     connect(tempPlayerController, SIGNAL(update()), turnController->turnInitController, SLOT(on_update()));
 
+    connect(turnController->turnLocController, SIGNAL(viewNPC(NPC*)), turnController->turnInfoController, SLOT(on_viewNPC(NPC*)));
+
     foreach (Controller* con, controllers)
     {
         if (con != fileController)
@@ -161,6 +167,8 @@ void MainWindow::setControllerWidgets()
                                                   ui->turnLocationLabel,
                                                   ui->turnNPCContents);
     turnController->turnInitController->setWidgets(ui->turnInitContents);
+    turnController->turnInfoController->setWidgets(ui->turnStatContents,
+                                                   ui->turnSkillContents);
 }
 
 void MainWindow::fromView()

@@ -9,6 +9,7 @@ NPC::NPC()
     name = "Unnamed NPC";
 
     hitAreas = new QVector<HitArea>();
+    skills = new QVector<SVP>();
 
     body = 2;
     coord = 2;
@@ -23,6 +24,7 @@ NPC::NPC(const NPC* old)
     setName(old->getName());
 
     hitAreas = new QVector<HitArea>(*old->getHitAreas());
+    skills = new QVector<SVP>(*old->getSkills());
 
     body = old->body;
     coord = old->coord;
@@ -42,6 +44,12 @@ NPC::NPC(const NPCTemplate* npcTemp)
         HitArea area = HitArea(svp);
         hitAreas->append(area);
     }
+    skills = new QVector<SVP>();
+    foreach (SVP svp, *npcTemp->getSkills())
+    {
+        SVP s = SVP(svp);
+        skills->append(s);
+    }
 
     body = npcTemp->body;
     coord = npcTemp->coord;
@@ -54,6 +62,7 @@ NPC::NPC(const NPCTemplate* npcTemp)
 NPC::~NPC()
 {
     delete hitAreas;
+    delete skills;
 }
 
 void NPC::setName(QString aName)
@@ -77,9 +86,20 @@ QVector<HitArea>* NPC::getHitAreas() const
     return hitAreas;
 }
 
+void NPC::setSkills(QVector<SVP>* s)
+{
+    delete skills;
+    skills = new QVector<SVP>(*s);
+}
+
+QVector<SVP>* NPC::getSkills() const
+{
+    return skills;
+}
+
 QDataStream& operator <<(QDataStream& out, const NPC& npc)
 {
-    out << QString("NPC2");
+    out << QString("NPC3");
 
     out << npc.getName();
     out << npc.body;
@@ -90,6 +110,7 @@ QDataStream& operator <<(QDataStream& out, const NPC& npc)
     out << npc.comm;
 
     out << *npc.getHitAreas();
+    out << *npc.getSkills();
 
     return out;
 }
@@ -135,6 +156,12 @@ QDataStream& operator >>(QDataStream& in, NPC& npc)
         QVector<HitArea>* areas = new QVector<HitArea>();
         in >> *areas;
         npc.setHitAreas(areas);
+    }
+    if (v >= 3)
+    {
+        QVector<SVP>* skills = new QVector<SVP>();
+        in >> *skills;
+        npc.setSkills(skills);
     }
 
     return in;

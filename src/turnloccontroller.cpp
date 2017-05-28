@@ -47,6 +47,7 @@ void TurnLocController::toView()
         Controller::appendToLayout(npcMod, uiContents->layout());
 
         connect(npcMod, SIGNAL(killMe(MenuModule*)), this, SLOT(on_deletionEvent(MenuModule*)));
+        connect(npcMod, SIGNAL(viewNPC(NPC*)), this, SLOT(on_viewNPC(NPC*)));
     }
 }
 
@@ -99,4 +100,9 @@ void TurnLocController::on_deletionEvent(MenuModule* toDelete)
 
     fromView();
     toModel();
+}
+
+void TurnLocController::on_viewNPC(NPC* npc)
+{
+    emit viewNPC(npc);
 }

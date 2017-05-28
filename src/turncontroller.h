@@ -6,6 +6,7 @@
 class TurnNotesController;
 class TurnLocController;
 class TurnInitController;
+class TurnInfoController;
 class QLabel;
 
 class TurnController : public Controller
@@ -30,6 +31,7 @@ public:
     TurnNotesController* turnNotesController;
     TurnLocController* turnLocController;
     TurnInitController* turnInitController;
+    TurnInfoController* turnInfoController;
 
 signals:
 
