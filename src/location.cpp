@@ -12,6 +12,7 @@ Location::Location()
 
     minions1 = 0;
     minions2 = 0;
+    turn = 1;
 }
 
 Location::Location(const Location* old)
@@ -27,6 +28,8 @@ Location::Location(const Location* old)
         NPC* newNPC = new NPC(oldNPC);
         addNPC(newNPC);
     }
+
+    turn = old->getTurn();
 }
 
 Location::Location(const LocTemplate* locTemp)
@@ -45,6 +48,8 @@ Location::Location(const LocTemplate* locTemp)
 
         npcs.append(npc);
     }
+
+    turn = 1;
 }
 
 Location::~Location()
@@ -82,6 +87,12 @@ QString Location::getName() const
     return name;
 }
 
+QString Location::getDisplayName() const
+{
+    QString out = name + " (Turn " + QString::number(turn) + ")";
+    return out;
+}
+
 void Location::setName(QString aName)
 {
     name = aName;
@@ -98,9 +109,24 @@ void Location::removeNPC(NPC* npc)
     delete npc;
 }
 
+void Location::setTurn(int i)
+{
+    turn = i;
+}
+
+void Location::incTurn()
+{
+    turn++;
+}
+
+int Location::getTurn() const
+{
+    return turn;
+}
+
 QDataStream& operator <<(QDataStream& out, const Location& loc)
 {
-    out << QString("Location2");
+    out << QString("Location3");
 
     out << loc.getName();
     out << loc.minions1;
@@ -111,6 +137,8 @@ QDataStream& operator <<(QDataStream& out, const Location& loc)
     {
         out << *npc;
     }
+
+    out << loc.getTurn();
 
     return out;
 }
@@ -139,6 +167,13 @@ QDataStream& operator >>(QDataStream& in, Location& loc)
             in >> *npc;
             loc.addNPC(npc);
         }
+    }
+    //I have no idea what happened to 2.
+    if (v >= 3)
+    {
+        int turn;
+        in >> turn;
+        loc.setTurn(turn);
     }
 
     return in;

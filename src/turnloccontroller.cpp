@@ -29,7 +29,7 @@ void TurnLocController::setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMini
 
 void TurnLocController::toView()
 {
-    uiLocName->setText(loc->getName());
+    uiLocName->setText(loc->getDisplayName());
     uiMinions1->setValue(loc->minions1);
     uiMinions2->setValue(loc->minions2);
 
@@ -68,7 +68,6 @@ void TurnLocController::fromModel()
 
 void TurnLocController::fromView()
 {
-    loc->setName(uiLocName->text());
     loc->minions1 = uiMinions1->value();
     loc->minions2 = uiMinions2->value();
 

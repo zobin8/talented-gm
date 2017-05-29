@@ -20,6 +20,7 @@ public:
     int minions2;
 
     QString getName() const;
+    QString getDisplayName() const;
     void setName(QString);
 
     QLinkedList<NPC*>& NPCs();
@@ -31,10 +32,15 @@ public:
     void incrementName(NPC*);
     void removeNPC(NPC*);
 
+    void setTurn(int);
+    void incTurn();
+    int getTurn() const;
+
 private:
     QString name;
     QLinkedList<NPC*> npcs;
     QMap<QString, int> tempNames;
+    int turn;
 
     static QString randName();
 };

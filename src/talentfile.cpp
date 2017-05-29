@@ -232,6 +232,7 @@ void TalentFile::addTurn()
     if (lastTurn())
     {
         Location* loc = new Location(lastTurn()->getLoc());
+        loc->incTurn();
         turn->setLoc(loc);
 
         QVector<InitiativeAct>* initiative = new QVector<InitiativeAct>();
