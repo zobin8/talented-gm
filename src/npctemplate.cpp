@@ -6,6 +6,7 @@
 NPCTemplate::NPCTemplate()
 {
     name = NPCTemplate::randName();
+    description = "";
 
     hitBoxes = new QLinkedList<SVP>();
     skills = new QLinkedList<SVP>();
@@ -21,6 +22,7 @@ NPCTemplate::NPCTemplate()
 NPCTemplate::NPCTemplate(const NPCTemplate* old)
 {
     setName(old->getName());
+    setDescription(old->getDescription());
 
     hitBoxes = new QLinkedList<SVP>(*old->getHitBoxes());
     skills = new QLinkedList<SVP>(*old->getSkills());
@@ -47,6 +49,16 @@ void NPCTemplate::setName(QString aName)
 QString NPCTemplate::getName() const
 {
     return name;
+}
+
+void NPCTemplate::setDescription(QString aDesc)
+{
+    description = aDesc;
+}
+
+QString NPCTemplate::getDescription() const
+{
+    return description;
 }
 
 QLinkedList<SVP>* NPCTemplate::getSkills() const
@@ -88,7 +100,7 @@ QString NPCTemplate::randName()
 
 QDataStream& operator <<(QDataStream& out, const NPCTemplate& npc)
 {
-    out << QString("NPCTemplate1");
+    out << QString("NPCTemplate2");
 
     out << npc.getName();
     out << npc.body;
@@ -99,6 +111,7 @@ QDataStream& operator <<(QDataStream& out, const NPCTemplate& npc)
     out << npc.comm;
     out << *npc.getSkills();
     out << *npc.getHitBoxes();
+    out << npc.getDescription();
 
     return out;
 }
@@ -109,7 +122,7 @@ QDataStream& operator >>(QDataStream& in, NPCTemplate& npc)
     in >> version;
     int v = TalentData::versionNumber(version, "NPCTemplate");
 
-    if (v == 1)
+    if (v >= 1)
     {
         QString name;
         in >> name;
@@ -146,6 +159,12 @@ QDataStream& operator >>(QDataStream& in, NPCTemplate& npc)
         QLinkedList<SVP>* hitBoxes = new QLinkedList<SVP>();
         in >> *hitBoxes;
         npc.setHitBoxes(hitBoxes);
+    }
+    if (v >= 2)
+    {
+        QString description;
+        in >> description;
+        npc.setDescription(description);
     }
 
     return in;

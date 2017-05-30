@@ -26,6 +26,9 @@ public:
     void setName(QString);
     QString getName() const;
 
+    void setDescription(QString);
+    QString getDescription() const;
+
     void setHitAreas(QVector<HitArea>*);
     QVector<HitArea>* getHitAreas() const;
 
@@ -34,6 +37,7 @@ public:
 
 private:
     QString name;
+    QString description;
     QVector<HitArea>* hitAreas;
     QVector<SVP>* skills;
 };

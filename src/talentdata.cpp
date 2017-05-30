@@ -108,7 +108,7 @@ QDataStream& operator >>(QDataStream& in, TalentData& data)
     in >> version;
     int v = TalentData::versionNumber(version, "TalentData");
 
-    if (v == 1)
+    if (v >= 1)
     {
         TalentFile* f = new TalentFile();
         data.setTalentFile(f);

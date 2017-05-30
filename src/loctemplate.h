@@ -17,6 +17,8 @@ public:
 
     QString getName() const;
     void setName(QString);
+    QString getDescription() const;
+    void setDescription(QString);
 
     QLinkedList<NPCTemplate*>& NPCs();
     const QLinkedList<NPCTemplate*>& getNPCs() const;
@@ -26,6 +28,7 @@ public:
 
 private:
     QString name;
+    QString description;
     QLinkedList<NPCTemplate*> npcs;
 
     static QString randName();

@@ -9,6 +9,7 @@ Location::Location()
     tempNames = QMap<QString, int>();
     npcs = QLinkedList<NPC*>();
     name = "No location loaded";
+    description = "";
 
     minions1 = 0;
     minions2 = 0;
@@ -21,6 +22,7 @@ Location::Location(const Location* old)
     name = old->getName();
     minions1 = old->minions1;
     minions2 = old->minions2;
+    description = old->getDescription();
 
     npcs = QLinkedList<NPC*>();
     foreach (const NPC* oldNPC, old->getNPCs())
@@ -38,6 +40,7 @@ Location::Location(const LocTemplate* locTemp)
     name = locTemp->getName();
     minions1 = locTemp->minions1;
     minions2 = locTemp->minions2;
+    description = locTemp->getDescription();
 
     npcs = QLinkedList<NPC*>();
     foreach (NPCTemplate* npcTemp, locTemp->getNPCs())
@@ -98,6 +101,16 @@ void Location::setName(QString aName)
     name = aName;
 }
 
+QString Location::getDescription() const
+{
+    return description;
+}
+
+void Location::setDescription(QString aDesc)
+{
+    description = aDesc;
+}
+
 void Location::addNPC(NPC* npc)
 {
     npcs.append(npc);
@@ -126,7 +139,7 @@ int Location::getTurn() const
 
 QDataStream& operator <<(QDataStream& out, const Location& loc)
 {
-    out << QString("Location3");
+    out << QString("Location4");
 
     out << loc.getName();
     out << loc.minions1;
@@ -139,6 +152,8 @@ QDataStream& operator <<(QDataStream& out, const Location& loc)
     }
 
     out << loc.getTurn();
+
+    out << loc.getDescription();
 
     return out;
 }
@@ -174,6 +189,12 @@ QDataStream& operator >>(QDataStream& in, Location& loc)
         int turn;
         in >> turn;
         loc.setTurn(turn);
+    }
+    if (v >= 4)
+    {
+        QString description;
+        in >> description;
+        loc.setDescription(description);
     }
 
     return in;

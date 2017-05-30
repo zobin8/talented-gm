@@ -23,6 +23,9 @@ public:
     QString getDisplayName() const;
     void setName(QString);
 
+    QString getDescription() const;
+    void setDescription(QString);
+
     QLinkedList<NPC*>& NPCs();
     const QLinkedList<NPC*>& getNPCs() const;
 
@@ -38,6 +41,7 @@ public:
 
 private:
     QString name;
+    QString description;
     QLinkedList<NPC*> npcs;
     QMap<QString, int> tempNames;
     int turn;

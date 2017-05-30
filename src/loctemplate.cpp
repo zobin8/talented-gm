@@ -7,6 +7,7 @@ LocTemplate::LocTemplate()
 {
     npcs = QLinkedList<NPCTemplate*>();
     name = LocTemplate::randName();
+    description = "";
 
     minions1 = 0;
     minions2 = 0;
@@ -15,6 +16,7 @@ LocTemplate::LocTemplate()
 LocTemplate::LocTemplate(LocTemplate* old)
 {
     name = old->getName();
+    description = old->getDescription();
     minions1 = old->minions1;
     minions2 = old->minions2;
     npcs = QLinkedList<NPCTemplate*>(old->NPCs());
@@ -40,6 +42,16 @@ void LocTemplate::setName(QString aName)
     name = aName;
 }
 
+QString LocTemplate::getDescription() const
+{
+    return description;
+}
+
+void LocTemplate::setDescription(QString aDesc)
+{
+    description = aDesc;
+}
+
 void LocTemplate::addNPC(NPCTemplate* npc)
 {
     npcs.append(npc);
@@ -57,7 +69,7 @@ QString LocTemplate::randName()
 
 QDataStream& operator <<(QDataStream& out, const LocTemplate& locTemp)
 {
-    out << QString("LocTemplate1");
+    out << QString("LocTemplate2");
 
     out << locTemp.getName();
     out << locTemp.minions1;
@@ -69,6 +81,8 @@ QDataStream& operator <<(QDataStream& out, const LocTemplate& locTemp)
         out << npc->getName();
     }
 
+    out << locTemp.getDescription();
+
     return out;
 }
 
@@ -78,7 +92,7 @@ QDataStream& operator >>(QDataStream& in, LocTemplate& locTemp)
     in >> version;
     int v = TalentData::versionNumber(version, "LocTemplate");
 
-    if (v == 1)
+    if (v >= 1)
     {
         QString name;
         in >> name;
@@ -99,6 +113,12 @@ QDataStream& operator >>(QDataStream& in, LocTemplate& locTemp)
                 locTemp.addNPC(npc);
             }
         }
+    }
+    if (v >= 2)
+    {
+        QString description;
+        in >> description;
+        locTemp.setDescription(description);
     }
 
     return in;

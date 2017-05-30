@@ -23,6 +23,9 @@ public:
     void setName(QString);
     QString getName() const;
 
+    void setDescription(QString);
+    QString getDescription() const;
+
     QLinkedList<SVP>* getSkills() const;
     QLinkedList<SVP>* getHitBoxes() const;
     void addSkill(SVP);
@@ -32,6 +35,7 @@ public:
 
 private:
     QString name;
+    QString description;
     QLinkedList<SVP>* skills;
     QLinkedList<SVP>* hitBoxes;
 

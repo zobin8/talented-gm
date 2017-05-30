@@ -29,7 +29,7 @@ QDataStream& operator >>(QDataStream& in, SVP& svp)
     in >> version;
     int v = TalentData::versionNumber(version, "SVP");
 
-    if (v == 1)
+    if (v >= 1)
     {
         in >> svp.string;
         in >> svp.value;
