@@ -4,6 +4,7 @@
 #include "controller.h"
 
 class NPC;
+class QTextEdit;
 
 class TurnInfoController : public Controller
 {
@@ -12,7 +13,7 @@ public:
     explicit TurnInfoController(QObject *parent = 0);
     ~TurnInfoController();
 
-    void setWidgets(QWidget* turnStatContents, QWidget* turnSkillContents);
+    void setWidgets(QWidget* turnStatContents, QWidget* turnSkillContents, QTextEdit* turnNPCDesc);
 
     void setNPC(NPC*);
 
@@ -31,6 +32,7 @@ private:
     NPC* npc;
     QWidget* uiSkills;
     QWidget* uiStats;
+    QTextEdit* uiDesc;
 };
 
 #endif // TURNINFOCONTROLLER_H

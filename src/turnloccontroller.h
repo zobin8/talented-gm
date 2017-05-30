@@ -5,6 +5,7 @@
 
 class QSpinBox;
 class QLabel;
+class QTextEdit;
 class Location;
 class MenuModule;
 class QWidget;
@@ -17,7 +18,7 @@ public:
     explicit TurnLocController(QObject *parent = 0);
     ~TurnLocController();
 
-    void setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMinionSpin2, QLabel* turnLocName, QWidget* turnNPCContents);
+    void setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMinionSpin2, QLabel* turnLocName, QWidget* turnNPCContents, QTextEdit* turnLocDesc);
 
     void toView();
     void toModel();
@@ -37,6 +38,7 @@ private:
     QSpinBox* uiMinions2;
     QLabel* uiLocName;
     QWidget* uiContents;
+    QTextEdit* uiDesc;
 
     Location* loc;
 };

@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QSpinBox>
 #include <QLayout>
+#include <QTextEdit>
 
 TurnLocController::TurnLocController(QObject *parent) : Controller(parent)
 {
@@ -19,17 +20,19 @@ TurnLocController::~TurnLocController()
     delete loc;
 }
 
-void TurnLocController::setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMinionSpin2, QLabel* turnLocName, QWidget* turnNPCContents)
+void TurnLocController::setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMinionSpin2, QLabel* turnLocName, QWidget* turnNPCContents, QTextEdit* turnLocDesc)
 {
     uiMinions1 = turnMinionSpin1;
     uiMinions2 = turnMinionSpin2;
     uiLocName = turnLocName;
     uiContents = turnNPCContents;
+    uiDesc = turnLocDesc;
 }
 
 void TurnLocController::toView()
 {
     uiLocName->setText(loc->getDisplayName());
+    uiDesc->setText(loc->getDescription());
     uiMinions1->setValue(loc->minions1);
     uiMinions2->setValue(loc->minions2);
 

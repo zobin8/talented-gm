@@ -10,6 +10,7 @@
 #include <QSpinBox>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QTextEdit>
 
 EditorLocController::EditorLocController(QObject *parent) : Controller(parent)
 {
@@ -21,7 +22,7 @@ EditorLocController::~EditorLocController()
     delete locTemp;
 }
 
-void EditorLocController::setWidgets(QComboBox *editLocationCombo, QLineEdit *editLocationName, QSpinBox *editMinionSpin1, QSpinBox *editMinionSpin2, QWidget* editLocContents, QComboBox* editLocNPCCombo)
+void EditorLocController::setWidgets(QComboBox *editLocationCombo, QLineEdit *editLocationName, QSpinBox *editMinionSpin1, QSpinBox *editMinionSpin2, QWidget* editLocContents, QComboBox* editLocNPCCombo, QTextEdit* editLocDesc)
 {
     uiCombo = editLocationCombo;
     uiName = editLocationName;
@@ -29,6 +30,7 @@ void EditorLocController::setWidgets(QComboBox *editLocationCombo, QLineEdit *ed
     uiMinions2 = editMinionSpin2;
     uiNPCWidget = editLocContents;
     uiNPCCombo = editLocNPCCombo;
+    uiDescription = editLocDesc;
 }
 
 void EditorLocController::addNPCModule(QString name)
@@ -79,6 +81,7 @@ void EditorLocController::toView()
     }
 
     uiName->setText(locTemp->getName());
+    uiDescription->setText(locTemp->getDescription());
     uiMinions1->setValue(locTemp->minions1);
     uiMinions2->setValue(locTemp->minions2);
 }
@@ -102,6 +105,7 @@ void EditorLocController::fromModel()
 void EditorLocController::fromView()
 {
     locTemp->setName(uiName->text());
+    locTemp->setDescription(uiDescription->toPlainText());
     locTemp->minions1 = uiMinions1->value();
     locTemp->minions2 = uiMinions2->value();
 

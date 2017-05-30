@@ -146,13 +146,15 @@ void MainWindow::setControllerWidgets()
                                     ui->editCharmSpin,
                                     ui->editCommSpin,
                                     ui->editNPCCombo,
-                                    ui->editSkillScrollContents);
+                                    ui->editSkillScrollContents,
+                                    ui->editNPCDesc);
     editorLocController->setWidgets(ui->editLocationCombo,
                                     ui->editLocationName,
                                     ui->editMinionSpin1,
                                     ui->editMinionSpin2,
                                     ui->editLocContents,
-                                    ui->editLocNPCCombo);
+                                    ui->editLocNPCCombo,
+                                    ui->editLocDesc);
 
     tempLocController->setWidgets(ui->tempLocContents);
     tempNPCController->setWidgets(ui->tempNPCContents);
@@ -167,10 +169,12 @@ void MainWindow::setControllerWidgets()
     turnController->turnLocController->setWidgets(ui->turnMinionSpin1,
                                                   ui->turnMinionSpin2,
                                                   ui->turnLocationLabel,
-                                                  ui->turnNPCContents);
+                                                  ui->turnNPCContents,
+                                                  ui->turnLocDescription);
     turnController->turnInitController->setWidgets(ui->turnInitContents);
     turnController->turnInfoController->setWidgets(ui->turnStatContents,
-                                                   ui->turnSkillContents);
+                                                   ui->turnSkillContents,
+                                                   ui->turnNPCDescription);
 }
 
 void MainWindow::fromView()

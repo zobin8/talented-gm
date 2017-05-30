@@ -9,6 +9,7 @@
 #include <QLineEdit>
 #include <QSpinBox>
 #include <QComboBox>
+#include <QTextEdit>
 
 EditorNPCController::EditorNPCController(QObject* parent) : Controller(parent)
 {
@@ -20,7 +21,7 @@ EditorNPCController::~EditorNPCController()
     delete npcTemp;
 }
 
-void EditorNPCController::setWidgets(QWidget *editHitScrollContents, QLineEdit *editNPCName, QSpinBox *editBodySpin, QSpinBox *editCoordSpin, QSpinBox *editSenseSpin, QSpinBox *editMindSpin, QSpinBox *editCharmSpin, QSpinBox *editCommSpin, QComboBox *editNPCCombo, QWidget *editSkillScrollContents)
+void EditorNPCController::setWidgets(QWidget *editHitScrollContents, QLineEdit *editNPCName, QSpinBox *editBodySpin, QSpinBox *editCoordSpin, QSpinBox *editSenseSpin, QSpinBox *editMindSpin, QSpinBox *editCharmSpin, QSpinBox *editCommSpin, QComboBox *editNPCCombo, QWidget *editSkillScrollContents, QTextEdit* editNPCDesc)
 {
     uiHitContents = editHitScrollContents;
     uiSkillContents = editSkillScrollContents;
@@ -32,6 +33,7 @@ void EditorNPCController::setWidgets(QWidget *editHitScrollContents, QLineEdit *
     uiCharm = editCharmSpin;
     uiComm = editCommSpin;
     uiCombo = editNPCCombo;
+    uiDescription = editNPCDesc;
 }
 
 void EditorNPCController::fromView()
@@ -62,6 +64,7 @@ void EditorNPCController::fromView()
     }
 
     npcTemp->setName(uiName->text());
+    npcTemp->setDescription(uiDescription->toPlainText());
     npcTemp->body = uiBody->value();
     npcTemp->coord = uiCoord->value();
     npcTemp->sense = uiSense->value();
@@ -88,6 +91,7 @@ void EditorNPCController::toView()
     }
 
     uiName->setText(npcTemp->getName());
+    uiDescription->setText(npcTemp->getDescription());
     uiBody->setValue(npcTemp->body);
     uiCoord->setValue(npcTemp->coord);
     uiSense->setValue(npcTemp->sense);

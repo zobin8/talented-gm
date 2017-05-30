@@ -3,6 +3,7 @@
 #include "svp.h"
 #include <QLayout>
 #include <QLabel>
+#include <QTextEdit>
 
 TurnInfoController::TurnInfoController(QObject *parent) : Controller(parent)
 {
@@ -14,10 +15,11 @@ TurnInfoController::~TurnInfoController()
     delete npc;
 }
 
-void TurnInfoController::setWidgets(QWidget *turnStatContents, QWidget *turnSkillContents)
+void TurnInfoController::setWidgets(QWidget *turnStatContents, QWidget *turnSkillContents, QTextEdit* turnNPCDesc)
 {
     uiSkills = turnSkillContents;
     uiStats = turnStatContents;
+    uiDesc = turnNPCDesc;
 }
 
 void TurnInfoController::toView()
@@ -27,6 +29,8 @@ void TurnInfoController::toView()
 
     Controller::clearLayout(skills);
     Controller::clearLayout(stats);
+
+    uiDesc->setText("");
 
     if (npc)
     {
@@ -58,6 +62,8 @@ void TurnInfoController::toView()
             QString string = skill.string + ": " + QString::number(skill.value);
             skills->addWidget(new QLabel(string));
         }
+
+        uiDesc->setText(npc->getDescription());
     }
 }
 
