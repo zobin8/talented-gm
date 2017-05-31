@@ -65,10 +65,10 @@ void EditorLocController::deleteNPC(MenuModule* menMod)
 void EditorLocController::toView()
 {
     uiCombo->clear();
-    uiCombo->addItem("Custom");
+    Controller::appendToCombo("Custom", uiCombo);
     foreach (LocTemplate* aLoc, TalentData::getTalentFile()->getLocTemplates())
     {
-        uiCombo->addItem(aLoc->getName());
+        Controller::appendToCombo(aLoc->getName(), uiCombo);
     }
     uiCombo->setCurrentText(locTemp->getName());
 
@@ -158,7 +158,10 @@ void EditorLocController::on_NPCNamesChanged(QStringList names)
     QString current = uiNPCCombo->currentText();
 
     uiNPCCombo->clear();
-    uiNPCCombo->addItems(names);
+    foreach (QString name, names)
+    {
+        Controller::appendToCombo(name, uiNPCCombo);
+    }
 
     uiNPCCombo->setCurrentText(current);
 }

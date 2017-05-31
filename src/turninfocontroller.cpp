@@ -60,7 +60,7 @@ void TurnInfoController::toView()
         foreach (SVP skill, *npc->getSkills())
         {
             QString string = skill.string + ": " + QString::number(skill.value);
-            skills->addWidget(new QLabel(string));
+            Controller::appendToLayout(string, skills);
         }
 
         uiDesc->setText(npc->getDescription());

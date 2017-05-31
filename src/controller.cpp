@@ -4,6 +4,8 @@
 #include <QLayout>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QComboBox>
+#include <QLabel>
 
 Controller::Controller(QObject* parent) : QObject(parent)
 {
@@ -63,4 +65,46 @@ void Controller::appendToLayout(Module* insertedModule, QLayout* l)
     {
         vLayout->addWidget(insertedModule);
     }
+}
+
+void Controller::appendToLayout(QLabel* toSort, QLayout* l)
+{
+    QVBoxLayout* vLayout = static_cast<QVBoxLayout*>(l);
+
+    for (int i = 0; i < vLayout->count(); i++)
+    {
+        QWidget* w = vLayout->itemAt(i)->widget();
+        QLabel* label = dynamic_cast<QLabel*>(w);
+        if (label)
+        {
+            int comp = TalentData::smartStringCompare(toSort->text(), label->text());
+            if (comp < 0)
+            {
+                vLayout->insertWidget(i, toSort);
+                return;
+            }
+        }
+    }
+    vLayout->addWidget(toSort);
+}
+
+void Controller::appendToLayout(QString string, QLayout* l)
+{
+    QLabel* toSort = new QLabel(string);
+    appendToLayout(toSort, l);
+}
+
+void Controller::appendToCombo(QString toSort, QComboBox* combo)
+{
+    for (int i = 0; i < combo->count(); i++)
+    {
+        QString current = combo->itemText(i);
+        int comp = TalentData::smartStringCompare(toSort, current);
+        if (comp < 0)
+        {
+            combo->insertItem(i, toSort);
+            return;
+        }
+    }
+    combo->addItem(toSort);
 }

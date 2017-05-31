@@ -101,10 +101,10 @@ void EditorNPCController::toView()
 
     QStringList npcNames = QStringList();
     uiCombo->clear();
-    uiCombo->addItem("Custom");
+    Controller::appendToCombo("Custom", uiCombo);
     foreach (NPCTemplate* anNPC, TalentData::getTalentFile()->getNPCTemplates())
     {
-        uiCombo->addItem(anNPC->getName());
+        Controller::appendToCombo(anNPC->getName(), uiCombo);
         npcNames.append(anNPC->getName());
     }
     uiCombo->setCurrentText(npcTemp->getName());
