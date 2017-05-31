@@ -1,6 +1,7 @@
 #include "turninfocontroller.h"
 #include "npc.h"
 #include "svp.h"
+#include "skill.h"
 #include <QLayout>
 #include <QLabel>
 #include <QTextEdit>
@@ -57,9 +58,14 @@ void TurnInfoController::toView()
         QString willString = "Base will: " + QString::number(baseWill);
         stats->addWidget(new QLabel(willString));
 
-        foreach (SVP skill, *npc->getSkills())
+        foreach (Skill skill, *npc->getSkills())
         {
-            QString string = skill.getString() + ": " + QString::number(skill.getValue());
+            int dice = npc->getSkillDice(skill);
+            QString skillString = skill.getString();
+            QString valueString = QString::number(skill.getValue());
+            QString diceString = QString::number(dice);
+
+            QString string = skillString + ": " + valueString + " (" + diceString + "D)";
             Controller::appendToLayout(string, skills);
         }
 

@@ -6,6 +6,7 @@
 
 class NPCTemplate;
 class SVPMenuModule;
+class SkillMenuModule;
 class MenuModule;
 class QLineEdit;
 class QSpinBox;
@@ -25,7 +26,8 @@ public:
 
     void toView();
     void fromModel();
-    void addModule(QWidget* contents, QString s = "", double v = 0);
+    void addSVPModule(QString s = "", double v = 0);
+    void addSkillModule(QString n = "None", QString s = "", double v = 0);
     void fromView();
     void toModel();
     void toTurn();

@@ -6,6 +6,11 @@ Skill::Skill() : SVP()
     statName = "None";
 }
 
+Skill::Skill(QString aStat, QString aString, double aValue) : SVP(aString, aValue)
+{
+    statName = aStat;
+}
+
 Skill::Skill(const SVP svp) : SVP(svp)
 {
     statName = "None";

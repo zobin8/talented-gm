@@ -7,6 +7,7 @@ class Skill : public SVP
 {
 public:
     Skill();
+    Skill(QString, QString, double);
     Skill(const SVP);
     Skill(const Skill&);
 

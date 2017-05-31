@@ -1,5 +1,6 @@
 #include "npctemplate.h"
 #include "svp.h"
+#include "skill.h"
 #include "talentdata.h"
 #include <QLinkedList>
 
@@ -9,7 +10,7 @@ NPCTemplate::NPCTemplate()
     description = "";
 
     hitBoxes = new QLinkedList<SVP>();
-    skills = new QLinkedList<SVP>();
+    skills = new QLinkedList<Skill>();
 
     body = 2;
     coord = 2;
@@ -25,7 +26,7 @@ NPCTemplate::NPCTemplate(const NPCTemplate* old)
     setDescription(old->getDescription());
 
     hitBoxes = new QLinkedList<SVP>(*old->getHitBoxes());
-    skills = new QLinkedList<SVP>(*old->getSkills());
+    skills = new QLinkedList<Skill>(*old->getSkills());
 
     body = old->body;
     coord = old->coord;
@@ -61,7 +62,7 @@ QString NPCTemplate::getDescription() const
     return description;
 }
 
-QLinkedList<SVP>* NPCTemplate::getSkills() const
+QLinkedList<Skill>* NPCTemplate::getSkills() const
 {
     return skills;
 }
@@ -71,9 +72,9 @@ QLinkedList<SVP>* NPCTemplate::getHitBoxes() const
     return hitBoxes;
 }
 
-void NPCTemplate::addSkill(SVP svp)
+void NPCTemplate::addSkill(Skill skill)
 {
-    skills->append(svp);
+    skills->append(skill);
 }
 
 void NPCTemplate::addHitBox(SVP svp)
@@ -81,7 +82,7 @@ void NPCTemplate::addHitBox(SVP svp)
     hitBoxes->append(svp);
 }
 
-void NPCTemplate::setSkills(QLinkedList<SVP>* s)
+void NPCTemplate::setSkills(QLinkedList<Skill>* s)
 {
     delete skills;
     skills = s;
@@ -100,7 +101,7 @@ QString NPCTemplate::randName()
 
 QDataStream& operator <<(QDataStream& out, const NPCTemplate& npc)
 {
-    out << QString("NPCTemplate2");
+    out << QString("NPCTemplate3");
 
     out << npc.getName();
     out << npc.body;
@@ -109,9 +110,9 @@ QDataStream& operator <<(QDataStream& out, const NPCTemplate& npc)
     out << npc.mind;
     out << npc.charm;
     out << npc.comm;
-    out << *npc.getSkills();
     out << *npc.getHitBoxes();
     out << npc.getDescription();
+    out << *npc.getSkills();
 
     return out;
 }
@@ -152,9 +153,19 @@ QDataStream& operator >>(QDataStream& in, NPCTemplate& npc)
         in >> comm;
         npc.comm = comm;
 
-        QLinkedList<SVP>* skills = new QLinkedList<SVP>();
-        in >> *skills;
-        npc.setSkills(skills);
+        if (v < 3)
+        {
+            QLinkedList<SVP> oldSkills = QLinkedList<SVP>();
+            in >> oldSkills;
+
+            QLinkedList<Skill>* skills = new QLinkedList<Skill>();
+            foreach (SVP svp, oldSkills)
+            {
+                Skill s = Skill(svp);
+                skills->append(s);
+            }
+            npc.setSkills(skills);
+        }
 
         QLinkedList<SVP>* hitBoxes = new QLinkedList<SVP>();
         in >> *hitBoxes;
@@ -165,6 +176,12 @@ QDataStream& operator >>(QDataStream& in, NPCTemplate& npc)
         QString description;
         in >> description;
         npc.setDescription(description);
+    }
+    if (v >= 3)
+    {
+        QLinkedList<Skill>* skills = new QLinkedList<Skill>();
+        in >> *skills;
+        npc.setSkills(skills);
     }
 
     return in;

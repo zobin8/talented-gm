@@ -314,7 +314,7 @@ void MainWindow::on_editAddHitButton_clicked()
     if (running) return;
     running = true;
 
-    editorNPCController->addModule(ui->editHitScrollContents);
+    editorNPCController->addSVPModule();
 
     running = false;
 }
@@ -324,7 +324,7 @@ void MainWindow::on_editAddSkillButton_clicked()
     if (running) return;
     running = true;
 
-    editorNPCController->addModule(ui->editSkillScrollContents);
+    editorNPCController->addSkillModule();
 
     running = false;
 }

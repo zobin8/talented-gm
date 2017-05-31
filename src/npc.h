@@ -6,7 +6,7 @@
 
 class NPCTemplate;
 class HitArea;
-class SVP;
+class Skill;
 
 class NPC
 {
@@ -32,16 +32,17 @@ public:
     void setHitAreas(QVector<HitArea>*);
     QVector<HitArea>* getHitAreas() const;
 
-    void setSkills(QVector<SVP>*);
-    QVector<SVP>* getSkills() const;
+    void setSkills(QVector<Skill>*);
+    QVector<Skill>* getSkills() const;
+    int getSkillDice(Skill) const;
 
-    int getStatFromName(QString);
+    int getStatFromName(QString) const;
 
 private:
     QString name;
     QString description;
     QVector<HitArea>* hitAreas;
-    QVector<SVP>* skills;
+    QVector<Skill>* skills;
 };
 
 QDataStream& operator <<(QDataStream&, const NPC&);

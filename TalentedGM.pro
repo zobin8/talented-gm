@@ -55,7 +55,8 @@ SOURCES += src/main.cpp\
     src/turninitcontroller.cpp \
     src/module.cpp \
     src/turninfocontroller.cpp \
-    src/skill.cpp
+    src/skill.cpp \
+    src/skillmenumodule.cpp
 
 HEADERS  += src/mainwindow.h \
     src/talentdata.h \
@@ -88,7 +89,8 @@ HEADERS  += src/mainwindow.h \
     src/turninitcontroller.h \
     src/module.h \
     src/turninfocontroller.h \
-    src/skill.h
+    src/skill.h \
+    src/skillmenumodule.h
 
 FORMS    += src/mainwindow.ui
 

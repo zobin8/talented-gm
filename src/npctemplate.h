@@ -5,6 +5,7 @@
 #include <QLinkedList>
 
 class SVP;
+class Skill;
 
 class NPCTemplate
 {
@@ -26,17 +27,17 @@ public:
     void setDescription(QString);
     QString getDescription() const;
 
-    QLinkedList<SVP>* getSkills() const;
+    QLinkedList<Skill>* getSkills() const;
     QLinkedList<SVP>* getHitBoxes() const;
-    void addSkill(SVP);
+    void addSkill(Skill);
     void addHitBox(SVP);
-    void setSkills(QLinkedList<SVP>*);
+    void setSkills(QLinkedList<Skill>*);
     void setHitBoxes(QLinkedList<SVP>*);
 
 private:
     QString name;
     QString description;
-    QLinkedList<SVP>* skills;
+    QLinkedList<Skill>* skills;
     QLinkedList<SVP>* hitBoxes;
 
     static QString randName();

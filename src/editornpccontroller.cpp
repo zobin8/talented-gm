@@ -4,7 +4,9 @@
 #include "talentfile.h"
 #include "turn.h"
 #include "svpmenumodule.h"
+#include "skillmenumodule.h"
 #include "svp.h"
+#include "skill.h"
 #include <QVBoxLayout>
 #include <QLineEdit>
 #include <QSpinBox>
@@ -50,16 +52,15 @@ void EditorNPCController::fromView()
         }
     }
 
-    //TODO: Make this cleaner. Maybe a function?
     npcTemp->getSkills()->clear();
     QLayout* skillLayout = uiSkillContents->layout();
     for (int i = 0; i < skillLayout->count(); i++)
     {
         QWidget* widget = skillLayout->itemAt(i)->widget();
-        SVPMenuModule* menuMod = dynamic_cast<SVPMenuModule*>(widget);
+        SkillMenuModule* menuMod = dynamic_cast<SkillMenuModule*>(widget);
         if (menuMod)
         {
-            npcTemp->addSkill(menuMod->getValue());
+            npcTemp->addSkill(menuMod->getSkill());
         }
     }
 
@@ -83,11 +84,11 @@ void EditorNPCController::toView()
 
     foreach(SVP hit, *(npcTemp->getHitBoxes()))
     {
-        addModule(uiHitContents, hit.getString(), hit.getValue());
+        addSVPModule(hit.getString(), hit.getValue());
     }
-    foreach (SVP skill, *npcTemp->getSkills())
+    foreach (Skill skill, *npcTemp->getSkills())
     {
-        addModule(uiSkillContents, skill.getString(), skill.getValue());
+        addSkillModule(skill.getStatName(), skill.getString(), skill.getValue());
     }
 
     uiName->setText(npcTemp->getName());
@@ -149,7 +150,7 @@ void EditorNPCController::toTurn()
     emit unsavedChange();
 }
 
-void EditorNPCController::addModule(QWidget* contents, QString s, double v)
+void EditorNPCController::addSVPModule(QString s, double v)
 {
     SVPMenuModule* module = new SVPMenuModule();
     module->addWidgets();
@@ -157,7 +158,20 @@ void EditorNPCController::addModule(QWidget* contents, QString s, double v)
     module->setDecimals(0);
     module->setSortID(s);
 
-    Controller::appendToLayout(module, contents->layout());
+    Controller::appendToLayout(module, uiHitContents->layout());
+
+    connect(module, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteModule(MenuModule*)));
+}
+
+void EditorNPCController::addSkillModule(QString n, QString s, double v)
+{
+    SkillMenuModule* module = new SkillMenuModule();
+    module->addWidgets();
+    module->setSkill(Skill(n, s, v));
+    module->setDecimals(0);
+    module->setSortID(s);
+
+    Controller::appendToLayout(module, uiSkillContents->layout());
 
     connect(module, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteModule(MenuModule*)));
 }
