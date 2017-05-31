@@ -45,8 +45,8 @@ SVP SVPMenuModule::getValue()
 
 void SVPMenuModule::setValue(SVP svp)
 {
-    spin->setValue(svp.value);
-    edit->setText(svp.string);
+    spin->setValue(svp.getValue());
+    edit->setText(svp.getString());
 }
 
 QDoubleSpinBox* SVPMenuModule::getSpin()

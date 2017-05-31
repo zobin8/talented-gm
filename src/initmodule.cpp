@@ -50,8 +50,8 @@ InitiativeAct InitModule::getInitiativeAct()
     InitiativeAct act = InitiativeAct();
 
     SVP player = SVP();
-    player.string = name->text();
-    player.value = sense->value();
+    player.setString(name->text());
+    player.setValue(sense->value());
     act.setPlayer(player);
 
     act.setAction(action->text());
@@ -66,8 +66,8 @@ InitiativeAct InitModule::getInitiativeAct()
 
 void InitModule::setInitiativeAct(InitiativeAct act)
 {
-    name->setText(act.getPlayer().string);
-    sense->setValue(act.getPlayer().value);
+    name->setText(act.getPlayer().getString());
+    sense->setValue(act.getPlayer().getValue());
     action->setText(act.getAction());
     notes->setText(act.getNotes());
 

@@ -83,11 +83,11 @@ void EditorNPCController::toView()
 
     foreach(SVP hit, *(npcTemp->getHitBoxes()))
     {
-        addModule(uiHitContents, hit.string, hit.value);
+        addModule(uiHitContents, hit.getString(), hit.getValue());
     }
     foreach (SVP skill, *npcTemp->getSkills())
     {
-        addModule(uiSkillContents, skill.string, skill.value);
+        addModule(uiSkillContents, skill.getString(), skill.getValue());
     }
 
     uiName->setText(npcTemp->getName());

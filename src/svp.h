@@ -7,11 +7,18 @@ class SVP
 {
 public:
     SVP();
+    SVP(const SVP&);
     SVP(QString, double);
+
+    QString getString() const;
+    void setString(QString);
+
+    double getValue() const;
+    void setValue(double);
+
+protected:
     QString string;
     double value;
-
-private:
 };
 
 QDataStream& operator <<(QDataStream&, const SVP&);

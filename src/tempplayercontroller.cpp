@@ -24,7 +24,7 @@ void TempPlayerController::toView()
 
     foreach (SVP svp, *players)
     {
-        addPlayerView(svp.string, svp.value);
+        addPlayerView(svp.getString(), svp.getValue());
     }
 }
 

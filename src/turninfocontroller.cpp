@@ -59,7 +59,7 @@ void TurnInfoController::toView()
 
         foreach (SVP skill, *npc->getSkills())
         {
-            QString string = skill.string + ": " + QString::number(skill.value);
+            QString string = skill.getString() + ": " + QString::number(skill.getValue());
             Controller::appendToLayout(string, skills);
         }
 

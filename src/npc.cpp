@@ -110,6 +110,17 @@ QVector<SVP>* NPC::getSkills() const
     return skills;
 }
 
+int NPC::getStatFromName(QString n)
+{
+    if (n == "Body") return body;
+    else if (n == "Coordination") return coord;
+    else if (n == "Sense") return sense;
+    else if (n == "Mind") return mind;
+    else if (n == "Charm") return charm;
+    else if (n == "Command") return comm;
+    else return 0;
+}
+
 QDataStream& operator <<(QDataStream& out, const NPC& npc)
 {
     out << QString("NPC4");

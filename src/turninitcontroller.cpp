@@ -28,7 +28,7 @@ void TurnInitController::toView()
         InitModule* iMod = new InitModule();
         iMod->addWidgets();
         iMod->setInitiativeAct(act);
-        iMod->setSortID(QString::number(act.getPlayer().value));
+        iMod->setSortID(QString::number(act.getPlayer().getValue()));
 
         Controller::appendToLayout(iMod, initLayout);
     }
@@ -79,7 +79,7 @@ void TurnInitController::deleteInit(QString identity)
     for (int i = 0; i < initiative->count(); i++)
     {
         InitiativeAct act = initiative->at(i);
-        if (identity == act.getPlayer().string)
+        if (identity == act.getPlayer().getString())
         {
             initiative->remove(i);
             break;

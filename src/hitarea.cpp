@@ -10,8 +10,8 @@ HitArea::HitArea()
 
 HitArea::HitArea(const SVP svp)
 {
-    name = svp.string;
-    values = QVector<int>(svp.value, Qt::Unchecked);
+    name = svp.getString();
+    values = QVector<int>(svp.getValue(), Qt::Unchecked);
 }
 
 QString HitArea::getName() const

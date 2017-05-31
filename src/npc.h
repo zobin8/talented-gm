@@ -35,6 +35,8 @@ public:
     void setSkills(QVector<SVP>*);
     QVector<SVP>* getSkills() const;
 
+    int getStatFromName(QString);
+
 private:
     QString name;
     QString description;
