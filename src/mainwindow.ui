@@ -1757,6 +1757,12 @@ p, li { white-space: pre-wrap; }
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>350</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="title">
                  <string>Skills</string>
                 </property>
@@ -1791,7 +1797,14 @@ p, li { white-space: pre-wrap; }
                        </sizepolicy>
                       </property>
                       <property name="text">
-                       <string>Value</string>
+                       <string>Stat</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label">
+                      <property name="text">
+                       <string>Name</string>
                       </property>
                      </widget>
                     </item>
@@ -1804,7 +1817,7 @@ p, li { white-space: pre-wrap; }
                        </sizepolicy>
                       </property>
                       <property name="text">
-                       <string>Name</string>
+                       <string>Value</string>
                       </property>
                      </widget>
                     </item>
@@ -1862,7 +1875,7 @@ p, li { white-space: pre-wrap; }
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>301</width>
+                         <width>324</width>
                          <height>264</height>
                         </rect>
                        </property>
@@ -1893,6 +1906,12 @@ p, li { white-space: pre-wrap; }
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
                 </property>
                 <property name="title">
                  <string>Hitboxes</string>
@@ -1996,7 +2015,7 @@ p, li { white-space: pre-wrap; }
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>301</width>
+                      <width>278</width>
                       <height>264</height>
                      </rect>
                     </property>

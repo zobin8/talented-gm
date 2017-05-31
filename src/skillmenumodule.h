@@ -7,6 +7,7 @@ class Skill;
 class QHBoxLayout;
 class QDoubleSpinBox;
 class QLineEdit;
+class QComboBox;
 
 class SkillMenuModule : public MenuModule
 {
@@ -21,12 +22,14 @@ public:
 
     QDoubleSpinBox* getSpin();
     QLineEdit* getEdit();
+    QComboBox* getCombo();
 
     void setDecimals(int);
 
 private:
     QDoubleSpinBox* spin;
     QLineEdit* edit;
+    QComboBox* combo;
 };
 
 #endif // SKILLMENUMODULE_H

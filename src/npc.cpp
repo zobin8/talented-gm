@@ -120,12 +120,12 @@ int NPC::getSkillDice(Skill s) const
 
 int NPC::getStatFromName(QString n) const
 {
-    if (n == "Body") return body;
-    else if (n == "Coordination") return coord;
+    if (n == "Body ") return body;
+    else if (n == "Coord") return coord;
     else if (n == "Sense") return sense;
-    else if (n == "Mind") return mind;
+    else if (n == "Mind ") return mind;
     else if (n == "Charm") return charm;
-    else if (n == "Command") return comm;
+    else if (n == "Comm ") return comm;
     else return 0;
 }
 
