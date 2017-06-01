@@ -8,6 +8,19 @@ class QComboBox;
 class Module;
 class QLabel;
 
+enum class ConFreq
+{
+    editLoc,
+    editNPC,
+    tempLoc,
+    tempNPC,
+    turnLoc,
+    turnInit,
+    turn,
+    allButFile,
+    all
+};
+
 class Controller : public QObject
 {
     Q_OBJECT
@@ -28,10 +41,10 @@ public:
     virtual void fromView() = 0;
 
 public slots:
-    void on_update();
 
 signals:
-    void update();
+    void updateView(ConFreq);
+    void updateModel(ConFreq);
     void unsavedChange();
 };
 

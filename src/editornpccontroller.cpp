@@ -130,13 +130,18 @@ void EditorNPCController::fromModel()
 
 void EditorNPCController::toModel()
 {
+    //Do nothing.
+}
+
+void EditorNPCController::toTemp()
+{
     fromView();
 
     NPCTemplate* temp = new NPCTemplate(npcTemp);
     TalentData::getTalentFile()->addNPCTemplate(temp);
 
     toView();
-    emit update();
+    emit updateView(ConFreq::tempNPC);
     emit unsavedChange();
 }
 
@@ -146,7 +151,7 @@ void EditorNPCController::toTurn()
 
     TalentData::getTalentFile()->currentTurn()->addNPCTemplate(npcTemp);
 
-    emit update();
+    emit updateView(ConFreq::turn);
     emit unsavedChange();
 }
 

@@ -66,7 +66,7 @@ void TempNPCController::toModel()
 {
     TalentData::getTalentFile()->setNPCTemplates(npcTemplates);
 
-    emit update();
+    emit updateView(ConFreq::editNPC);
 }
 
 void TempNPCController::on_deletionEvent(MenuModule* menMod)

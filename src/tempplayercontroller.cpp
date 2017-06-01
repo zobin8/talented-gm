@@ -42,7 +42,7 @@ void TempPlayerController::toModel()
 void TempPlayerController::toTurn()
 {
     TalentData::getTalentFile()->resetInitiative();
-    emit update();
+    emit updateView(ConFreq::turnInit);
 }
 
 void TempPlayerController::fromView()
@@ -83,6 +83,7 @@ void TempPlayerController::addPlayer()
     on_uiUpdate();
 }
 
+//TODO: Merge with updateModel
 void TempPlayerController::on_uiUpdate()
 {
     fromView();

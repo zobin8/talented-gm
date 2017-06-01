@@ -26,10 +26,10 @@ public:
     void addNPCModule(QString name = "");
     void fromView();
     void toModel();
+    void toTemp();
     void toTurn();
 
 signals:
-    void update();
     void viewNPC(NPC*);
 
 public slots:

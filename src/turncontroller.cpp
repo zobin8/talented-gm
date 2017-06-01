@@ -10,25 +10,12 @@
 
 TurnController::TurnController(QObject *parent) : Controller(parent)
 {
-    turnNotesController = new TurnNotesController();
-    turnLocController = new TurnLocController();
-    turnInitController = new TurnInitController();
-    turnInfoController = new TurnInfoController();
-
-    turnControllers = QList<Controller*>();
-    turnControllers.append(turnNotesController);
-    turnControllers.append(turnLocController);
-    turnControllers.append(turnInitController);
-    turnControllers.append(turnInfoController);
 
 }
 
 TurnController::~TurnController()
 {
-    foreach (Controller* con, turnControllers)
-    {
-        delete con;
-    }
+
 }
 
 void TurnController::setWidgets(QLabel* turnCount)
@@ -38,11 +25,6 @@ void TurnController::setWidgets(QLabel* turnCount)
 
 void TurnController::toView()
 {
-    foreach (Controller* con, turnControllers)
-    {
-        con->toView();
-    }
-
     int count = TalentData::getTalentFile()->currentTurnIndex();
     QString counter = "Turn: " + QString::number(count + 1);
     uiTurnCount->setText(counter);
@@ -50,68 +32,51 @@ void TurnController::toView()
 
 void TurnController::toModel()
 {
-    foreach (Controller* con, turnControllers)
-    {
-        con->toModel();
-    }
-
     emit unsavedChange();
 }
 
 void TurnController::fromModel()
 {
-    foreach (Controller* con, turnControllers)
-    {
-        con->fromModel();
-    }
+
 }
 
 void TurnController::fromView()
 {
-    foreach (Controller* con, turnControllers)
-    {
-        con->fromView();
-    }
+
 }
 
 void TurnController::addTurn()
 {
-    fromView();
-    toModel();
+    emit updateModel(ConFreq::turn);
+
     TalentData::getTalentFile()->addTurn();
-    fromModel();
-    toView();
+
+    emit updateView(ConFreq::turn);
 }
 
 void TurnController::deleteTurn()
 {
-    fromView();
-    toModel();
+    emit updateModel(ConFreq::turn);
 
     TalentData::getTalentFile()->deleteTurn();
 
-    fromModel();
-    toView();
+    emit updateView(ConFreq::turn);
 }
 
 void TurnController::nextTurn()
 {
-    fromView();
-    toModel();
+    emit updateModel(ConFreq::turn);
 
     TalentData::getTalentFile()->nextTurn();
 
-    fromModel();
-    toView();
+    emit updateView(ConFreq::turn);
 }
 
 void TurnController::prevTurn()
 {
-    fromView();
-    toModel();
+    emit updateModel(ConFreq::turn);
 
     TalentData::getTalentFile()->previousTurn();
 
-    fromModel();
-    toView();
+    emit updateView(ConFreq::turn);
 }

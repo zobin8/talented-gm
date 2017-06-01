@@ -30,11 +30,11 @@ public:
     void addSkillModule(QString n = "None", QString s = "", double v = 0);
     void fromView();
     void toModel();
+    void toTemp();
     void toTurn();
 
 signals:
     void setNPCNames(QStringList);
-    void update();
 
 public slots:
     void deleteModule(MenuModule*);

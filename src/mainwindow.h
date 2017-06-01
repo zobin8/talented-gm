@@ -10,16 +10,7 @@ namespace Ui
 }
 
 class NPCTemplate;
-class EditorNPCController;
-class EditorLocController;
-class TempLocController;
-class TempNPCController;
-class TempPlayerController;
-class FileController;
-class GeneralController;
-class TempNotesController;
-class TurnController;
-class Controller;
+class MainController;
 
 class MainWindow : public QMainWindow
 {
@@ -67,32 +58,15 @@ private slots:
 
 private:
     Ui::MainWindow* ui;
-    QLinkedList<Controller*> controllers;
-
-    EditorNPCController* editorNPCController;
-    EditorLocController* editorLocController;
-    TempLocController* tempLocController;
-    TempNPCController* tempNPCController;
-    TempPlayerController* tempPlayerController;
-    FileController* fileController;
-    GeneralController* generalController;
-    TempNotesController* tempNotesController;
-    TurnController* turnController;
+    bool running;
+    MainController* mc;
 
     void setControllerWidgets();
-    void connectControllers();
-
-    void fromView();
-    void toView();
-    void fromModel();
-    void toModel();
 
     bool fileOkay(QString path, bool allowNew);
     QString pickFile(bool allowNew, QString filter, QString suffix);
     QString pickTGMFile(bool allowNew);
     QString pickLogFile();
-
-    bool running;
 };
 
 #endif // MAINWINDOW_H

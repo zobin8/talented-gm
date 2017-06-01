@@ -29,7 +29,7 @@ void FileController::setUnsaved(bool aBool)
 
 void FileController::toView()
 {
-    emit update();
+    emit updateView(ConFreq::allButFile);
     setStatus();
 }
 

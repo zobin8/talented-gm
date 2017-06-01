@@ -67,7 +67,7 @@ void TempLocController::toModel()
 {
     TalentData::getTalentFile()->setLocTemplates(locTemplates);
 
-    emit update();
+    emit updateView(ConFreq::editLoc);
 }
 
 void TempLocController::on_deletionEvent(MenuModule* menMod)

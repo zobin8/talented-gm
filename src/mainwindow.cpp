@@ -4,21 +4,7 @@
 #include "npctemplate.h"
 #include "svpmenumodule.h"
 #include "svp.h"
-
-#include "editornpccontroller.h"
-#include "editorloccontroller.h"
-#include "tempnpccontroller.h"
-#include "temploccontroller.h"
-#include "tempplayercontroller.h"
-#include "filecontroller.h"
-#include "generalcontroller.h"
-#include "tempnotescontroller.h"
-#include "turncontroller.h"
-#include "turnnotescontroller.h"
-#include "turnloccontroller.h"
-#include "turninitcontroller.h"
-#include "turninfocontroller.h"
-
+#include "maincontroller.h"
 #include <QDateTime>
 #include <QLinkedList>
 #include <QCloseEvent>
@@ -45,33 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->turnSkillContents->layout()->setAlignment(Qt::AlignTop);
     ui->turnStatContents->layout()->setAlignment(Qt::AlignTop);
 
-    editorNPCController = new EditorNPCController();
-    editorLocController = new EditorLocController();
-    tempLocController = new TempLocController();
-    tempNPCController = new TempNPCController();
-    tempPlayerController = new TempPlayerController();
-    fileController = new FileController();
-    generalController = new GeneralController();
-    tempNotesController = new TempNotesController();
-    turnController = new TurnController();
-
-    controllers = QLinkedList<Controller*>();
-    controllers.append(editorNPCController);
-    controllers.append(editorLocController);
-    controllers.append(tempLocController);
-    controllers.append(tempNPCController);
-    controllers.append(tempPlayerController);
-    controllers.append(fileController);
-    controllers.append(generalController);
-    controllers.append(tempNotesController);
-    controllers.append(turnController);
-    controllers.append(turnController->turnLocController);
-    controllers.append(turnController->turnNotesController);
-    controllers.append(turnController->turnInitController);
-    controllers.append(turnController->turnInfoController);
-
+    mc = new MainController();
     setControllerWidgets();
-    connectControllers();
 
     QString path = ":/default/default.tgm";
     QString argPath = "";
@@ -83,14 +44,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     if (fileOkay(argPath, false))
     {
-        fileController->openFile(argPath);
-        fileController->loadFile();
+        mc->fileController->openFile(argPath);
+        mc->fileController->loadFile();
     }
     else
     {
-        fileController->openFile(path);
-        fileController->loadFile();
-        fileController->closeFile();
+        mc->fileController->openFile(path);
+        mc->fileController->loadFile();
+        mc->fileController->closeFile();
     }
 
     ui->tabWidget->setCurrentWidget(ui->generalTab);
@@ -99,114 +60,49 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete editorNPCController;
-}
-
-void MainWindow::connectControllers()
-{
-    connect(editorNPCController, SIGNAL(setNPCNames(QStringList)), editorLocController, SLOT(on_NPCNamesChanged(QStringList)));
-
-    connect(editorLocController, SIGNAL(update()), tempLocController, SLOT(on_update()));
-    connect(tempLocController, SIGNAL(update()), editorLocController, SLOT(on_update()));
-
-    connect(editorNPCController, SIGNAL(update()), tempNPCController, SLOT(on_update()));
-    connect(tempNPCController, SIGNAL(update()), editorNPCController, SLOT(on_update()));
-
-    connect(editorLocController, SIGNAL(update()), turnController->turnLocController, SLOT(on_update()));
-    connect(editorNPCController, SIGNAL(update()), turnController->turnLocController, SLOT(on_update()));
-    connect(editorNPCController, SIGNAL(update()), turnController->turnInitController, SLOT(on_update()));
-    connect(editorLocController, SIGNAL(update()), turnController->turnInitController, SLOT(on_update()));
-
-    connect(turnController->turnLocController, SIGNAL(deletedNPC(QString)), turnController->turnInitController, SLOT(deleteInit(QString)));
-    connect(tempPlayerController, SIGNAL(deletedPlayer(QString)), turnController->turnInitController, SLOT(deleteInit(QString)));
-    connect(tempPlayerController, SIGNAL(update()), turnController->turnInitController, SLOT(on_update()));
-
-    connect(turnController->turnLocController, SIGNAL(viewNPC(NPC*)), turnController->turnInfoController, SLOT(on_viewNPC(NPC*)));
-    connect(turnController->turnLocController, SIGNAL(deletedNPC(QString)), turnController->turnInfoController, SLOT(on_deleteNPC(QString)));
-    connect(editorLocController, SIGNAL(viewNPC(NPC*)), turnController->turnInfoController, SLOT(on_viewNPC(NPC*)));
-
-    foreach (Controller* con, controllers)
-    {
-        if (con != fileController)
-        {
-            connect(fileController, SIGNAL(update()), con, SLOT(on_update()));
-            connect(con, SIGNAL(unsavedChange()), fileController, SLOT(on_unsavedChange()));
-        }
-    }
+    delete mc;
 }
 
 void MainWindow::setControllerWidgets()
 {
-    editorNPCController->setWidgets(ui->editHitScrollContents,
-                                    ui->editNPCName,
-                                    ui->editBodySpin,
-                                    ui->editCoordSpin,
-                                    ui->editSenseSpin,
-                                    ui->editMindSpin,
-                                    ui->editCharmSpin,
-                                    ui->editCommSpin,
-                                    ui->editNPCCombo,
-                                    ui->editSkillScrollContents,
-                                    ui->editNPCDesc);
-    editorLocController->setWidgets(ui->editLocationCombo,
-                                    ui->editLocationName,
-                                    ui->editMinionSpin1,
-                                    ui->editMinionSpin2,
-                                    ui->editLocContents,
-                                    ui->editLocNPCCombo,
-                                    ui->editLocDesc);
+    mc->editorNPCController->setWidgets(ui->editHitScrollContents,
+                                        ui->editNPCName,
+                                        ui->editBodySpin,
+                                        ui->editCoordSpin,
+                                        ui->editSenseSpin,
+                                        ui->editMindSpin,
+                                        ui->editCharmSpin,
+                                        ui->editCommSpin,
+                                        ui->editNPCCombo,
+                                        ui->editSkillScrollContents,
+                                        ui->editNPCDesc);
+    mc->editorLocController->setWidgets(ui->editLocationCombo,
+                                        ui->editLocationName,
+                                        ui->editMinionSpin1,
+                                        ui->editMinionSpin2,
+                                        ui->editLocContents,
+                                        ui->editLocNPCCombo,
+                                        ui->editLocDesc);
 
-    tempLocController->setWidgets(ui->tempLocContents);
-    tempNPCController->setWidgets(ui->tempNPCContents);
-    tempPlayerController->setWidgets(ui->tempPlayerContents);
-    tempNotesController->setWidgets(ui->tempEdit);
+    mc->tempLocController->setWidgets(ui->tempLocContents);
+    mc->tempNPCController->setWidgets(ui->tempNPCContents);
+    mc->tempPlayerController->setWidgets(ui->tempPlayerContents);
+    mc->tempNotesController->setWidgets(ui->tempEdit);
 
-    generalController->setWidgets(ui->generalEdit);
-    fileController->setWidgets(ui->statusBar);
+    mc->generalController->setWidgets(ui->generalEdit);
+    mc->fileController->setWidgets(ui->statusBar);
 
-    turnController->setWidgets(ui->turnCounterLabel);
-    turnController->turnNotesController->setWidgets(ui->turnEdit);
-    turnController->turnLocController->setWidgets(ui->turnMinionSpin1,
-                                                  ui->turnMinionSpin2,
-                                                  ui->turnLocationLabel,
-                                                  ui->turnNPCContents,
-                                                  ui->turnLocDescription);
-    turnController->turnInitController->setWidgets(ui->turnInitContents);
-    turnController->turnInfoController->setWidgets(ui->turnStatContents,
-                                                   ui->turnSkillContents,
-                                                   ui->turnNPCDescription);
-}
-
-void MainWindow::fromView()
-{
-    foreach (Controller* con, controllers)
-    {
-        con->fromView();
-    }
-}
-
-void MainWindow::toView()
-{
-    foreach (Controller* con, controllers)
-    {
-        con->toView();
-    }
-}
-
-void MainWindow::fromModel()
-{
-    foreach (Controller* con, controllers)
-    {
-        con->fromModel();
-    }
-}
-
-void MainWindow::toModel()
-{
-    foreach (Controller* con, controllers)
-    {
-        con->toModel();
-    }
+    mc->turnController->setWidgets(ui->turnCounterLabel);
+    mc->turnNotesController->setWidgets(ui->turnEdit);
+    mc->turnLocController->setWidgets(ui->turnMinionSpin1,
+                                                      ui->turnMinionSpin2,
+                                                      ui->turnLocationLabel,
+                                                      ui->turnNPCContents,
+                                                      ui->turnLocDescription);
+    mc->turnInitController->setWidgets(ui->turnInitContents);
+    mc->turnInfoController->setWidgets(ui->turnStatContents,
+                                                       ui->turnSkillContents,
+                                                       ui->turnNPCDescription);
 }
 
 QString MainWindow::pickTGMFile(bool allowNew)
@@ -293,8 +189,7 @@ void MainWindow::on_editNPCCombo_activated(const QString&)
     if (running) return;
     running = true;
 
-    editorNPCController->fromModel();
-    editorNPCController->toView();
+    mc->on_updateView(ConFreq::editNPC);
 
     running = false;
 }
@@ -303,7 +198,7 @@ void MainWindow::on_editNPCtoTempButton_clicked()
 {
     if (running) return;
     running = true;
-    editorNPCController->toModel();
+    mc->editorNPCController->toTemp();
     running = false;
 
     ui->tabWidget->setCurrentWidget(ui->templatesTab);
@@ -314,7 +209,7 @@ void MainWindow::on_editAddHitButton_clicked()
     if (running) return;
     running = true;
 
-    editorNPCController->addSVPModule();
+    mc->editorNPCController->addSVPModule();
 
     running = false;
 }
@@ -324,7 +219,7 @@ void MainWindow::on_editAddSkillButton_clicked()
     if (running) return;
     running = true;
 
-    editorNPCController->addSkillModule();
+    mc->editorNPCController->addSkillModule();
 
     running = false;
 }
@@ -334,9 +229,7 @@ void MainWindow::on_editLocationCombo_activated(const QString&)
     if (running) return;
     running = true;
 
-    editorLocController->fromModel();
-    editorLocController->toView();
-
+    mc->on_updateView(ConFreq::editLoc);
     running = false;
 }
 
@@ -345,7 +238,7 @@ void MainWindow::on_editAddLocTempButton_clicked()
     if (running) return;
     running = true;
 
-    editorLocController->toModel();
+    mc->editorLocController->toTemp();
 
     running = false;
 
@@ -357,7 +250,7 @@ void MainWindow::on_editAddNPCButton_clicked()
     if (running) return;
     running = true;
 
-    editorLocController->addNPCModule();
+    mc->editorLocController->addNPCModule();
 
     running = false;
 }
@@ -372,14 +265,14 @@ void MainWindow::on_tempNewPlayerButton_clicked()
     if (running) return;
     running = true;
 
-    tempPlayerController->addPlayer();
+    mc->tempPlayerController->addPlayer();
 
     running = false;
 }
 
 void MainWindow::on_actionQuit_triggered()
 {
-    FileAbortResponse res = fileController->abortClose();
+    FileAbortResponse res = mc->fileController->abortClose();
     if (res == FileAbortResponse::Okay)
     {
         QApplication::quit();
@@ -417,7 +310,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
     if (running) return;
     running = true;
 
-    FileAbortResponse res = fileController->abortClose();
+    FileAbortResponse res = mc->fileController->abortClose();
     if (res == FileAbortResponse::Okay)
     {
         event->accept();
@@ -442,10 +335,10 @@ void MainWindow::on_actionNew_triggered()
     if (running) return;
     running = true;
 
-    FileAbortResponse res = fileController->abortClose();
+    FileAbortResponse res = mc->fileController->abortClose();
     if (res == FileAbortResponse::Okay)
     {
-        fileController->newFile();
+        mc->fileController->newFile();
     }
     else if (res == FileAbortResponse::Save)
     {
@@ -463,15 +356,15 @@ void MainWindow::on_actionOpen_triggered()
     if (running) return;
     running = true;
 
-    FileAbortResponse res = fileController->abortClose();
+    FileAbortResponse res = mc->fileController->abortClose();
     if (res == FileAbortResponse::Okay)
     {
         //TODO: Clean up, put in functions. Need to hotfix right now.
         QString path = pickTGMFile(false);
         if (path != "")
         {
-            fileController->openFile(path);
-            fileController->loadFile();
+            mc->fileController->openFile(path);
+            mc->fileController->loadFile();
         }
     }
     else if (res == FileAbortResponse::Save)
@@ -490,12 +383,11 @@ void MainWindow::on_actionSave_triggered()
     if (running) return;
     running = true;
 
-    if (fileController->hasFile())
+    if (mc->fileController->hasFile())
     {
-        fromView();
-        toModel();
+        mc->on_updateModel(ConFreq::all);
 
-        fileController->saveFile();
+        mc->fileController->saveFile();
     }
     else
     {
@@ -514,11 +406,10 @@ void MainWindow::on_actionSave_as_triggered()
     QString path = pickTGMFile(true);
     if (path != "")
     {
-        fromView();
-        toModel();
+        mc->on_updateModel(ConFreq::all);
 
-        fileController->openFile(path);
-        fileController->saveFile();
+        mc->fileController->openFile(path);
+        mc->fileController->saveFile();
     }
 
     running = false;
@@ -529,16 +420,14 @@ void MainWindow::on_actionExport_to_log_triggered()
     if (running) return;
     running = true;
 
-    turnController->fromView();
-    turnController->toModel();
+    mc->on_updateModel(ConFreq::all);
 
     QString path = pickLogFile();
     if (path != "")
     {
-        fromView();
-        toModel();
+        mc->on_updateModel(ConFreq::all);
 
-        fileController->exportToLog(path);
+        mc->fileController->exportToLog(path);
     }
 
     running = false;
@@ -549,7 +438,7 @@ void MainWindow::on_actionAdd_triggered()
     if (running) return;
     running = true;
 
-    turnController->addTurn();
+    mc->turnController->addTurn();
 
     running = false;
 }
@@ -559,7 +448,7 @@ void MainWindow::on_actionDelete_triggered()
     if (running) return;
     running = true;
 
-    turnController->deleteTurn();
+    mc->turnController->deleteTurn();
 
     running = false;
 }
@@ -569,7 +458,7 @@ void MainWindow::on_actionPrevious_turn_triggered()
     if (running) return;
     running = true;
 
-    turnController->prevTurn();
+    mc->turnController->prevTurn();
 
     running = false;
 }
@@ -579,7 +468,7 @@ void MainWindow::on_actionNext_triggered()
     if (running) return;
     running = true;
 
-    turnController->nextTurn();
+    mc->turnController->nextTurn();
 
     running = false;
 }
@@ -610,7 +499,7 @@ void MainWindow::on_editAddLocTurnButton_clicked()
 {
     if (running) return;
     running = true;
-    editorLocController->toTurn();
+    mc->editorLocController->toTurn();
     running = false;
 
     ui->tabWidget->setCurrentWidget(ui->turnTab);
@@ -620,7 +509,7 @@ void MainWindow::on_editNPCToTurn_clicked()
 {
     if (running) return;
     running = true;
-    editorNPCController->toTurn();
+    mc->editorNPCController->toTurn();
     running = false;
 
     ui->tabWidget->setCurrentWidget(ui->turnTab);
@@ -630,7 +519,7 @@ void MainWindow::on_tempToTurnButton_clicked()
 {
     if (running) return;
     running = true;
-    tempPlayerController->toTurn();
+    mc->tempPlayerController->toTurn();
     running = false;
 
     ui->tabWidget->setCurrentWidget(ui->turnTab);

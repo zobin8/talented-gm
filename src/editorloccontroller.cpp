@@ -131,13 +131,18 @@ void EditorLocController::fromView()
 
 void EditorLocController::toModel()
 {
+    //Do nothing.
+}
+
+void EditorLocController::toTemp()
+{
     fromView();
 
     LocTemplate* temp = new LocTemplate(locTemp);
     TalentData::getTalentFile()->addLocTemplate(temp);
 
     toView();
-    emit update();
+    emit updateView(ConFreq::tempLoc);
     emit unsavedChange();
 }
 
@@ -149,7 +154,7 @@ void EditorLocController::toTurn()
     TalentData::getInstance().getTalentFile()->resetInitiative();
 
     emit viewNPC(NULL);
-    emit update();
+    emit updateView(ConFreq::turn);
     emit unsavedChange();
 }
 

@@ -3,10 +3,6 @@
 
 #include "controller.h"
 
-class TurnNotesController;
-class TurnLocController;
-class TurnInitController;
-class TurnInfoController;
 class QLabel;
 
 class TurnController : public Controller
@@ -28,18 +24,11 @@ public:
     void nextTurn();
     void prevTurn();
 
-    TurnNotesController* turnNotesController;
-    TurnLocController* turnLocController;
-    TurnInitController* turnInitController;
-    TurnInfoController* turnInfoController;
-
 signals:
 
 public slots:
 
 private:
-    QList<Controller*> turnControllers;
-
     QLabel* uiTurnCount;
 };
 
