@@ -7,7 +7,6 @@
 Talented GM is a simple tool for game masters (GMs) of the role-playing game *Wild Talents*. Using TalentedGM, one can create custom non-player characters (NPCs). This includes stats, skills, and hitboxes. These NPCs, along with minions, can be combined to make up custom locations. While a game is in process, one can load NPCs or locations into the current turn. Each turn also allows for intiative tracking and miscellaneous notes. After a game has finished, all turns can be exported into a log file.
 
 **At least, that is what will be possible once it is programmed. At the moment, some features are missing.** The following features are not currently implemented:
- * Tracking NPC consciousness
  * Undo/Redo
  * Exporting as a log file
 
