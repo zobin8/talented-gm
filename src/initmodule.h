@@ -20,9 +20,12 @@ public:
     InitiativeAct getInitiativeAct();
     void setInitiativeAct(InitiativeAct);
 
+    void resetActive();
+
 signals:
 
 public slots:
+    void on_activeEvent();
 
 private:
     QDoubleSpinBox* sense;
@@ -30,7 +33,7 @@ private:
     QLineEdit* action;
     QCheckBox* result;
     QLineEdit* notes;
-
+    QCheckBox* active;
 };
 
 #endif // INITMODULE_H

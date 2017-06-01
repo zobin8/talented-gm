@@ -431,20 +431,7 @@ p, li { white-space: pre-wrap; }
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string>Sense</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_5">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>Name</string>
+                    <string>Sense/Consciousness</string>
                    </property>
                   </widget>
                  </item>
@@ -457,20 +444,10 @@ p, li { white-space: pre-wrap; }
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string>Action</string>
+                    <string>Name/Action</string>
                    </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_3">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>Result</string>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -483,7 +460,10 @@ p, li { white-space: pre-wrap; }
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string>Notes</string>
+                    <string>Result/Notes</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>

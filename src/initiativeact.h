@@ -21,11 +21,15 @@ public:
     QString getNotes() const;
     void setNotes(QString);
 
+    bool isActive() const;
+    void setActive(bool);
+
 private:
     SVP player;
     QString action;
     int result;
     QString notes;
+    bool active;
 };
 
 QDataStream& operator <<(QDataStream&, const InitiativeAct&);

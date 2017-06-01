@@ -240,6 +240,7 @@ void TalentFile::addTurn()
         {
             InitiativeAct newAct = InitiativeAct();
             newAct.setPlayer(act.getPlayer());
+            newAct.setActive(act.isActive());
             initiative->append(newAct);
         }
         turn->setInitiative(initiative);
