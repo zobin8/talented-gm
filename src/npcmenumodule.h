@@ -28,8 +28,6 @@ signals:
 private:
     NPC* npc;
     QLabel* nameLabel;
-    QWidget* hitContents;
-    QWidget* mainContents;
     QPushButton* viewButton;
 };
 

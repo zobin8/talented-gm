@@ -19,9 +19,9 @@ SVPMenuModule::SVPMenuModule(QWidget* parent) : MenuModule(parent)
 
 void SVPMenuModule::addWidgets()
 {
-    layout->addWidget(spin);
-    layout->addWidget(edit);
-    layout->addWidget(getDeleteButton());
+    layout->addWidget(spin, 0, 0);
+    layout->addWidget(edit, 0, 1);
+    layout->addWidget(getDeleteButton(), 0, 2);
 }
 
 SVPMenuModule::~SVPMenuModule()

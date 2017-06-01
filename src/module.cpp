@@ -4,7 +4,7 @@
 
 Module::Module(QWidget *parent) : QWidget(parent)
 {
-    layout = new QHBoxLayout(this);
+    layout = new QGridLayout(this);
     this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
     sortID = "";

@@ -20,10 +20,10 @@ InitModule::InitModule(QWidget *parent) : MenuModule(parent)
     result->setTristate(true);
     result->setText("Success?");
 
-    sense->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+    sense->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     name->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     action->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-    result->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+    result->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     notes->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 }
 
@@ -38,11 +38,11 @@ InitModule::~InitModule()
 
 void InitModule::addWidgets()
 {
-    layout->addWidget(sense);
-    layout->addWidget(name);
-    layout->addWidget(action);
-    layout->addWidget(result);
-    layout->addWidget(notes);
+    layout->addWidget(sense, 0, 0);
+    layout->addWidget(name, 0, 1);
+    layout->addWidget(action, 1, 1);
+    layout->addWidget(result, 0, 2);
+    layout->addWidget(notes, 1, 2);
 }
 
 InitiativeAct InitModule::getInitiativeAct()

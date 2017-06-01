@@ -30,10 +30,10 @@ SkillMenuModule::SkillMenuModule(QWidget* parent) : MenuModule(parent)
 
 void SkillMenuModule::addWidgets()
 {
-    layout->addWidget(combo);
-    layout->addWidget(edit);
-    layout->addWidget(spin);
-    layout->addWidget(getDeleteButton());
+    layout->addWidget(combo, 0, 0);
+    layout->addWidget(edit, 0, 1);
+    layout->addWidget(spin, 0, 2);
+    layout->addWidget(getDeleteButton(), 0, 3);
 }
 
 SkillMenuModule::~SkillMenuModule()

@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-class QHBoxLayout;
+class QGridLayout;
 
 class Module : public QWidget
 {
@@ -21,7 +21,7 @@ signals:
 public slots:
 
 protected:
-    QHBoxLayout* layout;
+    QGridLayout* layout;
 
 private:
     QString sortID;

@@ -1,12 +1,13 @@
 #include "npcmenumodule.h"
 #include "npc.h"
-#include "hitmodule.h"
 #include "hitarea.h"
 #include "controller.h"
+#include "talentdata.h"
 #include <QLabel>
 #include <QLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QCheckBox>
 
 NPCMenuModule::NPCMenuModule()
 {
@@ -16,54 +17,58 @@ NPCMenuModule::NPCMenuModule()
     viewButton = new QPushButton("More Info");
     connect(viewButton, SIGNAL(clicked(bool)), this, SLOT(on_viewEvent()));
 
-    hitContents = new QWidget();
-    QVBoxLayout* hitLayout1 = new QVBoxLayout(hitContents);
-    hitLayout1->setAlignment(Qt::AlignTop);
-
-    mainContents = new QWidget();
-    QVBoxLayout* hitLayout2 = new QVBoxLayout(mainContents);
-    hitLayout2->setAlignment(Qt::AlignTop);
-
     npc = new NPC();
 }
 
 NPCMenuModule::~NPCMenuModule()
 {
-    mainContents->layout()->removeWidget(del);
-
-    delete hitContents->layout();
-    delete hitContents;
-    delete mainContents->layout();
     delete nameLabel;
     delete viewButton;
-    //TODO: memory leak
-    //delete mainContents;
     delete npc;
 }
 
 void NPCMenuModule::addWidgets()
 {
-    mainContents->layout()->addWidget(nameLabel);
-    mainContents->layout()->addWidget(viewButton);
-    mainContents->layout()->addWidget(del);
-    layout->addWidget(mainContents);
-    layout->addWidget(hitContents);
+    layout->addWidget(nameLabel, 0, 0);
+    layout->addWidget(viewButton, 1, 0);
+    layout->addWidget(del, 2, 0);
 }
 
 NPC* NPCMenuModule::getNPC()
 {
     QVector<HitArea>* areas = new QVector<HitArea>();
-    QLayout* hitLayout = hitContents->layout();
 
-    for (int i = 0; i < hitLayout->count(); i++)
+    int r = 0;
+    while (layout->itemAtPosition(r, 1))
     {
-        QWidget* w = hitLayout->itemAt(i)->widget();
-        HitModule* hitMod = dynamic_cast<HitModule*>(w);
-        if (hitMod)
+        QWidget* w = layout->itemAtPosition(r, 1)->widget();
+        QLabel* name = dynamic_cast<QLabel*>(w);
+
+        if (name)
         {
-            HitArea a = hitMod->getHitArea();
-            areas->append(a);
+            HitArea area = HitArea();
+            area.setName(name->text());
+
+            QVector<int> values = QVector<int>();
+            int c = 2;
+            while (layout->itemAtPosition(r, c))
+            {
+                QWidget* w2 = layout->itemAtPosition(r, c)->widget();
+                QCheckBox* check = dynamic_cast<QCheckBox*>(w2);
+
+                if (check)
+                {
+                    int i = TalentData::stateToInt(check->checkState());
+                    values.append(i);
+                }
+
+                c++;
+            }
+            area.setValues(values);
+            areas->append(area);
         }
+
+        r++;
     }
 
     npc->setHitAreas(areas);
@@ -76,17 +81,48 @@ void NPCMenuModule::setNPC(NPC* newNPC)
     if (npc) delete npc;
     npc = new NPC(newNPC);
 
+    QVector<QWidget*> killList = QVector<QWidget*>();
+    for (int i = 0; i < layout->count(); i++)
+    {
+        int r;
+        int c;
+        int rSpan;
+        int cSpan;
+        layout->getItemPosition(i, &r, &c, &rSpan, &cSpan);
+
+        if (c > 0)
+        {
+            killList.append(layout->itemAt(i)->widget());
+        }
+    }
+    foreach (QWidget* w, killList)
+    {
+        layout->removeWidget(w);
+        delete w;
+    }
+
     nameLabel->setText(npc->getName());
     setDeleteText("Remove");
     setIdentifier(npc->getName());
 
+    int r = 0;
     foreach (HitArea area, *npc->getHitAreas())
     {
-        HitModule* hitMod = new HitModule();
-        hitMod->setHitArea(area);
-        hitMod->setSortID(area.getName());
+        QLabel* name = new QLabel(area.getName());
+        layout->addWidget(name, r, 1);
 
-        Controller::appendToLayout(hitMod, hitContents->layout());
+        int c = 2;
+        foreach (int i, area.getValues())
+        {
+            QCheckBox* box = new QCheckBox();
+            box->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+            box->setTristate(true);
+            box->setCheckState(TalentData::intToState(i));
+            layout->addWidget(box, r, c);
+            c++; //Would you look at that.
+        }
+
+        r++;
     }
 }
 
