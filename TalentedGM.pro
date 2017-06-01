@@ -49,7 +49,6 @@ SOURCES += src/main.cpp\
     src/npc.cpp \
     src/npcmenumodule.cpp \
     src/hitarea.cpp \
-    src/hitmodule.cpp \
     src/initiativeact.cpp \
     src/initmodule.cpp \
     src/turninitcontroller.cpp \
@@ -84,7 +83,6 @@ HEADERS  += src/mainwindow.h \
     src/npc.h \
     src/npcmenumodule.h \
     src/hitarea.h \
-    src/hitmodule.h \
     src/initiativeact.h \
     src/initmodule.h \
     src/turninitcontroller.h \
