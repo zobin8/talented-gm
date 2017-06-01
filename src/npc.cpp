@@ -4,6 +4,7 @@
 #include "hitarea.h"
 #include "svp.h"
 #include "skill.h"
+#include <algorithm>
 
 NPC::NPC()
 {
@@ -28,6 +29,7 @@ NPC::NPC(const NPC* old)
 
     hitAreas = new QVector<HitArea>(*old->getHitAreas());
     skills = new QVector<Skill>(*old->getSkills());
+    sortHitAreas();
 
     body = old->body;
     coord = old->coord;
@@ -54,6 +56,7 @@ NPC::NPC(const NPCTemplate* npcTemp)
         Skill s = Skill(skill);
         skills->append(s);
     }
+    sortHitAreas();
 
     body = npcTemp->body;
     coord = npcTemp->coord;
@@ -93,6 +96,12 @@ void NPC::setHitAreas(QVector<HitArea>* areas)
 {
     delete hitAreas;
     hitAreas = new QVector<HitArea>(*areas);
+    sortHitAreas();
+}
+
+void NPC::sortHitAreas()
+{
+    std::sort(hitAreas->begin(), hitAreas->end(), HitArea::lessThan);
 }
 
 QVector<HitArea>* NPC::getHitAreas() const

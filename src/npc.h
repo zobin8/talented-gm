@@ -43,6 +43,8 @@ private:
     QString description;
     QVector<HitArea>* hitAreas;
     QVector<Skill>* skills;
+
+    void sortHitAreas();
 };
 
 QDataStream& operator <<(QDataStream&, const NPC&);

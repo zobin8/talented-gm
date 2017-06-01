@@ -34,6 +34,12 @@ void HitArea::setValues(QVector<int> aVec)
     values = aVec;
 }
 
+bool HitArea::lessThan(HitArea& a, HitArea& b)
+{
+    int c = TalentData::smartStringCompare(a.getName(), b.getName());
+    return (c < 0);
+}
+
 QDataStream& operator <<(QDataStream& out, const HitArea& area)
 {
     out << QString("HitArea1");

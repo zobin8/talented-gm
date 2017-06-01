@@ -18,6 +18,8 @@ public:
     QVector<int> getValues() const;
     void setValues(QVector<int>);
 
+    static bool lessThan(HitArea& a, HitArea& b);
+
 private:
     QVector<int> values;
     QString name;
