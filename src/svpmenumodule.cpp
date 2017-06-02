@@ -15,6 +15,9 @@ SVPMenuModule::SVPMenuModule(QWidget* parent) : MenuModule(parent)
 
     setDecimals(0);
     spin->setValue(1);
+
+    connect(spin, SIGNAL(valueChanged(double)), this, SLOT(on_update()));
+    connect(edit, SIGNAL(textChanged(QString)), this, SLOT(on_update()));
 }
 
 void SVPMenuModule::addWidgets()

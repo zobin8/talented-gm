@@ -67,6 +67,7 @@ void TempNPCController::toModel()
     TalentData::getTalentFile()->setNPCTemplates(npcTemplates);
 
     emit updateView(ConFreq::editNPC);
+    emit updateView(ConFreq::hash);
 }
 
 void TempNPCController::on_deletionEvent(MenuModule* menMod)
@@ -76,5 +77,4 @@ void TempNPCController::on_deletionEvent(MenuModule* menMod)
 
     fromView();
     toModel();
-    emit unsavedChange();
 }

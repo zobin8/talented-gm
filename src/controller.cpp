@@ -12,6 +12,18 @@ Controller::Controller(QObject* parent) : QObject(parent)
 
 }
 
+void Controller::on_viewUpdate()
+{
+    fromView();
+    toModel();
+}
+
+void Controller::on_modelUpdate()
+{
+    fromModel();
+    toView();
+}
+
 void Controller::clearLayout(QLayout* lay)
 {
     while (lay->count() > 0)

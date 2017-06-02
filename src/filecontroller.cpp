@@ -24,6 +24,12 @@ void FileController::setWidgets(QStatusBar* statusBar)
 void FileController::setUnsaved(bool aBool)
 {
     unsaved = aBool;
+
+    if (!unsaved)
+    {
+        emit savedChange();
+    }
+
     setStatus();
 }
 
@@ -133,9 +139,12 @@ void FileController::exportToLog(QString)
     //TODO
 }
 
-void FileController::on_unsavedChange()
+void FileController::on_unsavedChange(bool b)
 {
-    setUnsaved(true);
+    if (unsaved != b)
+    {
+        setUnsaved(b);
+    }
 }
 
 FileAbortResponse FileController::abortClose()

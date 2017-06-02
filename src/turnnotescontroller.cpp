@@ -22,6 +22,7 @@ void TurnNotesController::toView()
 void TurnNotesController::toModel()
 {
     TalentData::getTalentFile()->currentTurn()->setNotes(notes);
+    emit updateView(ConFreq::hash);
 }
 
 void TurnNotesController::fromModel()

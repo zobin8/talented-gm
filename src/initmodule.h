@@ -20,6 +20,13 @@ public:
     InitiativeAct getInitiativeAct();
     void setInitiativeAct(InitiativeAct);
 
+    QDoubleSpinBox* getSense();
+    QLineEdit* getName();
+    QLineEdit* getAction();
+    QCheckBox* getResult();
+    QLineEdit* getNotes();
+    QCheckBox* getActive();
+
     void resetActive();
 
 signals:

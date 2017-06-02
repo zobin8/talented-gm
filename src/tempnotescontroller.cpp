@@ -5,26 +5,25 @@
 
 TempNotesController::TempNotesController(QObject *parent) : Controller(parent)
 {
-    naturalChange = false;
+
 }
 
 void TempNotesController::setWidgets(QTextEdit* tempEdit)
 {
     uiNotes = tempEdit;
 
-    connect(uiNotes, SIGNAL(textChanged()), this, SLOT(on_textChanged()));
+    connect(uiNotes, SIGNAL(textChanged()), this, SLOT(on_viewUpdate()));
 }
 
 void TempNotesController::toView()
 {
-    naturalChange = true;
     uiNotes->setPlainText(notes);
-    naturalChange = false;
 }
 
 void TempNotesController::toModel()
 {
     TalentData::getTalentFile()->setNoteTemplate(notes);
+    emit updateView(ConFreq::hash);
 }
 
 void TempNotesController::fromModel()
@@ -37,10 +36,3 @@ void TempNotesController::fromView()
     notes = uiNotes->toPlainText();
 }
 
-void TempNotesController::on_textChanged()
-{
-    if (!naturalChange) emit unsavedChange();
-
-    fromView();
-    toModel();
-}

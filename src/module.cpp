@@ -31,3 +31,8 @@ bool Module::needsSort()
 {
     return sort;
 }
+
+void Module::on_update()
+{
+    emit viewUpdate();
+}

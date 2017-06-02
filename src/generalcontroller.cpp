@@ -5,14 +5,14 @@
 
 GeneralController::GeneralController(QObject *parent) : Controller(parent)
 {
-    naturalChange = false;
+
 }
 
 void GeneralController::setWidgets(QTextEdit* generalNotes)
 {
     uiNotes = generalNotes;
 
-    connect(uiNotes, SIGNAL(textChanged()), this, SLOT(on_textChanged()));
+    connect(uiNotes, SIGNAL(textChanged()), this, SLOT(on_viewUpdate()));
 }
 
 void GeneralController::toView()
@@ -23,6 +23,7 @@ void GeneralController::toView()
 void GeneralController::toModel()
 {
     TalentData::getTalentFile()->setNotes(notes);
+    emit updateView(ConFreq::hash);
 }
 
 void GeneralController::fromModel()
@@ -32,14 +33,5 @@ void GeneralController::fromModel()
 
 void GeneralController::fromView()
 {
-    naturalChange = true;
     notes = uiNotes->toPlainText();
-    naturalChange = false;
-}
-
-void GeneralController::on_textChanged()
-{
-    if (!naturalChange) emit unsavedChange();
-
-    fromView();
 }

@@ -32,7 +32,7 @@ void TurnController::toView()
 
 void TurnController::toModel()
 {
-    emit unsavedChange();
+    emit updateView(ConFreq::hash);
 }
 
 void TurnController::fromModel()
@@ -52,6 +52,7 @@ void TurnController::addTurn()
     TalentData::getTalentFile()->addTurn();
 
     emit updateView(ConFreq::turn);
+    emit updateView(ConFreq::hash);
 }
 
 void TurnController::deleteTurn()
@@ -61,6 +62,7 @@ void TurnController::deleteTurn()
     TalentData::getTalentFile()->deleteTurn();
 
     emit updateView(ConFreq::turn);
+    emit updateView(ConFreq::hash);
 }
 
 void TurnController::nextTurn()
@@ -70,6 +72,7 @@ void TurnController::nextTurn()
     TalentData::getTalentFile()->nextTurn();
 
     emit updateView(ConFreq::turn);
+    emit updateView(ConFreq::hash);
 }
 
 void TurnController::prevTurn()
@@ -79,4 +82,5 @@ void TurnController::prevTurn()
     TalentData::getTalentFile()->previousTurn();
 
     emit updateView(ConFreq::turn);
+    emit updateView(ConFreq::hash);
 }

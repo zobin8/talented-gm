@@ -27,6 +27,9 @@ void TurnLocController::setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMini
     uiLocName = turnLocName;
     uiContents = turnNPCContents;
     uiDesc = turnLocDesc;
+
+    connect(uiMinions1, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
+    connect(uiMinions2, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
 }
 
 void TurnLocController::toView()
@@ -51,6 +54,7 @@ void TurnLocController::toView()
 
         connect(npcMod, SIGNAL(killMe(MenuModule*)), this, SLOT(on_deletionEvent(MenuModule*)));
         connect(npcMod, SIGNAL(viewNPC(NPC*)), this, SLOT(on_viewNPC(NPC*)));
+        connect(npcMod, SIGNAL(viewUpdate()), this, SLOT(on_viewUpdate()));
     }
 }
 
@@ -59,7 +63,7 @@ void TurnLocController::toModel()
     Location* modelLoc = new Location(loc);
     TalentData::getTalentFile()->currentTurn()->setLoc(modelLoc);
 
-    emit unsavedChange();
+    emit updateView(ConFreq::hash);
 }
 
 void TurnLocController::fromModel()

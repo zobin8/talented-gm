@@ -37,12 +37,14 @@ void TempPlayerController::fromModel()
 void TempPlayerController::toModel()
 {
     TalentData::getTalentFile()->setPlayers(players);
+    emit updateView(ConFreq::hash);
 }
 
 void TempPlayerController::toTurn()
 {
     TalentData::getTalentFile()->resetInitiative();
     emit updateView(ConFreq::turnInit);
+    emit updateView(ConFreq::hash);
 }
 
 void TempPlayerController::fromView()
@@ -74,21 +76,13 @@ void TempPlayerController::on_deletionEvent(MenuModule* del)
 
     fromView();
     toModel();
-    emit unsavedChange();
 }
 
 void TempPlayerController::addPlayer()
 {
     addPlayerView();
-    on_uiUpdate();
-}
-
-//TODO: Merge with updateModel
-void TempPlayerController::on_uiUpdate()
-{
     fromView();
     toModel();
-    emit unsavedChange();
 }
 
 void TempPlayerController::addPlayerView(QString s, double v)
@@ -102,6 +96,5 @@ void TempPlayerController::addPlayerView(QString s, double v)
     Controller::appendToLayout(menMod, uiPlayerContents->layout());
 
     connect(menMod, SIGNAL(killMe(MenuModule*)), this, SLOT(on_deletionEvent(MenuModule*)));
-    connect(menMod->getSpin(), SIGNAL(valueChanged(double)), this, SLOT(on_uiUpdate()));
-    connect(menMod->getEdit(), SIGNAL(textChanged(QString)), this, SLOT(on_uiUpdate()));
+    connect(menMod, SIGNAL(viewUpdate()), this, SLOT(on_viewUpdate()));
 }

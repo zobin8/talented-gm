@@ -15,6 +15,7 @@ MainController::MainController(QObject *parent) : Controller(parent)
     turnLocController = new TurnLocController();
     turnInitController = new TurnInitController();
     turnInfoController = new TurnInfoController();
+    hashController = new HashController();
 
     controllers = QLinkedList<Controller*>();
     controllers.append(editorNPCController);
@@ -30,6 +31,7 @@ MainController::MainController(QObject *parent) : Controller(parent)
     controllers.append(turnNotesController);
     controllers.append(turnInitController);
     controllers.append(turnInfoController);
+    controllers.append(hashController);
 
     connectControllers();
 }
@@ -49,14 +51,11 @@ MainController::~MainController()
     delete turnLocController;
     delete turnInitController;
     delete turnInfoController;
+    delete hashController;
 }
 
 void MainController::connectControllers()
 {
-    /*
-    connect(tempLocController, SIGNAL(update()), editorLocController, SLOT(on_update()));
-    */
-
     connect(editorNPCController, SIGNAL(setNPCNames(QStringList)), editorLocController, SLOT(on_NPCNamesChanged(QStringList)));
 
     connect(turnLocController, SIGNAL(deletedNPC(QString)), turnInitController, SLOT(deleteInit(QString)));
@@ -66,15 +65,13 @@ void MainController::connectControllers()
     connect(turnLocController, SIGNAL(viewNPC(NPC*)), turnInfoController, SLOT(on_viewNPC(NPC*)));
     connect(editorLocController, SIGNAL(viewNPC(NPC*)), turnInfoController, SLOT(on_viewNPC(NPC*)));
 
+    connect(hashController, SIGNAL(unsavedChange(bool)), fileController, SLOT(on_unsavedChange(bool)));
+    connect(fileController, SIGNAL(savedChange()), hashController, SLOT(on_savedChange()));
+
     foreach (Controller* con, controllers)
     {
         connect(con, SIGNAL(updateModel(ConFreq)), this, SLOT(on_updateModel(ConFreq)));
         connect(con, SIGNAL(updateView(ConFreq)), this, SLOT(on_updateView(ConFreq)));
-
-        if (con != fileController)
-        {
-            connect(con, SIGNAL(unsavedChange()), fileController, SLOT(on_unsavedChange()));
-        }
     }
 }
 
@@ -141,6 +138,7 @@ QLinkedList<Controller*> MainController::conFromFreq(ConFreq cf)
         update.append(turnInfoController);
         update.append(turnNotesController);
         break;
+    case ConFreq::hash: break;
     case ConFreq::allButFile:
         update = QLinkedList<Controller*>(controllers);
         update.removeOne(fileController);
@@ -149,6 +147,7 @@ QLinkedList<Controller*> MainController::conFromFreq(ConFreq cf)
         update = QLinkedList<Controller*>(controllers);
         break;
     }
+    update.append(hashController);
 
     return update;
 }

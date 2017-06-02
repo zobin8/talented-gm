@@ -131,7 +131,7 @@ void EditorLocController::fromView()
 
 void EditorLocController::toModel()
 {
-    //Do nothing.
+    emit updateView(ConFreq::hash);
 }
 
 void EditorLocController::toTemp()
@@ -143,7 +143,7 @@ void EditorLocController::toTemp()
 
     toView();
     emit updateView(ConFreq::tempLoc);
-    emit unsavedChange();
+    emit updateView(ConFreq::hash);
 }
 
 void EditorLocController::toTurn()
@@ -155,7 +155,7 @@ void EditorLocController::toTurn()
 
     emit viewNPC(NULL);
     emit updateView(ConFreq::turn);
-    emit unsavedChange();
+    emit updateView(ConFreq::hash);
 }
 
 void EditorLocController::on_NPCNamesChanged(QStringList names)

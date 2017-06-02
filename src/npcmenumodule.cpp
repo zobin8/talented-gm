@@ -119,6 +119,7 @@ void NPCMenuModule::setNPC(NPC* newNPC)
             box->setTristate(true);
             box->setCheckState(TalentData::intToState(i));
             layout->addWidget(box, r, c);
+            connect(box, SIGNAL(clicked(bool)), this, SLOT(on_update()));
             c++; //Would you look at that.
         }
 

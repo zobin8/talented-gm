@@ -41,9 +41,10 @@ public:
     void setUnsaved(bool);
 
 signals:
+    void savedChange();
 
 public slots:
-    void on_unsavedChange();
+    void on_unsavedChange(bool);
 
 private:
     QFile* file;

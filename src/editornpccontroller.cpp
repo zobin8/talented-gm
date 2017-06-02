@@ -130,7 +130,7 @@ void EditorNPCController::fromModel()
 
 void EditorNPCController::toModel()
 {
-    //Do nothing.
+    emit updateView(ConFreq::hash);
 }
 
 void EditorNPCController::toTemp()
@@ -142,7 +142,7 @@ void EditorNPCController::toTemp()
 
     toView();
     emit updateView(ConFreq::tempNPC);
-    emit unsavedChange();
+    emit updateView(ConFreq::hash);
 }
 
 void EditorNPCController::toTurn()
@@ -152,7 +152,7 @@ void EditorNPCController::toTurn()
     TalentData::getTalentFile()->currentTurn()->addNPCTemplate(npcTemp);
 
     emit updateView(ConFreq::turn);
-    emit unsavedChange();
+    emit updateView(ConFreq::hash);
 }
 
 void EditorNPCController::addSVPModule(QString s, double v)

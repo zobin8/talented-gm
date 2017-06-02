@@ -6,6 +6,9 @@
 #include "turn.h"
 #include <QWidget>
 #include <QLayout>
+#include <QLineEdit>
+#include <QCheckBox>
+#include <QDoubleSpinBox>
 
 TurnInitController::TurnInitController(QObject *parent) : Controller(parent)
 {
@@ -30,6 +33,8 @@ void TurnInitController::toView()
         iMod->setInitiativeAct(act);
         iMod->setSortID(QString::number(act.getPlayer().getValue()));
 
+        connect(iMod, SIGNAL(viewUpdate()), this, SLOT(on_viewUpdate()));
+
         Controller::appendToLayout(iMod, initLayout);
     }
 }
@@ -38,6 +43,7 @@ void TurnInitController::toModel()
 {
     QVector<InitiativeAct>* modelInit = new QVector<InitiativeAct>(*initiative);
     TalentData::getTalentFile()->currentTurn()->setInitiative(modelInit);
+    emit updateView(ConFreq::hash);
 }
 
 void TurnInitController::fromModel()

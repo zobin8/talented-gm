@@ -15,21 +15,8 @@
 #include "turnloccontroller.h"
 #include "turninitcontroller.h"
 #include "turninfocontroller.h"
+#include "hashcontroller.h"
 #include <QLinkedList>
-
-class EditorNPCController;
-class EditorLocController;
-class TempLocController;
-class TempNPCController;
-class TempPlayerController;
-class FileController;
-class GeneralController;
-class TempNotesController;
-class TurnController;
-class TurnNotesController;
-class TurnLocController;
-class TurnInitController;
-class TurnInfoController;
 
 class MainController : public Controller
 {
@@ -58,6 +45,7 @@ public:
     TurnLocController* turnLocController;
     TurnInitController* turnInitController;
     TurnInfoController* turnInfoController;
+    HashController* hashController;
 
 signals:
 

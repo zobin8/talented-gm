@@ -29,6 +29,13 @@ InitModule::InitModule(QWidget *parent) : MenuModule(parent)
     active->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     connect(active, SIGNAL(clicked(bool)), this, SLOT(on_activeEvent()));
+
+    connect(sense, SIGNAL(valueChanged(double)), this, SLOT(on_update()));
+    connect(name, SIGNAL(textChanged(QString)), this, SLOT(on_update()));
+    connect(action, SIGNAL(textChanged(QString)), this, SLOT(on_update()));
+    connect(result, SIGNAL(clicked(bool)), this, SLOT(on_update()));
+    connect(notes, SIGNAL(textChanged(QString)), this, SLOT(on_update()));
+    connect(active, SIGNAL(clicked(bool)), this, SLOT(on_update()));
 }
 
 InitModule::~InitModule()
@@ -49,6 +56,36 @@ void InitModule::addWidgets()
     layout->addWidget(action, 1, 1);
     layout->addWidget(result, 0, 2);
     layout->addWidget(notes, 1, 2);
+}
+
+QDoubleSpinBox* InitModule::getSense()
+{
+    return sense;
+}
+
+QLineEdit* InitModule::getName()
+{
+    return name;
+}
+
+QLineEdit* InitModule::getAction()
+{
+    return action;
+}
+
+QCheckBox* InitModule::getResult()
+{
+    return result;
+}
+
+QLineEdit* InitModule::getNotes()
+{
+    return notes;
+}
+
+QCheckBox* InitModule::getActive()
+{
+    return active;
 }
 
 InitiativeAct InitModule::getInitiativeAct()

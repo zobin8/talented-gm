@@ -17,8 +17,10 @@ public:
     bool needsSort();
 
 signals:
+    void viewUpdate();
 
 public slots:
+    void on_update();
 
 protected:
     QGridLayout* layout;

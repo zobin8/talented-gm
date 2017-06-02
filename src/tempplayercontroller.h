@@ -26,7 +26,6 @@ signals:
 
 public slots:
     void on_deletionEvent(MenuModule*);
-    void on_uiUpdate();
 
 private:
     QLinkedList<SVP>* players;

@@ -17,6 +17,7 @@ enum class ConFreq
     turnLoc,
     turnInit,
     turn,
+    hash,
     allButFile,
     all
 };
@@ -41,11 +42,12 @@ public:
     virtual void fromView() = 0;
 
 public slots:
+    void on_viewUpdate();
+    void on_modelUpdate();
 
 signals:
     void updateView(ConFreq);
     void updateModel(ConFreq);
-    void unsavedChange();
 };
 
 #endif // CONTROLLER_H
