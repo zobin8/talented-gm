@@ -12,6 +12,8 @@ TurnNotesController::TurnNotesController(QObject* parent) : Controller(parent)
 void TurnNotesController::setWidgets(QTextEdit* turnNotes)
 {
     uiNotes = turnNotes;
+
+    connect(uiNotes, SIGNAL(textChanged()), this, SLOT(on_viewUpdate()));
 }
 
 void TurnNotesController::toView()

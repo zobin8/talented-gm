@@ -32,10 +32,11 @@ QByteArray HashController::getHash()
     buf.close();
 
     QCryptographicHash h(QCryptographicHash::Sha256);
+    if (!buf.open(QIODevice::ReadOnly)) return out;
     h.addData(&buf);
 
     out = h.result();
-    h.reset();
+    buf.close();
     return out;
 }
 
