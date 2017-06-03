@@ -200,8 +200,6 @@ void MainWindow::on_editNPCtoTempButton_clicked()
     running = true;
     mc->editorNPCController->toTemp();
     running = false;
-
-    ui->tabWidget->setCurrentWidget(ui->templatesTab);
 }
 
 void MainWindow::on_editAddHitButton_clicked()
@@ -241,8 +239,6 @@ void MainWindow::on_editAddLocTempButton_clicked()
     mc->editorLocController->toTemp();
 
     running = false;
-
-    ui->tabWidget->setCurrentWidget(ui->templatesTab);
 }
 
 void MainWindow::on_editAddNPCButton_clicked()
@@ -502,7 +498,7 @@ void MainWindow::on_editAddLocTurnButton_clicked()
     mc->editorLocController->toTurn();
     running = false;
 
-    ui->tabWidget->setCurrentWidget(ui->turnTab);
+    //ui->tabWidget->setCurrentWidget(ui->turnTab);
 }
 
 void MainWindow::on_editNPCToTurn_clicked()
@@ -512,7 +508,7 @@ void MainWindow::on_editNPCToTurn_clicked()
     mc->editorNPCController->toTurn();
     running = false;
 
-    ui->tabWidget->setCurrentWidget(ui->turnTab);
+    //ui->tabWidget->setCurrentWidget(ui->turnTab);
 }
 
 void MainWindow::on_tempToTurnButton_clicked()
