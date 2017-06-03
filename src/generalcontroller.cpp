@@ -12,6 +12,8 @@ void GeneralController::setWidgets(QTextEdit* generalNotes)
 {
     uiNotes = generalNotes;
 
+    view.append(uiNotes);
+
     connect(uiNotes, SIGNAL(textChanged()), this, SLOT(on_viewUpdate()));
 }
 
@@ -22,13 +24,14 @@ void GeneralController::toView()
 
 void GeneralController::toModel()
 {
-    TalentData::getTalentFile()->setNotes(notes);
-    emit updateView(ConFreq::hash);
+    TalentData::lockTalentFile()->setNotes(notes);
+    TalentData::unlockTalentFile();
 }
 
 void GeneralController::fromModel()
 {
-    notes = TalentData::getTalentFile()->getNotes();
+    notes = TalentData::lockTalentFile()->getNotes();
+    TalentData::unlockTalentFile();
 }
 
 void GeneralController::fromView()

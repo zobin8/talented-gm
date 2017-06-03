@@ -6,22 +6,76 @@
 #include <QWidget>
 #include <QComboBox>
 #include <QLabel>
+#include <QMutex>
 
 Controller::Controller(QObject* parent) : QObject(parent)
 {
+    mutex = new QMutex();
+    view = QVector<QWidget*>();
+}
 
+Controller::~Controller()
+{
+    delete mutex;
 }
 
 void Controller::on_viewUpdate()
 {
-    fromView();
+    tryFromView();
+    tryToModel();
+}
+
+void Controller::tryToView()
+{
+    lockView();
+
+    foreach (QWidget* w, view)
+    {
+        w->blockSignals(true);
+    }
+
+    toView();
+
+    foreach (QWidget* w, view)
+    {
+        w->blockSignals(false);
+    }
+
+    unlockView();
+}
+
+void Controller::tryToModel()
+{
     toModel();
+    emit updateView(ConFreq::hash);
+}
+
+void Controller::tryFromView()
+{
+    lockView();
+    fromView();
+    unlockView();
+}
+
+void Controller::tryFromModel()
+{
+    fromModel();
+}
+
+void Controller::lockView()
+{
+    mutex->lock();
+}
+
+void Controller::unlockView()
+{
+    mutex->unlock();
 }
 
 void Controller::on_modelUpdate()
 {
-    fromModel();
-    toView();
+    tryFromModel();
+    tryToView();
 }
 
 void Controller::clearLayout(QLayout* lay)

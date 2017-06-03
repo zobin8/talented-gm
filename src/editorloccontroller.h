@@ -21,11 +21,7 @@ public:
 
     void setWidgets(QComboBox* editLocationCombo, QLineEdit* editLocationName, QSpinBox* editMinionSpin1, QSpinBox* editMinionSpin2, QWidget* editLocContents, QComboBox* editlocNPCCombo, QTextEdit* editLocDesc);
 
-    void toView();
-    void fromModel();
     void addNPCModule(QString name = "");
-    void fromView();
-    void toModel();
     void toTemp();
     void toTurn();
 
@@ -35,7 +31,7 @@ signals:
 public slots:
     void deleteNPC(MenuModule*);
     void on_NPCNamesChanged(QStringList);
-    void on_load();
+    void on_load(QString);
 
 private:
     LocTemplate* locTemp;
@@ -46,6 +42,11 @@ private:
     QWidget* uiNPCWidget;
     QComboBox* uiNPCCombo;
     QTextEdit* uiDescription;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // EDITORLOCCONTROLLER_H

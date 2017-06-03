@@ -13,6 +13,8 @@ TempNPCController::TempNPCController(QObject *parent) : Controller(parent)
 void TempNPCController::setWidgets(QWidget* tempNPCContents)
 {
     uiNPCContents = tempNPCContents;
+
+    view.append(uiNPCContents);
 }
 
 void TempNPCController::toView()
@@ -37,8 +39,9 @@ void TempNPCController::toView()
 
 void TempNPCController::fromModel()
 {
-    QLinkedList<NPCTemplate*> model = TalentData::getTalentFile()->getNPCTemplates();
+    QLinkedList<NPCTemplate*> model = TalentData::lockTalentFile()->getNPCTemplates();
     npcTemplates = QLinkedList<NPCTemplate*>(model);
+    TalentData::unlockTalentFile();
 }
 
 void TempNPCController::fromView()
@@ -52,22 +55,24 @@ void TempNPCController::fromView()
         if (menuMod)
         {
             QString name = menuMod->getIdentifier();
-            NPCTemplate* npc = TalentData::getTalentFile()->getNPCFromName(name);
+            NPCTemplate* npc = TalentData::lockTalentFile()->getNPCFromName(name);
 
             if (npc)
             {
                 npcTemplates.append(npc);
             }
+
+            TalentData::unlockTalentFile();
         }
     }
 }
 
 void TempNPCController::toModel()
 {
-    TalentData::getTalentFile()->setNPCTemplates(npcTemplates);
+    TalentData::lockTalentFile()->setNPCTemplates(npcTemplates);
+    TalentData::unlockTalentFile();
 
     emit updateView(ConFreq::editNPC);
-    emit updateView(ConFreq::hash);
 }
 
 void TempNPCController::on_deletionEvent(MenuModule* menMod)
@@ -75,6 +80,6 @@ void TempNPCController::on_deletionEvent(MenuModule* menMod)
     uiNPCContents->layout()->removeWidget(menMod);
     delete menMod;
 
-    fromView();
-    toModel();
+    tryFromView();
+    tryToModel();
 }

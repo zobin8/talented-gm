@@ -14,11 +14,6 @@ public:
 
     void setWidgets(QLabel* turnCount);
 
-    void toView();
-    void toModel();
-    void fromModel();
-    void fromView();
-
     void addTurn();
     void deleteTurn();
     void nextTurn();
@@ -30,6 +25,11 @@ public slots:
 
 private:
     QLabel* uiTurnCount;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // TURNCONTROLLER_H

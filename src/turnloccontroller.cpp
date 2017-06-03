@@ -28,6 +28,12 @@ void TurnLocController::setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMini
     uiContents = turnNPCContents;
     uiDesc = turnLocDesc;
 
+    view.append(uiMinions1);
+    view.append(uiMinions2);
+    view.append(uiLocName);
+    view.append(uiContents);
+    view.append(uiDesc);
+
     connect(uiMinions1, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
     connect(uiMinions2, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
 }
@@ -61,14 +67,14 @@ void TurnLocController::toView()
 void TurnLocController::toModel()
 {
     Location* modelLoc = new Location(loc);
-    TalentData::getTalentFile()->currentTurn()->setLoc(modelLoc);
-
-    emit updateView(ConFreq::hash);
+    TalentData::lockTalentFile()->currentTurn()->setLoc(modelLoc);
+    TalentData::unlockTalentFile();
 }
 
 void TurnLocController::fromModel()
 {
-    const Location* modelLoc = TalentData::getTalentFile()->currentTurn()->getLoc();
+    const Location* modelLoc = TalentData::lockTalentFile()->currentTurn()->getLoc();
+    TalentData::unlockTalentFile();
     delete loc;
     loc = new Location(modelLoc);
 }
@@ -104,8 +110,8 @@ void TurnLocController::on_deletionEvent(MenuModule* toDelete)
     uiContents->layout()->removeWidget(toDelete);
     delete toDelete;
 
-    fromView();
-    toModel();
+    tryFromView();
+    tryToModel();
 }
 
 void TurnLocController::on_viewNPC(NPC* npc)

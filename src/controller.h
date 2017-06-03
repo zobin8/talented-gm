@@ -2,11 +2,13 @@
 #define CONTROLLER_H
 
 #include <QObject>
+#include <QVector>
 
 class QLayout;
 class QComboBox;
 class Module;
 class QLabel;
+class QMutex;
 
 enum class ConFreq
 {
@@ -28,6 +30,7 @@ class Controller : public QObject
 
 public:
     Controller(QObject* parent = 0);
+    ~Controller();
 
     static void clearLayout(QLayout*);
 
@@ -36,10 +39,10 @@ public:
     static void appendToLayout(QString, QLayout*);
     static void appendToCombo(QString, QComboBox*);
 
-    virtual void toView() = 0;
-    virtual void toModel() = 0;
-    virtual void fromModel() = 0;
-    virtual void fromView() = 0;
+    void tryToView();
+    void tryToModel();
+    void tryFromView();
+    void tryFromModel();
 
 public slots:
     void on_viewUpdate();
@@ -48,6 +51,20 @@ public slots:
 signals:
     void updateView(ConFreq);
     void updateModel(ConFreq);
+
+protected:
+    void lockView();
+    void unlockView();
+
+    QVector<QWidget*> view;
+
+private:
+    virtual void toView() = 0;
+    virtual void toModel() = 0;
+    virtual void fromModel() = 0;
+    virtual void fromView() = 0;
+
+    QMutex* mutex;
 };
 
 #endif // CONTROLLER_H

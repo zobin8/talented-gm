@@ -15,10 +15,6 @@ public:
     explicit TurnInitController(QObject *parent = 0);
     ~TurnInitController();
 
-    void toView();
-    void fromModel();
-    void toModel();
-    void fromView();
     void setWidgets(QWidget* turnInitContents);
     void addPlayer();
 
@@ -30,6 +26,11 @@ public slots:
 private:
     QWidget* uiContents;
     QVector<InitiativeAct>* initiative;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // TURNINITCONTROLLER_H

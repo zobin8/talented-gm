@@ -20,11 +20,6 @@ public:
 
     void setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMinionSpin2, QLabel* turnLocName, QWidget* turnNPCContents, QTextEdit* turnLocDesc);
 
-    void toView();
-    void toModel();
-    void fromModel();
-    void fromView();
-
 signals:
     void deletedNPC(QString);
     void viewNPC(NPC*);
@@ -39,8 +34,12 @@ private:
     QLabel* uiLocName;
     QWidget* uiContents;
     QTextEdit* uiDesc;
-
     Location* loc;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // TURNLOCCONTROLLER_H

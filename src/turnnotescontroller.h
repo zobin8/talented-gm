@@ -13,11 +13,6 @@ public:
 
     void setWidgets(QTextEdit* turnNotes);
 
-    void toView();
-    void toModel();
-    void fromModel();
-    void fromView();
-
 signals:
 
 public slots:
@@ -25,6 +20,11 @@ public slots:
 private:
     QTextEdit* uiNotes;
     QString notes;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // TURNNOTESCONTROLLER_H

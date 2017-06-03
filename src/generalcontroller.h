@@ -13,11 +13,6 @@ public:
 
     void setWidgets(QTextEdit* generalNotes);
 
-    void toView();
-    void fromModel();
-    void fromView();
-    void toModel();
-
 public slots:
 
 signals:
@@ -25,6 +20,11 @@ signals:
 private:
     QString notes;
     QTextEdit* uiNotes;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // GENERALCONTROLLER_H

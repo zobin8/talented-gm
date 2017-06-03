@@ -14,6 +14,7 @@ TempLocController::TempLocController(QObject *parent) : Controller(parent)
 void TempLocController::setWidgets(QWidget* tempLocContents)
 {
     uiLocContents = tempLocContents;
+    view.append(uiLocContents);
 }
 
 void TempLocController::toView()
@@ -38,8 +39,9 @@ void TempLocController::toView()
 
 void TempLocController::fromModel()
 {
-    QLinkedList<LocTemplate*> model = TalentData::getTalentFile()->getLocTemplates();
+    QLinkedList<LocTemplate*> model = TalentData::lockTalentFile()->getLocTemplates();
     locTemplates = QLinkedList<LocTemplate*>(model);
+    TalentData::unlockTalentFile();
 }
 
 void TempLocController::fromView()
@@ -53,22 +55,24 @@ void TempLocController::fromView()
         if (menuMod)
         {
             QString name = menuMod->getIdentifier();
-            LocTemplate* loc = TalentData::getTalentFile()->getLocFromName(name);
+            LocTemplate* loc = TalentData::lockTalentFile()->getLocFromName(name);
 
             if (loc)
             {
                 locTemplates.append(loc);
             }
+
+            TalentData::unlockTalentFile();
         }
     }
 }
 
 void TempLocController::toModel()
 {
-    TalentData::getTalentFile()->setLocTemplates(locTemplates);
+    TalentData::lockTalentFile()->setLocTemplates(locTemplates);
+    TalentData::unlockTalentFile();
 
     emit updateView(ConFreq::editLoc);
-    emit updateView(ConFreq::hash);
 }
 
 void TempLocController::on_deletionEvent(MenuModule* menMod)
@@ -76,6 +80,6 @@ void TempLocController::on_deletionEvent(MenuModule* menMod)
     uiLocContents->layout()->removeWidget(menMod);
     menMod->deleteLater();
 
-    fromView();
-    toModel();
+    tryFromView();
+    tryToModel();
 }

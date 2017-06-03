@@ -4,20 +4,36 @@
 #include <QTime>
 #include <QCoreApplication>
 #include <QRegularExpressionMatchIterator>
+#include <QMutex>
 
 TalentData::TalentData()
 {
     talentFile = new TalentFile();
+    fileLock = new QMutex();
 }
 
 TalentData::~TalentData()
 {
     delete talentFile;
+    delete fileLock;
+}
+
+TalentFile* TalentData::lockTalentFile()
+{
+    TalentData* inst = &TalentData::getInstance();
+    inst->fileLock->lock();
+
+    return inst->getTalentFile();
+}
+
+void TalentData::unlockTalentFile()
+{
+    TalentData::getInstance().fileLock->unlock();
 }
 
 TalentFile* TalentData::getTalentFile()
 {
-    return TalentData::getInstance().talentFile;
+    return talentFile;
 }
 
 void TalentData::setTalentFile(TalentFile* tf)
@@ -97,7 +113,9 @@ QDataStream& operator <<(QDataStream& out, const TalentData& data)
 {
     out << QString("TalentData1");
 
-    out << *data.getTalentFile();
+    out << *data.lockTalentFile();
+
+    TalentData::unlockTalentFile();
 
     return out;
 }

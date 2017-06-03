@@ -12,6 +12,8 @@ void TempNotesController::setWidgets(QTextEdit* tempEdit)
 {
     uiNotes = tempEdit;
 
+    view.append(uiNotes);
+
     connect(uiNotes, SIGNAL(textChanged()), this, SLOT(on_viewUpdate()));
 }
 
@@ -22,13 +24,14 @@ void TempNotesController::toView()
 
 void TempNotesController::toModel()
 {
-    TalentData::getTalentFile()->setNoteTemplate(notes);
-    emit updateView(ConFreq::hash);
+    TalentData::lockTalentFile()->setNoteTemplate(notes);
+    TalentData::unlockTalentFile();
 }
 
 void TempNotesController::fromModel()
 {
-    notes = TalentData::getTalentFile()->getNoteTemplate();
+    notes = TalentData::lockTalentFile()->getNoteTemplate();
+    TalentData::unlockTalentFile();
 }
 
 void TempNotesController::fromView()

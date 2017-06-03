@@ -13,10 +13,6 @@ class TempLocController : public Controller
 public:
     explicit TempLocController(QObject *parent = 0);
 
-    void toView();
-    void fromModel();
-    void toModel();
-    void fromView();
     void setWidgets(QWidget* tempLocContents);
 
 signals:
@@ -27,6 +23,11 @@ public slots:
 private:
     QLinkedList<LocTemplate*> locTemplates;
     QWidget* uiLocContents;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // TEMPLOCCONTROLLER_H

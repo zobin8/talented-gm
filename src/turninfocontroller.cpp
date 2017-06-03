@@ -21,6 +21,10 @@ void TurnInfoController::setWidgets(QWidget *turnStatContents, QWidget *turnSkil
     uiSkills = turnSkillContents;
     uiStats = turnStatContents;
     uiDesc = turnNPCDesc;
+
+    view.append(uiSkills);
+    view.append(uiStats);
+    view.append(uiDesc);
 }
 
 void TurnInfoController::toView()
@@ -100,7 +104,7 @@ void TurnInfoController::setNPC(NPC* anNPC)
         npc = NULL;
     }
 
-    toView();
+    tryToView();
 }
 
 void TurnInfoController::on_viewNPC(NPC* anNPC)

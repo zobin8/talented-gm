@@ -24,12 +24,8 @@ public:
     // RIP Code quality
     void setWidgets(QWidget* editHitScrollContents, QLineEdit* editNPCName, QSpinBox* editBodySpin, QSpinBox* editCoordSpin, QSpinBox* editSenseSpin, QSpinBox* editMindSpin, QSpinBox* editCharmSpin, QSpinBox* editCommSpin, QComboBox* editNPCCombo, QWidget* editSkillScrollContents, QTextEdit* editNPCDesc);
 
-    void toView();
-    void fromModel();
     void newSVPModule();
     void newSkillModule();
-    void fromView();
-    void toModel();
     void toTemp();
     void toTurn();
 
@@ -38,7 +34,7 @@ signals:
 
 public slots:
     void deleteModule(MenuModule*);
-    void on_load();
+    void on_load(QString);
 
 private:
     NPCTemplate* npcTemp;
@@ -56,6 +52,11 @@ private:
 
     void addSVPModule(QString s = "", double v = 0);
     void addSkillModule(QString n = "None", QString s = "", double v = 0);
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // EDITORNPCCONTROLLER_H

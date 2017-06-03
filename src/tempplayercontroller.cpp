@@ -31,18 +31,21 @@ void TempPlayerController::toView()
 void TempPlayerController::fromModel()
 {
     delete players;
-    players = new QLinkedList<SVP>(*TalentData::getTalentFile()->getPlayers());
+    players = new QLinkedList<SVP>(*TalentData::lockTalentFile()->getPlayers());
+    TalentData::unlockTalentFile();
 }
 
 void TempPlayerController::toModel()
 {
-    TalentData::getTalentFile()->setPlayers(players);
-    emit updateView(ConFreq::hash);
+    TalentData::lockTalentFile()->setPlayers(players);
+    TalentData::unlockTalentFile();
 }
 
 void TempPlayerController::toTurn()
 {
-    TalentData::getTalentFile()->resetInitiative();
+    TalentData::lockTalentFile()->resetInitiative();
+    TalentData::unlockTalentFile();
+
     emit updateView(ConFreq::turnInit);
     emit updateView(ConFreq::hash);
 }
@@ -74,15 +77,15 @@ void TempPlayerController::on_deletionEvent(MenuModule* del)
     uiPlayerContents->layout()->removeWidget(del);
     delete del;
 
-    fromView();
-    toModel();
+    tryFromView();
+    tryToModel();
 }
 
 void TempPlayerController::addPlayer()
 {
     addPlayerView();
-    fromView();
-    toModel();
+    tryFromView();
+    tryToModel();
 }
 
 void TempPlayerController::addPlayerView(QString s, double v)

@@ -107,11 +107,12 @@ QDataStream& operator >>(QDataStream& in, LocTemplate& locTemp)
         {
             QString n;
             in >> n;
-            NPCTemplate* npc = TalentData::getTalentFile()->getNPCFromName(n);
+            NPCTemplate* npc = TalentData::lockTalentFile()->getNPCFromName(n);
             if (npc)
             {
                 locTemp.addNPC(npc);
             }
+            TalentData::unlockTalentFile();
         }
     }
     if (v >= 2)

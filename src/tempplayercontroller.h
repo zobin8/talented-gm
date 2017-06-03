@@ -13,11 +13,7 @@ public:
     explicit TempPlayerController(QObject *parent = 0);
     ~TempPlayerController();
 
-    void toView();
-    void fromModel();
-    void toModel();
     void toTurn();
-    void fromView();
     void setWidgets(QWidget* tempPlayerContents);
     void addPlayer();
 
@@ -32,6 +28,11 @@ private:
     QWidget* uiPlayerContents;
 
     void addPlayerView(QString s = "", double v = 0);
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // TEMPPLAYERCONTROLLER_H

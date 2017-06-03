@@ -90,7 +90,7 @@ void FileController::newFile()
 {
     closeFile();
     TalentData::setTalentFile(new TalentFile());
-    toView();
+    tryToView();
     setUnsaved(false);
 }
 
@@ -109,7 +109,7 @@ void FileController::loadFile()
 
     file->close();
 
-    toView();
+    tryToView();
     setUnsaved(false);
 }
 

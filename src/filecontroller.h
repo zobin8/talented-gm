@@ -24,11 +24,6 @@ public:
     void setWidgets(QStatusBar* statusBar);
     void setStatus();
 
-    void toView();
-    void fromModel();
-    void fromView();
-    void toModel();
-
     bool hasFile();
     void newFile();
     void openFile(QString);
@@ -50,6 +45,11 @@ private:
     QFile* file;
     QStatusBar* uiStatusBar;
     bool unsaved;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // FILECONTROLLER_H

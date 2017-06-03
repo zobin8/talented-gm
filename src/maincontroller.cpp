@@ -79,7 +79,7 @@ void MainController::toView()
 {
     foreach (Controller* con, controllers)
     {
-        con->toView();
+        con->tryToView();
     }
 }
 
@@ -87,7 +87,7 @@ void MainController::toModel()
 {
     foreach (Controller* con, controllers)
     {
-        con->toModel();
+        con->tryToModel();
     }
 }
 
@@ -95,7 +95,7 @@ void MainController::fromModel()
 {
     foreach (Controller* con, controllers)
     {
-        con->fromModel();
+        con->tryFromModel();
     }
 }
 
@@ -103,7 +103,7 @@ void MainController::fromView()
 {
     foreach (Controller* con, controllers)
     {
-        con->fromView();
+        con->tryFromView();
     }
 }
 
@@ -158,8 +158,8 @@ void MainController::on_updateView(ConFreq cf)
 
     foreach (Controller* con, update)
     {
-        con->fromModel();
-        con->toView();
+        con->tryFromModel();
+        con->tryToView();
     }
 }
 
@@ -169,7 +169,7 @@ void MainController::on_updateModel(ConFreq cf)
 
     foreach (Controller* con, update)
     {
-        con->fromView();
-        con->toModel();
+        con->tryFromView();
+        con->tryToModel();
     }
 }

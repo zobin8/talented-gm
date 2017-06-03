@@ -13,6 +13,8 @@ void TurnNotesController::setWidgets(QTextEdit* turnNotes)
 {
     uiNotes = turnNotes;
 
+    view.append(uiNotes);
+
     connect(uiNotes, SIGNAL(textChanged()), this, SLOT(on_viewUpdate()));
 }
 
@@ -23,13 +25,14 @@ void TurnNotesController::toView()
 
 void TurnNotesController::toModel()
 {
-    TalentData::getTalentFile()->currentTurn()->setNotes(notes);
-    emit updateView(ConFreq::hash);
+    TalentData::lockTalentFile()->currentTurn()->setNotes(notes);
+    TalentData::unlockTalentFile();
 }
 
 void TurnNotesController::fromModel()
 {
-    notes = TalentData::getTalentFile()->currentTurn()->getNotes();
+    notes = TalentData::lockTalentFile()->currentTurn()->getNotes();
+    TalentData::unlockTalentFile();
 }
 
 void TurnNotesController::fromView()

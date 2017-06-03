@@ -5,6 +5,7 @@
 #include <QDataStream>
 
 class TalentFile;
+class QMutex;
 
 class TalentData
 {
@@ -16,7 +17,8 @@ public:
     }
     ~TalentData();
 
-    static TalentFile* getTalentFile();
+    static TalentFile* lockTalentFile();
+    static void unlockTalentFile();
     static void setTalentFile(TalentFile*);
 
     static Qt::CheckState intToState(int);
@@ -32,8 +34,10 @@ public:
 
 private:
     explicit TalentData();
+    TalentFile* getTalentFile();
 
     TalentFile* talentFile;
+    QMutex* fileLock;
 };
 
 QDataStream& operator <<(QDataStream&, const TalentData&);

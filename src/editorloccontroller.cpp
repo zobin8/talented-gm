@@ -32,8 +32,15 @@ void EditorLocController::setWidgets(QComboBox *editLocationCombo, QLineEdit *ed
     uiNPCCombo = editLocNPCCombo;
     uiDescription = editLocDesc;
 
-    connect(uiCombo, SIGNAL(currentTextChanged(QString)), this, SLOT(on_load()));
+    view.append(uiCombo);
+    view.append(uiName);
+    view.append(uiMinions1);
+    view.append(uiMinions2);
+    view.append(uiNPCWidget);
+    view.append(uiNPCCombo);
+    view.append(uiDescription);
 
+    connect(uiCombo, SIGNAL(activated(QString)), this, SLOT(on_load(QString)));
     connect(uiName, SIGNAL(textChanged(QString)), this, SLOT(on_viewUpdate()));
     connect(uiMinions1, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
     connect(uiMinions2, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
@@ -47,7 +54,8 @@ void EditorLocController::addNPCModule(QString name)
         name = uiNPCCombo->currentText();
     }
 
-    NPCTemplate* npc = TalentData::getTalentFile()->getNPCFromName(name);
+    NPCTemplate* npc = TalentData::lockTalentFile()->getNPCFromName(name);
+    TalentData::unlockTalentFile();
     if (npc)
     {
         MenuModule* menMod = new MenuModule();
@@ -60,8 +68,8 @@ void EditorLocController::addNPCModule(QString name)
 
         connect(menMod, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteNPC(MenuModule*)));
     }
-    fromView();
-    toModel();
+    tryFromView();
+    tryToModel();
 }
 
 void EditorLocController::deleteNPC(MenuModule* menMod)
@@ -69,18 +77,20 @@ void EditorLocController::deleteNPC(MenuModule* menMod)
     QVBoxLayout* npcLayout = (QVBoxLayout*) uiNPCWidget->layout();
     npcLayout->removeWidget(menMod);
     delete menMod;
-    fromView();
-    toModel();
+    tryFromView();
+    tryToModel();
 }
 
 void EditorLocController::toView()
 {
     uiCombo->clear();
     Controller::appendToCombo("Custom", uiCombo);
-    foreach (LocTemplate* aLoc, TalentData::getTalentFile()->getLocTemplates())
+    foreach (LocTemplate* aLoc, TalentData::lockTalentFile()->getLocTemplates())
     {
         Controller::appendToCombo(aLoc->getName(), uiCombo);
     }
+    TalentData::unlockTalentFile();
+
     uiCombo->setCurrentText(locTemp->getName());
 
     QLayout* npcLayout = uiNPCWidget->layout();
@@ -99,7 +109,9 @@ void EditorLocController::toView()
 
 void EditorLocController::fromModel()
 {
-    const LocTemplate* loc = TalentData::getTalentFile()->getCurrentLoc();
+    const LocTemplate* loc = TalentData::lockTalentFile()->getCurrentLoc();
+    TalentData::unlockTalentFile();
+
     delete locTemp;
     locTemp = new LocTemplate(loc);
 }
@@ -121,7 +133,8 @@ void EditorLocController::fromView()
         {
             QString name = menuMod->getIdentifier();
 
-            NPCTemplate* npc = TalentData::getTalentFile()->getNPCFromName(name);
+            NPCTemplate* npc = TalentData::lockTalentFile()->getNPCFromName(name);
+            TalentData::unlockTalentFile();
 
             if (npc)
             {
@@ -133,14 +146,14 @@ void EditorLocController::fromView()
 
 void EditorLocController::toModel()
 {
-    TalentData::getTalentFile()->setCurrentLoc(locTemp);
-    emit updateView(ConFreq::hash);
+    TalentData::lockTalentFile()->setCurrentLoc(locTemp);
+    TalentData::unlockTalentFile();
 }
 
-void EditorLocController::on_load()
+void EditorLocController::on_load(QString name)
 {
-    QString name = uiCombo->currentText();
-    LocTemplate* loc = TalentData::getTalentFile()->getLocFromName(name);
+    const LocTemplate* loc = TalentData::lockTalentFile()->getLocFromName(name);
+    TalentData::unlockTalentFile();
 
     delete locTemp;
     if (loc)
@@ -152,28 +165,31 @@ void EditorLocController::on_load()
         locTemp = new LocTemplate();
     }
 
-    toModel();
-    toView();
+    tryToModel();
+    tryToView();
 }
 
 void EditorLocController::toTemp()
 {
-    fromView();
+    tryFromView();
 
     LocTemplate* temp = new LocTemplate(locTemp);
-    TalentData::getTalentFile()->addLocTemplate(temp);
+    TalentData::lockTalentFile()->addLocTemplate(temp);
+    TalentData::unlockTalentFile();
 
-    toView();
+    tryToView();
     emit updateView(ConFreq::tempLoc);
     emit updateView(ConFreq::hash);
 }
 
 void EditorLocController::toTurn()
 {
-    fromView();
+    tryFromView();
 
-    TalentData::getTalentFile()->currentTurn()->setLocTemplate(locTemp);
-    TalentData::getInstance().getTalentFile()->resetInitiative();
+    TalentData::lockTalentFile()->currentTurn()->setLocTemplate(locTemp);
+    TalentData::unlockTalentFile();
+    TalentData::lockTalentFile()->resetInitiative();
+    TalentData::unlockTalentFile();
 
     emit viewNPC(NULL);
     emit updateView(ConFreq::turn);

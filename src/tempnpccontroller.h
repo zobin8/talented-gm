@@ -13,10 +13,6 @@ class TempNPCController : public Controller
 public:
     explicit TempNPCController(QObject *parent = 0);
 
-    void toView();
-    void fromModel();
-    void toModel();
-    void fromView();
     void setWidgets(QWidget* tempNPCContents);
 
 signals:
@@ -27,6 +23,11 @@ public slots:
 private:
     QLinkedList<NPCTemplate*> npcTemplates;
     QWidget* uiNPCContents;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // TEMPNPCCONTROLLER_H

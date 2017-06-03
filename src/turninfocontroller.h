@@ -17,11 +17,6 @@ public:
 
     void setNPC(NPC*);
 
-    void toView();
-    void toModel();
-    void fromModel();
-    void fromView();
-
 signals:
 
 public slots:
@@ -33,6 +28,11 @@ private:
     QWidget* uiSkills;
     QWidget* uiStats;
     QTextEdit* uiDesc;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // TURNINFOCONTROLLER_H

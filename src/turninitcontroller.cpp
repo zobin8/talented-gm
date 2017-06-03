@@ -42,14 +42,16 @@ void TurnInitController::toView()
 void TurnInitController::toModel()
 {
     QVector<InitiativeAct>* modelInit = new QVector<InitiativeAct>(*initiative);
-    TalentData::getTalentFile()->currentTurn()->setInitiative(modelInit);
-    emit updateView(ConFreq::hash);
+    TalentData::lockTalentFile()->currentTurn()->setInitiative(modelInit);
+    TalentData::unlockTalentFile();
 }
 
 void TurnInitController::fromModel()
 {
-    const QVector<InitiativeAct>* modelInit = TalentData::getTalentFile()->currentTurn()->getInitiative();
+    const QVector<InitiativeAct>* modelInit = TalentData::lockTalentFile()->currentTurn()->getInitiative();
     initiative = new QVector<InitiativeAct>(*modelInit);
+
+    TalentData::unlockTalentFile();
 }
 
 void TurnInitController::fromView()
@@ -92,6 +94,6 @@ void TurnInitController::deleteInit(QString identity)
         }
     }
 
-    toView();
-    toModel();
+    tryToView();
+    tryToModel();
 }

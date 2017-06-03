@@ -37,9 +37,19 @@ void EditorNPCController::setWidgets(QWidget *editHitScrollContents, QLineEdit *
     uiCombo = editNPCCombo;
     uiDescription = editNPCDesc;
 
-    /*
-    connect(uiCombo, SIGNAL(currentTextChanged(QString)), this, SLOT(on_load()));
+    view.append(uiHitContents);
+    view.append(uiSkillContents);
+    view.append(uiName);
+    view.append(uiBody);
+    view.append(uiCoord);
+    view.append(uiSense);
+    view.append(uiMind);
+    view.append(uiCharm);
+    view.append(uiComm);
+    view.append(uiCombo);
+    view.append(uiDescription);
 
+    connect(uiCombo, SIGNAL(activated(QString)), this, SLOT(on_load(QString)));
     connect(uiName, SIGNAL(textChanged(QString)), this, SLOT(on_viewUpdate()));
     connect(uiBody, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
     connect(uiCoord, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
@@ -47,7 +57,7 @@ void EditorNPCController::setWidgets(QWidget *editHitScrollContents, QLineEdit *
     connect(uiMind, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
     connect(uiCharm, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
     connect(uiComm, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
-    connect(uiDescription, SIGNAL(textChanged()), this, SLOT(on_viewUpdate()));*/
+    connect(uiDescription, SIGNAL(textChanged()), this, SLOT(on_viewUpdate()));
 }
 
 void EditorNPCController::fromView()
@@ -103,6 +113,7 @@ void EditorNPCController::toView()
         addSkillModule(skill.getStatName(), skill.getString(), skill.getValue());
     }
 
+
     uiName->setText(npcTemp->getName());
     uiDescription->setText(npcTemp->getDescription());
     uiBody->setValue(npcTemp->body);
@@ -112,48 +123,55 @@ void EditorNPCController::toView()
     uiCharm->setValue(npcTemp->charm);
     uiComm->setValue(npcTemp->comm);
 
+
     QStringList npcNames = QStringList();
     uiCombo->clear();
     Controller::appendToCombo("Custom", uiCombo);
-    foreach (NPCTemplate* anNPC, TalentData::getTalentFile()->getNPCTemplates())
+    foreach (NPCTemplate* anNPC, TalentData::lockTalentFile()->getNPCTemplates())
     {
         Controller::appendToCombo(anNPC->getName(), uiCombo);
         npcNames.append(anNPC->getName());
     }
+    TalentData::unlockTalentFile();
+
     uiCombo->setCurrentText(npcTemp->getName());
-    //emit setNPCNames(npcNames);
+    emit setNPCNames(npcNames);
 }
 
 void EditorNPCController::fromModel()
 {
-    const NPCTemplate* npc = TalentData::getTalentFile()->getCurrentNPC();
+    const NPCTemplate* npc = TalentData::lockTalentFile()->getCurrentNPC();
+    TalentData::unlockTalentFile();
+
     delete npcTemp;
     npcTemp = new NPCTemplate(npc);
 }
 
 void EditorNPCController::toModel()
 {
-    TalentData::getTalentFile()->setCurrentNPC(npcTemp);
-    emit updateView(ConFreq::hash);
+    TalentData::lockTalentFile()->setCurrentNPC(npcTemp);
+    TalentData::unlockTalentFile();
 }
 
 void EditorNPCController::toTemp()
 {
-    fromView();
+    tryFromView();
 
     NPCTemplate* temp = new NPCTemplate(npcTemp);
-    TalentData::getTalentFile()->addNPCTemplate(temp);
+    TalentData::lockTalentFile()->addNPCTemplate(temp);
+    TalentData::unlockTalentFile();
 
-    toView();
+    tryToView();
     emit updateView(ConFreq::tempNPC);
     emit updateView(ConFreq::hash);
 }
 
 void EditorNPCController::toTurn()
 {
-    fromView();
+    tryFromView();
 
-    TalentData::getTalentFile()->currentTurn()->addNPCTemplate(npcTemp);
+    TalentData::lockTalentFile()->currentTurn()->addNPCTemplate(npcTemp);
+    TalentData::unlockTalentFile();
 
     emit updateView(ConFreq::turn);
     emit updateView(ConFreq::hash);
@@ -162,15 +180,15 @@ void EditorNPCController::toTurn()
 void EditorNPCController::newSVPModule()
 {
     addSVPModule();
-    //fromView();
-    //toModel();
+    tryFromView();
+    tryToModel();
 }
 
 void EditorNPCController::newSkillModule()
 {
     addSkillModule();
-    //fromView();
-    //toModel();
+    tryFromView();
+    tryToModel();
 }
 
 void EditorNPCController::addSVPModule(QString s, double v)
@@ -199,10 +217,10 @@ void EditorNPCController::addSkillModule(QString n, QString s, double v)
     connect(module, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteModule(MenuModule*)));
 }
 
-void EditorNPCController::on_load()
+void EditorNPCController::on_load(QString name)
 {
-    QString name = uiCombo->currentText();
-    NPCTemplate* npc = TalentData::getTalentFile()->getNPCFromName(name);
+    const NPCTemplate* npc = TalentData::lockTalentFile()->getNPCFromName(name);
+    TalentData::unlockTalentFile();
 
     delete npcTemp;
     if (npc)
@@ -214,8 +232,8 @@ void EditorNPCController::on_load()
         npcTemp = new NPCTemplate();
     }
 
-    //toModel();
-    //toView();
+    tryToModel();
+    tryToView();
 }
 
 void EditorNPCController::deleteModule(MenuModule* menuMod)
@@ -228,6 +246,6 @@ void EditorNPCController::deleteModule(MenuModule* menuMod)
 
     delete menuMod;
 
-    //fromView();
-    //toModel();
+    tryFromView();
+    tryToModel();
 }

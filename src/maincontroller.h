@@ -27,11 +27,6 @@ public:
 
     void connectControllers();
 
-    void toView();
-    void toModel();
-    void fromModel();
-    void fromView();
-
     EditorNPCController* editorNPCController;
     EditorLocController* editorLocController;
     TempLocController* tempLocController;
@@ -56,6 +51,11 @@ public slots:
 private:
     QLinkedList<Controller*> controllers;
     QLinkedList<Controller*> conFromFreq(ConFreq);
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // MAINCONTROLLER_H

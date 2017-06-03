@@ -15,11 +15,6 @@ public:
 
     QByteArray getHash();
 
-    void toView();
-    void toModel();
-    void fromModel();
-    void fromView();
-
 signals:
     void unsavedChange(bool);
 
@@ -31,6 +26,11 @@ private:
     QByteArray currentHash;
     QByteArray fileHash;
     QTimer* hashTimer;
+
+    void toView() override;
+    void toModel() override;
+    void fromView() override;
+    void fromModel() override;
 };
 
 #endif // HASHCONTROLLER_H
