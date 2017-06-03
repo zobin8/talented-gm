@@ -20,8 +20,7 @@ public:
     ~EditorLocController();
 
     void setWidgets(QComboBox* editLocationCombo, QLineEdit* editLocationName, QSpinBox* editMinionSpin1, QSpinBox* editMinionSpin2, QWidget* editLocContents, QComboBox* editlocNPCCombo, QTextEdit* editLocDesc);
-
-    void addNPCModule(QString name = "");
+    void newNPCModule();
     void toTemp();
     void toTurn();
 
@@ -47,6 +46,8 @@ private:
     void toModel() override;
     void fromView() override;
     void fromModel() override;
+
+    void addNPCModule(QString name = "");
 };
 
 #endif // EDITORLOCCONTROLLER_H

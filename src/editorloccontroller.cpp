@@ -47,6 +47,13 @@ void EditorLocController::setWidgets(QComboBox *editLocationCombo, QLineEdit *ed
     connect(uiDescription, SIGNAL(textChanged()), this, SLOT(on_viewUpdate()));
 }
 
+void EditorLocController::newNPCModule()
+{
+    addNPCModule();
+    tryFromView();
+    tryToModel();
+}
+
 void EditorLocController::addNPCModule(QString name)
 {
     if (name == "")
@@ -68,8 +75,6 @@ void EditorLocController::addNPCModule(QString name)
 
         connect(menMod, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteNPC(MenuModule*)));
     }
-    tryFromView();
-    tryToModel();
 }
 
 void EditorLocController::deleteNPC(MenuModule* menMod)

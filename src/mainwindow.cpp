@@ -246,7 +246,7 @@ void MainWindow::on_editAddNPCButton_clicked()
     if (running) return;
     running = true;
 
-    mc->editorLocController->addNPCModule();
+    mc->editorLocController->newNPCModule();
 
     running = false;
 }
@@ -518,7 +518,7 @@ void MainWindow::on_tempToTurnButton_clicked()
     mc->tempPlayerController->toTurn();
     running = false;
 
-    ui->tabWidget->setCurrentWidget(ui->turnTab);
+    //ui->tabWidget->setCurrentWidget(ui->turnTab);
 }
 
 void MainWindow::on_actionNext_Tab_triggered()
