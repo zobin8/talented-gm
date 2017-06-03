@@ -49,7 +49,7 @@ void HashController::fromModel()
 {
     if (!hashTimer->isActive())
     {
-        hashTimer->start(500);
+        hashTimer->start(100);
     }
 }
 

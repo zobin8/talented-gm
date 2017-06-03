@@ -209,7 +209,7 @@ void MainWindow::on_editAddHitButton_clicked()
     if (running) return;
     running = true;
 
-    mc->editorNPCController->addSVPModule();
+    mc->editorNPCController->newSVPModule();
 
     running = false;
 }
@@ -219,7 +219,7 @@ void MainWindow::on_editAddSkillButton_clicked()
     if (running) return;
     running = true;
 
-    mc->editorNPCController->addSkillModule();
+    mc->editorNPCController->newSkillModule();
 
     running = false;
 }

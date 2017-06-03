@@ -13,6 +13,8 @@ TalentFile::TalentFile()
 {
     npcTemplates = QLinkedList<NPCTemplate*>();
     locTemplates = QLinkedList<LocTemplate*>();
+    currentNPC = new NPCTemplate();
+    currentLoc = new LocTemplate();
     players = new QLinkedList<SVP>();
     generalNotes = "";
     noteTemplate = "";
@@ -38,6 +40,8 @@ TalentFile::~TalentFile()
     }
 
     delete players;
+    delete currentLoc;
+    delete currentNPC;
 }
 
 QLinkedList<SVP>* TalentFile::getPlayers() const
@@ -73,6 +77,28 @@ LocTemplate* TalentFile::getLocFromName(const QString name)
         }
     }
     return NULL;
+}
+
+void TalentFile::setCurrentNPC(const NPCTemplate* t)
+{
+    delete currentNPC;
+    currentNPC = new NPCTemplate(t);
+}
+
+void TalentFile::setCurrentLoc(const LocTemplate* t)
+{
+    delete currentLoc;
+    currentLoc = new LocTemplate(t);
+}
+
+const NPCTemplate* TalentFile::getCurrentNPC() const
+{
+    return currentNPC;
+}
+
+const LocTemplate* TalentFile::getCurrentLoc() const
+{
+    return currentLoc;
 }
 
 void TalentFile::addNPCTemplate(NPCTemplate* npc)
@@ -265,7 +291,7 @@ void TalentFile::deleteTurn()
 
 QDataStream& operator <<(QDataStream& out, const TalentFile& file)
 {
-    out << QString("TalentFile6");
+    out << QString("TalentFile7");
 
     out << file.getNotes();
     out << file.getNoteTemplate();
@@ -288,6 +314,9 @@ QDataStream& operator <<(QDataStream& out, const TalentFile& file)
     {
         out << *t;
     }
+
+    out << *file.getCurrentLoc();
+    out << *file.getCurrentNPC();
 
     return out;
 }
@@ -354,6 +383,16 @@ QDataStream& operator >>(QDataStream& in, TalentFile& file)
             turns.append(t);
         }
         file.setTurns(turns);
+    }
+    if (v >= 7)
+    {
+        LocTemplate loc = LocTemplate();
+        in >> loc;
+        file.setCurrentLoc(&loc);
+
+        NPCTemplate npc = NPCTemplate();
+        in >> npc;
+        file.setCurrentNPC(&npc);
     }
 
     return in;

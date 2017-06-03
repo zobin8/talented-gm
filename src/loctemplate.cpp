@@ -13,13 +13,13 @@ LocTemplate::LocTemplate()
     minions2 = 0;
 }
 
-LocTemplate::LocTemplate(LocTemplate* old)
+LocTemplate::LocTemplate(const LocTemplate* old)
 {
     name = old->getName();
     description = old->getDescription();
     minions1 = old->minions1;
     minions2 = old->minions2;
-    npcs = QLinkedList<NPCTemplate*>(old->NPCs());
+    npcs = QLinkedList<NPCTemplate*>(old->getNPCs());
 }
 
 const QLinkedList<NPCTemplate*>& LocTemplate::getNPCs() const

@@ -26,8 +26,8 @@ public:
 
     void toView();
     void fromModel();
-    void addSVPModule(QString s = "", double v = 0);
-    void addSkillModule(QString n = "None", QString s = "", double v = 0);
+    void newSVPModule();
+    void newSkillModule();
     void fromView();
     void toModel();
     void toTemp();
@@ -38,6 +38,7 @@ signals:
 
 public slots:
     void deleteModule(MenuModule*);
+    void on_load();
 
 private:
     NPCTemplate* npcTemp;
@@ -52,6 +53,9 @@ private:
     QSpinBox* uiComm;
     QComboBox* uiCombo;
     QTextEdit* uiDescription;
+
+    void addSVPModule(QString s = "", double v = 0);
+    void addSkillModule(QString n = "None", QString s = "", double v = 0);
 };
 
 #endif // EDITORNPCCONTROLLER_H

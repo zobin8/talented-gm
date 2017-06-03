@@ -28,6 +28,11 @@ public:
     QLinkedList<LocTemplate*> getLocTemplates() const;
     void setLocTemplates(QLinkedList<LocTemplate*>);
 
+    void setCurrentNPC(const NPCTemplate*);
+    void setCurrentLoc(const LocTemplate*);
+    const NPCTemplate* getCurrentNPC() const;
+    const LocTemplate* getCurrentLoc() const;
+
     QLinkedList<SVP>* getPlayers() const;
     void setPlayers(QLinkedList<SVP>*);
 
@@ -57,6 +62,9 @@ private:
 
     QLinkedList<SVP>* players;
     QString noteTemplate;
+
+    NPCTemplate* currentNPC;
+    LocTemplate* currentLoc;
 
     QString generalNotes;
 

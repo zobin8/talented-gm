@@ -35,6 +35,7 @@ signals:
 public slots:
     void deleteNPC(MenuModule*);
     void on_NPCNamesChanged(QStringList);
+    void on_load();
 
 private:
     LocTemplate* locTemp;

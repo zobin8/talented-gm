@@ -31,6 +31,13 @@ void EditorLocController::setWidgets(QComboBox *editLocationCombo, QLineEdit *ed
     uiNPCWidget = editLocContents;
     uiNPCCombo = editLocNPCCombo;
     uiDescription = editLocDesc;
+
+    connect(uiCombo, SIGNAL(currentTextChanged(QString)), this, SLOT(on_load()));
+
+    connect(uiName, SIGNAL(textChanged(QString)), this, SLOT(on_viewUpdate()));
+    connect(uiMinions1, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
+    connect(uiMinions2, SIGNAL(valueChanged(int)), this, SLOT(on_viewUpdate()));
+    connect(uiDescription, SIGNAL(textChanged()), this, SLOT(on_viewUpdate()));
 }
 
 void EditorLocController::addNPCModule(QString name)
@@ -53,6 +60,8 @@ void EditorLocController::addNPCModule(QString name)
 
         connect(menMod, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteNPC(MenuModule*)));
     }
+    fromView();
+    toModel();
 }
 
 void EditorLocController::deleteNPC(MenuModule* menMod)
@@ -60,6 +69,8 @@ void EditorLocController::deleteNPC(MenuModule* menMod)
     QVBoxLayout* npcLayout = (QVBoxLayout*) uiNPCWidget->layout();
     npcLayout->removeWidget(menMod);
     delete menMod;
+    fromView();
+    toModel();
 }
 
 void EditorLocController::toView()
@@ -88,18 +99,9 @@ void EditorLocController::toView()
 
 void EditorLocController::fromModel()
 {
-    QString name = uiCombo->currentText();
-    LocTemplate* loc = TalentData::getTalentFile()->getLocFromName(name);
-
+    const LocTemplate* loc = TalentData::getTalentFile()->getCurrentLoc();
     delete locTemp;
-    if (loc)
-    {
-        locTemp = new LocTemplate(loc);
-    }
-    else
-    {
-        locTemp = new LocTemplate();
-    }
+    locTemp = new LocTemplate(loc);
 }
 
 void EditorLocController::fromView()
@@ -131,7 +133,27 @@ void EditorLocController::fromView()
 
 void EditorLocController::toModel()
 {
+    TalentData::getTalentFile()->setCurrentLoc(locTemp);
     emit updateView(ConFreq::hash);
+}
+
+void EditorLocController::on_load()
+{
+    QString name = uiCombo->currentText();
+    LocTemplate* loc = TalentData::getTalentFile()->getLocFromName(name);
+
+    delete locTemp;
+    if (loc)
+    {
+        locTemp = new LocTemplate(loc);
+    }
+    else
+    {
+        locTemp = new LocTemplate();
+    }
+
+    toModel();
+    toView();
 }
 
 void EditorLocController::toTemp()

@@ -10,7 +10,7 @@ class LocTemplate
 {
 public:
     LocTemplate();
-    LocTemplate(LocTemplate*);
+    LocTemplate(const LocTemplate*);
 
     int minions1;
     int minions2;
