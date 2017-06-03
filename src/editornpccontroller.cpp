@@ -201,6 +201,7 @@ void EditorNPCController::addSVPModule(QString s, double v)
 
     Controller::appendToLayout(module, uiHitContents->layout());
 
+    connect(module, SIGNAL(viewUpdate()), this, SLOT(on_viewUpdate()));
     connect(module, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteModule(MenuModule*)));
 }
 
@@ -214,6 +215,7 @@ void EditorNPCController::addSkillModule(QString n, QString s, double v)
 
     Controller::appendToLayout(module, uiSkillContents->layout());
 
+    connect(module, SIGNAL(viewUpdate()), this, SLOT(on_viewUpdate()));
     connect(module, SIGNAL(killMe(MenuModule*)), this, SLOT(deleteModule(MenuModule*)));
 }
 

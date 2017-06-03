@@ -26,6 +26,10 @@ SkillMenuModule::SkillMenuModule(QWidget* parent) : MenuModule(parent)
     combo->addItem("Mind ");
     combo->addItem("Charm");
     combo->addItem("Comm ");
+
+    connect(spin, SIGNAL(valueChanged(double)), this, SLOT(on_update()));
+    connect(edit, SIGNAL(textChanged(QString)), this, SLOT(on_update()));
+    connect(combo, SIGNAL(currentIndexChanged(int)), this, SLOT(on_update()));
 }
 
 void SkillMenuModule::addWidgets()
