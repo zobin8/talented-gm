@@ -4,8 +4,6 @@
 #include <QString>
 #include <QLinkedList>
 
-class NPCTemplate;
-
 class LocTemplate
 {
 public:
@@ -20,16 +18,16 @@ public:
     QString getDescription() const;
     void setDescription(QString);
 
-    QLinkedList<NPCTemplate*>& NPCs();
-    const QLinkedList<NPCTemplate*>& getNPCs() const;
+    QLinkedList<QString>& NPCs();
+    const QLinkedList<QString>& getNPCs() const;
 
-    void addNPC(NPCTemplate*);
-    void removeNPC(NPCTemplate*);
+    void addNPC(QString);
+    void removeNPC(QString);
 
 private:
     QString name;
     QString description;
-    QLinkedList<NPCTemplate*> npcs;
+    QLinkedList<QString> npcs;
 
     static QString randName();
 };

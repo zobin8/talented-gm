@@ -24,6 +24,33 @@ TalentFile::TalentFile()
     addTurn();
 }
 
+TalentFile::TalentFile(const TalentFile& old) : TalentFile()
+{
+    foreach(NPCTemplate* npc, old.getNPCTemplates())
+    {
+        npcTemplates.append(new NPCTemplate(npc));
+    }
+    foreach(LocTemplate* loc, old.getLocTemplates())
+    {
+        locTemplates.append(new LocTemplate(loc));
+    }
+
+    setCurrentNPC(old.getCurrentNPC());
+    setCurrentLoc(old.getCurrentLoc());
+
+    setPlayers(old.getPlayers());
+
+    generalNotes = old.getNotes();
+    noteTemplate = old.getNoteTemplate();
+
+    turnIndex = old.currentTurnIndex();
+    turns.clear();
+    foreach (Turn* t, old.getTurns())
+    {
+        turns.append(new Turn(t));
+    }
+}
+
 TalentFile::~TalentFile()
 {
     foreach (NPCTemplate* npc, npcTemplates)
@@ -53,6 +80,18 @@ void TalentFile::setPlayers(QLinkedList<SVP>* newPlayers)
 {
     delete players;
     players = new QLinkedList<SVP>(*newPlayers);
+}
+
+const NPCTemplate* TalentFile::constNPCFromName(const QString name) const
+{
+    foreach (const NPCTemplate* npc, npcTemplates)
+    {
+        if (npc->getName() == name)
+        {
+            return npc;
+        }
+    }
+    return NULL;
 }
 
 NPCTemplate* TalentFile::getNPCFromName(const QString name)

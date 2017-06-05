@@ -43,13 +43,16 @@ Location::Location(const LocTemplate* locTemp)
     description = locTemp->getDescription();
 
     npcs = QLinkedList<NPC*>();
-    foreach (NPCTemplate* npcTemp, locTemp->getNPCs())
+    foreach (QString name, locTemp->getNPCs())
     {
-        NPC* npc = new NPC(npcTemp);
+        const NPCTemplate* npcTemp = TalentData::getTalentFile()->constNPCFromName(name);
 
-        incrementName(npc);
-
-        npcs.append(npc);
+        if (npcTemp)
+        {
+            NPC* npc = new NPC(npcTemp);
+            incrementName(npc);
+            npcs.append(npc);
+        }
     }
 
     turn = 1;

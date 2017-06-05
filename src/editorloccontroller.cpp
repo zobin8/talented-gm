@@ -101,9 +101,9 @@ void EditorLocController::toView()
     QLayout* npcLayout = uiNPCWidget->layout();
     Controller::clearLayout(npcLayout);
 
-    foreach (NPCTemplate* npc, locTemp->NPCs())
+    foreach (QString npc, locTemp->NPCs())
     {
-        addNPCModule(npc->getName());
+        addNPCModule(npc);
     }
 
     uiName->setText(locTemp->getName());
@@ -143,7 +143,7 @@ void EditorLocController::fromView()
 
             if (npc)
             {
-                locTemp->addNPC(npc);
+                locTemp->addNPC(name);
             }
         }
     }
@@ -191,9 +191,9 @@ void EditorLocController::toTurn()
 {
     tryFromView();
 
-    TalentData::lockTalentFile()->currentTurn()->setLocTemplate(locTemp);
-    TalentData::unlockTalentFile();
-    TalentData::lockTalentFile()->resetInitiative();
+    TalentFile* file = TalentData::lockTalentFile();
+    file->currentTurn()->setLocTemplate(locTemp);
+    file->resetInitiative();
     TalentData::unlockTalentFile();
 
     emit viewNPC(NULL);

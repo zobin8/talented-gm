@@ -15,8 +15,10 @@ class TalentFile
 {
 public:
     TalentFile();
+    TalentFile(const TalentFile&);
     ~TalentFile();
 
+    const NPCTemplate* constNPCFromName(const QString) const;
     NPCTemplate* getNPCFromName(const QString);
     LocTemplate* getLocFromName(const QString);
 

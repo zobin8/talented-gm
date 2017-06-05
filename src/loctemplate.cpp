@@ -5,7 +5,7 @@
 
 LocTemplate::LocTemplate()
 {
-    npcs = QLinkedList<NPCTemplate*>();
+    npcs = QLinkedList<QString>();
     name = LocTemplate::randName();
     description = "";
 
@@ -19,15 +19,15 @@ LocTemplate::LocTemplate(const LocTemplate* old)
     description = old->getDescription();
     minions1 = old->minions1;
     minions2 = old->minions2;
-    npcs = QLinkedList<NPCTemplate*>(old->getNPCs());
+    npcs = QLinkedList<QString>(old->getNPCs());
 }
 
-const QLinkedList<NPCTemplate*>& LocTemplate::getNPCs() const
+const QLinkedList<QString>& LocTemplate::getNPCs() const
 {
     return npcs;
 }
 
-QLinkedList<NPCTemplate*>& LocTemplate::NPCs()
+QLinkedList<QString>& LocTemplate::NPCs()
 {
     return npcs;
 }
@@ -52,12 +52,12 @@ void LocTemplate::setDescription(QString aDesc)
     description = aDesc;
 }
 
-void LocTemplate::addNPC(NPCTemplate* npc)
+void LocTemplate::addNPC(QString npc)
 {
     npcs.append(npc);
 }
 
-void LocTemplate::removeNPC(NPCTemplate* npc)
+void LocTemplate::removeNPC(QString npc)
 {
     npcs.removeOne(npc);
 }
@@ -69,17 +69,13 @@ QString LocTemplate::randName()
 
 QDataStream& operator <<(QDataStream& out, const LocTemplate& locTemp)
 {
-    out << QString("LocTemplate2");
+    out << QString("LocTemplate3");
 
     out << locTemp.getName();
     out << locTemp.minions1;
     out << locTemp.minions2;
 
-    out << locTemp.getNPCs().count();
-    foreach (NPCTemplate* npc, locTemp.getNPCs())
-    {
-        out << npc->getName();
-    }
+    out << locTemp.getNPCs();
 
     out << locTemp.getDescription();
 
@@ -101,18 +97,20 @@ QDataStream& operator >>(QDataStream& in, LocTemplate& locTemp)
         in >> locTemp.minions1;
         in >> locTemp.minions2;
 
-        int count;
-        in >> count;
-        for (int i = 0; i < count; i++)
+        if (v < 3)
         {
-            QString n;
-            in >> n;
-            NPCTemplate* npc = TalentData::lockTalentFile()->getNPCFromName(n);
-            if (npc)
+            int count;
+            in >> count;
+            for (int i = 0; i < count; i++)
             {
-                locTemp.addNPC(npc);
+                QString n;
+                in >> n;
+                locTemp.addNPC(n);
             }
-            TalentData::unlockTalentFile();
+        }
+        else
+        {
+            in >> locTemp.NPCs();
         }
     }
     if (v >= 2)

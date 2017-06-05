@@ -3,9 +3,11 @@
 
 #include <QString>
 #include <QDataStream>
+#include <QLinkedList>
 
 class TalentFile;
 class QMutex;
+class NPCTemplate;
 
 class TalentData
 {
@@ -20,6 +22,7 @@ public:
     static TalentFile* lockTalentFile();
     static void unlockTalentFile();
     static void setTalentFile(TalentFile*);
+    static const TalentFile* getTalentFile();
 
     static Qt::CheckState intToState(int);
     static int stateToInt(Qt::CheckState);
@@ -34,9 +37,9 @@ public:
 
 private:
     explicit TalentData();
-    TalentFile* getTalentFile();
 
     TalentFile* talentFile;
+    TalentFile* copyFile;
     QMutex* fileLock;
 };
 

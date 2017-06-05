@@ -1,5 +1,6 @@
 #include "talentdata.h"
 #include "talentfile.h"
+#include "npctemplate.h"
 #include <QMessageBox>
 #include <QTime>
 #include <QCoreApplication>
@@ -9,6 +10,7 @@
 TalentData::TalentData()
 {
     talentFile = new TalentFile();
+    copyFile = NULL;
     fileLock = new QMutex();
 }
 
@@ -16,6 +18,7 @@ TalentData::~TalentData()
 {
     delete talentFile;
     delete fileLock;
+    delete copyFile;
 }
 
 TalentFile* TalentData::lockTalentFile()
@@ -23,23 +26,36 @@ TalentFile* TalentData::lockTalentFile()
     TalentData* inst = &TalentData::getInstance();
     inst->fileLock->lock();
 
-    return inst->getTalentFile();
+    inst->copyFile = new TalentFile(*inst->talentFile);
+
+    return inst->talentFile;
 }
 
 void TalentData::unlockTalentFile()
 {
     TalentData::getInstance().fileLock->unlock();
+    delete TalentData::getInstance().copyFile;
+    TalentData::getInstance().copyFile = NULL;
 }
 
-TalentFile* TalentData::getTalentFile()
+const TalentFile* TalentData::getTalentFile()
 {
-    return talentFile;
+    if (TalentData::getInstance().copyFile)
+    {
+        return TalentData::getInstance().copyFile;
+    }
+    else
+    {
+        return TalentData::getInstance().talentFile;
+    }
 }
 
 void TalentData::setTalentFile(TalentFile* tf)
 {
+    lockTalentFile();
     delete TalentData::getInstance().talentFile;
     TalentData::getInstance().talentFile = tf;
+    unlockTalentFile();
 }
 
 int TalentData::versionNumber(QString version, QString prefix)
@@ -129,8 +145,8 @@ QDataStream& operator >>(QDataStream& in, TalentData& data)
     if (v >= 1)
     {
         TalentFile* f = new TalentFile();
-        data.setTalentFile(f);
         in >> *f;
+        data.setTalentFile(f);
     }
 
     return in;
