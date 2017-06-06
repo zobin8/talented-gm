@@ -9,14 +9,18 @@ HashController::HashController(QObject *parent) : Controller(parent)
 {
     fileHash = QByteArray();
     currentHash = QByteArray();
-    hashTimer = new QTimer();
+    changeTimer = new QTimer();
+    backupTimer = new QTimer();
+    backupIndex = 0;
 
-    connect(hashTimer, SIGNAL(timeout()), this, SLOT(on_timeout()));
+    connect(changeTimer, SIGNAL(timeout()), this, SLOT(on_changeTimeout()));
+    connect(backupTimer, SIGNAL(timeout()), this, SLOT(on_backupTimeout()));
 }
 
 HashController::~HashController()
 {
-    delete hashTimer;
+    delete changeTimer;
+    delete backupTimer;
 }
 
 QByteArray HashController::getHash()
@@ -42,14 +46,20 @@ QByteArray HashController::getHash()
 
 void HashController::toModel()
 {
-    emit unsavedChange(currentHash != fileHash);
+    bool change = currentHash != fileHash;
+    emit unsavedChange(change);
+
+    if (change && !backupTimer->isActive())
+    {
+        backupTimer->start(60000);
+    }
 }
 
 void HashController::fromModel()
 {
-    if (!hashTimer->isActive())
+    if (!changeTimer->isActive())
     {
-        hashTimer->start(100);
+        changeTimer->start(100);
     }
 }
 
@@ -63,11 +73,24 @@ void HashController::fromView()
     //Do nothing. Model only.
 }
 
-void HashController::on_timeout()
+void HashController::on_changeTimeout()
 {
-    hashTimer->stop();
+    changeTimer->stop();
     currentHash = getHash();
     toModel();
+}
+
+void HashController::on_backupTimeout()
+{
+    backupTimer->stop();
+
+    //TODO: More logic here, maybe?
+    emit backup(backupIndex);
+    backupIndex++;
+    if (backupIndex >= TOTAL_BACKUPS)
+    {
+        backupIndex = 0;
+    }
 }
 
 void HashController::on_savedChange()

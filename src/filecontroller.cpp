@@ -123,15 +123,25 @@ void FileController::closeFile()
     }
 }
 
-void FileController::saveFile()
+void FileController::saveFile(QFile* f)
 {
-    if (!file->open(QIODevice::WriteOnly)) return;
+    bool backup = f;
+    if (!backup)
+    {
+        f = file;
+    }
 
-    QDataStream out(file);
+    if (!f->open(QIODevice::WriteOnly)) return;
+
+    QDataStream out(f);
     out << TalentData::getInstance();
 
-    file->close();
-    setUnsaved(false);
+    f->close();
+
+    if (!backup)
+    {
+        setUnsaved(false);
+    }
 }
 
 void FileController::exportToLog(QString)
@@ -144,6 +154,19 @@ void FileController::on_unsavedChange(bool b)
     if (unsaved != b)
     {
         setUnsaved(b);
+    }
+}
+
+void FileController::on_backup(int b)
+{
+    if (file)
+    {
+        QString ext = "." + QString::number(b);
+        QString path = file->fileName();
+
+        QFile* backup = new QFile(path + ext);
+        saveFile(backup);
+        delete backup;
     }
 }
 

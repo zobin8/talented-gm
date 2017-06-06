@@ -29,7 +29,7 @@ public:
     void openFile(QString);
     void loadFile();
     void closeFile();
-    void saveFile();
+    void saveFile(QFile* f = 0);
     void exportToLog(QString);
 
     FileAbortResponse abortClose();
@@ -40,6 +40,7 @@ signals:
 
 public slots:
     void on_unsavedChange(bool);
+    void on_backup(int);
 
 private:
     QFile* file;

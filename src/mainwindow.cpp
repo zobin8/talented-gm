@@ -95,14 +95,14 @@ void MainWindow::setControllerWidgets()
     mc->turnController->setWidgets(ui->turnCounterLabel);
     mc->turnNotesController->setWidgets(ui->turnEdit);
     mc->turnLocController->setWidgets(ui->turnMinionSpin1,
-                                                      ui->turnMinionSpin2,
-                                                      ui->turnLocationLabel,
-                                                      ui->turnNPCContents,
-                                                      ui->turnLocDescription);
+                                      ui->turnMinionSpin2,
+                                      ui->turnLocationLabel,
+                                      ui->turnNPCContents,
+                                      ui->turnLocDescription);
     mc->turnInitController->setWidgets(ui->turnInitContents);
     mc->turnInfoController->setWidgets(ui->turnStatContents,
-                                                       ui->turnSkillContents,
-                                                       ui->turnNPCDescription);
+                                       ui->turnSkillContents,
+                                       ui->turnNPCDescription);
 }
 
 QString MainWindow::pickTGMFile(bool allowNew)

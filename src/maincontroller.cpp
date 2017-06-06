@@ -68,6 +68,8 @@ void MainController::connectControllers()
     connect(hashController, SIGNAL(unsavedChange(bool)), fileController, SLOT(on_unsavedChange(bool)));
     connect(fileController, SIGNAL(savedChange()), hashController, SLOT(on_savedChange()));
 
+    connect(hashController, SIGNAL(backup(int)), fileController, SLOT(on_backup(int)));
+
     foreach (Controller* con, controllers)
     {
         connect(con, SIGNAL(updateModel(ConFreq)), this, SLOT(on_updateModel(ConFreq)));
