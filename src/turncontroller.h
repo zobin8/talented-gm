@@ -4,6 +4,7 @@
 #include "controller.h"
 
 class QLabel;
+class QPushButton;
 
 class TurnController : public Controller
 {
@@ -12,7 +13,7 @@ public:
     explicit TurnController(QObject *parent = 0);
     ~TurnController();
 
-    void setWidgets(QLabel* turnCount);
+    void setWidgets(QLabel* turnCount, QPushButton* turnDeleteButton);
 
     void addTurn();
     void deleteTurn();
@@ -25,6 +26,9 @@ public slots:
 
 private:
     QLabel* uiTurnCount;
+    QPushButton* uiDelete;
+
+    void updateDeleteButton();
 
     void toView() override;
     void toModel() override;

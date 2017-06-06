@@ -95,7 +95,8 @@ void MainWindow::setControllerWidgets()
     mc->generalController->setWidgets(ui->generalEdit);
     mc->fileController->setWidgets(ui->statusBar);
 
-    mc->turnController->setWidgets(ui->turnCounterLabel);
+    mc->turnController->setWidgets(ui->turnCounterLabel,
+                                   ui->turnDeleteButton);
     mc->turnNotesController->setWidgets(ui->turnEdit);
     mc->turnLocController->setWidgets(ui->turnMinionSpin1,
                                       ui->turnMinionSpin2,

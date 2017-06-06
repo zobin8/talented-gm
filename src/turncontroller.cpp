@@ -7,6 +7,8 @@
 #include "talentfile.h"
 #include <QLabel>
 #include <QList>
+#include <QMessageBox>
+#include <QPushButton>
 
 TurnController::TurnController(QObject *parent) : Controller(parent)
 {
@@ -18,11 +20,20 @@ TurnController::~TurnController()
 
 }
 
-void TurnController::setWidgets(QLabel* turnCount)
+void TurnController::setWidgets(QLabel* turnCount, QPushButton* turnDeleteButton)
 {
     uiTurnCount = turnCount;
+    uiDelete = turnDeleteButton;
 
     view.append(uiTurnCount);
+    updateDeleteButton();
+}
+
+void TurnController::updateDeleteButton()
+{
+    int turn = TalentData::getTalentFile()->getTurns().count();
+
+    uiDelete->setEnabled(turn > 1);
 }
 
 void TurnController::toView()
@@ -58,17 +69,32 @@ void TurnController::addTurn()
 
     emit updateView(ConFreq::turn);
     emit updateView(ConFreq::hash);
+
+    updateDeleteButton();
 }
 
 void TurnController::deleteTurn()
 {
-    emit updateModel(ConFreq::turn);
+    QMessageBox msgBox;
+    msgBox.setModal(true);
+    msgBox.setText("Delete turn");
+    msgBox.setInformativeText("Are you sure you want to delete this turn?");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
+    int ret = msgBox.exec();
 
-    TalentData::lockTalentFile()->deleteTurn();
-    TalentData::unlockTalentFile();
+    if (ret == QMessageBox::Yes)
+    {
+        emit updateModel(ConFreq::turn);
 
-    emit updateView(ConFreq::turn);
-    emit updateView(ConFreq::hash);
+        TalentData::lockTalentFile()->deleteTurn();
+        TalentData::unlockTalentFile();
+
+        emit updateView(ConFreq::turn);
+        emit updateView(ConFreq::hash);
+    }
+
+    updateDeleteButton();
 }
 
 void TurnController::nextTurn()
