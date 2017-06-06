@@ -178,12 +178,20 @@ void FileController::loadBackup(int b)
 {
     if (file)
     {
-        QString ext = "." + QString::number(b);
-        QString path = file->fileName();
+        QMessageBox msgBox;
+        msgBox.setModal(true);
+        msgBox.setText("Loading backup " + QString::number(b));
+        msgBox.setInformativeText("Are you sure you want to load this backup?");
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        int ret = msgBox.exec();
 
-        QFile* backup = new QFile(path + ext);
-        loadFile(backup);
-        delete backup;
+        if (ret == QMessageBox::Yes)
+        {
+            QFile* backup = new QFile(getBackupPath(b));
+            loadFile(backup);
+            delete backup;
+        }
     }
 }
 
@@ -195,16 +203,31 @@ void FileController::on_unsavedChange(bool b)
     }
 }
 
-void FileController::on_backup(int b)
+QString FileController::getBackupPath(int i)
+{
+    QString path = file->fileName();
+    QString ext = "." + QString::number(i);
+    return path + ext;
+}
+
+void FileController::on_backup()
 {
     if (file)
     {
-        QString ext = "." + QString::number(b);
-        QString path = file->fileName();
+        QFile* oldestBackup = new QFile(getBackupPath(TOTAL_BACKUPS));
+        oldestBackup->remove();
+        delete oldestBackup;
 
-        QFile* backup = new QFile(path + ext);
-        saveFile(backup);
-        delete backup;
+        for (int i = TOTAL_BACKUPS - 1; i > 0; i--)
+        {
+            QFile* backup = new QFile(getBackupPath(i));
+            backup->rename(getBackupPath(i + 1));
+            delete backup;
+        }
+
+        QFile* newBackup = new QFile(getBackupPath(1));
+        saveFile(newBackup);
+        delete newBackup;
     }
 }
 

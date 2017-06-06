@@ -11,7 +11,6 @@ HashController::HashController(QObject *parent) : Controller(parent)
     currentHash = QByteArray();
     changeTimer = new QTimer();
     backupTimer = new QTimer();
-    backupIndex = 0;
 
     connect(changeTimer, SIGNAL(timeout()), this, SLOT(on_changeTimeout()));
     connect(backupTimer, SIGNAL(timeout()), this, SLOT(on_backupTimeout()));
@@ -51,7 +50,7 @@ void HashController::toModel()
 
     if (change && !backupTimer->isActive())
     {
-        backupTimer->start(60000);
+        backupTimer->start(30000);
     }
 }
 
@@ -85,12 +84,7 @@ void HashController::on_backupTimeout()
     backupTimer->stop();
 
     //TODO: More logic here, maybe?
-    emit backup(backupIndex);
-    backupIndex++;
-    if (backupIndex >= TOTAL_BACKUPS)
-    {
-        backupIndex = 0;
-    }
+    emit backup();
 }
 
 void HashController::on_savedChange()

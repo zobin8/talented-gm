@@ -68,7 +68,7 @@ void MainController::connectControllers()
     connect(hashController, SIGNAL(unsavedChange(bool)), fileController, SLOT(on_unsavedChange(bool)));
     connect(fileController, SIGNAL(savedChange()), hashController, SLOT(on_savedChange()));
 
-    connect(hashController, SIGNAL(backup(int)), fileController, SLOT(on_backup(int)));
+    connect(hashController, SIGNAL(backup()), fileController, SLOT(on_backup()));
 
     foreach (Controller* con, controllers)
     {

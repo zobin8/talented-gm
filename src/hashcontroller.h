@@ -17,7 +17,7 @@ public:
 
 signals:
     void unsavedChange(bool);
-    void backup(int);
+    void backup();
 
 public slots:
     void on_savedChange();
@@ -25,13 +25,10 @@ public slots:
     void on_backupTimeout();
 
 private:
-    const int TOTAL_BACKUPS = 3;
-
     QByteArray currentHash;
     QByteArray fileHash;
     QTimer* changeTimer;
     QTimer* backupTimer;
-    int backupIndex;
 
     void toView() override;
     void toModel() override;

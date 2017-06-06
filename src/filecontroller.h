@@ -42,12 +42,13 @@ signals:
 
 public slots:
     void on_unsavedChange(bool);
-    void on_backup(int);
+    void on_backup();
 
 private:
+    const int TOTAL_BACKUPS = 3;
+
     QFile* file;
     QStatusBar* uiStatusBar;
-
     bool unsaved;
     QMutex* fileMutex;
 
@@ -55,6 +56,8 @@ private:
     void toModel() override;
     void fromView() override;
     void fromModel() override;
+
+    QString getBackupPath(int);
 };
 
 #endif // FILECONTROLLER_H
