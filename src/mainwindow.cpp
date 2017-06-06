@@ -542,3 +542,18 @@ void MainWindow::on_actionPrevious_Tab_triggered()
     }
     ui->tabWidget->setCurrentIndex(i);
 }
+
+void MainWindow::on_actionLoad_1_triggered()
+{
+    mc->fileController->loadBackup(1);
+}
+
+void MainWindow::on_actionLoad_2_triggered()
+{
+    mc->fileController->loadBackup(2);
+}
+
+void MainWindow::on_actionLoad_3_triggered()
+{
+    mc->fileController->loadBackup(3);
+}

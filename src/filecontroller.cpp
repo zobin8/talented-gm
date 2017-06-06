@@ -100,17 +100,24 @@ void FileController::openFile(QString path)
     file = new QFile(path);
 }
 
-void FileController::loadFile()
+void FileController::loadFile(QFile* f)
 {
-    if (!file->open(QIODevice::ReadOnly)) return;
+    bool backup = f;
+    if (!backup)
+    {
+        f = file;
+    }
 
-    QDataStream in(file);
+    if (!f->open(QIODevice::ReadOnly)) return;
+
+    QDataStream in(f);
     in >> TalentData::getInstance();
 
-    file->close();
+    f->close();
 
     tryToView();
-    setUnsaved(false);
+
+    setUnsaved(backup);
 }
 
 void FileController::closeFile()
@@ -147,6 +154,19 @@ void FileController::saveFile(QFile* f)
 void FileController::exportToLog(QString)
 {
     //TODO
+}
+
+void FileController::loadBackup(int b)
+{
+    if (file)
+    {
+        QString ext = "." + QString::number(b);
+        QString path = file->fileName();
+
+        QFile* backup = new QFile(path + ext);
+        loadFile(backup);
+        delete backup;
+    }
 }
 
 void FileController::on_unsavedChange(bool b)

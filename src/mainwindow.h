@@ -56,6 +56,12 @@ private slots:
     void on_actionNext_Tab_triggered();
     void on_actionPrevious_Tab_triggered();
 
+    void on_actionLoad_1_triggered();
+
+    void on_actionLoad_2_triggered();
+
+    void on_actionLoad_3_triggered();
+
 private:
     Ui::MainWindow* ui;
     bool running;

@@ -27,10 +27,12 @@ public:
     bool hasFile();
     void newFile();
     void openFile(QString);
-    void loadFile();
+    void loadFile(QFile* f = 0);
     void closeFile();
     void saveFile(QFile* f = 0);
     void exportToLog(QString);
+
+    void loadBackup(int);
 
     FileAbortResponse abortClose();
     void setUnsaved(bool);
