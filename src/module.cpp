@@ -1,6 +1,7 @@
 #include "module.h"
 #include <QHBoxLayout>
 #include <QString>
+#include <QStyle>
 
 Module::Module(QWidget *parent) : QWidget(parent)
 {

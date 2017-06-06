@@ -51,11 +51,11 @@ InitModule::~InitModule()
 void InitModule::addWidgets()
 {
     layout->addWidget(sense, 0, 0);
-    layout->addWidget(active, 1, 0);
-    layout->addWidget(name, 0, 1);
-    layout->addWidget(action, 1, 1);
-    layout->addWidget(result, 0, 2);
-    layout->addWidget(notes, 1, 2);
+    layout->addWidget(active, 0, 1);
+    layout->addWidget(name, 0, 2);
+    layout->addWidget(action, 1, 0, 1, 3);
+    layout->addWidget(result, 0, 3);
+    layout->addWidget(notes, 1, 3);
 }
 
 QDoubleSpinBox* InitModule::getSense()

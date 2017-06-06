@@ -29,6 +29,7 @@ private:
     NPC* npc;
     QLabel* nameLabel;
     QPushButton* viewButton;
+    QGridLayout* hitLayout;
 };
 
 #endif // NPCMENUMODULE_H

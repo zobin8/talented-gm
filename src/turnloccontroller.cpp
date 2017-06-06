@@ -28,6 +28,8 @@ void TurnLocController::setWidgets(QSpinBox* turnMinionSpin1, QSpinBox* turnMini
     uiContents = turnNPCContents;
     uiDesc = turnLocDesc;
 
+    uiContents->layout()->setSpacing(18);
+
     view.append(uiMinions1);
     view.append(uiMinions2);
     view.append(uiLocName);
