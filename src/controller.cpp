@@ -10,13 +10,13 @@
 
 Controller::Controller(QObject* parent) : QObject(parent)
 {
-    mutex = new QMutex();
+    conMutex = new QMutex();
     view = QVector<QWidget*>();
 }
 
 Controller::~Controller()
 {
-    delete mutex;
+    delete conMutex;
 }
 
 void Controller::on_viewUpdate()
@@ -27,7 +27,7 @@ void Controller::on_viewUpdate()
 
 void Controller::tryToView()
 {
-    lockView();
+    lockCon();
 
     foreach (QWidget* w, view)
     {
@@ -41,35 +41,40 @@ void Controller::tryToView()
         w->blockSignals(false);
     }
 
-    unlockView();
+    unlockCon();
 }
 
 void Controller::tryToModel()
 {
+    lockCon();
     toModel();
+    unlockCon();
+
     emit updateView(ConFreq::hash);
 }
 
 void Controller::tryFromView()
 {
-    lockView();
+    lockCon();
     fromView();
-    unlockView();
+    unlockCon();
 }
 
 void Controller::tryFromModel()
 {
+    lockCon();
     fromModel();
+    unlockCon();
 }
 
-void Controller::lockView()
+void Controller::lockCon()
 {
-    mutex->lock();
+    conMutex->lock();
 }
 
-void Controller::unlockView()
+void Controller::unlockCon()
 {
-    mutex->unlock();
+    conMutex->unlock();
 }
 
 void Controller::on_modelUpdate()

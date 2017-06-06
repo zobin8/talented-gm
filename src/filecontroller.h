@@ -47,7 +47,9 @@ public slots:
 private:
     QFile* file;
     QStatusBar* uiStatusBar;
+
     bool unsaved;
+    QMutex* fileMutex;
 
     void toView() override;
     void toModel() override;

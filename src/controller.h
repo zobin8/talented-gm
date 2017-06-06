@@ -53,8 +53,8 @@ signals:
     void updateModel(ConFreq);
 
 protected:
-    void lockView();
-    void unlockView();
+    void lockCon();
+    void unlockCon();
 
     QVector<QWidget*> view;
 
@@ -64,7 +64,7 @@ private:
     virtual void fromModel() = 0;
     virtual void fromView() = 0;
 
-    QMutex* mutex;
+    QMutex* conMutex;
 };
 
 #endif // CONTROLLER_H

@@ -5,15 +5,18 @@
 #include <QDataStream>
 #include <QMessageBox>
 #include <QStatusBar>
+#include <QMutex>
 
 FileController::FileController(QObject *parent) : Controller(parent)
 {
     file = NULL;
+    fileMutex = new QMutex();
 }
 
 FileController::~FileController()
 {
     closeFile();
+    delete fileMutex;
 }
 
 void FileController::setWidgets(QStatusBar* statusBar)
@@ -89,9 +92,14 @@ bool FileController::hasFile()
 void FileController::newFile()
 {
     closeFile();
+
+    fileMutex->lock();
+
     TalentData::setTalentFile(new TalentFile());
     tryToView();
     setUnsaved(false);
+
+    fileMutex->unlock();
 }
 
 void FileController::openFile(QString path)
@@ -102,6 +110,8 @@ void FileController::openFile(QString path)
 
 void FileController::loadFile(QFile* f)
 {
+    fileMutex->lock();
+
     bool backup = f;
     if (!backup)
     {
@@ -114,6 +124,7 @@ void FileController::loadFile(QFile* f)
     in >> TalentData::getInstance();
 
     f->close();
+    fileMutex->unlock();
 
     tryToView();
 
@@ -122,16 +133,22 @@ void FileController::loadFile(QFile* f)
 
 void FileController::closeFile()
 {
+    fileMutex->lock();
+
     if (file)
     {
         delete file;
         file = NULL;
         setStatus();
     }
+
+    fileMutex->unlock();
 }
 
 void FileController::saveFile(QFile* f)
 {
+    fileMutex->lock();
+
     bool backup = f;
     if (!backup)
     {
@@ -144,6 +161,7 @@ void FileController::saveFile(QFile* f)
     out << TalentData::getInstance();
 
     f->close();
+    fileMutex->unlock();
 
     if (!backup)
     {
