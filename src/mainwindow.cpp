@@ -10,11 +10,14 @@
 #include <QCloseEvent>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QGuiApplication>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    QGuiApplication::setApplicationDisplayName(TGM_VERSION);
+
     qsrand(QDateTime::currentMSecsSinceEpoch());
 
     running = false;

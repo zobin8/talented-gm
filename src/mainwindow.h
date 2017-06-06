@@ -55,11 +55,8 @@ private slots:
     void on_tempToTurnButton_clicked();
     void on_actionNext_Tab_triggered();
     void on_actionPrevious_Tab_triggered();
-
     void on_actionLoad_1_triggered();
-
     void on_actionLoad_2_triggered();
-
     void on_actionLoad_3_triggered();
 
 private:
@@ -73,6 +70,8 @@ private:
     QString pickFile(bool allowNew, QString filter, QString suffix);
     QString pickTGMFile(bool allowNew);
     QString pickLogFile();
+
+    const QString TGM_VERSION = "v0.8.2";
 };
 
 #endif // MAINWINDOW_H
