@@ -71,7 +71,7 @@ private:
     QString pickTGMFile(bool allowNew);
     QString pickLogFile();
 
-    const QString TGM_VERSION = "v0.8.2";
+    const QString TGM_VERSION = "v0.8.3";
 };
 
 #endif // MAINWINDOW_H
